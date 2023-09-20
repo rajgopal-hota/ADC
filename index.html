@@ -59,18 +59,20 @@
       }
 
       h1 {
-        font-size: 1.875rem;
+        font-size: 1.975rem;
         margin-top: 1.875rem;
       }
 
       h2 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         margin-top: 1.5rem;
       }
 
       h3 {
+        list-style: circle;
         font-size: 1.25rem;
         margin-top: 1.25rem;
+        padding: 12px;
       }
 
       .source {
@@ -368,9 +370,12 @@
         border-radius: 3px;
       }
 
+      .link-to-page::before{
+        content: "~>";
+      }
       .link-to-page {
         margin: 1em 0;
-        padding: 0;
+        padding: 14px;
         border: none;
         font-weight: 500;
       }
@@ -773,13 +778,20 @@
       .checkbox-off {
         background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
       }
+      footer{
+        color: white;
+        font-weight: 800;
+        letter-spacing: 2px;
+        background-color: black;
+        border-radius: 12px;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
     <article id="c8ffbe24-30ea-47ca-ab2a-45d6d4b196b8" class="page sans">
       <header>
-        <h1 class="page-title">Notes</h1>
-        <p class="page-description"></p>
+        <h1 class="page-title">ADC - Notes</h1>
       </header>
       <div class="page-body">
         <div id="6c94ec73-2238-4d54-8ad6-f7114bcf96cc" class="column-list">
@@ -1373,5 +1385,8 @@
         <p id="36f31528-0cf9-40dc-bcc1-7d12f4a35464" class=""></p>
       </div>
     </article>
+    <footer>
+      <p class="page-description">Deployed By Raja</p>
+    </footer>
   </body>
 </html>
