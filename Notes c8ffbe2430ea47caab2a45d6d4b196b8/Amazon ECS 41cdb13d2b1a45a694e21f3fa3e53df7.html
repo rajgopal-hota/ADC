@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Amazon ECS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="41cdb13d-2b1a-45a6-94e2-1f3fa3e53df7" class="page sans"><header><h1 class="page-title">Amazon ECS</h1><p class="page-description"></p></header><div class="page-body"><nav id="7e9772ef-b4bd-427f-852f-1cf035f7ff3b" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0bb8d5c5-8807-4f0f-aee5-aa42ce23f399">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#39d55122-775f-40fa-a09c-8f0b465ac34b">Launch Types</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#04c94b13-c9df-437e-945a-87ed2db72e9d">EC2 Launch Type</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#27c4b76a-da29-44ae-8c5a-8e3ded392f58">Fargate Launch Type</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b6519965-2ddd-435c-9833-abe2201b7b14">IAM Roles for ECS Tasks</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#123b375e-00ef-494a-aea0-5732748af40c">ECS Services</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#799af64b-0283-4510-9882-91ade722f24c">Load Balancing</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6e0bda4e-789c-465a-ad9b-0119250fa0fa"><strong>EC2 Launch Type</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d2e19e3d-a4f0-4092-8180-195adccae78c"><strong>Fargate Launch Type</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ea36c740-8300-44e7-95f1-bd90b5b460ad">Rolling Updates</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#33981071-0b1d-4276-9edc-460d7a7a3e14">Secrets in ECS tasks</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f9f5130b-9879-4204-b774-9e87763251d2">Bind Mounts</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b0b1c90a-1465-4726-8807-c2d52c4476f1">Shared File System in ECS</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#662b74e4-7ffc-4849-8e72-d2cf902cbcc0">ECS Service Auto Scaling</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#da19b1ef-6a76-4c95-85e3-01b65ee3e782">Task Definition</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ab5f6d8d-35ac-4958-a470-b7a211b7b481">Task Placement</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5d126c61-ddee-4fa6-8820-320b195a51bd">Task Placement Strategy</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c3ba40ba-3645-4224-a91d-6ec049950991">Task Placement Constraints</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f57ba276-a17c-4588-8e2b-e555b0c49152">Troubleshooting Steps</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f4a7f945-cf7a-4003-966c-5d5b18cbf281">Misc</a></div></nav><hr id="c41a42c0-fdcf-46fa-9094-f5e3fc5ae5dd"/><h2 id="0bb8d5c5-8807-4f0f-aee5-aa42ce23f399" class="">Intro</h2><ul id="9edb11dd-91b5-4a2d-a9bd-78f5632d8c6c" class="bulleted-list"><li style="list-style-type:disc">AWS managed container orchestration platform</li></ul><ul id="daf97f0b-0dd1-4117-ab17-d059502458e6" class="bulleted-list"><li style="list-style-type:disc">Integrates with ALB for load balancing to ECS tasks</li></ul><ul id="4ab105dd-a68b-48a2-bc24-a372afcce5dc" class="bulleted-list"><li style="list-style-type:disc">EFS is used as persistent multi-AZ shared storage for ECS tasks</li></ul><ul id="6b8f7c0a-e0b6-46d1-8830-a90d9638c622" class="bulleted-list"><li style="list-style-type:disc">It doesn&#x27;t automatically handle resource provisioning, balancing load, auto-scaling, monitoring, and placing your containers across your cluster. Use <strong>Elastic Beanstalk</strong> for that.</li></ul><h2 id="39d55122-775f-40fa-a09c-8f0b465ac34b" class="">Launch Types</h2><h3 id="04c94b13-c9df-437e-945a-87ed2db72e9d" class="">EC2 Launch Type</h3><figure id="5996bf90-6d9f-4ea2-8a55-fb91bb3f1763" class="image"><a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled.png"><img style="width:1612px" src="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled.png"/></a></figure><ul id="37216f6b-7047-47be-a035-fe8b7764fa62" class="bulleted-list"><li style="list-style-type:disc"><strong>Not Serverless</strong></li></ul><ul id="4aec0d10-701d-400d-81e6-2e9ed882bf81" class="bulleted-list"><li style="list-style-type:disc">Containers run on underlying EC2 instances</li></ul><ul id="12a6e738-97df-491f-98a6-b4a6405e9bf9" class="bulleted-list"><li style="list-style-type:disc">ECS takes care of launching &amp; stopping containers (ECS tasks)</li></ul><ul id="a6938e17-15e0-4acd-9dee-77149446bb39" class="bulleted-list"><li style="list-style-type:disc">You must provision &amp; maintain EC2 instances (use ASG)</li></ul><ul id="0d1c7a77-e4c4-4a57-89dc-824fd29c6c5f" class="bulleted-list"><li style="list-style-type:disc"><strong>EC2 instances have ECS agent running on them as a docker container</strong></li></ul><ul id="b2d2b066-bf54-4e7d-917a-8b99725c6fb4" class="bulleted-list"><li style="list-style-type:disc">Inside a VPC spanning multiple AZ, there is an ECS cluster spanning multiple AZ. Inside the ECS cluster, there will be an ASG responsible for launching container instances (EC2). On every EC2 instance, ECS agent will be running (happens automatically if you choose the AMI for ECS when launching the instance) which registers these instances to the ECS cluster. This will allow the ECS cluster to run Docker containers (ECS tasks) on these instances.</li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="63bef09c-db6e-4308-bbf0-df3485895a76"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The ECS configuration is present in the <code>/etc/ecs/ecs.config</code> file in the EC2 instances. To modify properties such as the ECS cluster to which this instance should attach to, modify this file in the instance or in the user data of ASG.</div></figure><h3 id="27c4b76a-da29-44ae-8c5a-8e3ded392f58" class="">Fargate Launch Type</h3><figure id="bd8522dd-d085-4678-9db7-80b555e025c8" class="image"><a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%201.png"><img style="width:1394px" src="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%201.png"/></a></figure><ul id="731b8099-6fb9-40b3-90ab-eda0a10321f8" class="bulleted-list"><li style="list-style-type:disc"><strong>Serverless</strong></li></ul><ul id="95d32478-0bb7-4909-b98c-85c0732cf8b1" class="bulleted-list"><li style="list-style-type:disc">No need to provision infrastructure</li></ul><ul id="4d8fca44-a0e5-4e08-8bd8-93d212b3a50f" class="bulleted-list"><li style="list-style-type:disc">No need to worry about infrastructure scaling</li></ul><ul id="1fce132c-d1f5-467e-819e-3c67c9f8fd26" class="bulleted-list"><li style="list-style-type:disc">ECS launches the required containers based on the CPU / RAM needed (<strong>we won’t know where these containers are running</strong>)</li></ul><ul id="a9cb79ea-ba88-42d4-a241-3dd97b919d32" class="bulleted-list"><li style="list-style-type:disc">VPC and ECS cluster are setup the same way as in EC2 launch type, but instead of using ASG with EC2 instances, we have a Fargate cluster spanning multiple AZ. The Fargate cluster will run ECS tasks anywhere within the cluster and attach an ENI (private IP) to each task. So, if we have a lot of ECS tasks, <strong>we need sufficient free private IPs</strong>.</li></ul><h2 id="b6519965-2ddd-435c-9833-abe2201b7b14" class="">IAM Roles for ECS Tasks</h2><ul id="801d91bc-6896-4b8c-a8eb-1f96f0359566" class="bulleted-list"><li style="list-style-type:disc"><strong>EC2 Instance Profile</strong> (IAM role for the EC2 instance)<ul id="1fff5ead-7db8-4225-a727-5e6d7e50d0fd" class="bulleted-list"><li style="list-style-type:circle">Used by the ECS agent to:<ul id="cfec46f6-6375-46e9-89fb-7b2589895b0e" class="bulleted-list"><li style="list-style-type:square">Make API calls to ECS service</li></ul><ul id="374a1449-e53f-4a48-b53d-3fb329c8b319" class="bulleted-list"><li style="list-style-type:square">Send container logs to CloudWatch</li></ul><ul id="d57500a1-86a0-4ba0-b4eb-ee0735f1edc8" class="bulleted-list"><li style="list-style-type:square">Pull Docker image from ECR</li></ul></li></ul></li></ul><ul id="5b4fe58d-24a1-4669-9e11-afc5f2e0bd14" class="bulleted-list"><li style="list-style-type:disc"><strong>Task Execution Role</strong><ul id="06b1534b-ecf8-4681-9477-35dc9e0fb0c8" class="bulleted-list"><li style="list-style-type:circle">Allows ECS tasks to access AWS resources</li></ul><ul id="ed787a9f-bffe-4b27-a4fe-67819f067b47" class="bulleted-list"><li style="list-style-type:circle">Each task can have a separate role</li></ul><ul id="8e69fef5-c1d2-4287-bba7-e5900fdb08df" class="bulleted-list"><li style="list-style-type:circle"><strong>Use different roles for the different ECS Services</strong></li></ul><ul id="7db3612d-7635-4a82-84c9-b2b20f2230a6" class="bulleted-list"><li style="list-style-type:circle">Task Role is defined in the task definition</li></ul><ul id="26e95336-225e-477e-bc84-ae53fbc4eb56" class="bulleted-list"><li style="list-style-type:circle">Use <code>taskRoleArn</code> parameter to assign IAM policies to ECS Task Execution Role</li></ul><ul id="f048b256-566d-45c7-a723-ad9d374483d2" class="bulleted-list"><li style="list-style-type:circle">Ex. Reference sensitive data in <strong>Secrets Manager</strong> or <strong>SSM Parameter Store</strong></li></ul></li></ul><h2 id="123b375e-00ef-494a-aea0-5732748af40c" class="">ECS Services</h2><div id="bac93e34-1274-446f-af4f-baa8d9e2c80d" class="column-list"><div id="04037469-66a2-43d4-8726-f3b4b0972888" style="width:37.5%" class="column"><ul id="6d4fce40-f7ad-4421-a118-206e5ca42fda" class="bulleted-list"><li style="list-style-type:disc">An ECS Service is a <strong>collection of long-running ECS tasks</strong> (eg. web application) that perform the same function</li></ul><ul id="922a3a70-e6f9-4106-b2c2-c0d800bc5e44" class="bulleted-list"><li style="list-style-type:disc">We can use ALB to send requests to these tasks</li></ul><ul id="e5f11edf-aa2c-4a21-8e67-acf7230bcd42" class="bulleted-list"><li style="list-style-type:disc"><strong>Service CPU Usage</strong> or the <strong>SQS queue length</strong> for a service are used for scaling</li></ul></div><div id="c3677dd5-6ab3-4ae0-8229-3d0de3c600bc" style="width:62.5%" class="column"><figure id="67a12f35-20cc-4b1e-b4b9-d757a42880b1" class="image"><a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%202.png"><img style="width:1466px" src="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%202.png"/></a></figure></div></div><h2 id="799af64b-0283-4510-9882-91ade722f24c" class="">Load Balancing</h2><h3 id="6e0bda4e-789c-465a-ad9b-0119250fa0fa" class=""><strong>EC2 Launch Type</strong></h3><figure id="a13f40f1-2be1-429e-a94c-6eb4c2edef8d" class="image"><a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%203.png"><img style="width:480px" src="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%203.png"/></a></figure><div id="8f109464-6375-4e76-9a16-3e9469aa951b" class="column-list"><div id="6ac0d7b2-7ea3-4c60-965e-0a7515bf1788" style="width:50%" class="column"><ul id="d95ff17c-8c83-4503-bd0a-ef6c79ee53cc" class="bulleted-list"><li style="list-style-type:disc">For every container, the container port is mapped to a random free port on the host (instance). So the application running inside that container will be reached by the ALB on that random port. <mark class="highlight-yellow_background">Set the host port as 0 for this to work.</mark></li></ul><ul id="ebe31550-6a1d-4fb5-b8d7-64248a6f2d58" class="bulleted-list"><li style="list-style-type:disc"><strong>Dynamic Host Port Mapping</strong> - Once the ALB is registered to a service in the ECS cluster, it will automatically find the right port on the EC2 Instances. <mark class="highlight-yellow_background">This only works with ALB, not CLB.</mark></li></ul><ul id="92c36c22-280e-42f9-ac92-108d97010f91" class="bulleted-list"><li style="list-style-type:disc">You <strong>must allow on the EC2 instance’s security group any port from the ALB security group</strong> because it may attach on any port</li></ul></div><div id="a6943ae3-62d2-48f6-8ec8-e9ada6ac34f5" style="width:50%" class="column"><figure id="c21f91a3-f2a2-409f-8996-1b3057547616" class="image"><a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%204.png"><img style="width:336px" src="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%204.png"/></a></figure></div></div><h3 id="d2e19e3d-a4f0-4092-8180-195adccae78c" class=""><strong>Fargate Launch Type</strong></h3><div id="af80c2f2-002c-4202-8fd4-83c6d7763927" class="column-list"><div id="ef029815-4664-4b3a-90cc-31248fc6f6bd" style="width:37.5%" class="column"><ul id="f57ebc9b-c03f-4730-ae2f-3e3c8788aaa3" class="bulleted-list"><li style="list-style-type:disc"><strong>Each task has a unique IP but the same container port</strong></li></ul><ul id="c61a9d2e-097b-4b12-8064-ad8b7f18a65b" class="bulleted-list"><li style="list-style-type:disc">The ALB connects to each task directly on its IP and container port since these containers are not run on a defined host (instance).</li></ul><ul id="1a197d42-a9ca-4e81-8c4b-b3c9d2d3df83" class="bulleted-list"><li style="list-style-type:disc">You <strong>must allow on the ENI’s security group the task port from the ALB security group</strong></li></ul></div><div id="4814b0d6-9767-4abf-8d62-9115166a5287" style="width:62.5%" class="column"><figure id="cc3dff4f-a74f-4ddf-ad8f-6758018b131f" class="image"><a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%205.png"><img style="width:968px" src="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%205.png"/></a></figure></div></div><h2 id="ea36c740-8300-44e7-95f1-bd90b5b460ad" class="">Rolling Updates</h2><ul id="39ed4fbe-83d0-4920-a867-ab9cb2d8e47f" class="bulleted-list"><li style="list-style-type:disc"><strong>Minimum healthy percentage</strong> - determines how many tasks, running the current version, we can terminate while staying above the threshold</li></ul><ul id="8f725778-7119-4164-a450-f4fab51dfcb9" class="bulleted-list"><li style="list-style-type:disc"><strong>Maximum percentage</strong> - determines how many new tasks, running the new version, we can launch while staying below the threshold</li></ul><div id="8d03d912-65d4-4fcc-bfcb-42cba21cda3e" class="column-list"><div id="ca17af8e-73f3-477f-8720-dc3abb52860f" style="width:50%" class="column"><p id="f28bdd48-db89-40ea-bf0f-dbf46e8304ec" class="">Min: 50% and Max: 100% and starting number of tasks 4</p><figure id="5f0058f4-6ccf-4f73-9074-0dd837afca28" class="image" style="text-align:left"><a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%206.png"><img style="width:384px" src="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%206.png"/></a></figure></div><div id="2b98c16d-e93b-4dcc-a0a7-ef35fa08d264" style="width:50%" class="column"><p id="0fb9505e-b111-4b3c-9258-b6e17c5c806f" class="">Min: 100% and Max: 150% and starting number of tasks 4<div class="indented"><figure id="b7aa12e1-87f9-42bb-9b68-eab342a07c4c" class="image"><a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%207.png"><img style="width:384px" src="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%207.png"/></a></figure></div></p></div></div><h2 id="33981071-0b1d-4276-9edc-460d7a7a3e14" class="">Secrets in ECS tasks</h2><ul id="c581667c-3288-49b6-b4f8-026a8f33c337" class="bulleted-list"><li style="list-style-type:disc">Store the secrets in Secrets Manager or Parameter Store and encrypt them using KMS</li></ul><ul id="580017d2-aaa1-4c22-82c3-e48c122328f6" class="bulleted-list"><li style="list-style-type:disc">Reference the secrets in container definition with the name of the environment variable</li></ul><ul id="7b2ebd9a-9509-441f-9b18-025527f3f440" class="bulleted-list"><li style="list-style-type:disc">Create an <strong>ECS task execution role</strong> and reference it with your task definition, which allows access to both KMS and the Parameter Store/Secrets Manager.</li></ul><ul id="02b59805-9a06-452f-a80e-8e49b08381dc" class="bulleted-list"><li style="list-style-type:disc">Supported for both EC2 and Fargate launch types</li></ul><h2 id="f9f5130b-9879-4204-b774-9e87763251d2" class="">Bind Mounts</h2><ul id="3cef4cc4-87b7-4d10-92fe-9e35405e93e4" class="bulleted-list"><li style="list-style-type:disc"><strong>Shared volume between multiple containers</strong> running the same application (same definition file).</li></ul><ul id="42a926b5-c3d0-4a5b-8b13-b2fab42b517f" class="bulleted-list"><li style="list-style-type:disc">Bind mount lifecycle<ul id="e6df3d9f-9496-4661-a0f1-dac5e6aea637" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">EC2 Tasks: lifecycle of EC2 instances</mark> since the volumes exist on the host</li></ul><ul id="f1b10c69-43bc-4e3f-893a-1ef0bf906fa0" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Fargate Tasks: lifecycle of the ECS task</mark> [20 GiB (default) - 200 GiB]</li></ul></li></ul><h2 id="b0b1c90a-1465-4726-8807-c2d52c4476f1" class="">Shared File System in ECS</h2><ul id="fa27fe76-ebb7-4468-bcf4-49698c55bdc6" class="bulleted-list"><li style="list-style-type:disc"><strong>EFS can be mounted as a shared file system between ECS tasks</strong></li></ul><ul id="f93bc706-ca13-4f09-939a-3ecf5b708fcc" class="bulleted-list"><li style="list-style-type:disc">Works for both EC2 and Fargate launch types</li></ul><ul id="2f560fc4-b913-487a-a7b9-6eedd2b6f35c" class="bulleted-list"><li style="list-style-type:disc">ECS Fargate + EFS ⇒ serverless</li></ul><h2 id="662b74e4-7ffc-4849-8e72-d2cf902cbcc0" class="">ECS Service Auto Scaling</h2><ul id="203bc799-3da0-47a2-8f8c-64fb26cc2c75" class="bulleted-list"><li style="list-style-type:disc">Auto scale the number of ECS tasks in a service</li></ul><ul id="c45f6a12-6879-4021-8732-3bdc8c658c70" class="bulleted-list"><li style="list-style-type:disc"><strong>AWS Application Auto Scaling</strong> can be used to scale on metrics:<ul id="c2d6cf98-f60d-4ab1-bd00-06d5003c3f5e" class="bulleted-list"><li style="list-style-type:circle">ECS Service Average CPU Utilization</li></ul><ul id="3075e5ab-c1b2-4e7c-95eb-510fc19faac5" class="bulleted-list"><li style="list-style-type:circle">ECS Service Average Memory Utilization</li></ul><ul id="94490396-37c0-4981-a320-3ec0fd2bbda1" class="bulleted-list"><li style="list-style-type:circle">ALB Request Count Per Target</li></ul></li></ul><ul id="0e8b0123-135e-4473-abfa-0d9c80a928f8" class="bulleted-list"><li style="list-style-type:disc">The above metrics can be used to setup target tracking or step scaling for ECS tasks. Scheduled scaling can also be used.</li></ul><ul id="c9008b6e-7a4c-40a3-9070-3d3d1b848c78" class="bulleted-list"><li style="list-style-type:disc">Easier to setup on Fargate launch type because we don’t have to scale the underlying resource. </li></ul><ul id="148088bf-4844-4017-8212-fab9f3319a39" class="bulleted-list"><li style="list-style-type:disc">For EC2 launch type, auto-scaling EC2 instances:<ul id="fa17dc5c-13db-4587-96e0-227b52ec8e25" class="bulleted-list"><li style="list-style-type:circle">Using ASG to scale out based on CPU utilization</li></ul><ul id="d892c3b0-7b23-42e0-910c-023d0ec6f6a9" class="bulleted-list"><li style="list-style-type:circle"><strong>ECS Cluster Capacity Provider</strong> - automatically scales out EC2 instances when the service is missing capacity.</li></ul></li></ul><h2 id="da19b1ef-6a76-4c95-85e3-01b65ee3e782" class="">Task Definition</h2><ul id="3080360a-4916-4d7e-9572-59cf50ae3ba3" class="bulleted-list"><li style="list-style-type:disc">Analogous to Docker Compose</li></ul><ul id="2f4391a9-6445-449e-ab18-0b88ffe9893f" class="bulleted-list"><li style="list-style-type:disc">Tells ECS how to run the docker containers</li></ul><ul id="0e0296b3-00f7-4a15-b3d2-e66384b866c9" class="bulleted-list"><li style="list-style-type:disc"><strong>Only 1 IAM Role can be defined per Task Definition.</strong> All the tasks within a service will assume that role.</li></ul><ul id="87568654-cb86-4213-8d25-72afeb20c6c3" class="bulleted-list"><li style="list-style-type:disc">Environment variables in Task Definitions<ul id="c6b99949-46c0-47bb-ab97-1415bf08c126" class="bulleted-list"><li style="list-style-type:circle">Hardcoded (defined in the task definition file)</li></ul><ul id="2632237e-0d95-448f-93d9-b75edfa17996" class="bulleted-list"><li style="list-style-type:circle">Referenced from Parameter Store</li></ul><ul id="581b9dd8-7b10-454c-840a-a4e517e803d2" class="bulleted-list"><li style="list-style-type:circle">Referenced from Secrets Manager</li></ul><ul id="08edd24c-ee4c-4f25-a17f-7b58f28ae2de" class="bulleted-list"><li style="list-style-type:circle">Imported as Environment Files from S3 bucket</li></ul></li></ul><h2 id="ab5f6d8d-35ac-4958-a470-b7a211b7b481" class="">Task Placement</h2><p id="e903505a-9a34-4d7d-b32e-b0e95b93a2e3" class=""><mark class="highlight-yellow_background">This is to be decided only in EC2 launch type. </mark></p><h3 id="5d126c61-ddee-4fa6-8820-320b195a51bd" class="">Task Placement Strategy</h3><div id="013098c7-8ead-4bfe-a437-54bf9abca655" class="column-list"><div id="130e84f1-638b-4032-b72c-a3bdebe9ed56" style="width:50%" class="column"><ul id="da54e51a-7033-43f6-836e-a45bf1654a2d" class="bulleted-list"><li style="list-style-type:disc"><strong>Binpack</strong><ul id="b96556a0-6fd4-4e27-9afb-31f90ba37312" class="bulleted-list"><li style="list-style-type:circle">Fill up an instance (in terms of CPU or memory) and only then provision a new instance.</li></ul><ul id="bb4daaa7-5ed8-467e-8ea6-7567789c7780" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Minimize cost</mark> (number of instances)</li></ul><ul id="f0a86aee-a8f8-4c5b-b32e-a4a7c0b9249f" class="bulleted-list"><li style="list-style-type:circle">Example: Binpack on memory</li></ul></li></ul></div><div id="48c735ac-acf7-40e3-8495-69722e040f90" style="width:50%" class="column"><figure id="345c3afd-f476-4a40-9164-3a665058e87c" class="image"><a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%208.png"><img style="width:240px" src="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%208.png"/></a></figure></div></div><div id="2fadbf2d-f91a-4b36-a799-b11e00578194" class="column-list"><div id="cb933833-e18f-4c5e-a713-fa7b317d53f1" style="width:50%" class="column"><ul id="9cc31f0e-b2c9-4d1d-aed1-ee578071caba" class="bulleted-list"><li style="list-style-type:disc"><strong>Random</strong><ul id="1e33b907-94fc-4d29-b64a-0c8c3bafbff1" class="bulleted-list"><li style="list-style-type:circle">Randomly select an instance to place the task.</li></ul></li></ul></div><div id="9592e52c-a722-43fb-b7b6-a40cfcd29af9" style="width:50%" class="column"><figure id="1a109951-1a0c-4ad1-8a2d-e4f7eae6e635" class="image"><a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%209.png"><img style="width:240px" src="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%209.png"/></a></figure></div></div><div id="efd742df-6d76-4920-8402-bd57633f9335" class="column-list"><div id="78f79b3e-d601-4498-bace-dd0f24e45e1e" style="width:50%" class="column"><ul id="92e13850-13b9-4be8-ba92-5d713df305f3" class="bulleted-list"><li style="list-style-type:disc"><strong>Spread</strong><ul id="4fd97e08-59ec-4dfb-ba01-b150879d2460" class="bulleted-list"><li style="list-style-type:circle">Spread the tasks on a parameter</li></ul><ul id="14438787-4b2a-4e38-922d-869f77b381a6" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Maximize availability</mark></li></ul><ul id="28cecc05-4c8a-428e-be94-70de6390cdd3" class="bulleted-list"><li style="list-style-type:circle">Example: spread on AZ</li></ul></li></ul></div><div id="6f67e897-87b4-4443-b3ad-994d617286b7" style="width:50%" class="column"><figure id="2b14381c-992a-4a92-b2b6-ca817bd81482" class="image"><a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%2010.png"><img style="width:656px" src="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%2010.png"/></a></figure></div></div><div id="a99b5320-88e7-4811-8016-f8c966780787" class="column-list"><div id="4f11ad1d-bbf5-4c1b-92e2-2217584ee8da" style="width:50%" class="column"><ul id="d9a8a7e9-7dd2-4fbe-bf13-71c070f580b4" class="bulleted-list"><li style="list-style-type:disc">Task placement strategy can be mixed such as spread on AZ and binpack on memory:</li></ul></div><div id="6b7e39f2-b168-4c9a-abca-45c5a59f0863" style="width:50%" class="column"><figure id="c7d6271c-a498-48e8-b73e-ce8111b95e57" class="image"><a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%2011.png"><img style="width:644px" src="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7/Untitled%2011.png"/></a></figure></div></div><h3 id="c3ba40ba-3645-4224-a91d-6ec049950991" class="">Task Placement Constraints</h3><ul id="f7f855b9-f505-4cb0-8744-a684bea172fc" class="bulleted-list"><li style="list-style-type:disc"><code>distinctInstance</code> - place each task on a different instance</li></ul><ul id="edf436de-96ab-410f-9301-8aefe03559eb" class="bulleted-list"><li style="list-style-type:disc"><code>memberOf</code> - place task on instances that satisfy an expression (eg. only on T2 family of instances)</li></ul><h2 id="f57ba276-a17c-4588-8e2b-e555b0c49152" class="">Troubleshooting Steps</h2><ul id="75fb4136-b0dc-4a14-a323-6079db370634" class="bulleted-list"><li style="list-style-type:disc">Verify that the Docker daemon is running on the container instance.</li></ul><ul id="b2d5f38b-fe37-4ea2-bc1d-f42dcd682567" class="bulleted-list"><li style="list-style-type:disc">Verify that the container agent is running on the container instance.</li></ul><ul id="6fcc6cd0-5de2-4154-add3-cbd22b669fa8" class="bulleted-list"><li style="list-style-type:disc">Verify that the IAM instance profile has the necessary permissions.</li></ul><h2 id="f4a7f945-cf7a-4003-966c-5d5b18cbf281" class="">Misc</h2><ul id="56f00181-6b94-4ef0-ac24-6f3595a1f1b2" class="bulleted-list"><li style="list-style-type:disc">You can use EventBridge to run Amazon ECS tasks when certain AWS events occur. Ex: set up a CloudWatch Events rule that runs an Amazon ECS task whenever a file is uploaded to an S3 bucket. </li></ul><ul id="333791c5-140d-4313-a21d-71908bbe268d" class="bulleted-list"><li style="list-style-type:disc">For tracing, create a Docker image that runs the X-Ray daemon, upload it to a Docker image repository, and then deploy it to your Amazon ECS cluster. Configure the task definition file to allow your application to communicate with the daemon container.</li></ul><ul id="88cd3dd7-e996-44d7-904e-9645f3fe48d0" class="bulleted-list"><li style="list-style-type:disc">Use <strong>advanced container definition parameters</strong> to define environment variables for a task.</li></ul><p id="9a757acb-1c75-45db-9a09-a3bd6bff9045" class="">
+</p></div></article></body></html>

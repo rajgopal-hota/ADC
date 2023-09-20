@@ -1,0 +1,1377 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Notes</title>
+    <style>
+      /* cspell:disable-file */
+      /* webkit printing magic: print all background colors */
+      html {
+        -webkit-print-color-adjust: exact;
+      }
+      * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      @media only screen {
+        body {
+          margin: 2em auto;
+          max-width: 900px;
+          color: rgb(55, 53, 47);
+		  background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+        }
+      }
+
+      body {
+        line-height: 1.5;
+      }
+
+      a,
+      a.visited {
+        color: inherit;
+        text-decoration: underline;
+      }
+
+      .pdf-relative-link-path {
+        font-size: 80%;
+        color: #444;
+      }
+
+      h1,
+      h2,
+      h3 {
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+        font-weight: 600;
+        margin-bottom: 0;
+      }
+
+      .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 0.75em;
+      }
+
+      h1 {
+        font-size: 1.875rem;
+        margin-top: 1.875rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        margin-top: 1.25rem;
+      }
+
+      .source {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        padding: 1.5em;
+        word-break: break-all;
+      }
+
+      .callout {
+        border-radius: 3px;
+        padding: 1rem;
+      }
+
+      figure {
+        margin: 1.25em 0;
+        page-break-inside: avoid;
+      }
+
+      figcaption {
+        opacity: 0.5;
+        font-size: 85%;
+        margin-top: 0.5em;
+      }
+
+      mark {
+        background-color: transparent;
+      }
+
+      .indented {
+        padding-left: 1.5em;
+      }
+
+      hr {
+        background: transparent;
+        display: block;
+        width: 100%;
+        height: 1px;
+        visibility: visible;
+        border: none;
+        border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      @media only print {
+        img {
+          max-height: 100vh;
+          object-fit: contain;
+        }
+      }
+
+      @page {
+        margin: 1in;
+      }
+
+      .collection-content {
+        font-size: 0.875rem;
+      }
+
+      .column-list {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .column {
+        padding: 0 1em;
+      }
+
+      .column:first-child {
+        padding-left: 0;
+      }
+
+      .column:last-child {
+        padding-right: 0;
+      }
+
+      .table_of_contents-item {
+        display: block;
+        font-size: 0.875rem;
+        line-height: 1.3;
+        padding: 0.125rem;
+      }
+
+      .table_of_contents-indent-1 {
+        margin-left: 1.5rem;
+      }
+
+      .table_of_contents-indent-2 {
+        margin-left: 3rem;
+      }
+
+      .table_of_contents-indent-3 {
+        margin-left: 4.5rem;
+      }
+
+      .table_of_contents-link {
+        text-decoration: none;
+        opacity: 0.7;
+        border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid rgba(55, 53, 47, 0.09);
+        border-collapse: collapse;
+      }
+
+      table {
+        border-left: none;
+        border-right: none;
+      }
+
+      th,
+      td {
+        font-weight: normal;
+        padding: 0.25em 0.5em;
+        line-height: 1.5;
+        min-height: 1.5em;
+        text-align: left;
+      }
+
+      th {
+        color: rgba(55, 53, 47, 0.6);
+      }
+
+      ol,
+      ul {
+        margin: 0;
+        margin-block-start: 0.6em;
+        margin-block-end: 0.6em;
+      }
+
+      li > ol:first-child,
+      li > ul:first-child {
+        margin-block-start: 0.6em;
+      }
+
+      ul > li {
+        list-style: disc;
+      }
+
+      ul.to-do-list {
+        padding-inline-start: 0;
+      }
+
+      ul.to-do-list > li {
+        list-style: none;
+      }
+
+      .to-do-children-checked {
+        text-decoration: line-through;
+        opacity: 0.375;
+      }
+
+      ul.toggle > li {
+        list-style: none;
+      }
+
+      ul {
+        padding-inline-start: 1.7em;
+      }
+
+      ul > li {
+        padding-left: 0.1em;
+      }
+
+      ol {
+        padding-inline-start: 1.6em;
+      }
+
+      ol > li {
+        padding-left: 0.2em;
+      }
+
+      .mono ol {
+        padding-inline-start: 2em;
+      }
+
+      .mono ol > li {
+        text-indent: -0.4em;
+      }
+
+      .toggle {
+        padding-inline-start: 0em;
+        list-style-type: none;
+      }
+
+      /* Indent toggle children */
+      .toggle > li > details {
+        padding-left: 1.7em;
+      }
+
+      .toggle > li > details > summary {
+        margin-left: -1.1em;
+      }
+
+      .selected-value {
+        display: inline-block;
+        padding: 0 0.5em;
+        background: rgba(206, 205, 202, 0.5);
+        border-radius: 3px;
+        margin-right: 0.5em;
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+        white-space: nowrap;
+      }
+
+      .collection-title {
+        display: inline-block;
+        margin-right: 1em;
+      }
+
+      .page-description {
+        margin-bottom: 2em;
+      }
+
+      .simple-table {
+        margin-top: 1em;
+        font-size: 0.875rem;
+        empty-cells: show;
+      }
+      .simple-table td {
+        height: 29px;
+        min-width: 120px;
+      }
+
+      .simple-table th {
+        height: 29px;
+        min-width: 120px;
+      }
+
+      .simple-table-header-color {
+        background: rgb(247, 246, 243);
+        color: black;
+      }
+      .simple-table-header {
+        font-weight: 500;
+      }
+
+      time {
+        opacity: 0.5;
+      }
+
+      .icon {
+        display: inline-block;
+        max-width: 1.2em;
+        max-height: 1.2em;
+        text-decoration: none;
+        vertical-align: text-bottom;
+        margin-right: 0.5em;
+      }
+
+      img.icon {
+        border-radius: 3px;
+      }
+
+      .user-icon {
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 100%;
+        margin-right: 0.5rem;
+      }
+
+      .user-icon-inner {
+        font-size: 0.8em;
+      }
+
+      .text-icon {
+        border: 1px solid #000;
+        text-align: center;
+      }
+
+      .page-cover-image {
+        display: block;
+        object-fit: cover;
+        width: 100%;
+        max-height: 30vh;
+      }
+
+      .page-header-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .page-header-icon-with-cover {
+        margin-top: -0.72em;
+        margin-left: 0.07em;
+      }
+
+      .page-header-icon img {
+        border-radius: 3px;
+      }
+
+      .link-to-page {
+        margin: 1em 0;
+        padding: 0;
+        border: none;
+        font-weight: 500;
+      }
+
+      p > .user {
+        opacity: 0.5;
+      }
+
+      td > .user,
+      td > time {
+        white-space: nowrap;
+      }
+
+      input[type="checkbox"] {
+        transform: scale(1.5);
+        margin-right: 0.6em;
+        vertical-align: middle;
+      }
+
+      p {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+      }
+
+      .image {
+        border: none;
+        margin: 1.5em 0;
+        padding: 0;
+        border-radius: 0;
+        text-align: center;
+      }
+
+      .code,
+      code {
+        background: rgba(135, 131, 120, 0.15);
+        border-radius: 3px;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 85%;
+        tab-size: 2;
+      }
+
+      code {
+        color: #eb5757;
+      }
+
+      .code {
+        padding: 1.5em 1em;
+      }
+
+      .code-wrap {
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+
+      .code > code {
+        background: none;
+        padding: 0;
+        font-size: 100%;
+        color: inherit;
+      }
+
+      blockquote {
+        font-size: 1.25em;
+        margin: 1em 0;
+        padding-left: 1em;
+        border-left: 3px solid rgb(55, 53, 47);
+      }
+
+      .bookmark {
+        text-decoration: none;
+        max-height: 8em;
+        padding: 0;
+        display: flex;
+        width: 100%;
+        align-items: stretch;
+      }
+
+      .bookmark-title {
+        font-size: 0.85em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 1.75em;
+        white-space: nowrap;
+      }
+
+      .bookmark-text {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .bookmark-info {
+        flex: 4 1 180px;
+        padding: 12px 14px 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .bookmark-image {
+        width: 33%;
+        flex: 1 1 180px;
+        display: block;
+        position: relative;
+        object-fit: cover;
+        border-radius: 1px;
+      }
+
+      .bookmark-description {
+        color: rgba(55, 53, 47, 0.6);
+        font-size: 0.75em;
+        overflow: hidden;
+        max-height: 4.5em;
+        word-break: break-word;
+      }
+
+      .bookmark-href {
+        font-size: 0.75em;
+        margin-top: 0.25em;
+      }
+
+      .sans {
+        font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif,
+          "Segoe UI Emoji", "Segoe UI Symbol";
+      }
+      .code {
+        font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono",
+          "Liberation Mono", Courier, monospace;
+      }
+      .serif {
+        font-family: Lyon-Text, Georgia, ui-serif, serif;
+      }
+      .mono {
+        font-family: iawriter-mono, Nitti, Menlo, Courier, monospace;
+      }
+      .pdf .sans {
+        font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif,
+          "Segoe UI Emoji", "Segoe UI Symbol", "Twemoji", "Noto Color Emoji",
+          "Noto Sans CJK JP";
+      }
+      .pdf:lang(zh-CN) .sans {
+        font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif,
+          "Segoe UI Emoji", "Segoe UI Symbol", "Twemoji", "Noto Color Emoji",
+          "Noto Sans CJK SC";
+      }
+      .pdf:lang(zh-TW) .sans {
+        font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif,
+          "Segoe UI Emoji", "Segoe UI Symbol", "Twemoji", "Noto Color Emoji",
+          "Noto Sans CJK TC";
+      }
+      .pdf:lang(ko-KR) .sans {
+        font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif,
+          "Segoe UI Emoji", "Segoe UI Symbol", "Twemoji", "Noto Color Emoji",
+          "Noto Sans CJK KR";
+      }
+      .pdf .code {
+        font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas,
+          "PT Mono", "Liberation Mono", Courier, monospace, "Twemoji",
+          "Noto Color Emoji", "Noto Sans Mono CJK JP";
+      }
+      .pdf:lang(zh-CN) .code {
+        font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas,
+          "PT Mono", "Liberation Mono", Courier, monospace, "Twemoji",
+          "Noto Color Emoji", "Noto Sans Mono CJK SC";
+      }
+      .pdf:lang(zh-TW) .code {
+        font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas,
+          "PT Mono", "Liberation Mono", Courier, monospace, "Twemoji",
+          "Noto Color Emoji", "Noto Sans Mono CJK TC";
+      }
+      .pdf:lang(ko-KR) .code {
+        font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas,
+          "PT Mono", "Liberation Mono", Courier, monospace, "Twemoji",
+          "Noto Color Emoji", "Noto Sans Mono CJK KR";
+      }
+      .pdf .serif {
+        font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, "Twemoji",
+          "Noto Color Emoji", "Noto Serif CJK JP";
+      }
+      .pdf:lang(zh-CN) .serif {
+        font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, "Twemoji",
+          "Noto Color Emoji", "Noto Serif CJK SC";
+      }
+      .pdf:lang(zh-TW) .serif {
+        font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, "Twemoji",
+          "Noto Color Emoji", "Noto Serif CJK TC";
+      }
+      .pdf:lang(ko-KR) .serif {
+        font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, "Twemoji",
+          "Noto Color Emoji", "Noto Serif CJK KR";
+      }
+      .pdf .mono {
+        font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace,
+          "Twemoji", "Noto Color Emoji", "Noto Sans Mono CJK JP";
+      }
+      .pdf:lang(zh-CN) .mono {
+        font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace,
+          "Twemoji", "Noto Color Emoji", "Noto Sans Mono CJK SC";
+      }
+      .pdf:lang(zh-TW) .mono {
+        font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace,
+          "Twemoji", "Noto Color Emoji", "Noto Sans Mono CJK TC";
+      }
+      .pdf:lang(ko-KR) .mono {
+        font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace,
+          "Twemoji", "Noto Color Emoji", "Noto Sans Mono CJK KR";
+      }
+      .highlight-default {
+        color: rgba(55, 53, 47, 1);
+      }
+      .highlight-gray {
+        color: rgba(120, 119, 116, 1);
+        fill: rgba(120, 119, 116, 1);
+      }
+      .highlight-brown {
+        color: rgba(159, 107, 83, 1);
+        fill: rgba(159, 107, 83, 1);
+      }
+      .highlight-orange {
+        color: rgba(217, 115, 13, 1);
+        fill: rgba(217, 115, 13, 1);
+      }
+      .highlight-yellow {
+        color: rgba(203, 145, 47, 1);
+        fill: rgba(203, 145, 47, 1);
+      }
+      .highlight-teal {
+        color: rgba(68, 131, 97, 1);
+        fill: rgba(68, 131, 97, 1);
+      }
+      .highlight-blue {
+        color: rgba(51, 126, 169, 1);
+        fill: rgba(51, 126, 169, 1);
+      }
+      .highlight-purple {
+        color: rgba(144, 101, 176, 1);
+        fill: rgba(144, 101, 176, 1);
+      }
+      .highlight-pink {
+        color: rgba(193, 76, 138, 1);
+        fill: rgba(193, 76, 138, 1);
+      }
+      .highlight-red {
+        color: rgba(212, 76, 71, 1);
+        fill: rgba(212, 76, 71, 1);
+      }
+      .highlight-gray_background {
+        background: rgba(241, 241, 239, 1);
+      }
+      .highlight-brown_background {
+        background: rgba(244, 238, 238, 1);
+      }
+      .highlight-orange_background {
+        background: rgba(251, 236, 221, 1);
+      }
+      .highlight-yellow_background {
+        background: rgba(251, 243, 219, 1);
+      }
+      .highlight-teal_background {
+        background: rgba(237, 243, 236, 1);
+      }
+      .highlight-blue_background {
+        background: rgba(231, 243, 248, 1);
+      }
+      .highlight-purple_background {
+        background: rgba(244, 240, 247, 0.8);
+      }
+      .highlight-pink_background {
+        background: rgba(249, 238, 243, 0.8);
+      }
+      .highlight-red_background {
+        background: rgba(253, 235, 236, 1);
+      }
+      .block-color-default {
+        color: inherit;
+        fill: inherit;
+      }
+      .block-color-gray {
+        color: rgba(120, 119, 116, 1);
+        fill: rgba(120, 119, 116, 1);
+      }
+      .block-color-brown {
+        color: rgba(159, 107, 83, 1);
+        fill: rgba(159, 107, 83, 1);
+      }
+      .block-color-orange {
+        color: rgba(217, 115, 13, 1);
+        fill: rgba(217, 115, 13, 1);
+      }
+      .block-color-yellow {
+        color: rgba(203, 145, 47, 1);
+        fill: rgba(203, 145, 47, 1);
+      }
+      .block-color-teal {
+        color: rgba(68, 131, 97, 1);
+        fill: rgba(68, 131, 97, 1);
+      }
+      .block-color-blue {
+        color: rgba(51, 126, 169, 1);
+        fill: rgba(51, 126, 169, 1);
+      }
+      .block-color-purple {
+        color: rgba(144, 101, 176, 1);
+        fill: rgba(144, 101, 176, 1);
+      }
+      .block-color-pink {
+        color: rgba(193, 76, 138, 1);
+        fill: rgba(193, 76, 138, 1);
+      }
+      .block-color-red {
+        color: rgba(212, 76, 71, 1);
+        fill: rgba(212, 76, 71, 1);
+      }
+      .block-color-gray_background {
+        background: rgba(241, 241, 239, 1);
+      }
+      .block-color-brown_background {
+        background: rgba(244, 238, 238, 1);
+      }
+      .block-color-orange_background {
+        background: rgba(251, 236, 221, 1);
+      }
+      .block-color-yellow_background {
+        background: rgba(251, 243, 219, 1);
+      }
+      .block-color-teal_background {
+        background: rgba(237, 243, 236, 1);
+      }
+      .block-color-blue_background {
+        background: rgba(231, 243, 248, 1);
+      }
+      .block-color-purple_background {
+        background: rgba(244, 240, 247, 0.8);
+      }
+      .block-color-pink_background {
+        background: rgba(249, 238, 243, 0.8);
+      }
+      .block-color-red_background {
+        background: rgba(253, 235, 236, 1);
+      }
+      .select-value-color-interactiveBlue {
+        background-color: rgba(35, 131, 226, 0.07);
+      }
+      .select-value-color-pink {
+        background-color: rgba(245, 224, 233, 1);
+      }
+      .select-value-color-purple {
+        background-color: rgba(232, 222, 238, 1);
+      }
+      .select-value-color-green {
+        background-color: rgba(219, 237, 219, 1);
+      }
+      .select-value-color-gray {
+        background-color: rgba(227, 226, 224, 1);
+      }
+      .select-value-color-translucentGray {
+        background-color: rgba(255, 255, 255, 0.0375);
+      }
+      .select-value-color-orange {
+        background-color: rgba(250, 222, 201, 1);
+      }
+      .select-value-color-brown {
+        background-color: rgba(238, 224, 218, 1);
+      }
+      .select-value-color-red {
+        background-color: rgba(255, 226, 221, 1);
+      }
+      .select-value-color-yellow {
+        background-color: rgba(253, 236, 200, 1);
+      }
+      .select-value-color-blue {
+        background-color: rgba(211, 229, 239, 1);
+      }
+      .select-value-color-pageGlass {
+        background-color: undefined;
+      }
+      .select-value-color-washGlass {
+        background-color: undefined;
+      }
+
+      .checkbox {
+        display: inline-flex;
+        vertical-align: text-bottom;
+        width: 16;
+        height: 16;
+        background-size: 16px;
+        margin-left: 2px;
+        margin-right: 5px;
+      }
+
+      .checkbox-on {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+      }
+
+      .checkbox-off {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+      }
+    </style>
+  </head>
+  <body>
+    <article id="c8ffbe24-30ea-47ca-ab2a-45d6d4b196b8" class="page sans">
+      <header>
+        <h1 class="page-title">Notes</h1>
+        <p class="page-description"></p>
+      </header>
+      <div class="page-body">
+        <div id="6c94ec73-2238-4d54-8ad6-f7114bcf96cc" class="column-list">
+          <div
+            id="5d90036e-9304-41f3-86b3-b62942d00943"
+            style="width: 50%"
+            class="column"
+          >
+            <h2 id="84500402-5c14-466e-94b3-9dc50ae60d73" class="">Compute</h2>
+            <figure
+              id="ae47d2a3-6046-4e7d-ab63-184c8f3347b2"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/EC2%20ae47d2a360464e7dab63184c8f3347b2.html"
+                >EC2</a
+              >
+            </figure>
+            <figure
+              id="3c3c07d9-e460-443f-86e1-e8957f1df569"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Lambda%203c3c07d9e460443f86e1e8957f1df569.html"
+                >Lambda</a
+              >
+            </figure>
+            <figure
+              id="0cbf391d-f798-499a-81b9-842a3f2955ce"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Step%20Functions%200cbf391df798499a81b9842a3f2955ce.html"
+                >Step Functions</a
+              >
+            </figure>
+            <h2 id="290709ea-29d6-4503-a08a-5b2cc7c451c9" class="">
+              Networking
+            </h2>
+            <figure
+              id="52853e01-7ca0-4f19-a83d-64ee8663575f"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/VPC%2052853e017ca04f19a83d64ee8663575f.html"
+                >VPC</a
+              >
+            </figure>
+            <figure
+              id="66e0c404-8767-42b2-8e72-1984d5c5461f"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Route%2053%2066e0c404876742b28e721984d5c5461f.html"
+                >Route 53</a
+              >
+            </figure>
+            <figure
+              id="d1374d24-c498-4f31-af24-89a54c0219fd"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/ELB%20d1374d24c4984f31af2489a54c0219fd.html"
+                >ELB</a
+              >
+            </figure>
+            <figure
+              id="c14b044b-44f8-4519-8432-c631cb04de2a"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/API%20Gateway%20c14b044b44f845198432c631cb04de2a.html"
+                >API Gateway</a
+              >
+            </figure>
+            <h2 id="2225f04f-90d1-4329-9ab7-ed9e01590863" class="">
+              Containers
+            </h2>
+            <figure
+              id="41cdb13d-2b1a-45a6-94e2-1f3fa3e53df7"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7.html"
+                >Amazon ECS</a
+              >
+            </figure>
+            <figure
+              id="febe89e6-0d20-432f-a1c7-c016c2792d5e"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Elastic%20Container%20Registry%20(ECR)%20febe89e60d20432fa1c7c016c2792d5e.html"
+                >Elastic Container Registry (ECR)</a
+              >
+            </figure>
+            <figure
+              id="5ff3b4f2-d22c-4eca-b94d-18848b6a4556"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/AWS%20CoPilot%205ff3b4f2d22c4ecab94d18848b6a4556.html"
+                >AWS CoPilot</a
+              >
+            </figure>
+            <h2 id="8e54106f-40b9-4c9b-a487-d56c36df530a" class="">
+              Infrastructure
+            </h2>
+            <figure
+              id="46290b31-6262-4807-8dff-5ef2ad0e0095"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/ASG%2046290b31626248078dff5ef2ad0e0095.html"
+                >ASG</a
+              >
+            </figure>
+            <figure
+              id="f94355b2-18ad-4268-8be0-fb52bca801d6"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/CloudFormation%20f94355b218ad42688be0fb52bca801d6.html"
+                >CloudFormation</a
+              >
+            </figure>
+            <figure
+              id="aab457d6-9f26-4b37-a78b-fd5989528481"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481.html"
+                >Elastic Beanstalk</a
+              >
+            </figure>
+            <figure
+              id="d23e6c3b-3855-4741-9d6a-5191f950c266"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Serverless%20Application%20Model%20(SAM)%20d23e6c3b385547419d6a5191f950c266.html"
+                >Serverless Application Model (SAM)</a
+              >
+            </figure>
+            <figure
+              id="d1cd8fd4-d441-4920-b12f-e5d0f239e28c"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Cloud%20Development%20Kit%20(CDK)%20d1cd8fd4d4414920b12fe5d0f239e28c.html"
+                >Cloud Development Kit (CDK)</a
+              >
+            </figure>
+            <figure
+              id="b2f0622d-b601-4996-8b9f-be2a631a7227"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Amplify%20b2f0622db60149968b9fbe2a631a7227.html"
+                >Amplify</a
+              >
+            </figure>
+            <figure
+              id="57cd0ded-2647-4bc5-89ab-e287fadb8e9a"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/AppConfig%2057cd0ded26474bc589abe287fadb8e9a.html"
+                >AppConfig</a
+              >
+            </figure>
+            <figure
+              id="fedb82af-9c3e-4bad-a750-d42369d2de8d"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Cloud9%20fedb82af9c3e4bada750d42369d2de8d.html"
+                >Cloud9</a
+              >
+            </figure>
+            <h2 id="5b10cad7-1bcb-4af6-87a4-8cad9c03d865" class="">
+              Auth &amp; Security
+            </h2>
+            <figure
+              id="fca1d653-94b4-48e9-80af-f4dd39c7cb76"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Cognito%20fca1d65394b448e980aff4dd39c7cb76.html"
+                >Cognito</a
+              >
+            </figure>
+            <figure
+              id="2de8a34f-52d2-4535-aa2e-c4b0dd883626"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/IAM%202de8a34f52d24535aa2ec4b0dd883626.html"
+                >IAM</a
+              >
+            </figure>
+            <figure
+              id="33490611-4e5c-4f4d-bf73-9a43f64d65b4"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Security%20Token%20Service%20(STS)%20334906114e5c4f4dbf739a43f64d65b4.html"
+                >Security Token Service (STS)</a
+              >
+            </figure>
+            <figure
+              id="54866738-f683-4883-a0a9-6808ba7bbc61"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/AWS%20Directory%20Services%2054866738f6834883a0a96808ba7bbc61.html"
+                >AWS Directory Services</a
+              >
+            </figure>
+            <figure
+              id="57747982-4845-4e1c-b6e5-7275ad7f4171"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/KMS%205774798248454e1cb6e57275ad7f4171.html"
+                >KMS</a
+              >
+            </figure>
+            <figure
+              id="fffe763e-9915-402b-a181-4cfe43b08485"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/CloudHSM%20fffe763e9915402ba1814cfe43b08485.html"
+                >CloudHSM</a
+              >
+            </figure>
+            <figure
+              id="92c69316-d223-4298-9889-f31274249baf"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/SSM%20Parameter%20Store%2092c69316d22342989889f31274249baf.html"
+                >SSM Parameter Store</a
+              >
+            </figure>
+            <figure
+              id="f527071d-7632-4b01-8401-938905911108"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Secrets%20Manager%20f527071d76324b018401938905911108.html"
+                >Secrets Manager</a
+              >
+            </figure>
+            <figure
+              id="15c887f1-2be6-4a22-bf08-7d9f26af53f4"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Nitro%20Enclaves%2015c887f12be64a22bf087d9f26af53f4.html"
+                >Nitro Enclaves</a
+              >
+            </figure>
+            <figure
+              id="ebd0a0c8-4b4d-40ba-8d93-57a7335289ec"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/AWS%20Certificate%20Manager%20(ACM)%20ebd0a0c84b4d40ba8d9357a7335289ec.html"
+                >AWS Certificate Manager (ACM)</a
+              >
+            </figure>
+            <figure
+              id="b52fb971-3d7b-48e7-967a-42776dca8c58"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/AWS%20Private%20Certificate%20Authority%20(CA)%20b52fb9713d7b48e7967a42776dca8c58.html"
+                >AWS Private Certificate Authority (CA)</a
+              >
+            </figure>
+            <figure
+              id="d7ec7a3d-5b39-41d4-8bb1-116c3f0abf57"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Organizations%20d7ec7a3d5b3941d48bb1116c3f0abf57.html"
+                >Organizations</a
+              >
+            </figure>
+          </div>
+          <div
+            id="76f65aa4-d32a-4147-b1df-b0da7e5c0a4d"
+            style="width: 50%"
+            class="column"
+          >
+            <h2 id="f14319fb-f5bd-491d-98a5-1a150464da4b" class="">
+              Messaging
+            </h2>
+            <figure
+              id="36832398-d945-40b7-8e88-99422c230996"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/SQS%2036832398d94540b78e8899422c230996.html"
+                >SQS</a
+              >
+            </figure>
+            <figure
+              id="7993c053-a915-4024-9527-98bbfcfce830"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/SNS%207993c053a9154024952798bbfcfce830.html"
+                >SNS</a
+              >
+            </figure>
+            <figure
+              id="6a2d6231-6ef4-404b-ab68-60b3eb33ef28"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/EventBridge%206a2d62316ef4404bab6860b3eb33ef28.html"
+                >EventBridge</a
+              >
+            </figure>
+            <figure
+              id="cfeb858a-30e5-4ca5-bc7b-2e5be0728714"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714.html"
+                >Kinesis</a
+              >
+            </figure>
+            <figure
+              id="c1910975-e2a1-4a1b-91b9-24229d4c9ed0"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/AppSync%20c1910975e2a14a1b91b924229d4c9ed0.html"
+                >AppSync</a
+              >
+            </figure>
+            <figure
+              id="51e94d6c-4079-4eec-9260-2cbc90001131"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Managed%20Streaming%20for%20Apache%20Kafka%20(MSK)%2051e94d6c40794eec92602cbc90001131.html"
+                >Managed Streaming for Apache Kafka (MSK)</a
+              >
+            </figure>
+            <figure
+              id="c259121b-f9d0-41c4-8780-f98ab11f5577"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Simple%20Email%20Service%20(SES)%20c259121bf9d041c48780f98ab11f5577.html"
+                >Simple Email Service (SES)</a
+              >
+            </figure>
+            <h2 id="a38d9a66-1877-4c9b-9ccd-b33ae4ee047f" class="">
+              Storage &amp; Querying
+            </h2>
+            <figure
+              id="4c6afe3b-756e-4e2d-8070-f33f4f1bf9eb"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/EC2%20Instance%20Store%204c6afe3b756e4e2d8070f33f4f1bf9eb.html"
+                >EC2 Instance Store</a
+              >
+            </figure>
+            <figure
+              id="d0c61f10-fb90-417d-b1dd-c831c8923246"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/EBS%20d0c61f10fb90417db1ddc831c8923246.html"
+                >EBS</a
+              >
+            </figure>
+            <figure
+              id="e92c9c91-a106-432c-8d0f-71aa31dc91b8"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/EFS%20e92c9c91a106432c8d0f71aa31dc91b8.html"
+                >EFS</a
+              >
+            </figure>
+            <figure
+              id="1b0fd140-cfa2-48db-9bdc-56c4c0607583"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/RDS%201b0fd140cfa248db9bdc56c4c0607583.html"
+                >RDS</a
+              >
+            </figure>
+            <figure
+              id="f08230b9-bc8b-479a-9454-a888b0dd410d"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Aurora%20f08230b9bc8b479a9454a888b0dd410d.html"
+                >Aurora</a
+              >
+            </figure>
+            <figure
+              id="c1e69321-ae41-46e1-8b9c-f665749be50b"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/DynamoDB%20c1e69321ae4146e18b9cf665749be50b.html"
+                >DynamoDB</a
+              >
+            </figure>
+            <figure
+              id="63851cbf-21f9-4c29-8421-de1ce0cf5722"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/S3%2063851cbf21f94c298421de1ce0cf5722.html"
+                >S3</a
+              >
+            </figure>
+            <figure
+              id="cefbb7ac-6de0-4f5e-88a2-ce3ea749d8d0"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0.html"
+                >CloudFront</a
+              >
+            </figure>
+            <figure
+              id="28db505f-f145-4843-a263-256c5e9cca43"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/ElastiCache%2028db505ff1454843a263256c5e9cca43.html"
+                >ElastiCache</a
+              >
+            </figure>
+            <figure
+              id="84301298-9a83-4429-a5c3-6440cab0f285"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/OpenSearch%20843012989a834429a5c36440cab0f285.html"
+                >OpenSearch</a
+              >
+            </figure>
+            <figure
+              id="b92ab856-717d-4a9e-b9e3-dec7decde494"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Athena%20b92ab856717d4a9eb9e3dec7decde494.html"
+              >
+                Athena</a
+              >
+            </figure>
+            <figure
+              id="56b478a9-d4b6-4643-b9c6-f907ec974272"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/MemoryDB%20for%20Redis%2056b478a9d4b64643b9c6f907ec974272.html"
+                >MemoryDB for Redis</a
+              >
+            </figure>
+            <h2 id="f64d12eb-768f-48a9-bb87-ab0f1c7df8db" class="">
+              Observability
+            </h2>
+            <figure
+              id="cfa026a1-01e7-44da-b7d3-d6e83bc4b6e3"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/CloudWatch%20cfa026a101e744dab7d3d6e83bc4b6e3.html"
+                >CloudWatch</a
+              >
+            </figure>
+            <figure
+              id="18d31a62-0401-45a2-830b-957deebd2fae"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/CloudTrail%2018d31a62040145a2830b957deebd2fae.html"
+                >CloudTrail</a
+              >
+            </figure>
+            <figure
+              id="9fec84d6-90d9-4afb-bf0d-bc9536d51789"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/X-Ray%209fec84d690d94afbbf0dbc9536d51789.html"
+                >X-Ray</a
+              >
+            </figure>
+            <h2 id="30b8d202-0d11-4051-b6b7-340f394097f5" class="">CICD</h2>
+            <figure
+              id="744e57b7-c86e-40bf-a472-2ab9fc5d8ae5"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/CodeCommit%20744e57b7c86e40bfa4722ab9fc5d8ae5.html"
+                >CodeCommit</a
+              >
+            </figure>
+            <figure
+              id="f8548c99-78c6-4ac6-92d2-0e8e70f7f022"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/CodeBuild%20f8548c9978c64ac692d20e8e70f7f022.html"
+                >CodeBuild</a
+              >
+            </figure>
+            <figure
+              id="9bfb77d3-34bc-4e26-90f4-c8e6faeaeb49"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/CodeDeploy%209bfb77d334bc4e2690f4c8e6faeaeb49.html"
+                >CodeDeploy</a
+              >
+            </figure>
+            <figure
+              id="a259f114-ddc5-4249-a9f1-74aaddd20eb1"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/CodePipeline%20a259f114ddc54249a9f174aaddd20eb1.html"
+                >CodePipeline</a
+              >
+            </figure>
+            <figure
+              id="a5d2cca2-ece0-4617-8d64-40efab93953c"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/CodeArtifact%20a5d2cca2ece046178d6440efab93953c.html"
+                >CodeArtifact</a
+              >
+            </figure>
+            <figure
+              id="a976948f-e7fc-4b84-a7e9-ae10bc6bec3c"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/CodeStar%20a976948fe7fc4b84a7e9ae10bc6bec3c.html"
+                >CodeStar</a
+              >
+            </figure>
+            <figure
+              id="bb4a99a7-7000-4a2c-8daa-949940da01d1"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/CodeGuru%20bb4a99a770004a2c8daa949940da01d1.html"
+                >CodeGuru</a
+              >
+            </figure>
+            <h2 id="3f5d758e-0007-4da9-b4c0-7be3bd0f5ae6" class="">Extras</h2>
+            <figure
+              id="f3c87188-e179-4136-b673-6da278e8aa4c"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/AWS%20CLI%20&amp;%20SDK%20f3c87188e1794136b6736da278e8aa4c.html"
+                >AWS CLI &amp; SDK</a
+              >
+            </figure>
+            <figure
+              id="e594b37b-b077-472b-90ee-bfd4d01bbc4b"
+              class="link-to-page"
+            >
+              <a
+                href="Notes%20c8ffbe2430ea47caab2a45d6d4b196b8/Important%20Points%20e594b37bb077472b90eebfd4d01bbc4b.html"
+                >Important Points</a
+              >
+            </figure>
+          </div>
+        </div>
+        <p id="36f31528-0cf9-40dc-bcc1-7d12f4a35464" class=""></p>
+      </div>
+    </article>
+  </body>
+</html>

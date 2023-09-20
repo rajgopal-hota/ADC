@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>X-Ray</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9fec84d6-90d9-4afb-bf0d-bc9536d51789" class="page sans"><header><h1 class="page-title">X-Ray</h1><p class="page-description"></p></header><div class="page-body"><nav id="a3d6fe7f-f34a-490e-967f-22136889253a" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b0e4e359-b564-42bb-afbd-76661d471835">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#32cc3fbb-a8b7-4d61-bc64-f524ae1f1515">Enabling X-Ray</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#43d36e0a-eede-4cbc-8e6b-9a4e407c5115">How traces are sent</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9ff086e3-341b-4d50-94d4-e532c83629c4">X-Ray instrumentation in code</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f3ecde39-3651-4355-813b-92634c7efde0">Terminologies</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#14c5460e-4a34-48b5-a97d-c130c316ade7">Sampling</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e4e5a2ee-3bd0-4056-8ce0-7e98b0d3a86f">AWS managed IAM Policies</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d206d71c-f86c-45a5-bfb4-2728fde26549">X-Ray with  </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4875577c-68c3-45df-aeff-a4d45e7f7c05">X-Ray with <a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7.html">Amazon ECS</a> </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#25dbe7f7-1f8a-4c42-8c7c-886694bf1e32">Misc</a></div></nav><hr id="21b144bd-ee05-47c9-ab67-faf088b7a753"/><h2 id="b0e4e359-b564-42bb-afbd-76661d471835" class="">Intro</h2><figure id="e1e570ab-19af-487c-b7f0-7a91fd52e347" class="image"><a href="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled.png"><img style="width:480px" src="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled.png"/></a></figure><ul id="86d7233d-8a3f-4238-bfdc-19c95b2c4246" class="bulleted-list"><li style="list-style-type:disc"><strong>Provides tracing of requests as they travel through different AWS services</strong> to<ul id="ce287224-c02f-41c1-8771-13eb83ec371f" class="bulleted-list"><li style="list-style-type:circle">identify performance bottlenecks</li></ul><ul id="8a831376-69c2-4e0c-a2ec-b44c5e19e23f" class="bulleted-list"><li style="list-style-type:circle">pinpoint errors</li></ul><ul id="05842b2f-3146-4670-a04e-77958fecba66" class="bulleted-list"><li style="list-style-type:circle">understand dependencies in micro-services</li></ul></li></ul><ul id="97342323-edd2-4608-ab46-21e112525749" class="bulleted-list"><li style="list-style-type:disc"><strong>Useful for micro-services (distributed) applications</strong> where debugging is hard</li></ul><ul id="d1424ba6-d2e8-4f7f-a7a4-ff5bc8366b45" class="bulleted-list"><li style="list-style-type:disc">Ability to trace every request or a sample of requests</li></ul><ul id="236dd92e-e74b-4cac-be55-f473bf9a0950" class="bulleted-list"><li style="list-style-type:disc">Compatible with<ul id="1d5359da-a8fc-44a7-a13b-e75ab3fbfa5d" class="bulleted-list"><li style="list-style-type:circle">Lambda</li></ul><ul id="6608a4ac-d44e-4ca3-b5ed-e545d6861a47" class="bulleted-list"><li style="list-style-type:circle">Elastic Beanstalk</li></ul><ul id="263ed33d-53af-4dfa-8dc6-096b757e4109" class="bulleted-list"><li style="list-style-type:circle">ECS</li></ul><ul id="40006b22-e527-4bfa-8bcd-344043e498e8" class="bulleted-list"><li style="list-style-type:circle">ELB</li></ul><ul id="f98d57a0-f91c-47c6-ad1f-0884d4fe3a07" class="bulleted-list"><li style="list-style-type:circle">API Gateway</li></ul><ul id="5ca2014b-b46e-4b25-b1c1-393788ef9495" class="bulleted-list"><li style="list-style-type:circle">EC2 instances or on-premise servers</li></ul></li></ul><ul id="5852c4aa-74cf-43d4-8303-68c15b029f09" class="bulleted-list"><li style="list-style-type:disc">Security<ul id="b7842fa3-67ec-483f-9a44-253b74f7b414" class="bulleted-list"><li style="list-style-type:circle">IAM for authorization</li></ul><ul id="41bab02a-8b12-43ff-9480-95e8eb43e066" class="bulleted-list"><li style="list-style-type:circle">KMS for encryption at rest</li></ul></li></ul><ul id="ff19d200-3118-4128-b683-2792fa62d221" class="bulleted-list"><li style="list-style-type:disc">Ability to <strong>send traces across accounts</strong> (allows to have a central account for application tracing)</li></ul><h2 id="32cc3fbb-a8b7-4d61-bc64-f524ae1f1515" class="">Enabling X-Ray</h2><div id="6c89115c-f50e-4b38-8c88-3bc621a29cd6" class="column-list"><div id="edb882ee-26a4-4d30-8dd0-8bf1f8708b3d" style="width:62.5%" class="column"><ul id="bca6d979-5be7-47e8-ab54-80802d888c47" class="bulleted-list"><li style="list-style-type:disc">Use the AWS <strong>X-Ray SDK</strong> in your code (little code modification)</li></ul><ul id="f3d6058b-5f8b-440d-b163-4f72ba8e1d29" class="bulleted-list"><li style="list-style-type:disc">Install <strong>X-Ray daemon</strong> if your application is running on EC2 or on-premise server. For other services, enable X-Ray integration (X-Ray daemon is already running).</li></ul><ul id="2fd471bb-f2a5-40da-acee-7037371afb17" class="bulleted-list"><li style="list-style-type:disc">Configure IAM permissions for the X-Ray daemon or AWS service to write data to X-Ray.</li></ul><h2 id="43d36e0a-eede-4cbc-8e6b-9a4e407c5115" class="">How traces are sent</h2><ul id="2b2ca531-07b0-44d2-924e-99e29e496f61" class="bulleted-list"><li style="list-style-type:disc">X-Ray SDK captures calls to AWS services as well as other HTTP / HTTPS / Database / Queue calls.</li></ul><ul id="fc4ba638-1daf-46cb-b011-ec1dccacb998" class="bulleted-list"><li style="list-style-type:disc">X-Ray SDK sends traces to X-Ray daemon through <strong>UDP</strong> on <strong>port 2000</strong> (configure port mappings and network settings in the task definition file to allow the application to communicate with the X-Ray daemon container)</li></ul><ul id="2a974f36-bb2a-42be-82b8-f62ff4e36c1b" class="bulleted-list"><li style="list-style-type:disc">X-Ray daemon batches the traces and sends them to X-Ray service every second.</li></ul></div><div id="aaf88095-2022-421c-81a9-f75c8040d8b6" style="width:37.5%" class="column"><figure id="6e812385-0889-4583-a6a4-12161f641035" class="image"><a href="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%201.png"><img style="width:418px" src="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%201.png"/></a></figure></div></div><h2 id="9ff086e3-341b-4d50-94d4-e532c83629c4" class="">X-Ray instrumentation in code</h2><div id="81c41be1-802d-4c12-a451-b4025a5128c9" class="column-list"><div id="08a31b7b-b254-47df-9926-02574fbc5b41" style="width:43.75%" class="column"><ul id="91e3fb48-a7b7-4de0-8605-44d18ee66173" class="bulleted-list"><li style="list-style-type:disc">Only configuration change is required in the code</li></ul><ul id="f2ab0c36-40fc-4c81-8007-24151665fa80" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Can modify the application code to customize and annotate the traces sent by X-Ray SDK.</mark></li></ul></div><div id="3763c304-c875-468b-8c29-aef91c6706f5" style="width:56.25%" class="column"><figure id="e60488ca-deef-4d64-8179-00ed0ebcb0d9" class="image"><a href="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%202.png"><img style="width:480px" src="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%202.png"/></a></figure></div></div><h2 id="f3ecde39-3651-4355-813b-92634c7efde0" class="">Terminologies</h2><ul id="48882e6a-e54e-4f40-be25-a992684c561a" class="bulleted-list"><li style="list-style-type:disc"><strong>Segments</strong>: data sent by each application / service</li></ul><ul id="5db78c84-f754-4126-a248-ef0952c29bfa" class="bulleted-list"><li style="list-style-type:disc"><strong>Subsegments</strong>: provide more granular timing information and details about downstream calls (to AWS services, HTTP API or an SQL DB) that your application makes to fulfill the original request. </li></ul><ul id="a8750267-6b72-485e-a109-5d496c5bff16" class="bulleted-list"><li style="list-style-type:disc"><strong>Trace</strong>: segments collected together to form an end-to-end trace</li></ul><ul id="d2f3aa8d-508f-4e15-8175-88e6d56500df" class="bulleted-list"><li style="list-style-type:disc"><strong>Annotations</strong>: <mark class="highlight-yellow_background">indexed key-value pairs</mark> attached to traces for search capability and filtering traces using <strong>filter expressions</strong></li></ul><ul id="98f2e699-1216-443b-b0af-18f46b1950e8" class="bulleted-list"><li style="list-style-type:disc"><strong>Metadata</strong>: <mark class="highlight-yellow_background">non-indexed key-value pairs</mark> attached to traces</li></ul><h2 id="14c5460e-4a34-48b5-a97d-c130c316ade7" class="">Sampling</h2><ul id="d397ac18-03ae-4fb8-b66a-83030bd865da" class="bulleted-list"><li style="list-style-type:disc">Control the amount of data (traces) sent to X-Ray (to reduce cost)</li></ul><ul id="ca1ffb1f-2622-441e-84d6-4bc7d9e9ab7e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Sampling rules can be modified in the X-Ray console without changing the application code or restarting the application. The sampling rules are automatically applied to the X-Ray daemons.</mark></li></ul><ul id="f0f0d962-44ca-4a1e-8744-1bfa1de2a7b4" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">By </mark><strong><mark class="highlight-yellow_background">default</mark></strong><mark class="highlight-yellow_background">, the X-Ray SDK records the </mark><strong><mark class="highlight-yellow_background">first request each second</mark></strong><mark class="highlight-yellow_background"> (</mark><strong><mark class="highlight-yellow_background">reservoir</mark></strong><mark class="highlight-yellow_background">), and </mark><strong><mark class="highlight-yellow_background">five percent of any additional requests</mark></strong><mark class="highlight-yellow_background"> (</mark><strong><mark class="highlight-yellow_background">rate</mark></strong><mark class="highlight-yellow_background">).</mark></li></ul><ul id="98bbdd1a-339e-4382-ac5c-d7c718b1a1d0" class="bulleted-list"><li style="list-style-type:disc">Custom sampling rules<p id="940dc4c7-cf22-4952-84cf-9d0b1022b948" class="">Smaller priority number ⇒ higher priority</p><figure id="f63c331c-329f-4d47-bb78-a70bb75942c5" class="image"><a href="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%203.png"><img style="width:1252px" src="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%203.png"/></a></figure></li></ul><h2 id="e4e5a2ee-3bd0-4056-8ce0-7e98b0d3a86f" class="">AWS managed IAM Policies</h2><div id="cc85f1d6-ed01-4fcd-95d5-461b0de41ae0" class="column-list"><div id="f4f7dcff-75e1-441f-ac7c-d6b88e8db1f5" style="width:50.000000000000014%" class="column"><figure id="cb1a5d85-b6c2-44be-bf85-d8bcf5b82379" class="image"><a href="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%204.png"><img style="width:694px" src="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%204.png"/></a></figure><p id="53b4aa86-18be-4bcf-b5ce-2385f7566ca5" class=""><code>AWSXrayWriteOnlyAccess</code> - policy to allow X-Ray daemon to send trace segments and telemetry data and get sampling info.</p><p id="0dadf49e-a2f9-457f-aac4-c545baafbfe6" class="">
+</p></div><div id="5859477a-de03-49b3-8d01-a8a4dd933c6d" style="width:50%" class="column"><figure id="c82f3310-1257-45dc-b34b-7afdac9cc344" class="image"><a href="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%205.png"><img style="width:672px" src="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%205.png"/></a></figure><p id="51843ba6-5c5b-4229-ad61-330ec8b0d093" class=""><code>AWSXrayReadOnlyAccess</code> - policy to get certain information from X-Ray</p></div></div><h2 id="d206d71c-f86c-45a5-bfb4-2728fde26549" class="">X-Ray with  </h2><ul id="f7656086-9320-41a5-8c4b-a5547927c4ac" class="bulleted-list"><li style="list-style-type:disc">Enable X-Ray daemon by including the <code>xray-daemon.config</code> configuration file in the <code>.ebextensions</code> directory of your source code.</li></ul><ul id="51629a1c-0067-46eb-ac8a-46c305c256af" class="bulleted-list"><li style="list-style-type:disc">Instance profile should have the required IAM permissions</li></ul><ul id="f6a5d77b-572d-4099-ae05-94373a03b733" class="bulleted-list"><li style="list-style-type:disc">Application code should be instrumented with X-Ray SDK</li></ul><ul id="49550297-b70d-4226-b9c2-169595ff2cf2" class="bulleted-list"><li style="list-style-type:disc"><strong>X-Ray daemon must be manually setup in Multi-Container Docker</strong></li></ul><h2 id="4875577c-68c3-45df-aeff-a4d45e7f7c05" class="">X-Ray with <a href="Amazon%20ECS%2041cdb13d2b1a45a694e21f3fa3e53df7.html">Amazon ECS</a> </h2><ul id="6c4cd1b6-4b15-4646-93a6-c7cdff148677" class="bulleted-list"><li style="list-style-type:disc">In ECS, the <strong>X-Ray daemon must be running as a container</strong>. For EC2 launch types we can either have 1 X-Ray daemon container per instance or per application (side car). In fargate launch type, since we have no control over the container placement, we need to use sidecar pattern.<figure id="82bb8204-61f6-4b0a-bb39-86c3aad1fa5c" class="image"><a href="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%206.png"><img style="width:1636px" src="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%206.png"/></a></figure></li></ul><ul id="7bc4a804-f274-43b2-8e44-bd96438fd2ef" class="bulleted-list"><li style="list-style-type:disc">Setting up sidecar X-Ray daemon for EC2 launch type requires port mapping and linking the application and side car containers.<figure id="5876fb22-2615-4552-b5a0-1814ca6472c1" class="image"><a href="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%207.png"><img style="width:1070px" src="X-Ray%209fec84d690d94afbbf0dbc9536d51789/Untitled%207.png"/></a></figure></li></ul><h2 id="25dbe7f7-1f8a-4c42-8c7c-886694bf1e32" class="">Misc</h2><ul id="c5d5a171-38cd-4a4a-8769-00bb57e1bb20" class="bulleted-list"><li style="list-style-type:disc">A subset of segment fields are indexed by X-Ray for use with filter expressions. Example, if you set the <code>user</code> field on a segment to a unique identifier, you can search for segments associated with specific users in the X-Ray console or by using the <code>GetTraceSummaries</code> API.</li></ul><ul id="1c029638-5282-4203-bb01-2acb2c5030a1" class="bulleted-list"><li style="list-style-type:disc">Segment metadata is not is not indexed for search</li></ul><ul id="64364745-e958-4185-8f9f-1df762788aef" class="bulleted-list"><li style="list-style-type:disc">Trace segments can be uploaded using <code>PutTraceSegments</code> API</li></ul><ul id="7a0170fe-45ef-4709-befd-91e019477a84" class="bulleted-list"><li style="list-style-type:disc">X-Ray daemon uses <code>PutTelemetryRecords</code> API to send telemetry data</li></ul><ul id="9cd74fa8-a6e4-4426-9dfc-f95d75992177" class="bulleted-list"><li style="list-style-type:disc"><strong>Preferred over CloudWatch to debug serverless applications</strong></li></ul><ul id="26295eaf-c0ea-42fb-a169-cec29938b290" class="bulleted-list"><li style="list-style-type:disc">Lambda functions use environment variables to facilitate communication with X-Ray<ul id="5e3580f4-1300-4e8e-b32a-5fb1f5c44cab" class="bulleted-list"><li style="list-style-type:circle"><code>AWS_XRAY_DAEMON_ADDRESS</code></li></ul><ul id="66ebe2c0-fc55-43e3-9426-68cb4b14bd54" class="bulleted-list"><li style="list-style-type:circle"><code>_X_AMZN_TRACE_ID</code></li></ul><ul id="b6ed27a1-277d-48da-9670-5511cbe348a4" class="bulleted-list"><li style="list-style-type:circle"><code>AWS_XRAY_CONTEXT_MISSING</code></li></ul></li></ul><ul id="6af8155d-8794-47f0-b5e6-ffa07e66200e" class="bulleted-list"><li style="list-style-type:disc">Use the <code>GetTraceSummaries</code> API to get the list of trace IDs and then retrieve the list of traces using <code>BatchGetTraces</code> API</li></ul><ul id="a1e82e6e-a312-4774-bc1b-06af3aa1f820" class="bulleted-list"><li style="list-style-type:disc">Prefer <strong>AWS Distro for OpenTelemetry</strong> over X-Ray if you want to send traces to multiple different tracing backends without having to re-instrument your code.</li></ul><ul id="90c6ce51-4054-4e20-8536-c12d783bf6b5" class="toggle"><li><details open=""><summary>We can define arbitrary subsegments to instrument specific functions or lines of code in an application.</summary><figure id="bbc1006a-84ee-4b72-a3fb-d81c96e0e0b2" class="image"><a href="https://media-tutorials-dojo.s3-ap-southeast-2.amazonaws.com/pic.PNG"><img src="https://media-tutorials-dojo.s3-ap-southeast-2.amazonaws.com/pic.PNG"/></a></figure></details></li></ul><p id="1b9bca54-1f0e-4d42-b091-8e401fe2ccd7" class="">
+</p></div></article></body></html>

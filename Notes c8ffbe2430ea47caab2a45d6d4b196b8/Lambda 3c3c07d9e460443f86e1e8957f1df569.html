@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Lambda</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3c3c07d9-e460-443f-86e1-e8957f1df569" class="page sans"><header><h1 class="page-title">Lambda</h1><p class="page-description"></p></header><div class="page-body"><nav id="4f9e5623-3954-48dc-a4bc-dc8033a42137" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#85d3ba84-2318-49da-a563-619578d40270">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b78bbfc1-ecac-40ff-8e24-4c029565f71f">Performance &amp; Limits</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3f83f979-9854-4b1f-af24-bee7bcbea499">Cold Start</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4c496309-7518-4899-a799-f93eb1eacc58">Access Control</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#76bd5e69-6054-46a6-a4c6-29ed958c6143">Synchronous Invocation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#88793460-ca9a-4d76-b725-2bd769e590f0">Asynchronous Invocation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3e7b6f29-eac9-4480-b04e-c2f15200caf7">Event Source Mapping</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#09427a97-b2ef-436b-a61a-827de48498eb"><strong>Streams</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c838017-74a8-4256-a20d-698eae53db9c">Queues</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#86b6cf21-e6b2-48f9-977e-72ba9fbe2efe">Integration with ALB</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#601b467b-ea53-48c7-9ac4-b57cc53a2c1e">Event and Context Objects</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ac1685f9-e7f9-4838-a542-7e684e5b0308">Destinations</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#160ab055-2dbb-45d1-b46e-20e1dcc0ee9e">Access Control</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4f1ec231-7e4e-4bc6-b108-ac086ba01619">Lambda Execution Role</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5a01ca00-8a75-421e-982e-6d2a96a1d5fc">Resource-based Policy</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#859b5a27-4006-47f5-908e-90d83e0bf3fe">Cross Account Access</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#def7c495-23fc-4cc5-9478-d627cec72f2d">Environment Variables</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#de277264-bba1-417d-bd71-2eeec38d963e">Observability</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#929d6ad9-29ad-4d32-a1d7-cba4241e283d">Logging &amp; Monitoring</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#889dc7bd-3206-4321-8b8f-a31b6c0d286c">Tracing</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#deb9507c-2e8a-43e7-90f9-5dc7096ce75d">Lambda@Edge</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#02b4cad1-41ab-41ba-819b-e912b22b3f29">Lambda@Edge vs CloudFront Functions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#37582d8f-e12b-4031-80d7-fef4835bbffa">Networking</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6597980c-eb7f-4beb-897d-db89c19bf4e0">Execution Context</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c9c74a22-f328-4822-a603-1a42ce2a0983">Storage Options</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f6949812-cdfd-4b63-bd60-3d3ce1931de9">EFS Mounting</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2b1cbb61-65ed-472c-8fdc-6dfce7d89951">Concurrency</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#47590f4f-d729-4aa2-b715-bf465cdaa1fb">Deployment</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#28b1443c-fcda-4d2c-bf8e-b0af92b2b75c">Packaging Dependencies</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#346f3e2a-aabf-4b3c-92ba-93ad3fa57f2a">Lambda Layers</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5b888e33-6895-4c75-92c1-817ec0b67ab2">Deployment with CloudFormation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#31f72424-673f-42f2-bb4a-89530dbe7d73">Traffic-shifting with CodeDeploy</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#90d9e253-5d06-45e9-bd4c-48eb85be8ab0">Lambda Container Images</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#29cd6b67-6dcb-4efa-b8c0-f5c3bcfaa5a9">Versions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#da065594-3f2c-402b-a64a-0b67df5e6f77">Aliases</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cdcb2cd4-a82d-42bc-b4ea-9e824f5de34d">Function URL</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#fb7110cb-4dd6-4df2-9ae1-bfc20c4ee72c">Security</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c4d66cef-d719-450a-9a9f-45d829d958b1">Profiling using CodeGuru</a></div></nav><hr id="2e1852a8-d2cc-4ba1-b07c-1b1cbd87cd25"/><h2 id="85d3ba84-2318-49da-a563-619578d40270" class="">Intro</h2><ul id="14ec6786-6f58-4b1d-9979-baee621dd0f6" class="bulleted-list"><li style="list-style-type:disc">Function as a Service (FaaS)</li></ul><ul id="4839b95e-3d5c-4e00-8f29-df6e5c98cad3" class="bulleted-list"><li style="list-style-type:disc">Serverless</li></ul><ul id="f758fa6f-0f55-46d4-b5f8-1560c252e974" class="bulleted-list"><li style="list-style-type:disc">Auto-scaling</li></ul><ul id="8ee67ff4-c9f9-419e-833a-3f455b305d96" class="bulleted-list"><li style="list-style-type:disc">Pay per request (number of invocations) and compute time</li></ul><ul id="097e7a57-3730-4f6f-bd53-8c73c24e3010" class="bulleted-list"><li style="list-style-type:disc">Free tier: 1,000,000 requests and 400,000 GBs of compute time</li></ul><ul id="65fdb2d9-69a5-4c23-9231-644edb6fbd2c" class="toggle"><li><details open=""><summary>Supported runtime</summary><ul id="3780afdc-ba16-4a64-9980-fa8b9bdab91f" class="bulleted-list"><li style="list-style-type:disc">NodeJS</li></ul><ul id="532c4a8f-09ce-42e4-8d85-c49153052c95" class="bulleted-list"><li style="list-style-type:disc">Python</li></ul><ul id="5f37d354-80a7-4e00-90ce-981e4ce10f6e" class="bulleted-list"><li style="list-style-type:disc">Java</li></ul><ul id="28d9e886-47d1-4b58-b65a-3391f18d0f6d" class="bulleted-list"><li style="list-style-type:disc">C#</li></ul><ul id="a2f29896-fa1a-42bc-a195-731254d90e21" class="bulleted-list"><li style="list-style-type:disc">Golang</li></ul><ul id="9e68e8c7-77a6-4cbe-85d5-7f4b66600d62" class="bulleted-list"><li style="list-style-type:disc">Ruby</li></ul><ul id="0fcafbc8-9fb0-47f9-b7fb-d6e97fe6314a" class="bulleted-list"><li style="list-style-type:disc">Any other language using Custom Runtime API (example Rust)</li></ul><ul id="b18b8c58-eda7-415a-bda0-0994838bd8b0" class="bulleted-list"><li style="list-style-type:disc">Docker containers</li></ul></details></li></ul><h2 id="b78bbfc1-ecac-40ff-8e24-4c029565f71f" class="">Performance &amp; Limits</h2><ul id="df6c4df2-37c5-4aaf-99b8-5485a1bff840" class="bulleted-list"><li style="list-style-type:disc">RAM: 128MB (default) - 10 GB (1 MB increments)</li></ul><ul id="6acc7c85-8940-4569-9c15-c1713c2d26f5" class="bulleted-list"><li style="list-style-type:disc">Disk capacity (<code>/tmp</code>): 512 MB (free) - 10 GB </li></ul><ul id="7d060455-8c2f-4fdb-9403-a2a0411d0246" class="bulleted-list"><li style="list-style-type:disc">Cannot configure vCPU count directly, increase RAM to increase vCPU count<ul id="45eb09cd-5909-4aed-85bd-5b0d4851d8bf" class="bulleted-list"><li style="list-style-type:circle">RAM = 1,792 MB ⇒ vCPU = 1</li></ul><ul id="334db192-a5d5-47b4-8802-4f4ce0fb2e82" class="bulleted-list"><li style="list-style-type:circle">For vCPU &gt; 1, need to use multi-threading to take advantage of multiple cores</li></ul></li></ul><ul id="c6e4f8c0-e3cf-4262-9f2a-309ea381f6b9" class="bulleted-list"><li style="list-style-type:disc">Timeout: default 3s, max 15 mins (900s)</li></ul><ul id="aeddb1cb-3dc5-4c2e-9dbd-a64ef714ce49" class="bulleted-list"><li style="list-style-type:disc">Environment variables: max 4 KB </li></ul><ul id="09103006-1c65-4c97-826d-3d95dd01a75c" class="bulleted-list"><li style="list-style-type:disc">Deployment<ul id="81e24a54-ebfb-41eb-9b8d-da213239a1e9" class="bulleted-list"><li style="list-style-type:circle">Compressed: max 50 MB</li></ul><ul id="dc119f8f-61bf-4a10-a761-c31f22cba9da" class="bulleted-list"><li style="list-style-type:circle">Uncompressed: max 250 MB (for more use <code>/tmp</code>)</li></ul></li></ul><h2 id="3f83f979-9854-4b1f-af24-bee7bcbea499" class="">Cold Start</h2><ul id="6c410699-2dd8-4809-830d-ba2abed4cc31" class="bulleted-list"><li style="list-style-type:disc">To minimize partial cold start time, minimize the time taken to execute the code outside the lambda handler by:<ul id="7c0d2163-ad2c-4d78-bd7d-9958f21cb4d6" class="bulleted-list"><li style="list-style-type:circle">Reducing the deployment package size</li></ul><ul id="471c4678-2170-49f2-af11-b32b24d96bf1" class="bulleted-list"><li style="list-style-type:circle">Increasing computing power (by increasing the allocated memory)</li></ul></li></ul><figure id="66831926-8f43-4623-8449-7694b08f98d6" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled.png"><img style="width:1194px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled.png"/></a></figure><h2 id="4c496309-7518-4899-a799-f93eb1eacc58" class="">Access Control</h2><ul id="4d179f3d-17a3-4081-981e-bec04c84e623" class="bulleted-list"><li style="list-style-type:disc">IAM permissions to control API access to Lambda</li></ul><ul id="f55f4cc8-8d41-45be-b7c9-bb2500a97bf5" class="bulleted-list"><li style="list-style-type:disc">Resource-based policies to allow other services to invoke the lambda function</li></ul><h2 id="76bd5e69-6054-46a6-a4c6-29ed958c6143" class="">Synchronous Invocation</h2><ul id="492476c9-e9ac-41d2-9f80-f1a770a6a1d2" class="bulleted-list"><li style="list-style-type:disc">The caller invokes the lambda function and waits for it to return the result</li></ul><ul id="cd7ef1c2-48f7-4337-b41e-10e5c768c849" class="bulleted-list"><li style="list-style-type:disc">Error handling (retries, exponential backoff, etc) must be done by the caller</li></ul><ul id="34a43d6d-3a9f-4198-9563-378834f11516" class="bulleted-list"><li style="list-style-type:disc">Invoking a lambda function using CLI or SDK results in synchronous invocations by default. To invoke explicitly, set <code>invocation-type</code> to <code>RequestResponse</code></li></ul><ul id="44c4f0e4-bef0-4258-9332-a14a67ee2426" class="bulleted-list"><li style="list-style-type:disc">Some services that invoke the lambda function synchronously<ul id="57036b2b-e203-4728-8e08-592841389d55" class="bulleted-list"><li style="list-style-type:circle">Invoked by user<ul id="3382e828-74b1-432d-b681-885142c91d0f" class="bulleted-list"><li style="list-style-type:square">ALB</li></ul><ul id="b814aad5-7138-4d08-9f6b-0f802e61c95e" class="bulleted-list"><li style="list-style-type:square">API Gateway</li></ul><ul id="0dfb77d3-f35a-4024-a8a4-d6fe5f738726" class="bulleted-list"><li style="list-style-type:square">CloudFront (Lambda@Edge)</li></ul><ul id="bd1d636f-ac8c-4dff-a538-00d9649a1676" class="bulleted-list"><li style="list-style-type:square">S3 Batch</li></ul></li></ul><ul id="1a7cca02-359d-4f29-a32e-cdfdc030a1df" class="bulleted-list"><li style="list-style-type:circle">Invoked by service<ul id="0b47be04-d730-4f08-8471-876a00f3a374" class="bulleted-list"><li style="list-style-type:square">Cognito</li></ul><ul id="6800d00c-79bb-4964-b95f-9f1917ca8f2b" class="bulleted-list"><li style="list-style-type:square">Step Functions</li></ul><ul id="8d51d07b-c335-432d-8ca2-b9a8b793f56c" class="bulleted-list"><li style="list-style-type:square"><strong>SQS</strong> (through event source mapping)</li></ul></li></ul></li></ul><h2 id="88793460-ca9a-4d76-b725-2bd769e590f0" class="">Asynchronous Invocation</h2><div id="ef5debbb-bef0-466a-863b-7cad44b9afb0" class="column-list"><div id="6c872e14-4f3b-4938-9e7b-aac7e6864a8e" style="width:50%" class="column"><ul id="35b1bc98-a26f-42a4-bbe6-755293c67f3c" class="bulleted-list"><li style="list-style-type:disc">The caller just invokes the lambda function and does not wait for the result. Can send many events and let lambda process them.</li></ul><ul id="f2301f10-8776-4606-8d10-05dbefaa39d1" class="bulleted-list"><li style="list-style-type:disc">The event is put in an event queue from which the lambda function reads</li></ul><ul id="8f65d2ee-4d25-436c-8ad4-b6b4751410b0" class="bulleted-list"><li style="list-style-type:disc">Invoking a lambda function asynchronously returns <strong>status code 202 (lambda function invoked)</strong>. We don’t know if the processing was successful or not.</li></ul><ul id="a0e59fd1-3985-445e-94d4-d7b5c95a1c22" class="bulleted-list"><li style="list-style-type:disc">For asynchronous invocation, set <code>invocation-type</code> to <code>Event</code></li></ul></div><div id="28a21849-ae94-4bf9-baaf-5cbab431a3ef" style="width:50%" class="column"><figure id="6f931f22-9ff8-49c3-900e-5219e36eafc6" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%201.png"><img style="width:480px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%201.png"/></a></figure></div></div><ul id="c2f18285-4428-4964-b042-ea09c19bd9e3" class="bulleted-list"><li style="list-style-type:disc">Error handling is done by the lambda function<ul id="dc370143-374f-4c42-b01b-c793ccad1c58" class="bulleted-list"><li style="list-style-type:circle">Retries: 0 - 2</li></ul><ul id="39c3f4a8-60f3-4a43-bd9e-557250438633" class="bulleted-list"><li style="list-style-type:circle">Exponential Backoff: 1 min (first retry), 2 min (second retry)</li></ul><ul id="3a95c260-2cbb-4c79-a975-5f069389d5ce" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Can setup DLQ (SQS queue or an SNS topic) </mark><strong><mark class="highlight-yellow_background">on the lambda function</mark></strong> to send failed events after retries. <mark class="highlight-yellow_background">Need to provide IAM permissions to the lambda to write to DLQ.</mark></li></ul><ul id="02c40fb7-169b-4615-9801-445f8c35165d" class="bulleted-list"><li style="list-style-type:circle">Retries lead to duplicate logs in CW</li></ul><ul id="948e33ac-d331-46d3-8773-f2ee8a4f7837" class="bulleted-list"><li style="list-style-type:circle">Make sure the event processing is <strong>idempotent</strong> (not affected by retries)</li></ul></li></ul><ul id="2de82a89-613d-4c57-b679-006f7e03b8cf" class="bulleted-list"><li style="list-style-type:disc">Some services that invoke the lambda function asynchronously<ul id="47e6abc6-dda4-4e26-825a-ff514ec68217" class="bulleted-list"><li style="list-style-type:circle">S3 (S3 notifications)</li></ul><ul id="0a81f809-280a-4f60-a8a6-02744e8be249" class="bulleted-list"><li style="list-style-type:circle"><strong>SNS</strong></li></ul><ul id="0a5ffb27-5aed-4475-b4a6-fbd23da19c48" class="bulleted-list"><li style="list-style-type:circle">EventBridge (events in event buses)</li></ul><ul id="ff409320-cc37-4c7c-92fe-680cc1dc62a3" class="bulleted-list"><li style="list-style-type:circle">CodeCommit (Code Commit Trigger: new branch, new tag, new push)</li></ul><ul id="09303d8f-a31a-4152-8498-2e6cbd5ae1fa" class="bulleted-list"><li style="list-style-type:circle">CodePipeline (invoke a Lambda function during the pipeline)</li></ul></li></ul><h2 id="3e7b6f29-eac9-4480-b04e-c2f15200caf7" class="">Event Source Mapping</h2><div id="0470da73-a457-424f-9988-a3c60acaecc5" class="column-list"><div id="10757d28-f49d-4f7a-ac44-9728de83e035" style="width:50%" class="column"><ul id="f16a3a32-25c2-41e9-a38d-98507a9be401" class="bulleted-list"><li style="list-style-type:disc"><strong>Lambda needs to poll the service to get records for processing</strong> (required when the following services are configured as the trigger for lambda function)<ul id="6020cfaf-745f-488f-ad14-020e276af11a" class="bulleted-list"><li style="list-style-type:circle">Kinesis Data Streams (KDS)</li></ul><ul id="a17b3db6-d014-4ac4-b86f-eb5c6fdbdc07" class="bulleted-list"><li style="list-style-type:circle">DynamoDB Streams</li></ul><ul id="5021c5fe-de31-4e78-ad84-ed9a29f5e8e5" class="bulleted-list"><li style="list-style-type:circle">SQS queues (Standard and FIFO)</li></ul></li></ul><ul id="1eb3a7fa-7be2-483b-afe9-8d93ff8f8a66" class="bulleted-list"><li style="list-style-type:disc">When we configure the lambda function to work with the above services, an event source mapping is created internally which repeatedly polls the service to get a batch of data and <strong>invoke the lambda function synchronously with an event batch</strong>.</li></ul><ul id="8269c147-fc04-4bc0-837d-08202a06713d" class="bulleted-list"><li style="list-style-type:disc">Need to attach IAM permissions to the Lambda role to read from the appropriate service.</li></ul></div><div id="9303854e-8da1-4a46-af6a-2e36ca60b5be" style="width:50%" class="column"><figure id="55ee992d-80dc-4d0e-9b00-65cf739f7f4e" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%202.png"><img style="width:714px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%202.png"/></a></figure><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="023d20d3-9a8e-43b3-8330-803d9ef42c9e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Event Source Mapping is a process internal to Lambda.</strong> It is managed by the Lambda service but is not directly run inside the Lambda function.</div></figure></div></div><p id="48a38fdb-b1d8-4811-8875-6abbc571a252" class="">There are two kinds of event source mappers:</p><h3 id="09427a97-b2ef-436b-a61a-827de48498eb" class=""><strong>Streams</strong></h3><ul id="772eca59-9b69-41be-9a43-0e7824057191" class="bulleted-list"><li style="list-style-type:disc">Used for KDS and DynamoDB streams as Lambda trigger</li></ul><ul id="824d18ca-a37f-4acf-aaea-1d6f64709981" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">The event source mapping creates an iterator for each shard</mark>. <mark class="highlight-yellow_background">Items within a shard will be processed in order</mark> but items across shards might not be processed in order.</li></ul><ul id="f52a506f-3f0f-4a1d-8c26-2faa30e7a04c" class="bulleted-list"><li style="list-style-type:disc">The iterator can be configured where to read from:<ul id="0fe94806-aced-43d7-b7b3-010c4ed90293" class="bulleted-list"><li style="list-style-type:circle">Trim Horizon (beginning of the shard)</li></ul><ul id="5653bc6e-00fa-41a0-889c-594792fde8bc" class="bulleted-list"><li style="list-style-type:circle">At timestamp</li></ul><ul id="e031c373-3a6b-4d04-b5fc-2a6db5dff0a5" class="bulleted-list"><li style="list-style-type:circle">Latest</li></ul></li></ul><ul id="3c669e09-2704-4bde-b0ee-db8a381b1461" class="bulleted-list"><li style="list-style-type:disc"><strong>Processed records aren’t removed from the stream</strong> and can be viewed by other consumers.</li></ul><ul id="cbb33a0d-6fab-45f3-8a27-ba30960f1f9e" class="bulleted-list"><li style="list-style-type:disc">For low traffic streams, process the records in batches for each shard using batch window (time to wait for the batch to fill up)<ul id="84070e0f-1e6a-41eb-8bf3-833d052a257e" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">1 lambda per shard</mark></li></ul><ul id="543088ee-cc62-4384-ba26-a5fa08db9a84" class="bulleted-list"><li style="list-style-type:circle">In order processing for each shard</li></ul></li></ul><ul id="76498098-a78a-4abb-bbdd-0303f24d3168" class="bulleted-list"><li style="list-style-type:disc">For high traffic streams, process multiple batches (partitioned using partition key) in parallel at the shard level<ul id="74cabdf5-7102-4ab9-b530-4f22777175db" class="bulleted-list"><li style="list-style-type:circle">Max 10 batches per shard (<mark class="highlight-yellow_background">10 lambdas per shard</mark>)</li></ul><ul id="43871e60-5c78-4c66-9ecd-962be75b12fb" class="bulleted-list"><li style="list-style-type:circle">In order processing for each partition key</li></ul><figure id="afca2862-9077-41d6-8a95-f920fc33d5d1" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%203.png"><img style="width:528px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%203.png"/></a></figure></li></ul><ul id="8f17d31b-23cf-4ed9-9cf5-c5b478c8d39a" class="bulleted-list"><li style="list-style-type:disc">Error Handling<ul id="42c72617-548f-423f-b827-f5e9854d5e2b" class="bulleted-list"><li style="list-style-type:circle"><strong>If an error occurs while processing a batch, the entire batch is reprocessed until the processing succeeds or items in the batch expire. </strong></li></ul><ul id="bd0ae878-0971-4628-be52-bbd797c8bdc4" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Processing for the affected shard is paused until the error is resolved (to ensure that batches are processed in order)</mark>.</li></ul><ul id="52e17d2d-058f-4767-9215-6bc6e6ac61b0" class="bulleted-list"><li style="list-style-type:circle">Event source mapping can be configured to:<ul id="dc55d2dc-11c0-4621-aad0-df355286468a" class="bulleted-list"><li style="list-style-type:square">Discard old events (send to a <strong>destination</strong>)</li></ul><ul id="f0a906df-eab8-4658-9d05-7fa409ed0079" class="bulleted-list"><li style="list-style-type:square">Restrict the number of retries</li></ul><ul id="2cf1fe7d-517d-42d9-98dd-54d2ee50a55c" class="bulleted-list"><li style="list-style-type:square">Split the batch on error (process the batch partially) (work around Lambda timeout issue)</li></ul></li></ul></li></ul><h3 id="1c838017-74a8-4256-a20d-698eae53db9c" class="">Queues</h3><div id="edf58c82-0512-439e-b0e8-8d114e210d24" class="column-list"><div id="979d6bc4-83a6-4724-b8d1-1dd4a4e03222" style="width:50%" class="column"><ul id="38a1730e-dcf0-4b43-9561-c9195d98cef7" class="bulleted-list"><li style="list-style-type:disc">Used for SQS as Lambda trigger</li></ul><ul id="bf2ce6c7-75db-410f-997c-08450a4eab15" class="bulleted-list"><li style="list-style-type:disc">Event source mapping uses <strong>long polling </strong>to poll the queue for messages.</li></ul><ul id="d4b4ed16-4ec9-489e-86d0-618837b5e950" class="bulleted-list"><li style="list-style-type:disc"><strong>Batch size</strong>: 1 - 10 messages</li></ul><ul id="6cc73884-fcf7-4d95-927a-568bcc86e8f9" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Recommended to set message visibility timeout to 6x lambda function timeout</mark></li></ul><ul id="1954e6fd-a92b-4902-80a5-0b64011bf096" class="bulleted-list"><li style="list-style-type:disc">FIFO Queues<ul id="06b6fe45-644d-41b2-a36b-0dc3d4b75f1f" class="bulleted-list"><li style="list-style-type:circle">In-order processing</li></ul><ul id="7576d025-acb4-4c09-9548-b6ac6c475cd1" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Lambda scales to the number of group IDs</mark></li></ul></li></ul><ul id="5ca2443a-b8da-45e3-8c33-de8da94febe2" class="bulleted-list"><li style="list-style-type:disc">Standard Queues<ul id="91ddd4ed-8c08-4a91-ba3a-99bc6a9a6501" class="bulleted-list"><li style="list-style-type:circle">Processing not necessarily in order</li></ul><ul id="106de8ac-be4e-424b-980b-2c534af4ffe8" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Lambda scales up to process items in the queue as quickly as possible</mark> (adds 60 more instances per minute)</li></ul><ul id="81b0eeaa-d7a5-40b3-9152-d9b6c18be9be" class="bulleted-list"><li style="list-style-type:circle">Up to 1000 batches of messages processed simultaneously</li></ul></li></ul></div><div id="96d6eb1c-4e1f-49b5-a532-ddfafa42ef3f" style="width:50%" class="column"><figure id="c50b60ea-e322-4a6a-a1d2-a3e574209175" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%204.png"><img style="width:432px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%204.png"/></a></figure></div></div><ul id="4976b58b-1423-4be0-87b0-37326c9f5e85" class="bulleted-list"><li style="list-style-type:disc"><strong>When an error occurs, items within the batch are returned to the queue</strong> and might be processed in a different grouping than the original batch.</li></ul><ul id="980b8638-5768-4f96-b38e-75ade59664d0" class="bulleted-list"><li style="list-style-type:disc">The event source mapping might receive the same item multiple times, even if no function error occurred. So the processing should be <strong>idempotent</strong>.</li></ul><ul id="2673193f-fb8c-42d7-ae48-46d06a957385" class="bulleted-list"><li style="list-style-type:disc"><strong>Lambda deletes messages from the queue after they&#x27;re processed successfully.</strong></li></ul><ul id="d1ed128a-3287-4d0b-a2c3-2f5eb56df8f3" class="bulleted-list"><li style="list-style-type:disc"><strong><mark class="highlight-yellow_background">DLQ needs to be set on the queue, not the Lambda function</mark></strong> because DLQ for Lambda is only for asynchronous invocations.</li></ul><ul id="559dcdc1-a73b-4c3f-840a-b40e9d8330ac" class="bulleted-list"><li style="list-style-type:disc">Lambda destination can be used for failures</li></ul><h2 id="86b6cf21-e6b2-48f9-977e-72ba9fbe2efe" class="">Integration with ALB</h2><figure id="0fde5f9e-4a8d-4c13-837e-1066932a6dc0" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%205.png"><img style="width:432px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%205.png"/></a></figure><ul id="68911211-4011-423d-aa22-049f7d7ca846" class="bulleted-list"><li style="list-style-type:disc">ALB is used to expose a lambda function as an HTTP/HTTPS endpoint</li></ul><ul id="fa7374b2-a931-4895-aa31-a48b14500284" class="bulleted-list"><li style="list-style-type:disc">Lambda function must be registered in a target group</li></ul><ul id="2c5e5659-e04a-4625-bda0-fe4e8575fdda" class="bulleted-list"><li style="list-style-type:disc">ALB converts the HTTP request into a JSON event to <mark class="highlight-yellow_background">invoke the lambda synchronously</mark>. It also converts the response from Lambda back into HTTP response to return to the client.</li></ul><ul id="f2b3024c-d323-464d-8fbe-f889fb376f2f" class="toggle"><li><details open=""><summary>Multi-value headers support in ALB</summary><p id="3a61d177-728a-443c-829b-2cc747fc733c" class="">If <strong>multi-value header setting in the target group</strong> is enabled, <strong>HTTP headers</strong> and <strong>query string parameters</strong> with the same key but different values are converted to arrays in the JSON event.</p><figure id="4689ec9a-552d-4c1c-9d91-275747ccb04c" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%206.png"><img style="width:336px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%206.png"/></a></figure></details></li></ul><h2 id="601b467b-ea53-48c7-9ac4-b57cc53a2c1e" class="">Event and Context Objects</h2><figure id="b163b6fa-28c5-4d32-8e1e-0c01b77bc9ed" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%207.png"><img style="width:1754px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%207.png"/></a></figure><figure id="f1780120-5ec1-4f6e-a697-b1a4c38b0fdc" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%208.png"><img style="width:576px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%208.png"/></a></figure><div id="546b8ac1-0d2e-4857-946d-6d695345a354" class="column-list"><div id="a112d0a1-4cfb-494b-9f55-cf4719dfd1fc" style="width:50%" class="column"><p id="c314fca5-16f8-4a29-b93d-32ae0c698493" class=""><strong>Event Object</strong></p><ul id="47941034-f645-4f13-a582-b38bae2b8039" class="bulleted-list"><li style="list-style-type:disc">JSON formatted event (data for the function to process)</li></ul><ul id="e2b408e6-c594-46e0-92a9-5b094e21b4bc" class="bulleted-list"><li style="list-style-type:disc">Lambda runtime converts the event to an object based on the language (e.g. dict type in Python)</li></ul></div><div id="c8867d95-3c39-477c-ad7c-b545821cfe29" style="width:50%" class="column"><p id="536b7cad-37ef-4ed1-8457-cadfe6785e80" class=""><strong>Context Object</strong></p><ul id="d78896fd-4ff6-422d-860c-27de402cee6c" class="bulleted-list"><li style="list-style-type:disc">JSON document available to the function at runtime which <mark class="highlight-yellow_background">provides metadata about the function, invocation and runtime environment</mark></li></ul><ul id="0ecd3b44-2576-4a2a-be60-625fdf1c4703" class="bulleted-list"><li style="list-style-type:disc">Contains the name of log stream</li></ul></div></div><h2 id="ac1685f9-e7f9-4838-a542-7e684e5b0308" class="">Destinations</h2><div id="dbc19980-4bab-46bf-bc0a-8fe155e1cdbb" class="column-list"><div id="fff34104-9902-43da-94f6-4fd145020410" style="width:50%" class="column"><ul id="3249e02c-b455-4675-ae56-92af07e4a44a" class="bulleted-list"><li style="list-style-type:disc">Configure the lambda function to send information regarding the invocations and results of <strong>asynchronous invocations</strong> or <strong>synchronous invocations through event source mapping</strong> (successful or failed) to a destination.</li></ul><ul id="ce49ee1e-f93b-4a53-bfdc-6cacd0f52f0b" class="bulleted-list"><li style="list-style-type:disc">Successful invocations are sent to destination immediately but failed invocations are retried before sending to the destination.  </li></ul><ul id="78fd7811-7533-4aa1-b32b-f3202359d0cd" class="bulleted-list"><li style="list-style-type:disc">Can send successful and failed invocations to different destinations.</li></ul><ul id="d2088d48-6a29-424a-9a21-451d9ccf6de5" class="bulleted-list"><li style="list-style-type:disc"><strong>Destination is recommended over DLQ</strong> (as it supports more destinations)</li></ul><ul id="af951298-adc5-473f-b2a1-cf07b5ae07bc" class="bulleted-list"><li style="list-style-type:disc">Destination for asynchronous invocations of Lambda function:<ul id="aa7a8722-5114-4821-a271-ce32bbaf0a9f" class="bulleted-list"><li style="list-style-type:circle">SQS</li></ul><ul id="8c0677c3-b2ea-47ec-bec3-683374a26800" class="bulleted-list"><li style="list-style-type:circle">SNS</li></ul><ul id="ac4952d4-c28f-46f5-bbc1-3c755773f080" class="bulleted-list"><li style="list-style-type:circle">Lambda</li></ul><ul id="9dde1e44-c191-4ec7-b80c-0219500140d1" class="bulleted-list"><li style="list-style-type:circle">Event bus</li></ul></li></ul></div><div id="cd1b10e1-ca4d-468d-8c44-1e1493072701" style="width:50%" class="column"><figure id="13cc3123-4f8e-4651-a9ab-0e1847683fa4" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%209.png"><img style="width:288px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%209.png"/></a></figure><figure id="db0e36e2-f392-41a5-ba93-94a7d2ad26ee" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2010.png"><img style="width:336px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2010.png"/></a></figure></div></div><ul id="ca8d41e5-f62c-4e1f-99ad-24cfc6b9ebc4" class="bulleted-list"><li style="list-style-type:disc">Destination for discarded event batches in <strong>Stream type Event Source Mapping</strong>:<ul id="607a684e-9720-4f42-808d-c9c04a2e86d5" class="bulleted-list"><li style="list-style-type:circle">SQS</li></ul><ul id="67884c60-8f08-4d6e-8703-74ea3330afa9" class="bulleted-list"><li style="list-style-type:circle">SNS</li></ul></li></ul><h2 id="160ab055-2dbb-45d1-b46e-20e1dcc0ee9e" class="">Access Control</h2><h3 id="4f1ec231-7e4e-4bc6-b108-ac086ba01619" class="">Lambda Execution Role</h3><ul id="1914d6c2-f241-4a3c-96a9-8b121e8c4008" class="bulleted-list"><li style="list-style-type:disc">IAM role for Lambda functions</li></ul><ul id="9f26df77-2c55-4170-8c51-9cf0284c5878" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Best practice: one execution role per function</mark></li></ul><ul id="e2ee849a-9a34-48a3-acfd-3488a4ca905b" class="bulleted-list"><li style="list-style-type:disc">When using event source mapping, the Lambda function needs IAM permissions in the execution role to poll another service for events. </li></ul><ul id="86c5f0eb-1d10-4037-a073-97cc2c83dab6" class="bulleted-list"><li style="list-style-type:disc">Commonly used managed policies for Lambda:<ul id="ef6784bd-e9f1-4283-bc26-3bea6a553f3f" class="bulleted-list"><li style="list-style-type:circle"><code>AWSLambdaBasicExecutionRole</code> - Send logs to CloudWatch.</li></ul><ul id="c563889d-d44a-4436-9cad-d7c979e3c942" class="bulleted-list"><li style="list-style-type:circle"><code>AWSLambdaKinesisExecutionRole</code> - Read from Kinesis</li></ul><ul id="87cfd550-2356-4660-9771-a7b0909056f2" class="bulleted-list"><li style="list-style-type:circle"><code>AWSLambdaDynamoDBExecutionRole</code> - Read from DynamoDB Streams</li></ul><ul id="d0b53db9-5972-4f65-a6b1-3133d4a29913" class="bulleted-list"><li style="list-style-type:circle"><code>AWSLambdaSQSQueueExecutionRole</code> - Read from SQS queues</li></ul><ul id="e100134f-787a-4729-b318-d731976a3d2e" class="bulleted-list"><li style="list-style-type:circle"><code>AWSLambdaVPCAccessExecutionRole</code> - Deploy Lambda function in VPC</li></ul><ul id="6c687b13-ad89-4ca8-b47e-e872dd3fbd77" class="bulleted-list"><li style="list-style-type:circle"><code>AWSXRayDaemonWriteAccess</code> - Upload trace data to X-Ray</li></ul></li></ul><h3 id="5a01ca00-8a75-421e-982e-6d2a96a1d5fc" class="">Resource-based Policy</h3><ul id="dda889ee-4107-420e-b988-0b03323cba56" class="bulleted-list"><li style="list-style-type:disc">Used to allow other services to invoke the lambda function</li></ul><ul id="586fa9a8-8038-43c6-a7b7-8486252e3431" class="bulleted-list"><li style="list-style-type:disc">When a service like S3 triggers a lambda function, the resource-based policy for that lambda function gives it access.</li></ul><ul id="f392c456-c9bb-4de7-a0aa-3d88589b528e" class="bulleted-list"><li style="list-style-type:disc">An IAM principal can access Lambda if the IAM policy attached to the principal authorizes it or the resource-based policy authorizes.</li></ul><h3 id="859b5a27-4006-47f5-908e-90d83e0bf3fe" class="">Cross Account Access</h3><p id="0222c9aa-806b-4ed9-b580-f236edb9830a" class="">You can give a Lambda function created in one account (&quot;account A&quot;) permissions to assume a role from another account (&quot;account B&quot;) to access resources such as DynamoDB or S3 bucket. You need to create an execution role in Account A. Then you need to create a role in account B that the Lambda function in account A assumes to gain access to the cross-account DynamoDB table. Make sure that you modify the trust policy of the role in Account B to allow the execution role of Lambda to assume this role. Finally, update the Lambda function code to add the <code>AssumeRole</code> API call.</p><h2 id="def7c495-23fc-4cc5-9478-d627cec72f2d" class="">Environment Variables</h2><ul id="0faacbc6-bffb-47c9-afa3-b3c4cbb4e517" class="bulleted-list"><li style="list-style-type:disc">Environment variables (key-value pairs) for Lambda</li></ul><ul id="e5edb179-ffae-4293-89b3-bc382af74928" class="bulleted-list"><li style="list-style-type:disc"><strong>No limit on the number of environment variables</strong></li></ul><ul id="8a0eed58-9c3b-45ff-96b0-7047880f3dd9" class="bulleted-list"><li style="list-style-type:disc"><strong>Max total size of all environment variables = 4 KB</strong></li></ul><ul id="3a9e8e76-1411-481c-84e5-a9281fb99c1b" class="bulleted-list"><li style="list-style-type:disc">Lambda adds some system environment variables by default</li></ul><ul id="371ed009-2e74-43f7-893a-e383e76c2abf" class="bulleted-list"><li style="list-style-type:disc">Can be used to store parameters (config) and secrets (encrypt using Lambda key or CMK in KMS)</li></ul><ul id="49fb7c7b-d5f5-48aa-8bcd-f49561fcf547" class="bulleted-list"><li style="list-style-type:disc"><strong>Lambda encrypts environment variables at rest by default.</strong></li></ul><ul id="02ac1e1e-ed8f-4793-82eb-8bc728ec16be" class="bulleted-list"><li style="list-style-type:disc"><strong>Encryption helpers:</strong> encrypt environment variables client side, before sending them to Lambda. This enhances security further by <mark class="highlight-yellow_background">preventing secrets from being displayed unencrypted in the Lambda console, or in function configuration</mark>.</li></ul><h2 id="de277264-bba1-417d-bd71-2eeec38d963e" class="">Observability</h2><h3 id="929d6ad9-29ad-4d32-a1d7-cba4241e283d" class="">Logging &amp; Monitoring</h3><ul id="b783718f-433d-45f7-8e3c-6ec8d6bece4a" class="bulleted-list"><li style="list-style-type:disc">Lambda <mark class="highlight-yellow_background">automatically sends logs to CW</mark> using <code>AWSLambdaBasicExecutionRole</code> policy</li></ul><ul id="16878f59-0540-4b43-87e4-2fa7cb1a7e38" class="bulleted-list"><li style="list-style-type:disc">Lambda <mark class="highlight-yellow_background">automatically sends metrics to CW</mark><ul id="b269dfec-3096-4e84-82fb-70562d1cbfe0" class="bulleted-list"><li style="list-style-type:circle">Invocations, duration, concurrent execution</li></ul><ul id="1ca05953-9141-4cb6-bdf3-6e9c3140bf34" class="bulleted-list"><li style="list-style-type:circle">Error count, success rate, throttles</li></ul><ul id="f6885356-35f4-425c-840a-16eb902f36d4" class="bulleted-list"><li style="list-style-type:circle">Async delivery failures</li></ul><ul id="810479f3-b802-4a37-8021-e6291e9c8936" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Iterator age</mark> (how much the lambda is lagging when reading from a stream)</li></ul></li></ul><h3 id="889dc7bd-3206-4321-8b8f-a31b6c0d286c" class="">Tracing</h3><ul id="edf8e350-7129-4ed0-9777-b58b00efccb7" class="bulleted-list"><li style="list-style-type:disc">Enable <strong>Active Tracing</strong> in Lambda configuration (runs X-Ray daemon)</li></ul><ul id="b1aa25ce-4ff6-4107-aa54-f26bcac4e1ae" class="bulleted-list"><li style="list-style-type:disc">Instrument your code with X-Ray SDK</li></ul><ul id="3212dca6-2a28-4098-9adb-8893fc6a344b" class="bulleted-list"><li style="list-style-type:disc">Ensure Lambda function has <code>AWSXRayDaemonWriteAccess</code> policy (automatically added when Active Tracing is enabled) </li></ul><ul id="167f127e-43cd-46dc-bb69-6e71fa67db21" class="bulleted-list"><li style="list-style-type:disc">Environment variables used by the X-Ray SDK (automatically configured)<ul id="19e7dc7a-2918-4a6d-bcdf-19152b916248" class="bulleted-list"><li style="list-style-type:circle"><code>AWS_XRAY_DAEMON_ADDRESS</code>: the X-Ray Daemon ip-address:port</li></ul><ul id="3e48b49a-9dd8-403e-815a-1fe0dd63b216" class="bulleted-list"><li style="list-style-type:circle"><code>_X_AMZN_TRACE_ID</code>: contains the tracing header</li></ul><ul id="60442553-1312-41a2-ba3a-c948517902fd" class="bulleted-list"><li style="list-style-type:circle"><code>AWS_XRAY_CONTEXT_MISSING</code>: by default, LOG_ERROR</li></ul></li></ul><h2 id="deb9507c-2e8a-43e7-90f9-5dc7096ce75d" class="">Lambda@Edge</h2><ul id="bb47a3df-0138-464f-a6af-9917cb48f9be" class="bulleted-list"><li style="list-style-type:disc">Run lambda function, written in <strong>NodeJS or Python</strong>, at edge locations by attaching them to CloudFront distributions</li></ul><ul id="7bf68f2b-a3e5-4f52-bb3c-aeec372bcb01" class="bulleted-list"><li style="list-style-type:disc">Minimizes latency (globally available)</li></ul><ul id="b889ea30-dce8-4d80-9a4b-5464e1404b0e" class="bulleted-list"><li style="list-style-type:disc">Throughput: <strong>thousands of requests/second</strong></li></ul><ul id="51c998fd-2d76-492e-ab47-b555759b0246" class="bulleted-list"><li style="list-style-type:disc">Can be used to modify Viewer and Origin Request and Response<figure id="ae835c34-79be-402d-94d3-5860d7853715" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2011.png"><img style="width:432px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2011.png"/></a></figure></li></ul><ul id="e46004a4-d783-4b7f-a17a-b18a0f80bcc6" class="bulleted-list"><li style="list-style-type:disc">Create functions in <code>us-east-1</code> ⇒ CloudFront replicates to the edge locations</li></ul><h3 id="02b4cad1-41ab-41ba-819b-e912b22b3f29" class="">Lambda@Edge vs CloudFront Functions</h3><figure id="654d2dc4-d9a4-4c68-b1f7-8668229c3870" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2012.png"><img style="width:1638px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2012.png"/></a></figure><h2 id="37582d8f-e12b-4031-80d7-fef4835bbffa" class="">Networking</h2><ul id="75a14b7f-72ac-497a-85d3-f467ff130d5a" class="bulleted-list"><li style="list-style-type:disc">By default, Lambda functions are launched outside your VPC (in an AWS owned VPC). So, it cannot access resources within your VPC.</li></ul><div id="63711d30-f151-419b-bd8d-945069fdd0b0" class="column-list"><div id="8ee4d295-9d2c-4ee0-b04e-4455b1305433" style="width:68.75%" class="column"><ul id="0b206164-ebf0-4d66-a1fb-8bf02bc87c99" class="bulleted-list"><li style="list-style-type:disc">To deploy a lambda in your VPC<ul id="e331c6ce-7e2f-41a8-944f-97e22191a0d8" class="bulleted-list"><li style="list-style-type:circle">Configure the VPC ID and Subnets</li></ul><ul id="7ea68c92-9502-4a99-8e14-95a74e2f11b2" class="bulleted-list"><li style="list-style-type:circle">Create a <strong>security group for the lambda function</strong></li></ul></li></ul><ul id="f7e5551a-f0a9-4135-ae2f-37fdba458250" class="bulleted-list"><li style="list-style-type:disc">Deploying a Lambda function within a VPC <mark class="highlight-yellow_background">internally creates ENIs within the subnets configured, with the lambda security group attached to them</mark>. To create ENIs, Lambda function needs <code>AWSLambdaENIManagementAccess</code> policy (need to configure manually). </li></ul><ul id="97bfe8b1-b1b2-49d1-86d9-838c2caaa160" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">A lambda function deployed in a public subnet of a VPC does not have internet access or a public IP.</mark></li></ul></div><div id="fd1ca88f-7937-416d-9a2e-0ccbc6cc74cf" style="width:31.249999999999993%" class="column"><figure id="4a3b9489-a527-4c29-aa7b-5a392b019b85" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2013.png"><img style="width:192px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2013.png"/></a></figure></div></div><div id="5396a455-be80-405c-85ae-8c92557fdfdd" class="column-list"><div id="ac55ab7d-27eb-434f-9aa1-c044ccfdf87d" style="width:50%" class="column"><ul id="dc7a98d4-9c96-4b60-be95-de48568969da" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">To have internet access, deploy the lambda in a private subnet with a NAT gateway (in a public subnet).</mark> In this setting, AWS services outside the VPC can be accessed by the lambda function without traversing the public internet using <mark class="highlight-yellow_background">VPC endpoints</mark>. </li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="c3acce59-f4d3-432d-9140-066f755385f7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Irrespective of how Lambda is deployed, it will always be able to send logs to CloudWatch without any additional configuration.</div></figure></div><div id="59247602-a390-4a11-88a4-37fcf96ea1cc" style="width:50%" class="column"><figure id="981142c5-9c58-42d2-a9ba-3398badd79a3" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2014.png"><img style="width:866px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2014.png"/></a></figure></div></div><h2 id="6597980c-eb7f-4beb-897d-db89c19bf4e0" class="">Execution Context</h2><figure id="b2775324-df0e-4f54-b690-75a00ede5bc1" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2015.png"><img style="width:1714px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2015.png"/></a></figure><ul id="044fba35-0e97-448e-8c2d-30543b2ec8b8" class="bulleted-list"><li style="list-style-type:disc">Temporary runtime environment that runs the code outside of the Lambda handler</li></ul><ul id="deeeacf7-13be-427f-94f8-d4938954b734" class="bulleted-list"><li style="list-style-type:disc">Used to initialize external dependencies of the lambda handler<ul id="5f1e2867-497a-4d37-a7ab-81492213e3ab" class="bulleted-list"><li style="list-style-type:circle">Create DB connections</li></ul><ul id="bb25d81c-0231-48e1-a3f3-d44d95b5b62c" class="bulleted-list"><li style="list-style-type:circle">Start web servers</li></ul><ul id="c8b10302-b223-4e64-a716-acff280fb514" class="bulleted-list"><li style="list-style-type:circle">Initialize SDKs</li></ul></li></ul><ul id="2e451e78-cd58-41f4-89e1-5f4d574dfe60" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Execution context is maintained as long as that instance of lambda function lives</mark> in anticipation of another invocation. If the same lambda instance (if it is still alive) is invoked again, it will reuse the execution context to save time.</li></ul><ul id="1fc64a26-3bf5-42be-9741-96777d85a74b" class="bulleted-list"><li style="list-style-type:disc"><code>/tmp</code> directory is included in the execution context <ul id="6e8efa90-5b0d-40aa-9d1d-5c752cf3974e" class="bulleted-list"><li style="list-style-type:circle">can be used as a transient cache across invocations</li></ul><ul id="7f4b740a-dd51-4df0-aced-56bae00a4aaf" class="bulleted-list"><li style="list-style-type:circle">free up to 512 MB, max 10 GB</li></ul></li></ul><ul id="45ee4cd4-3962-4314-832e-13fcb6d365eb" class="bulleted-list"><li style="list-style-type:disc"><strong>Best practice</strong>: anything that takes time should be moved outside of the event handler (into execution context)</li></ul><h2 id="c9c74a22-f328-4822-a603-1a42ce2a0983" class="">Storage Options</h2><figure id="7a700fb9-fa22-4dbd-a796-6700449ca7d7" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2016.png"><img style="width:1618px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2016.png"/></a></figure><div id="143e484f-60eb-4af0-8267-ebe3c3f3be93" class="column-list"><div id="e2274080-10aa-49ec-bd27-22ab064f684b" style="width:62.5%" class="column"><h3 id="f6949812-cdfd-4b63-bd60-3d3ce1931de9" class="">EFS Mounting</h3><ul id="6be0002e-0655-4451-b1b9-73835eb190ab" class="bulleted-list"><li style="list-style-type:disc"><strong>Lambda functions must be running within the VPC</strong></li></ul><ul id="65e0ba94-9098-4ccd-a66b-941517d92012" class="bulleted-list"><li style="list-style-type:disc">Configure Lambda to mount EFS to a local directory during initialization</li></ul><ul id="81a72639-8302-4331-aebe-226ef83ad42c" class="bulleted-list"><li style="list-style-type:disc"><strong>Must leverage EFS Access Points</strong></li></ul><ul id="8e4aea7d-47c5-4375-bb8a-1976fa5eb242" class="bulleted-list"><li style="list-style-type:disc">Limitations: each lambda instance creates a connection with EFS (watch out for connection limits)</li></ul></div><div id="f6c36ce2-8107-4831-a5f5-4605575cbd57" style="width:37.5%" class="column"><figure id="4fef1d6e-156a-4adb-9231-2da1716b807c" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2017.png"><img style="width:642px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2017.png"/></a></figure></div></div><h2 id="2b1cbb61-65ed-472c-8fdc-6dfce7d89951" class="">Concurrency</h2><ul id="7cdb8fb9-b9b5-45c0-9541-18d4dba80c93" class="bulleted-list"><li style="list-style-type:disc">Concurrency soft limit across account: 1000 (can be raised by opening a support ticket)</li></ul><ul id="4263c5c2-ed3a-4473-b3c0-65fe6569e0bf" class="bulleted-list"><li style="list-style-type:disc"><strong>Reserved concurrency</strong>: concurrency hard limit for a lambda function<ul id="8d520ad5-0eb1-4ca8-980d-24936d146b31" class="bulleted-list"><li style="list-style-type:circle">Recommended to reserve (limit) concurrency for every lambda function. </li></ul><ul id="ca8235c1-f296-4573-933d-17cd0be4dcf1" class="bulleted-list"><li style="list-style-type:circle">With unreserved concurrency, a function can throttle other functions.</li></ul><ul id="8a244c4c-1f91-4ba3-916d-c6c4be12bc90" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">To throttle a function, set its reserved concurrency to 0</mark></li></ul></li></ul><ul id="1a44fa8c-bd4d-4713-9714-4e9f2eddc345" class="bulleted-list"><li style="list-style-type:disc">Each request over the concurrency limit will throttle<ul id="60af67d2-e4e8-4934-86e0-62ce12573f8d" class="bulleted-list"><li style="list-style-type:circle">Synchronous invocation → return <strong>ThrottleError 429</strong></li></ul><ul id="aef0be8e-5d77-45fc-af69-deda8279464e" class="bulleted-list"><li style="list-style-type:circle">Asynchronous invocation → retry (up to 6 hours) with exponential backoff (1 sec - 5 min)</li></ul></li></ul><ul id="58266520-7c93-4628-b23d-56230ef8b857" class="bulleted-list"><li style="list-style-type:disc"><strong>Provisioned concurrency</strong>:  keep some lambda functions warm to prevent cold start<ul id="34fe181b-5147-4d71-a5bf-450dee372a06" class="bulleted-list"><li style="list-style-type:circle">Specified number of lambda functions will be ready to serve requests at all times</li></ul><ul id="95f3451d-19d1-4d99-a0fe-79a2bb5a3afa" class="bulleted-list"><li style="list-style-type:circle"><strong>Application Auto Scaling</strong> can control the provisioned concurrency on a schedule or based on a target metric.</li></ul></li></ul><ul id="7a88f0e6-6649-4819-9fb2-fdedce64b348" class="bulleted-list"><li style="list-style-type:disc">Required Concurrency = <code>invocations_per_sec</code> x <code>avg_execution_time</code></li></ul><ul id="51c44df4-71e8-4ffa-9a43-1d7e7bbc3441" class="bulleted-list"><li style="list-style-type:disc">If the concurrency requirements are above the limit for the account, contact AWS to increase the quota.</li></ul><ul id="2dbe56fc-5406-421d-8fb0-eeb13e9e6bff" class="bulleted-list"><li style="list-style-type:disc"><strong>Unreserved concurrency cannot go below 100</strong>, so that functions that do not have reserved concurrency limits can still process requests. So, if your total account limit is 1000, you are limited to allocating 900 reserved concurrency to individual functions combined.</li></ul><h2 id="47590f4f-d729-4aa2-b715-bf465cdaa1fb" class="">Deployment</h2><h3 id="28b1443c-fcda-4d2c-bf8e-b0af92b2b75c" class="">Packaging Dependencies</h3><ul id="678acc9c-1eb8-4195-a205-b58aa98e6f60" class="bulleted-list"><li style="list-style-type:disc">Code and dependencies need to be packaged into a zip file and <mark class="highlight-yellow_background">uploaded directly to Lambda if less than 50 MB, otherwise upload to S3 and download to </mark><code><mark class="highlight-yellow_background">/tmp</mark></code><mark class="highlight-yellow_background">.</mark></li></ul><ul id="9cb4d84b-f870-423f-95fa-ae1de480c2e2" class="bulleted-list"><li style="list-style-type:disc">Native libraries need to be compiled on Amazon Linux</li></ul><ul id="d4980f4d-cd7d-47b4-97fd-210edafd0e65" class="bulleted-list"><li style="list-style-type:disc">AWS SDK is installed by default on Lambda (no need to package it)</li></ul><h3 id="346f3e2a-aabf-4b3c-92ba-93ad3fa57f2a" class="">Lambda Layers</h3><figure id="14da5c09-3fef-4def-a214-33c13dccd52a" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2018.png"><img style="width:480px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2018.png"/></a></figure><ul id="598b6835-5469-49cb-8b17-38c1d4523dfa" class="bulleted-list"><li style="list-style-type:disc">Used to <strong>separate dependencies from the application code</strong> to reuse them</li></ul><ul id="61fbb9dc-78f5-4d7b-a52e-8d5fe274524e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Allow the application package to be small</mark></li></ul><ul id="83f040c9-a59b-408c-8f3d-ae00384ed14e" class="bulleted-list"><li style="list-style-type:disc">Lambda layers can be referenced by multiple functions </li></ul><ul id="df8f3875-c0d0-4730-8ceb-77d278e74877" class="bulleted-list"><li style="list-style-type:disc">Additional feature: <strong>support custom runtimes</strong> (allows Lambda functions to run any programming language)</li></ul><ul id="32f99d02-ba1e-4b12-a54d-85ba108f4ff1" class="bulleted-list"><li style="list-style-type:disc">Up to 5 layers per function (max 250 MB total)</li></ul><h3 id="5b888e33-6895-4c75-92c1-817ec0b67ab2" class="">Deployment with CloudFormation</h3><ul id="0c9760f2-3c29-494d-a376-38d65024dfb5" class="toggle"><li><details open=""><summary>Simple code (Python or NodeJS) <strong>without dependencies</strong> can be written directly in the CloudFormation template</summary><figure id="82483f20-588b-441e-8178-676370d820b9" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2019.png"><img style="width:432px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2019.png"/></a></figure></details></li></ul><ul id="6a4213e2-84de-46c2-a0fe-7a29e87550ae" class="toggle"><li><details open=""><summary>Reference the zip file stored in S3</summary><ul id="fa7ae35a-8815-465c-b70a-995038aa2fa1" class="bulleted-list"><li style="list-style-type:disc"><code>S3ObjectVersion</code> is required only if the bucket is versioned (recommended)</li></ul><ul id="e80777a9-39a6-4cda-aa16-bddc7fb52c94" class="bulleted-list"><li style="list-style-type:disc">CloudFormation will only update (redeploy) the function if either <code>S3Bucket</code> , <code>S3Key</code> or <code>S3ObjectVersion</code> changes in the template.</li></ul><figure id="255d537c-e448-42b9-ade0-380e748cfb7f" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2020.png"><img style="width:432px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2020.png"/></a></figure></details></li></ul><ul id="071d234a-1ffd-4fb8-85ac-46af1181e3c5" class="toggle"><li><details open=""><summary>Deploy a lambda function in multiple AWS accounts</summary><p id="5167fea9-b1c5-4349-9c12-f3f95a31d94b" class="">The zipped lambda code is in an S3 bucket in account 1. <mark class="highlight-yellow_background">Bucket policy will be used in account 1 to allow accounts 2 and 3 to access the zipped lambda code.</mark> Also, the <mark class="highlight-yellow_background">CloudFormation templates in account 2 and 3 need to have an execution role to allow reading the contents of the bucket at the desired location.</mark></p><figure id="c162da12-9d44-46fe-baf5-a79b5eb45c5d" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2021.png"><img style="width:624px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2021.png"/></a></figure></details></li></ul><h3 id="31f72424-673f-42f2-bb4a-89530dbe7d73" class="">Traffic-shifting with CodeDeploy</h3><div id="d27a6d6e-629c-42a7-a398-1b21949f226e" class="column-list"><div id="4df19e55-c75d-420d-9552-c71f0ce44272" style="width:50%" class="column"><ul id="25be32b0-a9e7-49c7-af28-574bccdb3fe7" class="bulleted-list"><li style="list-style-type:disc">Automatically increases the percentage of traffic (x) going to the new version until 100%</li></ul><ul id="2de51d69-88a3-4f67-a66b-88eb2580b089" class="bulleted-list"><li style="list-style-type:disc">Integrated within the SAM framework</li></ul><ul id="56cf455a-3f25-44f9-b660-af9fd3919815" class="bulleted-list"><li style="list-style-type:disc"><strong>Pre &amp; Post Traffic Hooks</strong> to check the health of Lambda function after traffic shift. If something fails, CodeDeploy will rollback the deployment to the old version.</li></ul></div><div id="c39fbf9f-5a1f-4fb9-b303-2c1cf95837e0" style="width:50%" class="column"><figure id="36921d5c-7f3d-4195-8793-dd70f66adb9b" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2022.png"><img style="width:432px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2022.png"/></a></figure></div></div><ul id="9acdc98a-b787-4a78-8690-1bf06c983065" class="bulleted-list"><li style="list-style-type:disc">Traffic-shifting strategies:<ul id="18ae9e61-7fad-4313-b3fb-3d528ce961ec" class="bulleted-list"><li style="list-style-type:circle"><strong>AllAtOnce</strong> - change to 100% immediately</li></ul><ul id="d0710805-4955-40bc-997e-a28ddfd05fd8" class="bulleted-list"><li style="list-style-type:circle"><strong>Linear</strong> - grow traffic at regular intervals<ul id="3bc18771-c8cb-4d56-b70c-f4dcfd85d9c4" class="bulleted-list"><li style="list-style-type:square"><code>Linear10PercentEvery3Minutes</code> - increase traffic by 10% every 3 mins</li></ul></li></ul><ul id="351cab64-2f6f-47ed-ad04-bb1fb8d17cc3" class="bulleted-list"><li style="list-style-type:circle"><strong>Canary</strong> - try a small percentage, then 100%<ul id="31b7475b-b06e-476c-83fa-31e28aaccab0" class="bulleted-list"><li style="list-style-type:square"><code>Canary10Percent5Minutes</code> - try 10% for 5 minutes</li></ul></li></ul></li></ul><div id="6cc632bd-798d-4fa5-8fea-37340871c3ba" class="column-list"><div id="bd6739e2-dd16-4cb0-bd6f-05708dfb1458" style="width:50%" class="column"><ul id="4450fc0d-563e-426e-8423-79d23e72356e" class="bulleted-list"><li style="list-style-type:disc"><code>AppSpec.yml</code> can be used for deploying a new version of Lambda function<ul id="3ae39efb-2658-4c0c-93f2-19757faa724e" class="bulleted-list"><li style="list-style-type:circle"><code>Name</code> - name of the function </li></ul><ul id="ef2d2ed5-6e6e-4e3c-8eb7-9fb4d08a746a" class="bulleted-list"><li style="list-style-type:circle"><code>Alias</code> - name of the alias that needs to be updated</li></ul><ul id="e022689a-48c9-4e4a-a952-04e01cbb1230" class="bulleted-list"><li style="list-style-type:circle"><code>CurrentVersion</code> - current version</li></ul><ul id="ea717e01-f994-401b-be16-0f0225925c09" class="bulleted-list"><li style="list-style-type:circle"><code>TargetVersion</code> - new version</li></ul></li></ul></div><div id="c92c93dd-6118-4316-818a-139ea6cef773" style="width:49.99999999999999%" class="column"><figure id="6aad2712-0455-409e-95c0-3d84acd87365" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2023.png"><img style="width:288px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2023.png"/></a></figure></div></div><h2 id="90d9e253-5d06-45e9-bd4c-48eb85be8ab0" class="">Lambda Container Images</h2><ul id="662eeffe-9d67-4ba7-8aca-7a7dbf450b59" class="bulleted-list"><li style="list-style-type:disc">Docker images up to <strong>10 GB</strong> in size from ECR can be deployed on Lambda. </li></ul><ul id="788fa97d-83c0-4674-b870-b2b5a53014e0" class="bulleted-list"><li style="list-style-type:disc">Base image (in <code>Dockerfile</code>) must implement the <strong>Lambda Runtime API</strong>. Base images are available for <strong>Python</strong>, <strong>NodeJS</strong>, <strong>Java</strong>, <strong>.NET</strong>, <strong>Go</strong> and <strong>Ruby</strong>. </li></ul><ul id="6686e9ce-9a08-497f-a0ad-a6f5d8ebb60b" class="toggle"><li><details open=""><summary>We can create custom images, as long as they implement the Lambda Runtime API.</summary><figure id="ba5574a8-a207-439b-b9c1-5cee5a3a995c" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2024.png"><img style="width:1304px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2024.png"/></a></figure></details></li></ul><ul id="0c4e6c12-ce32-48df-ac64-5706b8ba890a" class="bulleted-list"><li style="list-style-type:disc">Built container images can be tested locally using <strong>Lambda Runtime Interface Emulator</strong></li></ul><ul id="9cb9266b-c89e-4106-aece-d160a0dbba43" class="bulleted-list"><li style="list-style-type:disc">Ease of shipping FaaS code as container images</li></ul><ul id="0bf7a9e8-a6c1-4202-943c-f7c84a5557e2" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">The lambda function and the ECR repo must be in the same AWS account.</mark></li></ul><ul id="77d5aeae-589b-43a8-acf1-5b3f72731142" class="bulleted-list"><li style="list-style-type:disc">Best practices for building container images:<ul id="059c7b65-1b3c-4f35-a603-0e5762569171" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Use AWS-provided Base Images as they are stable and cached by Lambda service</mark></li></ul><ul id="d00910f6-fb4a-47b3-98c2-a81bca89ad1e" class="bulleted-list"><li style="list-style-type:circle">Multi-Stage Builds: copy the built artifact and discard the build stage</li></ul><ul id="0f0caf20-d985-4839-bdc5-fc3ee28af674" class="bulleted-list"><li style="list-style-type:circle">Build from Stable to Frequently Changing layers as we go down the <code>Dockerfile</code></li></ul><ul id="2b76235b-451b-4c78-9bf9-7a38299e3b16" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Use a Single Repository for Functions with Large Layers</mark> (to take advantage of layer caching in Docker)</li></ul></li></ul><h2 id="29cd6b67-6dcb-4efa-b8c0-f5c3bcfaa5a9" class="">Versions</h2><ul id="ed60df44-b862-441d-8202-e24ebeb67b48" class="bulleted-list"><li style="list-style-type:disc">When we work on a Lambda function we work on its unpublished version <code>$LATEST</code> (mutable) which always has the latest code and configuration.</li></ul><ul id="9a69a383-1a8e-4bda-acde-69758fcb2660" class="bulleted-list"><li style="list-style-type:disc">When we publish a Lambda function, we create an <strong>immutable version</strong> of the function. We cannot modify the code or configuration of a lambda version. We must create a new incremental version.</li></ul><ul id="97bf4214-3571-4259-b296-58b81f691f62" class="bulleted-list"><li style="list-style-type:disc">Each version gets a unique ARN and is independents of other immutable versions and the <code>$LATEST</code> version. </li></ul><ul id="218597f2-42c9-4033-b4f5-bac56c54eb9d" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Old versions of the Lambda function can also be accessed.</mark></li></ul><h2 id="da065594-3f2c-402b-a64a-0b67df5e6f77" class="">Aliases</h2><div id="e0ab332e-c020-4a0a-8ddc-0a07089248d8" class="column-list"><div id="3a24d023-31d4-4152-98ae-cddd25d3c511" style="width:56.25%" class="column"><ul id="cdf6abb7-054d-483c-b34d-ed321bb2c0c2" class="bulleted-list"><li style="list-style-type:disc"><strong>Pointers to Lambda function versions</strong> (mutable)</li></ul><ul id="eb69ed46-cd91-466f-83d3-efb86b9539c1" class="bulleted-list"><li style="list-style-type:disc">They provide a <strong>stable endpoint</strong> (does not keep changing with version)</li></ul><ul id="3930866f-8f58-45bd-bb0d-1a7cba0db146" class="bulleted-list"><li style="list-style-type:disc">Multiple aliases can be created (eg. dev, test, prod), each pointing to a different version</li></ul><ul id="d62d8956-ddf7-433a-9f02-332406031ce9" class="bulleted-list"><li style="list-style-type:disc">Canary deployment by assigning weights to different lambda versions for an alias</li></ul><ul id="69080467-7499-4ab8-be46-a2395bac1ef1" class="bulleted-list"><li style="list-style-type:disc"><strong>Aliases cannot reference other aliases</strong></li></ul></div><div id="779c19cb-3a09-4bf0-92f1-57f7184d9c04" style="width:43.75000000000001%" class="column"><figure id="67804a45-9f85-4f34-a697-a5754b0122de" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2025.png"><img style="width:802px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2025.png"/></a></figure></div></div><h2 id="cdcb2cd4-a82d-42bc-b4ea-9e824f5de34d" class="">Function URL</h2><ul id="083ecebc-0f03-4696-a093-8035dd540a7f" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTPS endpoints for Lambda functions</strong> (without using an API gateway or ALB)</li></ul><ul id="d0ece5d1-2874-4923-b792-e6f88e2c66af" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Function URL can only be generated for </mark><mark class="highlight-yellow_background"><code>$LATEST</code></mark><mark class="highlight-yellow_background"> (unpublished function version) and aliases. </mark><strong>It cannot be generated for published function versions.</strong></li></ul><ul id="e387721c-254c-45c3-b786-6d2f0e4ff269" class="bulleted-list"><li style="list-style-type:disc">A unique <strong>static URL</strong> is generated for each alias or <code>$LATEST</code> which <mark class="highlight-yellow_background">can only be accessed from public internet</mark>.</li></ul><h3 id="fb7110cb-4dd6-4df2-9ae1-bfc20c4ee72c" class="">Security</h3><ul id="6f58ac32-83f6-44e3-81ae-ef13d97f3b00" class="bulleted-list"><li style="list-style-type:disc">To access the URL from another domain, need to configure CORS</li></ul><ul id="85503646-2620-4383-8738-57576b6dd321" class="bulleted-list"><li style="list-style-type:disc"><strong>Resource-based policy - </strong>control which accounts / CIDR / IAM principals can access the URL<ul id="5862069e-4f99-4d3e-a5d1-5515817acf67" class="toggle"><li><details open=""><summary>Auth type: <code>NONE</code> - allow public and unauthenticated access</summary><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="0b08ac3c-4dda-4d4f-ba59-386b1659390f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The function will be publicly accessible without requiring any additional authentication. However, <strong>you still need to write custom authorization logic to verify the signature provided in the HTTP headers and ensure that the request is coming from a valid user.</strong></div></figure><figure id="4a1fede8-143d-42d3-b6ee-b2639627a79f" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2026.png"><img style="width:1690px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2026.png"/></a></figure></details></li></ul><ul id="930aecd3-cc19-48b8-bb49-edcc328cab8c" class="toggle"><li><details open=""><summary>Auth type: <code>AWS_IAM</code> - use IAM to authenticate and authorize requests</summary><ul id="fcd3170b-6497-43b0-bb9b-9a4eafa4780d" class="bulleted-list"><li style="list-style-type:disc">Principal’s identity based policy is also evaluated (Principal should have <code>lambda:InvokeFunctionUrl</code> permission)</li></ul><ul id="8b7f8dbb-0d74-43fc-af74-627398f77182" class="bulleted-list"><li style="list-style-type:disc">For same account access, either resource based or identity based policy should allow</li></ul><ul id="1f4c0e08-fc0a-4b32-9311-7e4a057130dd" class="bulleted-list"><li style="list-style-type:disc">For cross account access, both resource based and identity based policy should allow</li></ul><figure id="faa3c838-e03c-43d8-b235-2864139a161c" class="image"><a href="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2027.png"><img style="width:1778px" src="Lambda%203c3c07d9e460443f86e1e8957f1df569/Untitled%2027.png"/></a></figure></details></li></ul></li></ul><h2 id="c4d66cef-d719-450a-9a9f-45d829d958b1" class="">Profiling using CodeGuru</h2><ul id="895d99d0-6ff7-4f67-a1ea-9fe435cd0875" class="bulleted-list"><li style="list-style-type:disc">CodeGuru Profiler is integrated with Lambda to provide runtime performance</li></ul><ul id="77f5fefe-2b3f-4a55-9dde-280f3caee86f" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Supported for Java and Python runtimes</mark></li></ul><ul id="8977db98-0879-4597-80f9-f39381fc2d61" class="bulleted-list"><li style="list-style-type:disc">Just enable from the console<ul id="758234a8-037f-4954-9a06-719c015e8e61" class="bulleted-list"><li style="list-style-type:circle">CodeGuru profiler is added to the function as a Lambda layer</li></ul><ul id="e3b630da-8bcf-4be7-bbc7-753e56785767" class="bulleted-list"><li style="list-style-type:circle">Required environment variables are populated</li></ul><ul id="b7582014-be91-4313-b22e-bbfc115c9490" class="bulleted-list"><li style="list-style-type:circle"><code>AmazonCodeGuruProfilerAgentAccess</code> policy is attached to the lambda function</li></ul><p id="15337a0f-05ce-47ef-8e0b-9c3c65cbb19f" class="">
+</p></li></ul></div></article></body></html>

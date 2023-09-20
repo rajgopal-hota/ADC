@@ -1,0 +1,676 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Elastic Beanstalk</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="aab457d6-9f26-4b37-a78b-fd5989528481" class="page sans"><header><h1 class="page-title">Elastic Beanstalk</h1><p class="page-description"></p></header><div class="page-body"><nav id="aa7c0ea2-3718-4e39-a28a-3b13301918de" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#562f2fd5-fd7d-4b6f-8359-c8dc825242ed">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2eb9a5f3-aed3-4ca0-b2f0-00e8a41256fc">Components</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4f0254ec-3a93-40ea-9a4b-0c071e53e94e">Web Server &amp; Worker Environment Tier</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#15f49c43-9465-46cc-b6df-7fccfe65a9f0">Deployment Modes</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7a31e3d4-3e66-4763-8ede-96fe962f9337">Lifecycle Policy</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#dbcae5f5-982a-45ab-a985-3c5d60f1917c">EB Extensions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#89813a8d-3093-46fc-9826-0816160d3d3f">EB Cloning</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d2517050-112a-4ef9-a2a0-71d1d57e881f">EB Migration</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c9bf3830-95ab-41b6-afa5-f27637dcd093">Decoupling DB from EB Environment</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#37dc79b8-4c58-46ef-8781-6e8aa6f7cf29">Running containerized applications on EB</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a4f259c9-48ae-467d-8850-f97d4128805a">Single Container</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e7448682-1ef9-48f3-88ea-cde2a87e7ee6">Multi Container</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e4cb4652-33d7-4e24-82ff-a71075d8ddf7">HTTPS on Elastic Beanstalk</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6ff3d9c1-a84c-49b1-906d-9cfe66b667dc">Redirect HTTP to HTTPS on Beanstalk</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ce03027a-6ac4-49b4-b9e3-bae13af9a361">Custom Platform</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#05a3b288-9dd7-4341-abb2-2f460f65fe4a">Deployment options for Update</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#389cfec6-886d-490b-8fdf-c8bb05d0a900">All at once</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0b084dfb-3f92-4c56-8aac-4d4563bf7df5">Rolling updates</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a23b5d29-3337-4115-8ba1-2261cfca46f9">Rolling with additional batches</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5e80b446-f541-4e0c-91ef-149ab3f13427">Immutable</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#46cb3d86-77b3-4f5e-8887-c9b91f073e24">Blue / Green</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8620f97f-c1cf-4489-90ee-8695ac9bf815">Deployment Comparisons</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cdd2e451-a6f4-4fad-b8fe-39f492c26632">Misc</a></div></nav><hr id="3d26f396-3523-42f5-88db-edcb0d9b2be4"/><h2 id="562f2fd5-fd7d-4b6f-8359-c8dc825242ed" class="">Intro</h2><figure id="e5e5c420-80f9-4327-a1c3-f7d3db142a6e" class="image"><a href="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled.png"><img style="width:528px" src="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled.png"/></a></figure><ul id="b9cc3280-9536-46fd-a221-882ab510acdc" class="bulleted-list"><li style="list-style-type:disc"><strong>PaaS</strong> which provides platform for developers to write and easily deploy code. It automatically creates the necessary infrastructure (EC2, ELB, SG, etc.) in AWS. </li></ul><ul id="0e5d61aa-5f55-4634-8bd8-e0328d4664c2" class="bulleted-list"><li style="list-style-type:disc">Good for non-serverless applications</li></ul><ul id="dca7272c-53ce-4dc9-8e9a-e536884354b2" class="bulleted-list"><li style="list-style-type:disc">Automatically handles capacity provisioning, load balancing, scaling, application health monitoring, instance configuration, etc. but <strong>we have full control over the configuration. </strong></li></ul><ul id="aa3c8d51-3452-4a54-be72-511f7c999876" class="bulleted-list"><li style="list-style-type:disc"><strong>Free</strong> (pay for the underlying resources spawned by Beanstalk)</li></ul><ul id="ffbce6be-4396-4dc2-8fa5-5269d17ed49f" class="bulleted-list"><li style="list-style-type:disc">Supports versioning of application code</li></ul><ul id="f8736a0f-11f5-4620-beaa-8926de3e981a" class="bulleted-list"><li style="list-style-type:disc">Can create multiple environment (dev, test, prod)</li></ul><ul id="753000c6-a5bb-44b8-b36a-aa860467a0ac" class="bulleted-list"><li style="list-style-type:disc">Supports the deployment of web applications from <strong>Docker</strong> containers and automatically handles load balancing, auto-scaling, monitoring, and placing containers across the cluster.</li></ul><ul id="d77a5efa-0f66-4445-b2d2-5f44ddec409e" class="bulleted-list"><li style="list-style-type:disc">Supports pretty much any programming language and even Docker containers.</li></ul><ul id="52fe3e56-81bd-4c69-a517-11db10851d9f" class="bulleted-list"><li style="list-style-type:disc">Beanstalk CLI helps manage the applications from CLI.</li></ul><ul id="b7dc079c-22a3-48e7-ad51-410ebbdd0f86" class="bulleted-list"><li style="list-style-type:disc">Beanstalk <mark class="highlight-yellow_background">uses CloudFormation under the hood</mark> to provision resources.</li></ul><h2 id="2eb9a5f3-aed3-4ca0-b2f0-00e8a41256fc" class="">Components</h2><ul id="c9152227-a6c0-4e7b-a456-e30b8627ff2b" class="bulleted-list"><li style="list-style-type:disc"><strong>Application</strong>: collection of Beanstalk components (environment, versions, config, etc.)</li></ul><ul id="022e9fcc-efa4-4c8a-bf9a-3b39f2cb4c90" class="bulleted-list"><li style="list-style-type:disc"><strong>Application Version</strong>: version of your application code</li></ul><ul id="f070a3be-67a6-431d-af23-439c42636a87" class="bulleted-list"><li style="list-style-type:disc"><strong>Environment</strong>: collection of AWS resources running an application version<ul id="1116cabe-c537-418f-bf27-933dd588e582" class="bulleted-list"><li style="list-style-type:circle">Environments are created under the application</li></ul><ul id="b8e3b92d-0498-4ea2-b191-5d555a01942c" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Only 1 application version can be running at a time in an environment</mark></li></ul><ul id="04f7a72d-1433-4d3f-84dd-b11fe4b530dd" class="bulleted-list"><li style="list-style-type:circle">Can create multiple environments (dev, test, prod) with separate configurations inside an application                                                      </li></ul></li></ul><h2 id="4f0254ec-3a93-40ea-9a4b-0c071e53e94e" class="">Web Server &amp; Worker Environment Tier</h2><ul id="b6e44395-9d65-4a47-a9bd-c41f9022e01d" class="bulleted-list"><li style="list-style-type:disc">Web Environment (Web Server Tier): clients requests are directly handled by EC2 instances through a load balancer.</li></ul><ul id="2fa44911-b87f-408e-ac17-62c05139bf07" class="bulleted-list"><li style="list-style-type:disc">Worker Environment (Worker Tier): clients’s requests are put in a SQS queue and the EC2 instances will pull the messages to process them. Scaling depends on the number of SQS messages in the queue.</li></ul><figure id="860362a7-f594-4bd7-af01-c70f3adbe44c" class="image"><a href="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%201.png"><img style="width:1706px" src="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%201.png"/></a></figure><h2 id="15f49c43-9465-46cc-b6df-7fccfe65a9f0" class="">Deployment Modes</h2><figure id="90ec84e0-a31b-4d60-91d9-72c0f0793e3d" class="image"><a href="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%202.png"><img style="width:1278px" src="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%202.png"/></a></figure><h2 id="7a31e3d4-3e66-4763-8ede-96fe962f9337" class="">Lifecycle Policy</h2><ul id="c4d87cb7-30e0-4715-a5e9-89d6d0f28c00" class="bulleted-list"><li style="list-style-type:disc">Lifecycle policy to phase out old versions based on:<ul id="489f6b80-386a-43dc-909a-d0a740a00483" class="bulleted-list"><li style="list-style-type:circle"><strong>Days</strong> (delete versions older than x days)</li></ul><ul id="5bdcda88-a4e5-4c80-bc67-4b3492b11ffc" class="bulleted-list"><li style="list-style-type:circle"><strong>Count</strong> (keep latest x versions)</li></ul></li></ul><ul id="9d781aec-5197-4c0d-937f-06bb2988666d" class="bulleted-list"><li style="list-style-type:disc">Up to 1000 application version deployed simultaneously</li></ul><ul id="49e20fd2-a71a-4e5a-b66a-96812a9acd4d" class="bulleted-list"><li style="list-style-type:disc">Option to retain the old version’s source bundle in S3</li></ul><h2 id="dbcae5f5-982a-45ab-a985-3c5d60f1917c" class="">EB Extensions</h2><ul id="d818cefa-b7e3-47f3-9b7a-b48c58661886" class="bulleted-list"><li style="list-style-type:disc">Configure EB environment through config files</li></ul><ul id="d516d443-2bd9-4611-84e4-63d07dc827fb" class="bulleted-list"><li style="list-style-type:disc">Config files should be present in <code>.ebextensions/</code> directory in the root of the source code</li></ul><ul id="f0f7dcab-d1e0-4abb-8899-54a177508c83" class="bulleted-list"><li style="list-style-type:disc">Config files should have <code>.config</code> extension and should be in YAML or JSON format</li></ul><ul id="2bc47d2b-a865-4917-89e9-c380ce188265" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Lifecycle of resources managed by EB Extensions are tied to the EB environment</mark></li></ul><ul id="47c285c3-8ca9-44bb-bcf2-083137cf3e71" class="bulleted-list"><li style="list-style-type:disc">Through EB Extensions, we have the ability to add resources (RDS, ElastiCache, etc.) through CloudFormation, which cannot be done from the EB console.</li></ul><h2 id="89813a8d-3093-46fc-9826-0816160d3d3f" class="">EB Cloning</h2><ul id="75e58cdc-d132-4fec-8ff0-553e372f7a33" class="bulleted-list"><li style="list-style-type:disc">Clone an <strong>environment</strong> with the <strong>same configuration</strong></li></ul><ul id="516548e8-0782-4b25-80a0-6171a6c8083f" class="bulleted-list"><li style="list-style-type:disc">Useful to deploy a test version of your application</li></ul><ul id="ac4e2b95-0bd7-40b5-b582-d53d3e3685ff" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Data present in DB will not be cloned, only the configuration will be cloned</mark></li></ul><ul id="c9a9c02d-af45-4e81-a0fd-3b07710b2be9" class="bulleted-list"><li style="list-style-type:disc">After cloning an environment, we can change the configuration</li></ul><h2 id="d2517050-112a-4ef9-a2a0-71d1d57e881f" class="">EB Migration</h2><div id="fe68265c-d094-445f-bb4d-4b06afe6ae6d" class="column-list"><div id="b575d3bf-cb98-4469-b998-17125b2e023b" style="width:56.25%" class="column"><ul id="03bfd2b8-cd2c-483e-a39f-b31f17abb3e3" class="bulleted-list"><li style="list-style-type:disc"><strong>If some change cannot be done in an environment</strong> (eg. changing the load balancer type), <strong>we need to migrate our environment.</strong></li></ul><ul id="54aec5c3-db50-4250-be42-fc38e41aac27" class="bulleted-list"><li style="list-style-type:disc">Steps for migration<ul id="10bda008-8332-4a62-a7bb-3123410295e3" class="bulleted-list"><li style="list-style-type:circle">Create a new application environment with the same configuration except the required change (cannot clone)</li></ul><ul id="1dfc2373-323e-4de8-89f7-b0f98c8b8eb1" class="bulleted-list"><li style="list-style-type:circle">Perform a CNAME swap or Route 53 update to route all traffic to the new environment</li></ul></li></ul></div><div id="82bd6516-2578-49f6-92a5-d2fe832d91d7" style="width:43.75%" class="column"><figure id="807ad4d1-ed5a-42f5-965e-29e6471205cc" class="image"><a href="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%203.png"><img style="width:712px" src="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%203.png"/></a></figure></div></div><h3 id="c9bf3830-95ab-41b6-afa5-f27637dcd093" class="">Decoupling DB from EB Environment</h3><ul id="e5a6dabd-08af-4c83-9e26-fe652864826a" class="bulleted-list"><li style="list-style-type:disc"><strong>Production environments should not have DB as a part of the environment as its lifecycle gets tied to the environment. </strong></li></ul><div id="f6d6c53a-a8ec-46bf-ae41-b7cd9ace4981" class="column-list"><div id="db7e1ac9-4b16-4c4a-951c-c2d40c264286" style="width:50%" class="column"><ul id="a094887e-1ce7-4d64-aa80-7f1450f3b452" class="bulleted-list"><li style="list-style-type:disc">Steps to decouple an RDS DB already present in an EB environment:<ul id="06d3f953-fee7-458f-99c9-960366a55377" class="bulleted-list"><li style="list-style-type:circle">Create a snapshot of the DB (for safety)</li></ul><ul id="f62a162d-5cb5-4ead-ab34-e94da749da26" class="bulleted-list"><li style="list-style-type:circle">Go to RDS console → Protect RDS from deletion</li></ul><ul id="d90f9aa6-2d3c-4559-975b-1f4c77e4d7be" class="bulleted-list"><li style="list-style-type:circle">Create a new EB environment without RDS and connect the application to the existing RDS (using connection string passed in the environment variable)</li></ul><ul id="28edd6aa-88f1-47bc-aa32-31ffc4527383" class="bulleted-list"><li style="list-style-type:circle">Perform a CNAME swap or Route 53 update to route all traffic to the new environment</li></ul><ul id="e2f66de5-04db-4c25-8cc4-0013ea7c7225" class="bulleted-list"><li style="list-style-type:circle">Terminate the old environment (RDS won’t be deleted)</li></ul><ul id="afc8e629-a3de-409f-9df3-e03160cf86cb" class="bulleted-list"><li style="list-style-type:circle">Delete CF stack (which is in <code>DELETE_FAILED</code> state)</li></ul></li></ul></div><div id="1aa56a55-626b-42c6-b181-c7f4c7fea06c" style="width:50%" class="column"><figure id="fc3136c2-e06e-4caa-b616-3293275e167e" class="image"><a href="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%204.png"><img style="width:432px" src="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%204.png"/></a></figure></div></div><h2 id="37dc79b8-4c58-46ef-8781-6e8aa6f7cf29" class="">Running containerized applications on EB</h2><h3 id="a4f259c9-48ae-467d-8850-f97d4128805a" class="">Single Container</h3><ul id="daba489d-2b19-4492-8bd2-8b5b026ce5af" class="bulleted-list"><li style="list-style-type:disc"><strong>Running the application as a single container does not use orchestration solutions like ECS.</strong> It runs it directly on an EC2 instance.</li></ul><ul id="93c6a5df-1d49-4c6c-b5a9-c2ce13edbc54" class="bulleted-list"><li style="list-style-type:disc">Need to provide either:<ul id="90dab433-9ef5-4c3e-8d87-95e53301c07a" class="bulleted-list"><li style="list-style-type:circle"><code>Dockerfile</code> - EB will build and run the Docker container (doesn’t require a pre-built docker image in a container repository)</li></ul><ul id="7c98f512-6036-42e7-a93c-f3ce6f863f20" class="bulleted-list"><li style="list-style-type:circle"><code>Dockerrun.aws.json</code> (v1) - describes where the prebuilt Docker image is along with how to run it (ports, volumes, etc.)</li></ul></li></ul><h3 id="e7448682-1ef9-48f3-88ea-cde2a87e7ee6" class="">Multi Container</h3><ul id="3136a1c0-8b31-42dd-83cd-23a22c7583d4" class="bulleted-list"><li style="list-style-type:disc"><strong>Running the application in a multi-container setup creates an ECS cluster along with task definition and executions.</strong> It also provisions ELB in <strong>high availability mode</strong>.</li></ul><ul id="30d889d7-6335-497f-87fe-ad3e0ff83cb8" class="bulleted-list"><li style="list-style-type:disc">Runs multiple containers in each EC2 instance.</li></ul><ul id="249faac0-45c1-4702-8350-0620ffc66032" class="bulleted-list"><li style="list-style-type:disc">Requires <code>Dockerrun.aws.json</code> (v2) at the <mark class="highlight-yellow_background">root of the source code</mark>. It is used by EB to generate the ECS task definition.</li></ul><ul id="101cb3ba-8cd9-4c5c-9824-0205c92a6035" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">The Docker images must be pre-built and stored in a container repository.</mark></li></ul><h2 id="e4cb4652-33d7-4e24-82ff-a71075d8ddf7" class="">HTTPS on Elastic Beanstalk</h2><ul id="c13d9f69-f860-4af4-a831-6225b1efa80a" class="bulleted-list"><li style="list-style-type:disc">TLS certificate can be loaded on to the load balancer in either of the two ways:<ul id="ff61ea54-04eb-4d33-807d-ab16a55438c5" class="bulleted-list"><li style="list-style-type:circle">From the EB console under load balancer configuration</li></ul><ul id="06b035cd-17a4-4d1f-b5a8-8f9ad38ce8f5" class="bulleted-list"><li style="list-style-type:circle">In the <code>.ebextensions/securelistener-alb.config</code> file </li></ul></li></ul><ul id="496a5d90-2b64-4a36-b8d6-02133f7370d7" class="bulleted-list"><li style="list-style-type:disc">SSL cert can be provisioned using ACM or CLI</li></ul><ul id="fc2728b7-d311-4b6b-ace7-3c087426113d" class="bulleted-list"><li style="list-style-type:disc">Must configure a SG rule to allow incoming traffic on port 443 </li></ul><h2 id="6ff3d9c1-a84c-49b1-906d-9cfe66b667dc" class="">Redirect HTTP to HTTPS on Beanstalk</h2><ul id="b6e7362f-87cd-4179-8ad5-25ac1aae200d" class="bulleted-list"><li style="list-style-type:disc">Can be done in either of two ways:<ul id="14fc552f-4506-4b68-b99a-47312d4a7385" class="bulleted-list"><li style="list-style-type:circle">Configure EC2 instances to redirect HTTP to HTTPS</li></ul><ul id="1c1548ec-fa98-4f84-bd3a-8120ff8f82d9" class="bulleted-list"><li style="list-style-type:circle">Configure ALB with a rule (preferred)</li></ul></li></ul><ul id="7576dd11-bbd4-453e-8b74-f08f56390df5" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Health Checks should not be redirected</mark></li></ul><h2 id="ce03027a-6ac4-49b4-b9e3-bae13af9a361" class="">Custom Platform</h2><ul id="4c64a303-cd0d-4a85-b780-c94ea1270c57" class="bulleted-list"><li style="list-style-type:disc">If your app’s language is incompatible with Beanstalk and does not use Docker, we can use Beanstalk and need to create a custom platform.</li></ul><ul id="45571cfb-a068-47ff-9df5-06372538be60" class="bulleted-list"><li style="list-style-type:disc">Steps to create custom platform:<ul id="87ab5dd0-a9a1-42c6-84da-97dfa8e1812b" class="bulleted-list"><li style="list-style-type:circle">Define an AMI using <code>Platform.yaml</code> file</li></ul><ul id="c564f72a-73d9-473a-a885-00a4d90082bc" class="bulleted-list"><li style="list-style-type:circle">Build the platform using <strong>Packer</strong> (open-source tool to create AMIs)</li></ul></li></ul><h2 id="05a3b288-9dd7-4341-abb2-2f460f65fe4a" class="">Deployment options for Update</h2><h3 id="389cfec6-886d-490b-8fdf-c8bb05d0a900" class="">All at once</h3><div id="8100eb80-f612-424f-bcc0-8645fb6d2e1c" class="column-list"><div id="6f700db1-d9d4-4546-bec7-33e0ca76d231" style="width:68.75%" class="column"><ul id="d780208a-90a5-4ee4-879f-22eb8bd27c6c" class="bulleted-list"><li style="list-style-type:disc">Bring down the old version and then bring up the new version</li></ul><ul id="956d5553-f311-449e-955a-8d85bb06fc04" class="bulleted-list"><li style="list-style-type:disc"><strong>Downtime</strong></li></ul><ul id="7bfdc872-e88b-4c5a-87aa-7a55af33a214" class="bulleted-list"><li style="list-style-type:disc">Fastest deployment</li></ul><ul id="a811a4ef-a7fc-4aa6-a3db-7cb78b9333dd" class="bulleted-list"><li style="list-style-type:disc">No additional cost</li></ul></div><div id="2a1a7b0b-7ef1-4f91-942b-061e4fb1aa61" style="width:31.25%" class="column"><figure id="af3d33d0-c2f5-4671-98d6-c41e40907ec9" class="image"><a href="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%205.png"><img style="width:288px" src="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%205.png"/></a></figure></div></div><h3 id="0b084dfb-3f92-4c56-8aac-4d4563bf7df5" class="">Rolling updates</h3><div id="c791fc26-0ee6-4408-b349-cd50ba97867f" class="column-list"><div id="c232759b-1843-474b-9d8f-e9f962573c89" style="width:37.5%" class="column"><ul id="fd5a3768-2505-489c-a5b6-dc5045722ce0" class="bulleted-list"><li style="list-style-type:disc">Update a portion of applications in buckets</li></ul><ul id="4da83398-f690-4f54-b9ab-3345a17d16d0" class="bulleted-list"><li style="list-style-type:disc">Application can be running below capacity</li></ul><ul id="45880c07-722f-4199-86f1-f185ea8b651b" class="bulleted-list"><li style="list-style-type:disc">Long deployment</li></ul><ul id="aed4428e-1e90-4479-99f3-93f5ea66257b" class="bulleted-list"><li style="list-style-type:disc">No additional cost</li></ul></div><div id="5f57afa1-f336-4427-9768-0a00f82bf1b7" style="width:62.5%" class="column"><figure id="812d74ba-362b-4cd9-bf93-6fb723eeb4c7" class="image"><a href="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%206.png"><img style="width:528px" src="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%206.png"/></a></figure></div></div><h3 id="a23b5d29-3337-4115-8ba1-2261cfca46f9" class="">Rolling with additional batches</h3><div id="631195c9-c6fa-44a5-91bb-0fbbb7dc5811" class="column-list"><div id="6c73cfda-8468-4315-9dd8-4f5eeb5fe526" style="width:56.25%" class="column"><ul id="8f1bf358-892b-4b0a-b977-0e03a48d3b72" class="bulleted-list"><li style="list-style-type:disc">Run rolling updates while adding a bucket size (batch) of new applications that will be removed after deployment.</li></ul><ul id="070d3514-30a7-4af8-8fdd-229e9428a493" class="bulleted-list"><li style="list-style-type:disc">Application can be running above capacity (small additional cost)</li></ul><ul id="0b0ffbe8-d675-4c3a-bc10-ca798beafd05" class="bulleted-list"><li style="list-style-type:disc">Long deployment</li></ul><ul id="0742cc20-5cb7-4fd8-956a-1ecc5d122708" class="bulleted-list"><li style="list-style-type:disc">Good for prod environment</li></ul></div><div id="6c7e1051-e287-4d6a-8e71-90aaca244e4c" style="width:43.75000000000001%" class="column"><figure id="71152170-3d43-4c95-8670-687776f50cfb" class="image"><a href="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%207.png"><img style="width:818px" src="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%207.png"/></a></figure></div></div><h3 id="5e80b446-f541-4e0c-91ef-149ab3f13427" class="">Immutable</h3><div id="bc278e29-b4d8-4438-8df3-5d257fe86169" class="column-list"><div id="782ff7e7-5ced-47a5-9934-5a47976784d8" style="width:50%" class="column"><ul id="32b1a0f2-7f6e-44d1-a105-e95d76fe506d" class="bulleted-list"><li style="list-style-type:disc">New version is deployed to new instances on a temporary ASG. The instances in the temporary ASG are moved to the current ASG. The instances running the old application version in the current ASG are terminated and the temporary ASG is discarded.</li></ul><ul id="a13affe2-2edc-4471-85c1-20bf51274557" class="bulleted-list"><li style="list-style-type:disc">Longest deployment</li></ul><ul id="3e7f9b13-4236-4ba9-8be0-e628d5526f7c" class="bulleted-list"><li style="list-style-type:disc">Zero downtime</li></ul><ul id="baa19e90-8183-4645-bbe8-6586132d9bac" class="bulleted-list"><li style="list-style-type:disc">High cost (double capacity needed)</li></ul><ul id="09c0778a-a27b-407d-b7b8-fd08231ae3de" class="bulleted-list"><li style="list-style-type:disc"><strong>Quick rollback</strong> (just delete the temporary ASG)</li></ul></div><div id="4171ba68-c8c9-417d-92fb-96797f22c35f" style="width:50%" class="column"><figure id="1a43aa52-b496-4761-bccb-8cb8dfbcb668" class="image"><a href="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%208.png"><img style="width:804px" src="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%208.png"/></a></figure></div></div><h3 id="46cb3d86-77b3-4f5e-8887-c9b91f073e24" class="">Blue / Green</h3><div id="bf4b5aa7-b766-4e45-af2c-70a38ec7a746" class="column-list"><div id="7d2c8db0-b4f6-48ae-a9a4-80eeceade9af" style="width:50%" class="column"><ul id="c136e4d9-419a-4359-9402-c9267a1449bf" class="bulleted-list"><li style="list-style-type:disc">Create an environment with new application version. Send a small amount of traffic to the new application version (environment) using <strong>Route53 weighted routing</strong> policy. If the new version is working fine, direct all the traffic to the new version (<mark class="highlight-yellow_background">using Application URL swap which internally does a CNAME swap in Route53</mark>) and delete the old application environment.</li></ul><ul id="60f369d4-6d16-460a-967c-bfbff172ceb0" class="bulleted-list"><li style="list-style-type:disc">Zero downtime</li></ul><ul id="1826687c-55cb-4968-b592-92882e3b5ee0" class="bulleted-list"><li style="list-style-type:disc">High cost (double capacity needed)</li></ul><ul id="9eba0b28-b9ad-4943-b7ac-e12c68d0109e" class="bulleted-list"><li style="list-style-type:disc">Not directly available in Beanstalk</li></ul></div><div id="31fe8933-e68b-4a90-a658-49c907891ee0" style="width:50%" class="column"><figure id="c6069aca-f376-47fd-b138-c1eb90c5fa01" class="image"><a href="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%209.png"><img style="width:700px" src="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%209.png"/></a></figure></div></div><h2 id="8620f97f-c1cf-4489-90ee-8695ac9bf815" class="">Deployment Comparisons</h2><figure id="0679b07b-e9ed-4a83-b1e3-65ffa989f457" class="image"><a href="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%2010.png"><img style="width:1488px" src="Elastic%20Beanstalk%20aab457d69f264b37a78bfd5989528481/Untitled%2010.png"/></a></figure><h2 id="cdd2e451-a6f4-4fad-b8fe-39f492c26632" class="">Misc</h2><ul id="6ee89b82-9547-4770-9439-24860d7697c7" class="bulleted-list"><li style="list-style-type:disc">To deploy a new application version through the console, you&#x27;ll need to upload a source bundle that meets the following requirements:<ul id="a323c1f1-dcb4-4ac5-8b23-7abab6a97d7a" class="bulleted-list"><li style="list-style-type:circle">Consist of a <strong>single</strong> ZIP file or WAR file</li></ul><ul id="47681478-4c63-46f4-b443-cc2bedd2e0ef" class="bulleted-list"><li style="list-style-type:circle">Not exceed 512 MB</li></ul><ul id="3d69a22e-6531-4bb1-b0d6-83ca726ed231" class="bulleted-list"><li style="list-style-type:circle">Not include a parent folder or top-level directory (subdirectories are fine)</li></ul></li></ul><ul id="2a741418-ecf4-46b7-8418-97857101e2e8" class="bulleted-list"><li style="list-style-type:disc">To deploy a worker application that processes periodic background tasks, the application bundle must include a <code>cron.yaml</code> file.</li></ul><ul id="af49e826-e827-4273-ad16-7f2305d8c951" class="bulleted-list"><li style="list-style-type:disc">EBS can configure EC2, CloudWatch and ALB. It cannot configure <strong>Lambda</strong> or CloudFront.</li></ul><ul id="2957d25c-68f2-4b5a-acbd-55abf96aa0cf" class="bulleted-list"><li style="list-style-type:disc">Environment variables can be defined in <code>env.yaml</code> present in the root of the source bundle.</li></ul><ul id="bc6676b9-3764-4dbe-98ee-f41274858b24" class="bulleted-list"><li style="list-style-type:disc">To deploy a new version of the application, package your application as a <code>zip</code> or <code>war</code> file and deploy it using <code>eb deploy</code> command.</li></ul><ul id="0c9b001e-725e-4210-b0dc-681991cc81b8" class="bulleted-list"><li style="list-style-type:disc">To migrate an EB environment between accounts, create a saved configuration in the first account and download it to your local machine. Make the account-specific parameter changes and upload to the S3 bucket in second account. From Elastic Beanstalk console, create an application from <strong>Saved Configurations</strong>.</li></ul></div></article></body></html>

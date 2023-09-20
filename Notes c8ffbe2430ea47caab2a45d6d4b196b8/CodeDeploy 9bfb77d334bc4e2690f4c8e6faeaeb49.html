@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CodeDeploy</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9bfb77d3-34bc-4e26-90f4-c8e6faeaeb49" class="page sans"><header><h1 class="page-title">CodeDeploy</h1><p class="page-description"></p></header><div class="page-body"><nav id="f89f8e2b-aeb7-44b9-aea0-351c868e252f" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ae0c846e-85d4-4b41-b159-964a9266da1b">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2283628b-1876-4dc6-afbd-89187eb08a5b">Components</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#84e3481a-460a-492b-97d8-1684cf59eb3b">Workflow</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cd6d6e93-b3a2-4077-9b42-8891f1058c0c"><code>appspec.yaml</code></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6a1aba44-0ac4-4cbe-9b0d-db8ea291d19c">Deployment Type</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#dac35a0e-7d5b-4670-a5f3-6c625d0ca833">Failures &amp; Rollbacks</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e3beb032-2ac7-40fd-8bce-c44cc4e1e44f">Troubleshooting</a></div></nav><hr id="38057e60-b971-46b9-aebf-5e3321562ae3"/><h2 id="ae0c846e-85d4-4b41-b159-964a9266da1b" class="">Intro</h2><ul id="eacdd15a-a948-4ee7-ab21-d1c9aa693e46" class="bulleted-list"><li style="list-style-type:disc"><strong>AWS managed CD server</strong> to automatically deploy the latest version of the application.</li></ul><ul id="786ba564-02af-4472-8dfa-f5ad2162f1d5" class="bulleted-list"><li style="list-style-type:disc">To use CodeDeploy, we first need to create an Application (in CodeDeploy console) with the correct compute platform configured. Then, create a Deployment Group with the compute resource tagged. Then, we can create a deployment with the correct application build artifact.</li></ul><h2 id="2283628b-1876-4dc6-afbd-89187eb08a5b" class="">Components</h2><ul id="f0059b98-4c11-48c7-a1cc-d000fb3493a5" class="bulleted-list"><li style="list-style-type:disc">Application - the build artifact (archived) we want to deploy</li></ul><ul id="e6b13bfe-ad92-455e-8c95-e2f40f20bbbc" class="bulleted-list"><li style="list-style-type:disc"><strong>Compute Platform</strong> - what platform the application will be deployed to<ul id="8a5ba1a9-5398-46c2-8f48-e0d4ec400ce8" class="bulleted-list"><li style="list-style-type:circle">EC2 or On-Premises (<strong>CodeDeploy Agent</strong> must be installed)</li></ul><ul id="82ee8b7d-f85b-4eb9-b8de-474383e70979" class="bulleted-list"><li style="list-style-type:circle">AWS Lambda</li></ul><ul id="5a31248a-75db-4401-8ff5-5fff04471015" class="bulleted-list"><li style="list-style-type:circle">Amazon ECS</li></ul></li></ul><ul id="00a5cbaf-7877-49f3-afe9-f6e088abaef1" class="bulleted-list"><li style="list-style-type:disc">Deployment Configuration - set of deployment rules for successful deployment<ul id="63a6e31c-0829-416d-9cfa-5f9e1cf3d5aa" class="bulleted-list"><li style="list-style-type:circle">EC2/On-premises - specify the minimum number of healthy instances for the deployment</li></ul><ul id="531b978d-f0fd-4f34-b26b-60726248bc8d" class="bulleted-list"><li style="list-style-type:circle">AWS Lambda or Amazon ECS - specify how traffic is routed to your updated versions</li></ul></li></ul><ul id="02d0b446-f974-4153-bffb-19b21468922f" class="bulleted-list"><li style="list-style-type:disc"><strong>Deployment Group</strong> - group of tagged EC2 instances (allows to deploy gradually, ex: first deploy to <code>dev</code>, then <code>test</code> and then <code>prod</code>)</li></ul><ul id="13f6f2ff-b6f9-4d83-8f47-4e148b8a6cd5" class="bulleted-list"><li style="list-style-type:disc"><strong>IAM Instance Profile</strong> - give EC2 instances the permissions to access S3 or GitHub</li></ul><ul id="e4eab9de-0c54-42ca-91e7-15d74f364951" class="bulleted-list"><li style="list-style-type:disc"><strong>Application Revision</strong> = build artifact + <code>appspec.yaml</code> file</li></ul><ul id="3969abed-365c-4f72-8a82-88dfd9609cb3" class="bulleted-list"><li style="list-style-type:disc"><strong>Service Role</strong> - IAM Role for CodeDeploy to perform operations on EC2 instances, ASGs, ELBs for deployment</li></ul><ul id="df1a5de2-d15a-48a0-b9ef-92c95107f17f" class="bulleted-list"><li style="list-style-type:disc">Target Revision - the most recent revision that you want to deploy to a Deployment Group</li></ul><h2 id="84e3481a-460a-492b-97d8-1684cf59eb3b" class="">Workflow</h2><div id="15f26ebf-89a0-432e-b6ba-202c4a9db126" class="column-list"><div id="68799359-4834-425e-be87-29280f376a1e" style="width:37.5%" class="column"><ul id="52a8c7c5-9478-4462-af74-18472c48a685" class="bulleted-list"><li style="list-style-type:disc">The developer or CI server builds and pushes the application revision (build artifact + <code>appspec.yaml</code>) on S3 or GitHub.</li></ul><ul id="793ed7c2-42e9-476c-bf23-bae876383c80" class="bulleted-list"><li style="list-style-type:disc">The developer triggers a new deployment in CodeDeploy.</li></ul><ul id="0b6db50a-75c5-49d1-9589-8ea82ed99040" class="bulleted-list"><li style="list-style-type:disc">The CodeDeploy Agent running on the compute resource continuously polls CodeDeploy to check if a new deployment needs to be done. </li></ul></div><div id="1dc9621b-1702-42ad-bb04-3805ac86c85b" style="width:62.5%" class="column"><figure id="1b683620-c46f-4f70-8aae-c4820f7b30ad" class="image"><a href="CodeDeploy%209bfb77d334bc4e2690f4c8e6faeaeb49/Untitled.png"><img style="width:576px" src="CodeDeploy%209bfb77d334bc4e2690f4c8e6faeaeb49/Untitled.png"/></a></figure></div></div><ul id="d645211c-d1dc-4630-9a99-bb6b2171d083" class="bulleted-list"><li style="list-style-type:disc">The build artifact and <code>appspec.yaml</code> are downloaded to the compute resource and the CodeDeploy Agent runs the deployment instructions mentioned in <code>appspec.yaml</code>. </li></ul><h2 id="cd6d6e93-b3a2-4077-9b42-8891f1058c0c" class=""><code>appspec.yaml</code></h2><div id="6411f867-595f-4bbb-89e9-0101489957f9" class="column-list"><div id="cadf12fe-90ba-434b-816c-fcc8e10e2214" style="width:50%" class="column"><ul id="f5eec426-38fa-49ce-8efc-1e0559e90506" class="bulleted-list"><li style="list-style-type:disc">Specifies how the build artifact should be deployed. </li></ul><ul id="e2b074dd-c28f-41ac-b3ff-ccbc1ba0496b" class="bulleted-list"><li style="list-style-type:disc">Should be present at the root of the bundle.</li></ul><ul id="d9f996df-160b-4817-a3c1-2b3aeb5fa287" class="bulleted-list"><li style="list-style-type:disc"><code>files</code> - what to copy from S3 or GitHub into the deployment server</li></ul><ul id="66768e96-495f-4ad5-a066-5a3c6360fe4b" class="bulleted-list"><li style="list-style-type:disc"><code>hooks</code> - set of instructions to deploy the new application version:<ul id="b5142a55-0986-4a04-a77d-078a5499f1df" class="bulleted-list"><li style="list-style-type:circle"><strong>ValidateService</strong> (checks if the application is running properly after installation)</li></ul></li></ul><ul id="093c2d6d-112c-4f2a-a0bb-185074503ffe" class="bulleted-list"><li style="list-style-type:disc">Can have timeouts in any step (hook)</li></ul><ul id="a1d48cc8-4238-4732-8642-157c15d82d79" class="bulleted-list"><li style="list-style-type:disc"><code>hooks</code> section for EC2 instances is shown to the right.</li></ul></div><div id="fe64cf9e-00ec-47c8-95ee-2d28065eac0e" style="width:50%" class="column"><figure id="5c088568-5ebd-4483-843f-24a4f4d14188" class="image"><a href="CodeDeploy%209bfb77d334bc4e2690f4c8e6faeaeb49/Untitled%201.png"><img style="width:616px" src="CodeDeploy%209bfb77d334bc4e2690f4c8e6faeaeb49/Untitled%201.png"/></a></figure></div></div><ul id="43c298b8-43e8-4c82-990a-a1a0348a11e1" class="bulleted-list"><li style="list-style-type:disc">Order of hooks for different compute resources<ul id="817dcea2-1c15-402c-9197-d13c23373161" class="bulleted-list"><li style="list-style-type:circle">Lambda: BeforeAllowTraffic &gt; AfterAllowTraffic</li></ul><ul id="fa30ab83-7a79-446f-92e8-6db3bb55a93c" class="bulleted-list"><li style="list-style-type:circle">EC2: BeforeInstall → AfterInstall → ApplicationStart → ValidateService</li></ul><ul id="1819b46d-e996-4dfc-afaa-c3a045cc4f82" class="bulleted-list"><li style="list-style-type:circle">ECS: BeforeInstall → AfterInstall → AfterAllowTestTraffic → BeforeAllowTraffic → AfterAllowTraffic</li></ul></li></ul><ul id="988d8d02-4ffe-4d2a-bd03-9d3b8bf76569" class="bulleted-list"><li style="list-style-type:disc">The content in the <code>resources</code> section varies, depending on the compute platform of your deployment. For Lambda functions, it has <code>name</code>, <code>alias</code>, <code>currentversion</code> and <code>targetversion</code>. <figure id="8612ba73-68a1-4508-bef5-fe372e5aa0e3" class="image"><a href="CodeDeploy%209bfb77d334bc4e2690f4c8e6faeaeb49/Untitled%202.png"><img style="width:1431px" src="CodeDeploy%209bfb77d334bc4e2690f4c8e6faeaeb49/Untitled%202.png"/></a></figure></li></ul><h2 id="6a1aba44-0ac4-4cbe-9b0d-db8ea291d19c" class="">Deployment Type</h2><p id="44133586-7fba-4d91-9813-ec2914d29fc3" class="">It is the method used to deploy the application to a Deployment Group.</p><ul id="795d4c36-b4d2-4212-aabb-f221b4ce996d" class="bulleted-list"><li style="list-style-type:disc"><strong>In-place Deployment</strong> - supports EC2, On-Premise Server<ul id="7d801fb0-a2b7-4ac9-8211-ea1280b17839" class="bulleted-list"><li style="list-style-type:circle"><strong>One at a time - one EC2 instance at time, if one instance fails then deployment stops</strong></li></ul><ul id="ecd03fe9-28bd-4d5a-81e4-485fe1c43490" class="bulleted-list"><li style="list-style-type:circle"><strong>Half at a time - 50% healthy instances even if the deployment fails</strong></li></ul><ul id="053fb3ba-11df-4947-ba30-16edbd3eccf7" class="bulleted-list"><li style="list-style-type:circle"><strong>All at once - quick but has downtime (good for dev)</strong></li></ul><ul id="c3f76af9-2fb4-4146-88bb-344669a56a5f" class="bulleted-list"><li style="list-style-type:circle"><strong>Custom - specify the minimum percentage of healthy hosts</strong></li></ul></li></ul><ul id="a0560611-d37e-4da9-9776-3fcfd295c0e3" class="bulleted-list"><li style="list-style-type:disc"><strong>Blue/Green Deployment</strong> - supports EC2 instances, AWS Lambda, and Amazon ECS</li></ul><figure id="a11f24eb-68aa-4f62-b8fd-3c94021466b5" class="image"><a href="CodeDeploy%209bfb77d334bc4e2690f4c8e6faeaeb49/Untitled%203.png"><img style="width:432px" src="CodeDeploy%209bfb77d334bc4e2690f4c8e6faeaeb49/Untitled%203.png"/></a></figure><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="2c4f6351-2290-43c5-a1b9-bd869d30af5d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Lambda functions don’t support in-place deployment</div></figure><h2 id="dac35a0e-7d5b-4670-a5f3-6c625d0ca833" class="">Failures &amp; Rollbacks</h2><ul id="742a0e0b-f3d0-4bac-b1de-d9b18f4b5cdc" class="bulleted-list"><li style="list-style-type:disc">Once deployment fails, EC2 instances stay in failed state</li></ul><ul id="b99c64a3-ad8b-4f85-aaf3-f9df2db29bfb" class="bulleted-list"><li style="list-style-type:disc">New deployments will first be deployed to failed instances</li></ul><ul id="b5eb1e6e-3570-4851-8397-ea4f8110e9af" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">To rollback, redeploy old deployment or enable automated rollback on failures</mark></li></ul><ul id="aa0fa18c-437b-49da-ba88-1bf047364122" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">If a rollback happens, CodeDeploy redeploys the last known good revision with a new deployment ID (does not restore to a previous version). </mark></li></ul><h2 id="e3beb032-2ac7-40fd-8bce-c44cc4e1e44f" class="">Troubleshooting</h2><ul id="9cf7a981-740e-41a2-a4f9-8fcc79dd86ae" class="bulleted-list"><li style="list-style-type:disc"><code>InvalidSignatureException</code> - the date or time in CodeDeploy (AWS) does not match that in the EC2 instance where the application is to be deployed</li></ul><ul id="1f9e7cac-39be-4067-826e-730cce9fae83" class="bulleted-list"><li style="list-style-type:disc">If the deployment fails on EC2, check deployment log files at <code>/opt/codedeploy-agent/deployment-root/deployment-logs/codedeploy-agent-deployments.log</code></li></ul><p id="fce8c03f-31cf-4610-a12c-bec112b8b826" class="">
+</p></div></article></body></html>

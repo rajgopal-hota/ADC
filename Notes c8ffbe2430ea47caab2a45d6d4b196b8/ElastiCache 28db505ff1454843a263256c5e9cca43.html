@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ElastiCache</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="28db505f-f145-4843-a263-256c5e9cca43" class="page sans"><header><h1 class="page-title">ElastiCache</h1><p class="page-description"></p></header><div class="page-body"><nav id="cf2954d7-2e79-4194-b5a7-3a13a66551a9" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0a265b43-293a-4f7d-bafe-7daa20346a38">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2f917c81-44b6-4560-bfd7-c76219bc0ae6">Redis vs Memcached</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c9f3b990-cf33-49e1-978c-57c406c52e84">Security &amp; Access Management</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#be75e762-f26c-44c2-8fdc-342a9e3e2ac4">Modes of ElastiCache Replication for Redis</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#db2efe37-1132-4e2f-bbd6-09ad6c6f8c58">Cluster Mode Disabled</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6f3aca5e-cabf-45e6-a28f-55b35ad725b7">Cluster Mode Enabled</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#698458ba-9765-4d87-8f6b-8d2450bf713b">Design patterns for implementing caching</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ff73245a-f5f7-4fda-bfd1-7602ffe4b563">Lazy Loading / Cache-Aside / Lazy Population</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ac48efa2-5eb2-47e7-bd84-b298031397e1">Write Through</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#72620398-262f-4496-b39f-b1024c451371">Cache Eviction</a></div></nav><hr id="f81721ce-782e-4407-96eb-d0d759420bbe"/><h2 id="0a265b43-293a-4f7d-bafe-7daa20346a38" class="">Intro</h2><ul id="88184de8-5631-4805-b4ff-b1c11ab91b84" class="bulleted-list"><li style="list-style-type:disc">Regional Service (all the nodes in the cluster must be in the same region)</li></ul><ul id="57ca1cba-20d2-42c0-924a-ce9ef64796f4" class="bulleted-list"><li style="list-style-type:disc">AWS managed caching service</li></ul><ul id="213441b2-6775-4200-abf2-5806be38c77d" class="bulleted-list"><li style="list-style-type:disc"><strong>In-memory key-value store</strong> with <strong>sub-millisecond latency</strong></li></ul><ul id="030da543-b3ff-4bd6-8d3e-2e0f90b3623e" class="bulleted-list"><li style="list-style-type:disc">Need to provision EC2 instances (nodes for the cluster)</li></ul><ul id="94c9e248-b7e2-4c48-b003-6fc44359dc87" class="bulleted-list"><li style="list-style-type:disc"><strong>Makes the application stateless</strong> because it doesn’t have to cache locally</li></ul><ul id="a6d041af-7f27-4c69-9f4c-5080f105afce" class="bulleted-list"><li style="list-style-type:disc"><strong>Using ElastiCache requires heavy application code changes</strong></li></ul><ul id="45348277-2289-49ce-957f-f4d48f8958e5" class="bulleted-list"><li style="list-style-type:disc">Usage:<ul id="493996d3-911e-4b7a-b5c1-b82df444ce96" class="bulleted-list"><li style="list-style-type:circle"><strong>DB Cache</strong> (lazy loading): cache read operations on a database (reduced latency)</li></ul><ul id="08600872-ae2c-410e-931a-7e835c1fe056" class="bulleted-list"><li style="list-style-type:circle"><strong>Session Store</strong>: store user&#x27;s session data like cart info (allows the application to remain stateless)</li></ul><ul id="efd43853-d76b-453b-a070-d56a65c28fd1" class="bulleted-list"><li style="list-style-type:circle"><strong>Global Data Store</strong>: store intermediate computation results</li></ul></li></ul><h2 id="2f917c81-44b6-4560-bfd7-c76219bc0ae6" class="">Redis vs Memcached</h2><table id="aebc1b30-3441-4013-9c6a-13aee25cdb1f" class="simple-table"><thead class="simple-table-header"><tr id="519ecdb1-b4f0-4162-873b-8de664678836"><th id="AgrA" class="simple-table-header-color simple-table-header" style="width:349px">Redis</th><th id="Dxz}" class="simple-table-header-color simple-table-header" style="width:349px">Memcached</th></tr></thead><tbody><tr id="805d6084-07f7-4d0d-aa9c-5d7d88f05ba9"><td id="AgrA" class="" style="width:349px">In-memory data store</td><td id="Dxz}" class="" style="width:349px"><strong>Distributed</strong> memory object cache</td></tr><tr id="1df00e28-242c-44eb-a210-96a4c772c092"><td id="AgrA" class="" style="width:349px">Read Replicas (for scaling reads &amp; HA)</td><td id="Dxz}" class="" style="width:349px">No replication</td></tr><tr id="d7e1742d-e75b-4ad5-9702-d32b8da4dec6"><td id="AgrA" class="" style="width:349px">Backup &amp; restore</td><td id="Dxz}" class="" style="width:349px">No backup &amp; restore</td></tr><tr id="6f0ae07a-e36b-4836-aa16-d891c95be6e8"><td id="AgrA" class="" style="width:349px"><strong>Single-threaded</strong></td><td id="Dxz}" class="" style="width:349px"><strong>Multi-threaded</strong></td></tr><tr id="426da660-abae-47e4-9a80-4cdfa9d320b9"><td id="AgrA" class="" style="width:349px"><strong>HIPAA compliant</strong></td><td id="Dxz}" class="" style="width:349px"><strong>Not HIPAA compliant</strong></td></tr><tr id="7d9f1011-e488-4d2b-95d5-4f15ff7f6ffd"><td id="AgrA" class="" style="width:349px">Data is stored in an in-memory DB which is replicated</td><td id="Dxz}" class="" style="width:349px">Data is partitioned across multiple nodes (sharding)</td></tr><tr id="a102ac4d-9a85-4ad4-8c04-8b13e31463c9"><td id="AgrA" class="" style="width:349px"><strong>Redis Sorted Sets</strong> are used in realtime Gaming Leaderboards</td><td id="Dxz}" class="" style="width:349px"></td></tr><tr id="d0d4a9d3-d95a-4695-9839-4daf20f0c900"><td id="AgrA" class="" style="width:349px">Good for auto-completion</td><td id="Dxz}" class="" style="width:349px"></td></tr><tr id="69df3efc-3b36-4f79-845b-c37116627cc9"><td id="AgrA" class="" style="width:349px"><strong>Multi-AZ support with automated failover</strong> (disaster recovery)</td><td id="Dxz}" class="" style="width:349px"></td></tr><tr id="4e0be432-6bf3-46f2-b5b7-e3e227556fc4"><td id="AgrA" class="" style="width:349px">Encryption at rest and in transit</td><td id="Dxz}" class="" style="width:349px">Encryption in transit only </td></tr></tbody></table><h2 id="c9f3b990-cf33-49e1-978c-57c406c52e84" class="">Security &amp; Access Management</h2><ul id="77d85740-baa2-4236-9aed-90575d066180" class="bulleted-list"><li style="list-style-type:disc">Network security is managed using <strong>Security Groups</strong></li></ul><ul id="2f9b53b0-ea91-4510-a896-bce652031d17" class="bulleted-list"><li style="list-style-type:disc">At rest encryption using KMS</li></ul><ul id="8f8b26fa-daeb-456c-a179-f6d02fd8467a" class="bulleted-list"><li style="list-style-type:disc">In-flight encryption using SSL</li></ul><ul id="f88dbc11-084d-40ba-be71-6972b68296de" class="bulleted-list"><li style="list-style-type:disc">Use <strong>Redis Auth</strong> to authenticate to ElastiCache for Redis</li></ul><ul id="3dd0ecc1-3f5a-4fcb-aa11-04bbeeda8c4f" class="bulleted-list"><li style="list-style-type:disc">Memcached supports SASL-based authentication</li></ul><h2 id="be75e762-f26c-44c2-8fdc-342a9e3e2ac4" class="">Modes of ElastiCache Replication for Redis</h2><h3 id="db2efe37-1132-4e2f-bbd6-09ad6c6f8c58" class="">Cluster Mode Disabled</h3><div id="0d9b110f-8d07-456c-8bfc-e409c9d68b4d" class="column-list"><div id="0e6c09d4-2c84-4891-be88-d76fd3853368" style="width:56.25%" class="column"><ul id="fb8ad97a-57a7-4e28-8589-c1dbfc13b269" class="bulleted-list"><li style="list-style-type:disc"><strong>1 primary node and up to 5 read-replicas</strong> <strong>(asynchronous replication)</strong>. Writes can occur only at the primary node. Reads can occur at any node including the primary node.</li></ul><ul id="1feddb7b-5fbd-41ab-bdf5-6117cc6cdd4f" class="bulleted-list"><li style="list-style-type:disc"><strong>No sharding</strong> (1 shard only) - every node has complete data</li></ul><ul id="95385334-41d3-45e1-bffc-a9aaf4abe7ad" class="bulleted-list"><li style="list-style-type:disc"><strong>Helpful for scaling read performance</strong></li></ul><ul id="a6a3fa28-a12e-426f-9ed2-af78abd1809c" class="bulleted-list"><li style="list-style-type:disc"><strong>Automated failover</strong> - if the primary node fails, one of the read-replicas will take over as the new master</li></ul><ul id="8ef74176-6655-4558-8878-739b0d32906e" class="bulleted-list"><li style="list-style-type:disc">Supports multi-AZ for failover in case an entire AZ is down</li></ul></div><div id="97a4b2d1-7fd2-483c-9918-d404508755d3" style="width:43.75000000000001%" class="column"><figure id="fc5e0c33-15fd-4226-a2b7-3c56d10c12cb" class="image"><a href="ElastiCache%2028db505ff1454843a263256c5e9cca43/Untitled.png"><img style="width:406px" src="ElastiCache%2028db505ff1454843a263256c5e9cca43/Untitled.png"/></a></figure></div></div><h3 id="6f3aca5e-cabf-45e6-a28f-55b35ad725b7" class="">Cluster Mode Enabled</h3><div id="cfc722d2-af29-42ca-8d7b-aaf755fd10e0" class="column-list"><div id="f8131465-4c55-4e44-a633-d58250c0579c" style="width:56.25%" class="column"><ul id="4172b392-18af-4696-927a-1d9382a8c6ab" class="bulleted-list"><li style="list-style-type:disc"><strong>Sharding</strong> - every node has partial data</li></ul><ul id="21434afb-9023-4194-9ffd-4690d995345e" class="bulleted-list"><li style="list-style-type:disc"><strong>Each shard has 1 primary and up to 5 read-replicas</strong> <strong>(asynchronous replication)</strong></li></ul><ul id="871fa99f-d96f-496d-98e9-8974946cb998" class="bulleted-list"><li style="list-style-type:disc">Sharding is helpful for scaling writes</li></ul><ul id="ec914086-fda1-444b-8545-32625bc41d6e" class="bulleted-list"><li style="list-style-type:disc">Read-replicas are helpful for scaling reads</li></ul><ul id="a3f78049-42a6-4f92-935a-01997c033dfb" class="bulleted-list"><li style="list-style-type:disc"><strong>Requires multi-AZ</strong> for failover in case an entire AZ is down</li></ul><ul id="259ed707-4bb7-4f73-a18d-3e626d67c4b8" class="bulleted-list"><li style="list-style-type:disc">Up to <strong>500 nodes per cluster</strong><ul id="102df1ff-230d-4c3a-ae97-992b582f78dc" class="bulleted-list"><li style="list-style-type:circle">500 shards without replication (no read-replica)</li></ul><ul id="64a01ced-4fcb-4dcb-bb51-175c72a801b1" class="bulleted-list"><li style="list-style-type:circle">250 shards with 1 master and 1 replica</li></ul></li></ul><ul id="3725688a-51f6-4375-ac03-ebcf1c8a8c78" class="bulleted-list"><li style="list-style-type:disc">You cannot manually promote any of the replica nodes to primary.</li></ul><ul id="bc5de70a-1377-467b-a357-805861724b97" class="bulleted-list"><li style="list-style-type:disc">You can only change the structure of a cluster, the node type, and the number of nodes by restoring from a backup.</li></ul></div><div id="afaf07bc-7b79-4868-9394-11901a91577b" style="width:43.75000000000001%" class="column"><figure id="e0e8dac9-286f-4e7d-8486-5f93c5ac5882" class="image"><a href="ElastiCache%2028db505ff1454843a263256c5e9cca43/Untitled%201.png"><img style="width:412px" src="ElastiCache%2028db505ff1454843a263256c5e9cca43/Untitled%201.png"/></a></figure></div></div><h2 id="698458ba-9765-4d87-8f6b-8d2450bf713b" class="">Design patterns for implementing caching</h2><h3 id="ff73245a-f5f7-4fda-bfd1-7602ffe4b563" class="">Lazy Loading / Cache-Aside / Lazy Population</h3><div id="aa7c400b-cfd7-4c5b-824d-1b085c797f52" class="column-list"><div id="9e02fc87-5c44-4f49-8968-2ad38d030453" style="width:50%" class="column"><p id="653ca032-0c73-407a-a012-3bb703ab427f" class="">The application reads the data from the cache first. If it is present in the cache (cache hit), the application gets it immediately. If it’s not (cache miss), the application reads it from the DB, and writes it to the cache for later reads. <mark class="highlight-yellow_background">This is used to optimize reads on the cache and is the first thing you should implement as a part of caching.</mark><strong> </strong>This is good when we have a <strong>small cache size and we only want to cache the data that is actively fetched</strong> from the database.</p><p id="f77f56c3-3bbb-4c72-8480-e9540faef79b" class="">
+</p></div><div id="d42b3ac1-04b7-42e1-9144-45b8e18d2443" style="width:50%" class="column"><figure id="93e0bbbf-925f-45c3-b75a-786881c19ecf" class="image"><a href="ElastiCache%2028db505ff1454843a263256c5e9cca43/Untitled%202.png"><img style="width:1002px" src="ElastiCache%2028db505ff1454843a263256c5e9cca43/Untitled%202.png"/></a></figure></div></div><figure id="d07edd9d-2d30-40d5-85b5-c114d868a465" class="image"><a href="ElastiCache%2028db505ff1454843a263256c5e9cca43/Untitled%203.png"><img style="width:1124px" src="ElastiCache%2028db505ff1454843a263256c5e9cca43/Untitled%203.png"/></a></figure><p id="1c7505e3-fbe3-420f-9866-5e239cc16f80" class=""><strong>Pros</strong></p><ul id="09b4e6a3-764f-4947-a8f6-033d84025c25" class="bulleted-list"><li style="list-style-type:disc">Only the data requested from the DB is cached. The cache will not contain unused data.</li></ul><ul id="ac43ac5c-f9e0-40ac-bfac-a5ca638fe763" class="bulleted-list"><li style="list-style-type:disc">Cache failures are not fatal, they just lead to increased latency of fetching the data from the DB.</li></ul><p id="cea4247c-be2d-416f-a0ee-15f6cabca1ae" class=""><strong>Cons</strong></p><ul id="65bb64fb-4023-48b8-9e68-ed645ea8e265" class="bulleted-list"><li style="list-style-type:disc"><strong>Cached data can become stale</strong> (outdated)</li></ul><ul id="07ac6b0b-c9d0-4b81-8bfa-e8cddd483441" class="bulleted-list"><li style="list-style-type:disc">Cache miss results in 3 network RTT delay which affects user experience</li></ul><h3 id="ac48efa2-5eb2-47e7-bd84-b298031397e1" class="">Write Through</h3><div id="f24d8944-09ab-4ba5-ba09-3155b6c961a5" class="column-list"><div id="8c59fb72-e70f-495f-86c6-744795082f60" style="width:43.75%" class="column"><p id="b5b8bcba-70ef-4179-ad5d-16fb59df998f" class="">Whenever there’s a change to some data in the DB (write), write the data to cache. <strong>This is done on top of lazy loading to optimize cache writes. </strong>This enables <strong>faster reads at the cost of longer writes.</strong></p><p id="bf34e31e-538d-4d0a-a37e-e504239ac9c2" class="">The cache and the DB cannot be updated at the same time via a single atomic operation as these are two separate systems. The cache must be updated or invalidated after writing to the DB.</p></div><div id="999c875b-53b0-4aab-abde-d15fe6b055f9" style="width:56.25%" class="column"><figure id="70cf53bc-5168-4479-b0db-d3e7302fc15a" class="image"><a href="ElastiCache%2028db505ff1454843a263256c5e9cca43/Untitled%204.png"><img style="width:980px" src="ElastiCache%2028db505ff1454843a263256c5e9cca43/Untitled%204.png"/></a></figure></div></div><figure id="0eab69e9-89e0-4706-8818-691bac4c29c4" class="image"><a href="ElastiCache%2028db505ff1454843a263256c5e9cca43/Untitled%205.png"><img style="width:1162px" src="ElastiCache%2028db505ff1454843a263256c5e9cca43/Untitled%205.png"/></a></figure><p id="73838623-1054-478a-9289-d9c32cb3303c" class=""><strong>Pros</strong></p><ul id="49a6725c-e0cf-4b70-a233-eeebbc4e6d21" class="bulleted-list"><li style="list-style-type:disc"><strong>Cache always contains up to date data</strong> (no stale data)</li></ul><ul id="28de98a3-ad54-40d6-82e5-3d94e45976eb" class="bulleted-list"><li style="list-style-type:disc">Each write takes up 2 network RTT delay which is better than 3 RTT delay during cache miss reads in case of lazy loading. </li></ul><p id="1e25e66f-9641-49b7-8542-420aefe7d153" class=""><strong>Cons</strong></p><ul id="4541478a-2af1-4bb0-91ad-eb6095542316" class="bulleted-list"><li style="list-style-type:disc">Data that doesn’t change in the DB doesn’t get cached. Solution is to implement lazy loading alongside write through.</li></ul><ul id="bb11d236-46df-4e77-8188-4104e19b8e12" class="bulleted-list"><li style="list-style-type:disc"><strong>Cache churn</strong> - most of the cached data will never be read</li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="bc738358-480e-4ecc-a530-3ee7d51ab6ec"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Lazy loading can be combined with Write through to optimize cache reads and writes.</div></figure><h2 id="72620398-262f-4496-b39f-b1024c451371" class="">Cache Eviction</h2><p id="3c06ee52-d236-40a3-a745-b2deb3cd707d" class="">The cache has a limited size and therefore the old or unused data must be removed to make room for new data. This is called as cache eviction. It occurs in 3 ways:</p><ul id="3dbbcc06-744a-4a9f-851b-f7d2a4f9fcc1" class="bulleted-list"><li style="list-style-type:disc">Delete the item explicitly</li></ul><ul id="8eaa50bf-d26f-4af2-bf4c-334f4fd3c25b" class="bulleted-list"><li style="list-style-type:disc">Delete the least recently used (LRU) data</li></ul><ul id="0c9f1fe3-d506-419b-a744-097da7399be8" class="bulleted-list"><li style="list-style-type:disc">Use TTL for the data stored in cache</li></ul><p id="827ca692-cb40-4446-ab50-5f4b7c451a50" class="">If too many cache evictions occur, you should consider scaling up/out your cache.</p></div></article></body></html>

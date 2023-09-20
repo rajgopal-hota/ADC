@@ -1,0 +1,676 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>EC2</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ae47d2a3-6046-4e7d-ab63-184c8f3347b2" class="page sans"><header><h1 class="page-title">EC2</h1><p class="page-description"></p></header><div class="page-body"><nav id="65b412fd-bfb2-4592-8955-71a203d2c112" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f125f427-e3be-44a8-9a4a-fd086294e4c8">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#73138dc4-1a22-4a92-8ef7-b5d42b205441">User Data</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0148becd-4bc1-4301-91f7-6336ceb8e17e">Instance Classes</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6f3b41a0-e18c-49ac-a4f9-4a2de006f58d">Security Groups</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cc66ec03-a27a-44a0-a865-b0cb007aaa9a">Elastic Network Interface (ENI)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7c40a7ec-d959-4449-8f46-de670620ffa3">Instance Profile</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f775753a-939f-4c7d-9fe9-1e098602f4c0">Purchasing Options</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d93434cc-4984-410d-a0e5-c029734cd98a">On-demand Instances</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#363b3818-498b-4396-97fc-63b168cd0cc0">Standard Reserved Instances</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#fcf843f9-e3cf-4def-a519-d7928a744675">Convertible Reserved Instances</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#163faada-1510-41b7-a3dc-aaf387142037">Scheduled Reserved Instances</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6ab39e5a-3091-41bf-854f-3707f5166bfe">Spot Instances</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2be37bb1-e4ea-48dd-a4c8-fcca678ee288">Dedicated Hosts</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#51fd2560-17a4-4243-ae2c-8d929e166374">Dedicated Instances</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3f91a101-00df-4476-bf14-1084bc36d328">Zonal Reserved Instances</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#332c7bb5-b7ba-45c2-af16-ef5959c27625">Reserved Capacity and Instance Comparison</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#018db8c5-15a9-427f-8859-a89c1342eb30">Spot Instances</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e483d304-b770-4fdb-b56d-99baf50866ba">Spot Requests</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#16135fe7-e9e6-4d29-ad85-77c49c252ad8">Spot Fleets</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#028e6f94-23b8-4fe8-8ab5-f50037c333f2">Elastic IP</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b9ce465e-f591-4231-aa88-b5224119677e">Placement Groups (Placement Strategies)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9fb626c3-d69f-41cd-9459-f683c157198a">Instance States</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#47f99f85-c2e7-4a0a-b2f1-9681d5f3dfef">EC2 Nitro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ddb8afba-3037-4db5-89cb-efd39481e797">vCPU &amp; Threads</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5f2686bb-5bc9-4593-9446-d832673b2602">Amazon Machine Image (AMI)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#de02e68b-1ca7-4c3a-9d89-34ca6ca05efe">EC2 Classic &amp; ClassicLink</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#db266684-4dbb-40ec-88f2-1c641657a609">Billing</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0c292a88-db28-4715-a5f1-7e8dca7b8d29">Run Command</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#adc2bfef-aa77-4bef-9970-3d12382781dc">Instance Tenancy</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7bc9e3a8-a08d-4eb8-a308-879a7ef4d199">Troubleshooting</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#46c14a2f-a7a6-4394-ba6f-475186ca3c88">EC2 Instance Metadata</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#07d7db51-e97f-49db-91dd-ec715c4a09ea">SSH Access</a></div></nav><hr id="f70d0281-d4e2-4e01-9f2d-a34de5e24ead"/><h2 id="f125f427-e3be-44a8-9a4a-fd086294e4c8" class="">Intro</h2><ul id="ba1b0851-2273-44de-a586-61f3eaf62960" class="bulleted-list"><li style="list-style-type:disc">Regional Service</li></ul><ul id="8b29c695-10c4-4dc2-8dd7-8400359d4baa" class="bulleted-list"><li style="list-style-type:disc"><strong>Infrastructure as a Service (IaaS)</strong></li></ul><ul id="0bc79416-0e86-4296-ae31-ab48ac644cc5" class="bulleted-list"><li style="list-style-type:disc">Stopping &amp; Starting an instance may change its public IP but not its private IP</li></ul><ul id="7918775e-7ba1-4658-bdcb-48c70379fd16" class="bulleted-list"><li style="list-style-type:disc"><strong>AWS Compute Optimizer</strong> recommends optimal AWS Compute resources for your workloads</li></ul><ul id="3cd7fce5-23bb-41e9-8c99-6acb923716be" class="bulleted-list"><li style="list-style-type:disc">There is a vCPU-based On-Demand Instance soft limit per region</li></ul><h2 id="73138dc4-1a22-4a92-8ef7-b5d42b205441" class="">User Data</h2><ul id="06410e99-b4a6-4df0-a449-4039b2999760" class="bulleted-list"><li style="list-style-type:disc">Bootstrap script (runs on the first launch)</li></ul><ul id="b9b26adf-6288-4411-a1ed-01d6e38f6a5a" class="bulleted-list"><li style="list-style-type:disc">Used to automate <strong>dynamic</strong> boot tasks (that cannot be done using AMIs)<ul id="6264a714-13fe-4881-a449-c14e6bb85b41" class="bulleted-list"><li style="list-style-type:circle">Installing updates</li></ul><ul id="00d419a5-a255-42ed-9413-e8173356a39b" class="bulleted-list"><li style="list-style-type:circle">Installing software</li></ul><ul id="c1f06335-2df7-4176-8b8b-e0e94827cd75" class="bulleted-list"><li style="list-style-type:circle">Downloading common files from the internet</li></ul></li></ul><ul id="adb31bc0-33d8-4862-90e0-b1fa8d16b03b" class="bulleted-list"><li style="list-style-type:disc">Runs with the <strong>root user privilege</strong></li></ul><h2 id="0148becd-4bc1-4301-91f7-6336ceb8e17e" class="">Instance Classes</h2><ul id="271889f8-d281-4901-9ace-d0891455361f" class="bulleted-list"><li style="list-style-type:disc"><strong>General Purpose</strong><ul id="7d0cf320-5de2-4d5f-8ed7-b283be3572d3" class="bulleted-list"><li style="list-style-type:circle">Great for a diversity of workloads such as <strong>web servers</strong> or <strong>code repositories</strong></li></ul><ul id="1fc71d04-b1a0-44ae-900e-09af15600dbc" class="bulleted-list"><li style="list-style-type:circle">Balance between compute, memory &amp; networking</li></ul></li></ul><ul id="73843383-b3b4-4d1e-887e-604e91d595da" class="bulleted-list"><li style="list-style-type:disc"><strong>Compute Optimized</strong><ul id="8dd73a53-dc38-44c3-9d03-6a584c995577" class="bulleted-list"><li style="list-style-type:circle">Great for compute intensive tasks<ul id="44615733-05e3-4d19-b93f-c0f6ec1b001e" class="bulleted-list"><li style="list-style-type:square">Batch Processing</li></ul><ul id="35fa60ff-f562-43cd-a555-7a485cffcbdd" class="bulleted-list"><li style="list-style-type:square">Media Transcoding</li></ul><ul id="d17cf380-ea7d-4d50-92a2-555e95ba6cea" class="bulleted-list"><li style="list-style-type:square">HPC</li></ul><ul id="407794c8-74af-4e0b-a7fb-0f22bf27193d" class="bulleted-list"><li style="list-style-type:square">Gaming Servers</li></ul></li></ul></li></ul><ul id="976e68e3-ce72-4196-bb84-63cbcbb9c4c1" class="bulleted-list"><li style="list-style-type:disc"><strong>Memory Optimized</strong><ul id="3f720fe2-7fee-48e0-b0c7-f4c18b50df44" class="bulleted-list"><li style="list-style-type:circle">Great for <strong>in-memory databases</strong> or <strong>distributed web caches</strong></li></ul></li></ul><ul id="bd724000-7fb0-4942-aa20-b037f0e0a11b" class="bulleted-list"><li style="list-style-type:disc"><strong>Storage Optimized</strong><ul id="5efa59cf-c9a9-4a49-a869-f78e4cb85567" class="bulleted-list"><li style="list-style-type:circle">Great for storage intensive tasks (accessing local databases)<ul id="c15f9a19-c872-4c77-a0f4-bafc0cfa5ced" class="bulleted-list"><li style="list-style-type:square">OLTP systems</li></ul><ul id="4a7542ea-372d-4974-9a7e-372ac0e926a0" class="bulleted-list"><li style="list-style-type:square">Distributed File System (DFS)</li></ul></li></ul></li></ul><h2 id="6f3b41a0-e18c-49ac-a4f9-4a2de006f58d" class="">Security Groups</h2><ul id="f777e794-4fe1-4854-9222-e0d6d7d34ef5" class="bulleted-list"><li style="list-style-type:disc"><strong>Only contain Allow rules</strong></li></ul><ul id="388f44d4-f500-472f-b6e2-ab4f97968e66" class="bulleted-list"><li style="list-style-type:disc">External firewall for EC2 instances (applied on ENI, if a request is blocked by SG, instance will never know)</li></ul><ul id="eb9061e4-e6df-457c-9650-4f5aa085c459" class="bulleted-list"><li style="list-style-type:disc">Security groups rules can reference a resource by IP or Security Group</li></ul><ul id="a88af6f9-5786-465b-81f3-71a0bacaebe9" class="bulleted-list"><li style="list-style-type:disc">Default SG<ul id="a1ba410b-f788-4006-9c80-120424ca6761" class="bulleted-list"><li style="list-style-type:circle">inbound traffic from the same SG is allowed</li></ul><ul id="e2bcef94-fd26-4755-bbdc-bb74bb575309" class="bulleted-list"><li style="list-style-type:circle">all outbound traffic is allowed</li></ul></li></ul><ul id="9028f6b4-b959-44c3-a29c-e2ef0bfd5262" class="bulleted-list"><li style="list-style-type:disc">New SG<ul id="444ad140-498d-4a1e-a729-86cfb3c1287f" class="bulleted-list"><li style="list-style-type:circle">all inbound traffic is blocked</li></ul><ul id="f708b91a-6407-4c70-add0-45b11abee2f3" class="bulleted-list"><li style="list-style-type:circle">all outbound traffic is allowed</li></ul></li></ul><ul id="127c98fc-4681-4e08-a2e4-f422b9d50bea" class="bulleted-list"><li style="list-style-type:disc">A security group can be attached to multiple instances and vice versa</li></ul><ul id="a38c0d79-55f0-4433-9bde-97ccfc47f0a7" class="bulleted-list"><li style="list-style-type:disc">Bound to a VPC (and hence to a region)</li></ul><ul id="3096fb09-7677-4eaa-8f86-5807b08d00f3" class="bulleted-list"><li style="list-style-type:disc">Recommended to maintain a separate security group for SSH access</li></ul><ul id="bf8d854d-5d3b-44f8-b88c-61544e419510" class="bulleted-list"><li style="list-style-type:disc">Blocked requests will give a <strong>504 Timeout</strong> error</li></ul><h2 id="cc66ec03-a27a-44a0-a865-b0cb007aaa9a" class="">Elastic Network Interface (ENI)</h2><ul id="9e8cfa39-f182-44a9-bb90-2103860fa3fc" class="bulleted-list"><li style="list-style-type:disc">ENI is a virtual network card that <strong>gives a private IP to an EC2 instance</strong></li></ul><ul id="cf906c2d-d975-4365-a8ca-ea279b8a4ee8" class="bulleted-list"><li style="list-style-type:disc">A primary ENI is created and attached to the instance upon creation and will be deleted automatically upon instance termination.</li></ul><ul id="4d1488aa-cb9b-4494-bc7b-cb1861971833" class="bulleted-list"><li style="list-style-type:disc">We can create additional ENIs and attach them to an EC2 instance to access it via multiple private IPs.</li></ul><ul id="7d474801-9cf5-4f0d-b934-e0ac4553f9d8" class="bulleted-list"><li style="list-style-type:disc">We can detach &amp; attach ENIs across instances</li></ul><ul id="da4a05b9-6b38-4d37-a214-121ee83db0dd" class="bulleted-list"><li style="list-style-type:disc"><strong>ENIs are tied to the subnet</strong> (and hence to the AZ)</li></ul><h2 id="7c40a7ec-d959-4449-8f46-de670620ffa3" class="">Instance Profile</h2><ul id="120c6225-368c-414c-b527-11b7a955f15e" class="bulleted-list"><li style="list-style-type:disc">Never enter AWS credentials into the EC2 instance, instead attach IAM Roles to the instances (instance profile)</li></ul><ul id="b7f50ef2-05dc-4a1c-9a2e-80b07af94012" class="bulleted-list"><li style="list-style-type:disc">Steps to create an instance profile for an EC2 instance and add a role to it<ul id="d985f1f6-c862-4e00-b94b-6ee9f497e208" class="bulleted-list"><li style="list-style-type:circle"><code>aws iam create-instance-profile</code></li></ul><ul id="cd628eab-d61c-4ab7-ae1b-ca5c5c56cc68" class="bulleted-list"><li style="list-style-type:circle"><code>aws iam add-role-to-instance-profile</code></li></ul><ul id="c0c810b7-dba1-4382-bbf0-39441bb5ca00" class="bulleted-list"><li style="list-style-type:circle"><code>aws ec2 associate-iam-instance-profile</code></li></ul></li></ul><h2 id="f775753a-939f-4c7d-9fe9-1e098602f4c0" class="">Purchasing Options</h2><h3 id="d93434cc-4984-410d-a0e5-c029734cd98a" class="">On-demand Instances</h3><ul id="f666046a-e289-4353-95cb-10358e0dee84" class="bulleted-list"><li style="list-style-type:disc">Pay per use (no upfront payment)</li></ul><ul id="f8ddb8c2-0711-4f29-8159-c78947ae5971" class="bulleted-list"><li style="list-style-type:disc">Highest cost</li></ul><ul id="e3067cae-649b-436c-8508-5bc82762efe7" class="bulleted-list"><li style="list-style-type:disc">No long-term commitment</li></ul><ul id="462cdb1d-e9c1-4171-857a-1a01ada99df3" class="bulleted-list"><li style="list-style-type:disc">Recommended for short-term, uninterrupted and <strong>unpredictable</strong> workloads</li></ul><h3 id="363b3818-498b-4396-97fc-63b168cd0cc0" class="">Standard Reserved Instances</h3><ul id="9e4e138c-6ac6-4fff-9736-eba7c5316cf3" class="bulleted-list"><li style="list-style-type:disc">Reservation Period: 1 year or 3 years</li></ul><ul id="c9d79a69-2ffd-4b03-9ccf-221966b5c6c7" class="bulleted-list"><li style="list-style-type:disc">Recommended for steady-state applications (like database)</li></ul><ul id="da161f03-94a3-4b7c-863e-6377cc319972" class="bulleted-list"><li style="list-style-type:disc"><strong>Sell unused instances</strong> on the Reserved Instance Marketplace</li></ul><h3 id="fcf843f9-e3cf-4def-a519-d7928a744675" class="">Convertible Reserved Instances</h3><ul id="a1f14281-f599-4743-89f7-c282851388e7" class="bulleted-list"><li style="list-style-type:disc">Can change the instance type</li></ul><ul id="b4161be3-8252-4104-9bad-f0a0e0f163fa" class="bulleted-list"><li style="list-style-type:disc">Lower discount</li></ul><ul id="02250159-b6c1-428b-a629-621b368e30a1" class="bulleted-list"><li style="list-style-type:disc"><strong>Cannot sell unused instances</strong> on the Reserved Instance Marketplace</li></ul><h3 id="163faada-1510-41b7-a3dc-aaf387142037" class="">Scheduled Reserved Instances</h3><ul id="e9c8f724-d9fc-4d20-ae49-12831524160c" class="bulleted-list"><li style="list-style-type:disc">reserved for a time window (ex. everyday from 9AM to 5PM)</li></ul><h3 id="6ab39e5a-3091-41bf-854f-3707f5166bfe" class="">Spot Instances</h3><ul id="f2737c22-5a71-448f-9526-e654d2be2090" class="bulleted-list"><li style="list-style-type:disc">Work on a bidding basis where you are willing to pay a specific max hourly rate for the instance. Your instance will get interrupted if the spot price increases your bidding price. </li></ul><ul id="bbdbb859-8c81-441d-8c13-8aaafdcaf7e1" class="bulleted-list"><li style="list-style-type:disc">The behavior for spot instance interruption can be <strong>stop</strong>, <strong>hibernate</strong> or <strong>terminate</strong>. <mark class="highlight-yellow_background">It cannot be </mark><strong><mark class="highlight-yellow_background">reboot</mark></strong>.</li></ul><ul id="4e4b31fc-f8ee-4a1a-9d7e-c679268ce7f5" class="bulleted-list"><li style="list-style-type:disc"><strong>Spot blocks</strong> are designed not to be interrupted</li></ul><ul id="1c5caa11-0a12-40af-be25-1cc5b0a6080f" class="bulleted-list"><li style="list-style-type:disc">Good for workloads that are resilient to failure<ul id="2b0fdc9b-6b1d-4637-ad62-01610dcfcc60" class="bulleted-list"><li style="list-style-type:circle">Distributed jobs (resilient if some nodes go down)</li></ul><ul id="b7fdb36f-9ff7-4bb2-a8d3-3f13502b85d6" class="bulleted-list"><li style="list-style-type:circle">Batch jobs</li></ul></li></ul><h3 id="2be37bb1-e4ea-48dd-a4c8-fcca678ee288" class="">Dedicated Hosts</h3><ul id="78278f9f-a899-4e3b-95c0-a6f6def388de" class="bulleted-list"><li style="list-style-type:disc">Server hardware is allocated to a specific company (not shared with other companies)</li></ul><ul id="c8d27812-32af-48a7-b62a-cff961074e78" class="bulleted-list"><li style="list-style-type:disc"><strong>3 year reservation</strong> period</li></ul><ul id="31e23b07-8c29-4ed6-bd47-ed5e50e49b4c" class="bulleted-list"><li style="list-style-type:disc">Billed per host (expensive)</li></ul><ul id="ccaf2760-29a0-48fd-8566-bc96b78d7936" class="bulleted-list"><li style="list-style-type:disc">Useful for software that have <strong>BYOL (Bring Your Own License)</strong> or for companies that have strong regulatory or compliance needs</li></ul><h3 id="51fd2560-17a4-4243-ae2c-8d929e166374" class="">Dedicated Instances</h3><ul id="889cc213-1b6f-437a-bc90-7548f06786e5" class="bulleted-list"><li style="list-style-type:disc">Instances running on a <strong>dedicated hardware for an AWS account</strong>. </li></ul><ul id="1b974172-beee-424b-b8b5-d369557d9e2e" class="bulleted-list"><li style="list-style-type:disc">Both dedicated and non-dedicated instances of an account can be running on the dedicated hardware</li></ul><ul id="b146ff5a-d259-4a66-827a-2df271717c07" class="bulleted-list"><li style="list-style-type:disc">Billed per instance</li></ul><ul id="3ed737ca-6350-4d0b-a9b5-4025831417d6" class="bulleted-list"><li style="list-style-type:disc">No control over instance placement</li></ul><ul id="3bf4790a-0bec-4a7a-92b0-2425046adb3a" class="bulleted-list"><li style="list-style-type:disc">Cheaper than Dedicated Host </li></ul><h3 id="3f91a101-00df-4476-bf14-1084bc36d328" class="">Zonal Reserved Instances</h3><ul id="15328f99-2760-4019-bb22-52debff4b797" class="bulleted-list"><li style="list-style-type:disc">Reserve capacity in an AZ to launch EC2 instances when needed</li></ul><ul id="b57d877c-41e7-4bfc-b52d-f59c8520ca41" class="bulleted-list"><li style="list-style-type:disc">Can reserve for a recurring schedule (ex. everyday from 9AM to 5PM)</li></ul><ul id="bfe321f4-4309-4d1e-80dd-f5d81f33f500" class="bulleted-list"><li style="list-style-type:disc"><strong>No need for 1 or 3-year commitment</strong> (independent of billing discounts)</li></ul><ul id="da55291d-fa3d-4a03-8790-b00e333051d2" class="bulleted-list"><li style="list-style-type:disc">Need to specify the following to create capacity reservation:<ul id="4fcaa4d9-0ab6-4956-8c57-9bc6495827a1" class="bulleted-list"><li style="list-style-type:circle">AZ</li></ul><ul id="94191e88-5db9-4ac5-9fd1-0820dd1ab5a2" class="bulleted-list"><li style="list-style-type:circle">Number of instances</li></ul><ul id="68eb56bd-10ca-4f81-bf53-ab9fa10c8a90" class="bulleted-list"><li style="list-style-type:circle">Instance attributes</li></ul></li></ul><ul id="cd0b7114-30e4-40e6-b04f-c101f6794d88" class="bulleted-list"><li style="list-style-type:disc"><strong>Regional reserved instances don’t provide capacity reservations</strong></li></ul><h3 id="332c7bb5-b7ba-45c2-af16-ef5959c27625" class="">Reserved Capacity and Instance Comparison</h3><figure id="ebd8807a-7c0f-463c-a6b4-50922fdfd0f5" class="image"><a href="EC2%20ae47d2a360464e7dab63184c8f3347b2/Untitled.png"><img style="width:747px" src="EC2%20ae47d2a360464e7dab63184c8f3347b2/Untitled.png"/></a></figure><h2 id="018db8c5-15a9-427f-8859-a89c1342eb30" class="">Spot Instances</h2><h3 id="e483d304-b770-4fdb-b56d-99baf50866ba" class="">Spot Requests</h3><ul id="75094f93-5828-40eb-8d78-7fc88ac2368b" class="bulleted-list"><li style="list-style-type:disc"><strong>One-time</strong>: Request once opened, spins up the spot instances and the request closes.</li></ul><ul id="056f8c47-331f-4fcd-b958-3e9076b6ba8b" class="bulleted-list"><li style="list-style-type:disc"><strong>Persistent</strong>:<ul id="f3b8c848-09ce-4b21-9942-0d80315c8f52" class="bulleted-list"><li style="list-style-type:circle">Request will stay disabled while the spot instances are up and running.</li></ul><ul id="0f8e593b-e7e8-4875-8d6a-c8649a4d06d5" class="bulleted-list"><li style="list-style-type:circle">It becomes active after the spot instance is interrupted.</li></ul><ul id="7d5c3662-600e-4398-88ba-3b910e02ce50" class="bulleted-list"><li style="list-style-type:circle">If you stop the spot instance, the request will become active only after you start the spot instance.</li></ul></li></ul><ul id="b0b44a56-7c47-45d4-972f-6e720593d5c2" class="bulleted-list"><li style="list-style-type:disc">You can only cancel spot requests that are open, active, or disabled.</li></ul><ul id="bc96561d-4f90-4ba3-9831-894d306b2345" class="bulleted-list"><li style="list-style-type:disc">Cancelling a Spot Request does not terminate instances. You must first cancel a Spot Request, and then terminate the associated Spot Instances.</li></ul><h3 id="16135fe7-e9e6-4d29-ad85-77c49c252ad8" class="">Spot Fleets</h3><ul id="ca6461d9-40d0-429d-bfc4-dcd1a4b12853" class="bulleted-list"><li style="list-style-type:disc">Combination of spot and on-demand instances (optional) that tries to <strong>optimize for cost or capacity</strong></li></ul><ul id="b9d3e385-5d4d-4f31-8fb4-d935f36a31e4" class="bulleted-list"><li style="list-style-type:disc"><strong>Launch Templates must be used to have on-demand instances in the fleet</strong></li></ul><ul id="4ecfa745-5dbb-4b21-b1c3-663e1095f0ee" class="bulleted-list"><li style="list-style-type:disc">Can consist of instances of different classes</li></ul><ul id="374283f0-484e-422e-bba3-d866759f66f6" class="bulleted-list"><li style="list-style-type:disc">Strategies to allocate Spot Instances:<ul id="ace7c150-3219-419e-a12c-6801ee70691b" class="bulleted-list"><li style="list-style-type:circle"><strong>lowestPrice</strong> - from the pool with the lowest price (cost optimization, short workload)</li></ul><ul id="1a4497e4-7f06-4da4-be16-7d824374c3c3" class="bulleted-list"><li style="list-style-type:circle"><strong>diversified</strong> - distributed across all pools (great for availability, long workloads)</li></ul><ul id="63358a1e-6cfa-4636-b985-c146e007347c" class="bulleted-list"><li style="list-style-type:circle"><strong>capacityOptimized</strong> - pool with the optimal capacity for the number of instances</li></ul></li></ul><h2 id="028e6f94-23b8-4fe8-8ab5-f50037c333f2" class="">Elastic IP</h2><ul id="5a1e7ca3-371d-4ca8-86f4-8cec887fdaf9" class="bulleted-list"><li style="list-style-type:disc"><strong>Static Public IP</strong> that you own as long as you don&#x27;t delete it</li></ul><ul id="d11eff54-381a-4b03-9504-c288c06ca139" class="bulleted-list"><li style="list-style-type:disc">Can be attached to an EC2 instance (even when it is stopped)</li></ul><ul id="ebb2ba24-0152-455c-8fae-5c671b18f111" class="bulleted-list"><li style="list-style-type:disc">Soft limit of 5 elastic IPs per account</li></ul><ul id="8b087a20-7e70-4135-9869-0ac1d95a5837" class="bulleted-list"><li style="list-style-type:disc">Doesn’t incur charges as long as the following conditions are met (EIP behaving like any other public IP randomly assigned to an EC2 instance):<ul id="c716ae85-5049-4599-9ec7-2e16252116c9" class="bulleted-list"><li style="list-style-type:circle">The Elastic IP is associated with an Amazon EC2 instance</li></ul><ul id="74490305-2c45-4d96-8d1a-517ead5d0ca7" class="bulleted-list"><li style="list-style-type:circle">The instance associated with the Elastic IP is running</li></ul><ul id="a9a77d82-c815-4b46-821f-c59ef2a5bb0f" class="bulleted-list"><li style="list-style-type:circle">The instance has only one Elastic IP attached to it</li></ul></li></ul><h2 id="b9ce465e-f591-4231-aa88-b5224119677e" class="">Placement Groups (Placement Strategies)</h2><div id="e9e02c8c-6bb9-4635-a4e3-7f59f4507272" class="column-list"><div id="9c96293f-2a39-4e46-9a46-fb233cec83c3" style="width:56.25%" class="column"><ul id="ad47f0dc-e94d-40d8-a2ab-f9ae43170856" class="bulleted-list"><li style="list-style-type:disc"><strong>Cluster Placement Group (optimize for network)</strong><ul id="bc9c36a8-8034-4bfc-9165-273e9bc53c63" class="bulleted-list"><li style="list-style-type:circle">All the instances are placed on the same hardware (same rack)</li></ul><ul id="6bfe8bc9-86e7-4ab5-93b6-8dab56a59553" class="bulleted-list"><li style="list-style-type:circle">Pros: Great network (10 Gbps bandwidth between instances)</li></ul><ul id="9a2d845e-e65f-40d6-8a19-7c5b0900ea2c" class="bulleted-list"><li style="list-style-type:circle">Cons: If the rack fails, all instances will fail at the same time</li></ul><ul id="fd81a6ef-636f-4e3d-88c1-c519ced11079" class="bulleted-list"><li style="list-style-type:circle">Used in <strong>HPC</strong> (minimize inter-node latency &amp; maximize throughput)</li></ul></li></ul></div><div id="8efc8d36-1490-4996-b75e-7be63859471e" style="width:43.75000000000001%" class="column"><figure id="fa1dfc3f-524b-4757-89e6-49750401c633" class="image"><a href="EC2%20ae47d2a360464e7dab63184c8f3347b2/Untitled%201.png"><img style="width:792px" src="EC2%20ae47d2a360464e7dab63184c8f3347b2/Untitled%201.png"/></a></figure></div></div><div id="e503d90d-77f6-4faa-ae50-9da443174071" class="column-list"><div id="4417ffbc-704b-451c-8ad1-dab0b7a48954" style="width:56.25%" class="column"><ul id="0b15ce52-f31d-40ec-867e-9a43063fd183" class="bulleted-list"><li style="list-style-type:disc"><strong>Spread Placement Group (maximize availability)</strong><ul id="ceee6a2b-932d-4e94-b97b-3032f6ed4caa" class="bulleted-list"><li style="list-style-type:circle">Each instance is in a separate rack (physical hardware)</li></ul><ul id="b08f92c5-c3be-45a1-95df-57dcf8dbf33d" class="bulleted-list"><li style="list-style-type:circle">Supports Multi AZ</li></ul><ul id="dd120299-98c4-4e4b-9fe3-32fc24e31c18" class="bulleted-list"><li style="list-style-type:circle">Up to 7 instances per AZ per placement group (ex. for 15 instances, need 3 AZ)</li></ul><ul id="2a2980d9-567c-4010-869a-86cd842f25ce" class="bulleted-list"><li style="list-style-type:circle">Used for critical applications</li></ul></li></ul></div><div id="69e27b3d-8cde-4a90-8353-179f03e2e60b" style="width:43.75000000000001%" class="column"><figure id="9499af43-7817-4005-bc7e-367e46f8cc0a" class="image"><a href="EC2%20ae47d2a360464e7dab63184c8f3347b2/Untitled%202.png"><img style="width:384px" src="EC2%20ae47d2a360464e7dab63184c8f3347b2/Untitled%202.png"/></a></figure></div></div><div id="5655ff6f-1c90-46b4-b6e7-0ed3a52dcf2f" class="column-list"><div id="34942184-b623-427e-bad9-41ff0e698bb2" style="width:56.25%" class="column"><ul id="54bfed67-b9ab-472c-8dea-a03206ad9388" class="bulleted-list"><li style="list-style-type:disc"><strong>Partition Placement Group (balance of performance and availability)</strong><ul id="cc0c7420-b5d9-40a1-a7f2-b89cbcc66d8a" class="bulleted-list"><li style="list-style-type:circle">Instances in a partition share rack with each other</li></ul><ul id="eb2b7ec3-5f57-49bd-a0ca-67897c3f7b67" class="bulleted-list"><li style="list-style-type:circle">If the rack goes down, the entire partition goes down</li></ul><ul id="74ed30b4-36ab-4363-8a46-2c5565bcee00" class="bulleted-list"><li style="list-style-type:circle">Up to 7 partitions per AZ</li></ul><ul id="ea10b84b-95e8-42f4-a241-a0f54e5b34bf" class="bulleted-list"><li style="list-style-type:circle">Used in <strong>big data</strong> applications (Hadoop, HDFS, HBase, Cassandra, Kafka)</li></ul></li></ul></div><div id="06a7353e-953b-4fec-9322-b67ad2abc969" style="width:43.75000000000001%" class="column"><figure id="679c0505-012d-4033-998f-2b748212c8b6" class="image"><a href="EC2%20ae47d2a360464e7dab63184c8f3347b2/Untitled%203.png"><img style="width:910px" src="EC2%20ae47d2a360464e7dab63184c8f3347b2/Untitled%203.png"/></a></figure></div></div><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="e8631c77-b910-46cc-9979-b0defb624398"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">If you receive a capacity error when launching an instance in a placement group that already has running instances, stop and start all of the instances in the placement group, and try the launch again. Restarting the instances may migrate them to hardware that has capacity for all the requested instances.</div></figure><h2 id="9fb626c3-d69f-41cd-9459-f683c157198a" class="">Instance States</h2><ul id="9b23cd57-08ef-4cd8-8475-3fe759d73c2d" class="bulleted-list"><li style="list-style-type:disc"><strong>Stop</strong><ul id="e835ee2f-e4a3-4a90-9997-026e91b50af4" class="bulleted-list"><li style="list-style-type:circle">EBS root volume is preserved</li></ul></li></ul><ul id="07fb8a5a-058b-4a6e-b7ae-fe56c5300d8b" class="bulleted-list"><li style="list-style-type:disc"><strong>Terminate</strong><ul id="c80bdf83-94e5-48c3-b0b0-cb5f779c277f" class="bulleted-list"><li style="list-style-type:circle">EBS root volume gets destroyed</li></ul></li></ul><ul id="7ba99902-7fba-45fe-8d9a-7f42098cecbf" class="bulleted-list"><li style="list-style-type:disc"><strong>Hibernate</strong><ul id="0a1b6b85-14e4-45f7-919b-d12e943d7389" class="bulleted-list"><li style="list-style-type:circle">Hibernation saves the contents from the instance memory (RAM) to the EBS root volume</li></ul><ul id="bc0d8e8d-c72f-42c9-b049-3a3635677ff9" class="bulleted-list"><li style="list-style-type:circle">EBS root volume is preserved</li></ul><ul id="417c1e17-87dd-4df1-adc9-6e0f88328e90" class="bulleted-list"><li style="list-style-type:circle">The instance boots much faster as the OS is not stopped and restarted</li></ul><ul id="f22a6c87-a722-4159-8336-b15e83dec664" class="bulleted-list"><li style="list-style-type:circle">When you start your instance:<ul id="12c51d05-ba02-4f52-bac1-afd56548a982" class="bulleted-list"><li style="list-style-type:square">EBS root volume is restored to its previous state</li></ul><ul id="a01c40d7-85d1-4e2c-8089-aa656882c2c0" class="bulleted-list"><li style="list-style-type:square">RAM contents are reloaded</li></ul><ul id="d9b9f4df-87b6-4e30-a0d1-483c8795824a" class="bulleted-list"><li style="list-style-type:square">Processes that were previously running on the instance are resumed</li></ul><ul id="81d5351c-9c67-4183-865a-39cbf4e4dc5d" class="bulleted-list"><li style="list-style-type:square">Previously attached data volumes are reattached and the instance retains its instance ID</li></ul></li></ul><ul id="002a5843-71e7-40f6-b29e-a50f5d3ed0e0" class="bulleted-list"><li style="list-style-type:circle">Should be used for applications that take a long time to start</li></ul><ul id="66b0540f-ca87-47ea-8b64-612ff9af80bb" class="bulleted-list"><li style="list-style-type:circle"><strong>Not supported for Spot Instances</strong></li></ul><ul id="635985e7-a04d-47f8-a265-67f71bc1fe90" class="bulleted-list"><li style="list-style-type:circle">Max hibernation duration = <strong>60 days</strong></li></ul></li></ul><ul id="210112d0-fa11-4966-b57b-8a64bf6fbafe" class="bulleted-list"><li style="list-style-type:disc"><strong>Standby</strong><ul id="b8433a83-cc36-4c1e-abd4-787dd3dbc772" class="bulleted-list"><li style="list-style-type:circle">Instance remains attached to the ASG but is temporarily put out of service (the ASG doesn&#x27;t replace this instance)</li></ul><ul id="8b7c4b6c-593c-4a38-a5c9-febbf6bfe8bc" class="bulleted-list"><li style="list-style-type:circle">Used to install updates or troubleshoot a running instance</li></ul></li></ul><h2 id="47f99f85-c2e7-4a0a-b2f1-9681d5f3dfef" class="">EC2 Nitro</h2><ul id="3adf77fc-04dc-4b28-a4ad-7d4664a9a1cb" class="bulleted-list"><li style="list-style-type:disc">Newer virtualization technology for EC2 instances</li></ul><ul id="b83edd41-978e-46ac-8d4f-96629a2e557c" class="bulleted-list"><li style="list-style-type:disc">Better networking options (enhanced networking, HPC, IPv6)</li></ul><ul id="47931154-7a84-4869-891e-8fa488ab764c" class="bulleted-list"><li style="list-style-type:disc">Higher Speed EBS (64,000 EBS IOPS max on Nitro instances whereas 32,000 on non-Nitro)</li></ul><ul id="229c6633-adc7-46cd-afc3-48009b65a02a" class="bulleted-list"><li style="list-style-type:disc">Better underlying security</li></ul><h2 id="ddb8afba-3037-4db5-89cb-efd39481e797" class="">vCPU &amp; Threads</h2><ul id="f7fc3cf4-88c8-49e2-9551-67cc3a6b1092" class="bulleted-list"><li style="list-style-type:disc">vCPU is the total number of concurrent threads that can be run on an EC2 instance</li></ul><ul id="711fa572-85a8-46a8-ae26-5c454928c481" class="bulleted-list"><li style="list-style-type:disc">Usually 2 threads per CPU core (eg. 4 CPU cores ⇒ 8 vCPU)</li></ul><h2 id="5f2686bb-5bc9-4593-9446-d832673b2602" class="">Amazon Machine Image (AMI)</h2><ul id="9038515d-b164-400b-bdeb-4dbd84aca73a" class="bulleted-list"><li style="list-style-type:disc">AMIs are the image of the instance after installing all the necessary OS, software and configuring everything.</li></ul><ul id="a5bfe93b-cba8-43d8-a5df-9ce8aa1095a6" class="bulleted-list"><li style="list-style-type:disc">It boots much faster because the whole thing is pre-packaged and doesn’t have to be installed separately for each instance.</li></ul><ul id="466159d0-5c9c-4aa2-bb2a-367b44c305d7" class="bulleted-list"><li style="list-style-type:disc">Good for static configurations</li></ul><ul id="2f4431dd-ae51-4c7a-8119-f40b0fd7cccd" class="bulleted-list"><li style="list-style-type:disc"><strong>Bound to a region</strong> (can be copied across regions)</li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="7ba04ccc-fa3c-4049-8dba-6da6849b6e31"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">When the new AMI is copied from region A into region B, it automatically creates a snapshot in region B because AMIs are based on the underlying snapshots.</div></figure><h2 id="de02e68b-1ca7-4c3a-9d89-34ca6ca05efe" class="">EC2 Classic &amp; ClassicLink</h2><ul id="d68ae934-109a-4ca9-81c8-c967b10b3429" class="bulleted-list"><li style="list-style-type:disc">Instances run in single network shared with other customers (this is how AWS started)</li></ul><ul id="4b729b63-a02c-4566-b458-f35e478dded6" class="bulleted-list"><li style="list-style-type:disc"><strong>ClassicLink</strong> allows you to link EC2-Classic instances to a VPC in your account</li></ul><h2 id="db266684-4dbb-40ec-88f2-1c641657a609" class="">Billing</h2><ul id="0ade1ad2-569d-4a34-bbee-54fa9b298c76" class="bulleted-list"><li style="list-style-type:disc"><strong>Reserved instances will be billed regardless of their state</strong> (billed for a reserved period)</li></ul><ul id="a0eb4b7d-e90d-4afd-b4a3-815214a331bc" class="bulleted-list"><li style="list-style-type:disc"><strong>On-demand instances in </strong><code><strong>stopping</strong></code><strong> state when preparing to hibernate will be billed</strong></li></ul><ul id="3887efda-5aea-4f7b-8236-7e594c0909fa" class="bulleted-list"><li style="list-style-type:disc">If an instance is running, it will be billed</li></ul><ul id="03850916-aabf-48e3-b83d-bb1a86caf92f" class="bulleted-list"><li style="list-style-type:disc">In all the other cases, an instance will not be billed</li></ul><ul id="aca7fe4f-87b2-4e93-bc40-8150ed625e3c" class="bulleted-list"><li style="list-style-type:disc"><strong>Burstable performance instances </strong>(T3, T3a, and T2 families), are designed to provide a baseline level of CPU performance with the ability to burst to a higher level when required by your workload.</li></ul><ul id="e077b2fc-072d-4a6f-95f4-8cb0c584a797" class="bulleted-list"><li style="list-style-type:disc">Burstable instances use a credit system to manage CPU performance. When the instance is idle or not using its full CPU capacity, it earns CPU credits. When the instance needs more CPU performance than its baseline, it can use these credits to &quot;burst&quot; above its baseline and provide the needed performance.<strong> </strong>Example: for a T2.micro instance in a new AWS account (&lt; 1 year old), burst performance will cost nothing as it will consume the credits from the free tier.</li></ul><h2 id="0c292a88-db28-4715-a5f1-7e8dca7b8d29" class="">Run Command</h2><ul id="db81db05-931f-4af0-bd33-da9f9464c69f" class="bulleted-list"><li style="list-style-type:disc">Systems Manager <strong>Run Command</strong> lets you remotely and securely <strong>manage the configuration</strong> of your <strong>managed instances</strong>. A <em>managed instance</em> is any EC2 instance that has been configured for <strong>Systems Manager</strong>.</li></ul><ul id="ae8f3d1f-c9a9-4140-8294-0709fb88332e" class="bulleted-list"><li style="list-style-type:disc">Run Command enables you to <strong>automate common administrative tasks</strong> and perform ad-hoc configuration changes at scale.</li></ul><ul id="46d8ab34-491e-40bf-9b6e-ad347fccc569" class="bulleted-list"><li style="list-style-type:disc">You can use Run Command from the <strong>AWS Console</strong>, the AWS CLI, AWS Tools for Windows PowerShell, or the AWS SDKs. Run Command is offered at no additional cost.</li></ul><h2 id="adc2bfef-aa77-4bef-9970-3d12382781dc" class="">Instance Tenancy</h2><ul id="af76e029-d255-4e87-acda-a62e82d3dc9c" class="bulleted-list"><li style="list-style-type:disc"><strong>Default</strong>: Instance runs on shared hardware</li></ul><ul id="17a5a3f5-d3ef-43eb-8157-ba2435978c29" class="bulleted-list"><li style="list-style-type:disc"><strong>Dedicated</strong>: Instance runs on single-tenant hardware</li></ul><ul id="53e8fb08-0cbc-489b-bfad-8443f783f62b" class="bulleted-list"><li style="list-style-type:disc"><strong>Host</strong>: Instance runs on dedicated host</li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="c084f9cc-ac48-4f11-94b0-c6f1eff26a79"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Tenancy of an instance can only be changed from host to dedicated or dedicated to host after the instance has been launched. Dedicated instance tenancy takes precedence over Default instance tenancy.</div></figure><h2 id="7bc9e3a8-a08d-4eb8-a308-879a7ef4d199" class="">Troubleshooting</h2><ul id="3fca46bf-f4fa-4d65-8273-77a55d355d93" class="bulleted-list"><li style="list-style-type:disc">The following are a few reasons why an instance might immediately terminate:<ul id="645f7225-4d72-4feb-a498-2eec18b869f2" class="bulleted-list"><li style="list-style-type:circle">You’ve reached your EBS volume limit.</li></ul><ul id="85a61020-8ed4-420f-856d-c516ab89649b" class="bulleted-list"><li style="list-style-type:circle">An EBS snapshot is corrupt.</li></ul><ul id="677261a3-9440-42f4-9269-2e2ea52f6de3" class="bulleted-list"><li style="list-style-type:circle">The root EBS volume is encrypted and you do not have permissions to access the KMS key for decryption.</li></ul><ul id="26d0cdfe-680c-46c1-a959-9eb31c558ca9" class="bulleted-list"><li style="list-style-type:circle">The instance store-backed AMI that you used to launch the instance is missing a required part.</li></ul></li></ul><h3 id="46c14a2f-a7a6-4394-ba6f-475186ca3c88" class="">EC2 Instance Metadata</h3><ul id="6ca6f982-5ddd-4bc1-a4ba-8c6028e2a513" class="bulleted-list"><li style="list-style-type:disc">EC2 instances can get metadata about them @ http://169.254.169.254/latest/meta-data. This API is internally available to the EC2 instances.</li></ul><ul id="ed820c07-19c9-430b-8d0a-2309876531b6" class="bulleted-list"><li style="list-style-type:disc">It allows the instances to get the metadata without using an IAM role.</li></ul><ul id="2fae7ac4-383f-4d5e-8d6f-b41cc5036654" class="bulleted-list"><li style="list-style-type:disc"><strong>IAM role can be retrieved from the metadata but not the IAM policy.</strong></li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="01beaf38-45ad-442c-8a7d-e3b94ac3da61"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">When you have an IAM role attached to your EC2 instance and you run AWS CLI commands from inside this instance, AWS CLI uses instance metadata to get temporary credentials.</div></figure><h2 id="07d7db51-e97f-49db-91dd-ec715c4a09ea" class="">SSH Access</h2><ul id="9c00456d-3067-4644-9aee-3e7707e8e340" class="bulleted-list"><li style="list-style-type:disc">SSH keys can be used to securely SSH into public EC2 instances</li></ul><ul id="67150e1a-7efd-4e4e-9720-6859483c95d3" class="bulleted-list"><li style="list-style-type:disc"><strong>Can generate a public key from the private key if the public key gets misplaced but not the other way around.</strong></li></ul><ul id="0a76f8af-8aba-4786-b768-7bb916982b52" class="bulleted-list"><li style="list-style-type:disc">SSH keys can be reused across regions:<ol type="1" id="bceea5ed-dd4a-430b-ac1e-9a1356237093" class="numbered-list" start="1"><li>Generate a public SSH key (.pub) file from the private SSH key (.pem) file.</li></ol><ol type="1" id="84a384a7-389c-47ac-a083-ade4084a87f8" class="numbered-list" start="2"><li>Set the AWS Region you wish to import to.</li></ol><ol type="1" id="71e424e1-5dd6-4684-9a6e-9a91f996bbb2" class="numbered-list" start="3"><li>Import the public SSH key into the new Region.</li></ol></li></ul></div></article></body></html>

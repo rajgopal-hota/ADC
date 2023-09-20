@@ -1,0 +1,681 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Kinesis</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="cfeb858a-30e5-4ca5-bc7b-2e5be0728714" class="page sans"><header><h1 class="page-title">Kinesis</h1><p class="page-description"></p></header><div class="page-body"><nav id="128260fe-eba0-4ffa-9abe-846ba071cfea" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#95ece441-ef19-4261-bf87-a523fcd426b6">Kinesis Data Stream (KDS)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5931537e-cc72-42e6-998b-9f755accb296">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#dd4889ff-cb65-4502-b54d-08ce14d44423"><strong>Capacity Modes</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#82956eb3-15b6-4c0f-a577-5d227141858c">Security</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#760b8f7c-20a4-490a-91da-2faa17fca647">Producers</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6ff6c84b-825c-4317-ab79-1a31428b4bdd">Consumers</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#8ef5986b-8075-4496-aeea-136cc921de0a">Classic (Shared) Consumer </a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#8ca4c73c-3587-4c2e-9af8-ace10fa09fb9">Enhanced Fan-Out Consumer</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#429c7620-f01e-431b-8f6c-1366505e3bf0">Lambda as Consumer</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#43f80886-27ba-4434-86dd-9d8a08dd6cb2">Kinesis Client Library (KCL)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#073ae1d9-4f30-4ef3-9eb1-983f0f9c4b1d">Shard Splitting</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c8bcc139-4731-452e-9e2f-def72c478ede">Shard Merging</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1c7faad2-d9b8-49c3-86f3-3867127ebac2">Kinesis Data Firehose (KDF)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4703b21b-185d-4f1f-b404-edd447f4b494">Kinesis Data Analytics (KDA)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#722376ce-de0d-4717-8cf1-d1f572dd9ac6">KDA for SQL</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f5325895-1797-487f-8344-638c1791f3b5">KDA for Apache Flink</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#23cd7f01-3fa0-470c-b108-acdde6ce415a">Kinesis Video Streams</a></div></nav><hr id="cad9e1c6-ae4f-4f7a-a46f-27617977abfe"/><h1 id="95ece441-ef19-4261-bf87-a523fcd426b6" class="">Kinesis Data Stream (KDS)</h1><figure id="96c978e5-1851-4a9c-b950-f7f9cc5469b2" class="image"><a href="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled.png"><img style="width:1764px" src="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled.png"/></a></figure><h2 id="5931537e-cc72-42e6-998b-9f755accb296" class="">Intro</h2><ul id="d920d50b-9da3-4093-8cf3-c3c77e379bb2" class="bulleted-list"><li style="list-style-type:disc">Real-time data streaming service</li></ul><ul id="25d8c26e-96ce-4df5-9c25-7b769d3ed6d3" class="bulleted-list"><li style="list-style-type:disc"><strong>Used to ingest data in real time directly from source</strong></li></ul><ul id="01d32053-7327-480f-80bb-8449f3f11324" class="bulleted-list"><li style="list-style-type:disc"><strong>Not Serverless</strong></li></ul><ul id="0656b366-695d-49e6-b360-c9cce49bc9c7" class="bulleted-list"><li style="list-style-type:disc"><strong>Data Retention: 1 day (default) to 365 days</strong></li></ul><ul id="0475c8ed-a404-4bf5-9069-f5bbbf9e67e3" class="bulleted-list"><li style="list-style-type:disc">A record consists of a <strong>partition key </strong>and data blob (<strong>max 1MB</strong>)</li></ul><ul id="e18c625f-6c16-4b25-9b09-80b535fa2839" class="bulleted-list"><li style="list-style-type:disc"><strong>Once data is inserted in KDS, it can’t be modified or deleted (immutability)</strong></li></ul><ul id="7b2243ed-3288-4a35-955d-4b479a4d9b4d" class="bulleted-list"><li style="list-style-type:disc">Records will be ordered in each shard</li></ul><ul id="77b7bc85-5136-48e5-9997-aedf24b20503" class="bulleted-list"><li style="list-style-type:disc">Producers use SDK, Kinesis Producer Library (KPL) or <strong>Kinesis Agent</strong> to publish records</li></ul><ul id="1044c967-bfb0-4661-999c-bc705764cc67" class="bulleted-list"><li style="list-style-type:disc">Consumers use SDK or Kinesis Client Library (KCL) to consume the records</li></ul><ul id="9fa5a60a-4254-4f7d-bbf6-440320737799" class="bulleted-list"><li style="list-style-type:disc">Ability to re-process (<strong>replay</strong>) data</li></ul><h3 id="dd4889ff-cb65-4502-b54d-08ce14d44423" class=""><strong>Capacity Modes</strong></h3><ul id="918e2be2-3097-41a2-ba06-8770006368b3" class="bulleted-list"><li style="list-style-type:disc"><strong>Provisioned</strong><ul id="d87e9731-ff16-439a-9976-ec81925dc460" class="bulleted-list"><li style="list-style-type:circle">Publishing: 1MB/sec per shard or 1000 msg/sec per shard</li></ul><ul id="3d55cc68-f28d-49d9-9f3a-f2be42b869da" class="bulleted-list"><li style="list-style-type:circle">Consuming:<ul id="d9c8d458-68a7-4ee0-83bc-fc80a36d777a" class="bulleted-list"><li style="list-style-type:square"><strong>Shared</strong>: 2MB/sec per shard (throughput shared between all consumers)</li></ul><ul id="155da9f8-048d-4add-ad77-d55978ef596c" class="bulleted-list"><li style="list-style-type:square"><strong>Enhanced Fanout</strong>: 2MB/sec per shard per consumer (dedicated throughput for each consumer)</li></ul></li></ul><ul id="8fdd080e-caa8-4cce-a0b9-e240f5314b73" class="bulleted-list"><li style="list-style-type:circle">Throughput scales with shards (<strong>manual scaling</strong>)</li></ul><ul id="971b1662-f290-46ce-b46e-0d3fecb38eb4" class="bulleted-list"><li style="list-style-type:circle">Pay per shard provisioned per hour</li></ul></li></ul><ul id="d7aa64ff-8398-443a-8333-342a886e0334" class="bulleted-list"><li style="list-style-type:disc"><strong>On-demand</strong><ul id="b10de194-3ffa-4532-bd0b-ac85652f436d" class="bulleted-list"><li style="list-style-type:circle">No need to provision or manage the capacity (shards)</li></ul><ul id="917261e3-5750-4687-a431-5e1ea3b7ca6a" class="bulleted-list"><li style="list-style-type:circle">Default capacity provisioned - <strong>4 MB/sec or 4000 records/sec</strong></li></ul><ul id="0048920d-e607-4819-9e68-a5fade06e185" class="bulleted-list"><li style="list-style-type:circle">Scales automatically based on observed throughput peak during the last 30 days</li></ul><ul id="b5aa6b5f-00d4-4bbc-bb0d-efbf87a80156" class="bulleted-list"><li style="list-style-type:circle">Pay per stream per hour &amp; data in/out per GB</li></ul></li></ul><h2 id="82956eb3-15b6-4c0f-a577-5d227141858c" class="">Security</h2><div id="05558ea4-9683-49b1-abc3-8cae7c73e61a" class="column-list"><div id="0de98d90-d6a2-4dad-9df1-c08ab6f69e88" style="width:56.25%" class="column"><ul id="72118e1d-94da-47fd-928e-9f63ff540d98" class="bulleted-list"><li style="list-style-type:disc"><strong>KDS is present outside the VPC. </strong>VPC endpoints can be used to access Kinesis from within the VPC.</li></ul><ul id="0a9f2410-e5de-4deb-81b3-ed7db98954fb" class="bulleted-list"><li style="list-style-type:disc">Access control for producing/consuming using IAM</li></ul><ul id="588d3da0-5c20-4250-8707-c3357b5dff9d" class="bulleted-list"><li style="list-style-type:disc">In-flight encryption using HTTPS</li></ul><ul id="af61ccad-23b6-4087-a5c9-7e5b3fa81cb6" class="bulleted-list"><li style="list-style-type:disc"><strong>Server-side at-rest encryption</strong> using KMS or client-side encryption</li></ul><p id="0bd9647f-3bd4-42fc-a221-917075ed183c" class="">
+</p></div><div id="37f2532c-5a74-4822-8bf0-5186094c4532" style="width:43.75%" class="column"><figure id="1b621e9b-e40f-4ece-8066-d755d7211b7e" class="image"><a href="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%201.png"><img style="width:432px" src="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%201.png"/></a></figure></div></div><h2 id="760b8f7c-20a4-490a-91da-2faa17fca647" class="">Producers</h2><ul id="70fa74ae-2fd2-4d68-93b0-a0cee04d5b2b" class="bulleted-list"><li style="list-style-type:disc">Producers can be:<ul id="2a4f455d-c3ba-4742-82cf-ffd006c11895" class="bulleted-list"><li style="list-style-type:circle"><strong>AWS SDK</strong> - simple producer</li></ul><ul id="ae52bde1-2602-479e-b544-49b7c005249e" class="bulleted-list"><li style="list-style-type:circle"><strong>Kinesis Producer Library (KPL)</strong> - <mark class="highlight-yellow_background">handles batching, compression and retries</mark></li></ul><ul id="f2a626c9-84a9-495e-95f4-4d2ed6275b68" class="bulleted-list"><li style="list-style-type:circle"><strong>Kinesis Agent</strong> - uses KPL to <mark class="highlight-yellow_background">stream log files</mark></li></ul></li></ul><ul id="ad9d69cf-9ec5-413e-95d7-615b78d20254" class="bulleted-list"><li style="list-style-type:disc"><code>PutRecord</code> API is used to publish a record in KDS</li></ul><ul id="171f011a-82f2-46af-98ad-caece0645e57" class="bulleted-list"><li style="list-style-type:disc"><strong>Batching</strong> in <code>PutRecord</code> API <strong>reduces cost and increases throughput</strong> (automatically done by KPL)</li></ul><ul id="c6ca7cf9-4f91-4b6b-83d6-7218a223b873" class="bulleted-list"><li style="list-style-type:disc">Partition key is passed through a hashing function to determine the shard. Use a well distributed field in the data as the partition key to avoid <strong>hot partition</strong> where most of the data is sent to a single shard.</li></ul><ul id="83fafa90-d4c9-4f6b-bdc3-b4cbd494f6c0" class="bulleted-list"><li style="list-style-type:disc">Going above the throughput limit (1 MB/s or 1000 records/sec) for any shard will cause <code>ProvisionedThroughputExceeded</code> exception. Possible solutions:<ul id="cecaae37-7c20-4fde-9f66-46946f7a4840" class="bulleted-list"><li style="list-style-type:circle">Retries with exponential backoff</li></ul><ul id="ff75fe51-282f-4fdd-afbb-b97e366171ac" class="bulleted-list"><li style="list-style-type:circle">Ensure the partition key is well distributed</li></ul><ul id="ef260e78-1b05-44a8-b64a-7dfc5d168774" class="bulleted-list"><li style="list-style-type:circle">Split the shards (increase number of shards)</li></ul></li></ul><ul id="b6f5ff2d-f21f-4381-9d64-ddfd1c48bc2e" class="bulleted-list"><li style="list-style-type:disc"><strong>Use KPL to achieve high write throughput in KDS</strong></li></ul><ul id="e77657af-b0ef-4d6b-a1c2-b82dee488d51" class="bulleted-list"><li style="list-style-type:disc">Embed a primary key within the record to handle duplicate records on the consumer side</li></ul><h2 id="6ff6c84b-825c-4317-ab79-1a31428b4bdd" class="">Consumers</h2><ul id="f52393b9-1716-46c4-8fef-9a0896971c2d" class="bulleted-list"><li style="list-style-type:disc">Consumers can be:<ul id="5ff03097-e0ae-4fe2-960a-fe937c322b36" class="bulleted-list"><li style="list-style-type:circle">AWS Lambda</li></ul><ul id="6a33b032-2d83-4101-aba3-599e47dfd6b4" class="bulleted-list"><li style="list-style-type:circle">Kinesis Data Analytics</li></ul><ul id="b4af4522-a973-4564-93b4-f45873457551" class="bulleted-list"><li style="list-style-type:circle">Kinesis Data Firehose</li></ul><ul id="7b78794a-a82d-4130-a6c6-b72cc1887219" class="bulleted-list"><li style="list-style-type:circle">Custom Consumer (AWS SDK) – consume at a low level (need to manage complexities)</li></ul><ul id="22552c3f-80b3-46c7-b2b3-8d311dade04b" class="bulleted-list"><li style="list-style-type:circle">Kinesis Client Library (KCL) - consume at a high level (complexities already managed)</li></ul></li></ul><div id="44554c43-5f7d-4ca4-85a9-bce13417e0c9" class="column-list"><div id="6535233b-4e1c-4aca-acf8-5694416f039c" style="width:50%" class="column"><h3 id="8ef5986b-8075-4496-aeea-136cc921de0a" class="">Classic (Shared) Consumer </h3><ul id="0976ec45-d090-4ff0-abfa-210c959b9a77" class="bulleted-list"><li style="list-style-type:disc">Read throughput: 2 MB/sec per shard
+shared across all consumers</li></ul><ul id="3055d6d1-3c65-403e-8905-2c89accb18cb" class="bulleted-list"><li style="list-style-type:disc"><strong>Consumers poll data from KDS</strong> using
+<code>GetRecords</code> API call (<strong>pull-based</strong>)</li></ul><ul id="4e17a9e7-781c-4810-8307-5cf616db1cfb" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Good for small number of consumers</mark></li></ul><ul id="c5416d31-417d-49d9-b446-8ff2b9708b2f" class="bulleted-list"><li style="list-style-type:disc">Limit of 5 <code>GetRecords</code> API calls/sec per shard</li></ul><ul id="ff3404c1-74d8-40cd-b9c2-e4b89377b0be" class="bulleted-list"><li style="list-style-type:disc">Latency ~200 ms (polling)</li></ul><ul id="e939fa41-b538-41e7-bb8f-86643437746a" class="bulleted-list"><li style="list-style-type:disc">Low cost</li></ul><ul id="5a09b349-cb77-4a64-bd19-1212b001b27b" class="bulleted-list"><li style="list-style-type:disc">Returns up to 10 MB or up to 10,000 records then throttle for 5 seconds</li></ul></div><div id="dff880de-0170-4584-892f-c683edbc675d" style="width:50%" class="column"><h3 id="8ca4c73c-3587-4c2e-9af8-ace10fa09fb9" class="">Enhanced Fan-Out Consumer</h3><ul id="ad775bd0-d893-402e-a1ad-32174c0e162f" class="bulleted-list"><li style="list-style-type:disc">Read throughput: 2 MB/sec per shard
+dedicated for each consumer</li></ul><ul id="a1a85022-691e-4c0c-b1fc-f45bb09b3d68" class="bulleted-list"><li style="list-style-type:disc"><strong>Consumers subscribe to a shard</strong> using <code>SubscribeToShard</code> API. KDS pushes data to consumers (<strong>push-based</strong>)</li></ul><ul id="3821ee11-da77-454a-8b91-7d7bc90040e6" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Good for large number of consumers</mark></li></ul><ul id="3aeefe9c-8d36-4cf4-9b77-9a02babf6ee1" class="bulleted-list"><li style="list-style-type:disc">Latency ~ 70 ms (event driven)</li></ul><ul id="3ca0007f-ae56-4f0a-a29d-b3569883dc1b" class="bulleted-list"><li style="list-style-type:disc">High cost</li></ul><ul id="1830fd90-feb9-48d8-a714-71dbeca89961" class="bulleted-list"><li style="list-style-type:disc">Default soft limit of 5 consumers per data stream</li></ul></div></div><figure id="e371cd28-8bda-44b6-ae78-75b6381d5554" class="image"><a href="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%202.png"><img style="width:1602px" src="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%202.png"/></a></figure><h3 id="429c7620-f01e-431b-8f6c-1366505e3bf0" class="">Lambda as Consumer</h3><ul id="6e7c3f9b-5cc6-439c-8a81-7b54308416e7" class="bulleted-list"><li style="list-style-type:disc">Supports classic and enhanced fan-out</li></ul><ul id="d655a570-8fd9-4fea-9400-b9e8431a4204" class="bulleted-list"><li style="list-style-type:disc">Can read records in batches (configure using batch size and batch window)</li></ul><ul id="992a42ca-8c0b-484f-b4b6-47bc96bd9df5" class="bulleted-list"><li style="list-style-type:disc">Can process up to 10 batches per shard simultaneously</li></ul><ul id="81a666cc-51a4-4c02-be85-06551e4d1000" class="bulleted-list"><li style="list-style-type:disc">Automatic retries on error until success or data expires in KDS</li></ul><h2 id="43f80886-27ba-4434-86dd-9d8a08dd6cb2" class="">Kinesis Client Library (KCL)</h2><ul id="db562308-a4a6-4578-aa6a-790f8705ef15" class="bulleted-list"><li style="list-style-type:disc">A <strong>Java</strong> library that helps read record from KDS with <strong>distributed applications</strong> sharing the read workload</li></ul><ul id="273d2c3e-b4b2-48b2-94e9-d457a2fb39c5" class="bulleted-list"><li style="list-style-type:disc"><strong>Maximum number of KCL instances = number of shards</strong></li></ul><ul id="22df0c6a-0f85-4d1b-acfd-c23de4667cc6" class="bulleted-list"><li style="list-style-type:disc"><strong>KCL checkpoints the read progress into DynamoDB</strong> (the application running KCL needs the IAM permissions)</li></ul><ul id="c38ddac3-1579-4339-a53f-d8decea8cd2c" class="bulleted-list"><li style="list-style-type:disc">By checkpointing in DynamoDB, KCL instances of an application track each other to divide the shards among themselves.</li></ul><ul id="6173ae94-3833-44c3-b361-5d65acdaf742" class="bulleted-list"><li style="list-style-type:disc">KCL can run on any compute resource (cloud or <strong>on-premise</strong>)</li></ul><ul id="955e6b48-4aba-4200-9d34-abe99c5f2766" class="bulleted-list"><li style="list-style-type:disc">Records are read in order at the shard level</li></ul><ul id="93221496-8941-4000-848f-f9ac83e578c9" class="bulleted-list"><li style="list-style-type:disc">Versions:<ul id="bddacf1a-71ec-4385-9cc8-b24aefb43992" class="bulleted-list"><li style="list-style-type:circle">KCL 1.x (supports shared consumer)</li></ul><ul id="f37ac97a-bb8c-4d70-a344-97128c1d6884" class="bulleted-list"><li style="list-style-type:circle">KCL 2.x (supports shared &amp; enhanced fan-out consumer)</li></ul></li></ul><div id="2cc02529-439b-4dd3-a191-a2fa2b7f6527" class="column-list"><div id="2be3e001-747b-4b9b-b0c1-6ea25dc45f27" style="width:50%" class="column"><figure id="db7914e6-cacc-470e-a50f-83cf4a6cc497" class="image"><a href="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%203.png"><img style="width:970px" src="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%203.png"/></a></figure></div><div id="010562a4-e38f-4d6c-8b0b-ecfae1988e45" style="width:50%" class="column"><figure id="9b2b8831-032d-4ff7-9ead-4cb7681122f4" class="image"><a href="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%204.png"><img style="width:1004px" src="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%204.png"/></a></figure></div></div><h2 id="073ae1d9-4f30-4ef3-9eb1-983f0f9c4b1d" class="">Shard Splitting</h2><div id="c797a398-950a-4b58-887b-53968f1e2ad3" class="column-list"><div id="d8a41662-9de8-4b66-a989-5cf8778a4100" style="width:50%" class="column"><ul id="415a392b-398f-40fc-ae0f-00ac2604ca67" class="bulleted-list"><li style="list-style-type:disc">Split a <strong>hot shard</strong> (high traffic) into 2 shards</li></ul><ul id="a3b1a7b0-a709-4f36-b432-21f04a3341bf" class="block-color-teal_background bulleted-list"><li style="list-style-type:disc">Increases the stream capacity by equivalent of adding 1 shard</li></ul><ul id="bc7c94d8-6084-49d9-9bef-3a45eca754f3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">The old shard is closed and will be deleted when the data in it expires</mark></li></ul><ul id="7a9e134c-49e6-4072-b1ce-f78da46618b5" class="bulleted-list"><li style="list-style-type:disc">Can’t split more than 2 shards in a single operation</li></ul></div><div id="757dd805-06b5-47e0-a6a0-aded5c407f75" style="width:50%" class="column"><figure id="52321a61-c0dd-49bb-ac79-d05c2056d345" class="image"><a href="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%205.png"><img style="width:432px" src="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%205.png"/></a></figure></div></div><h2 id="c8bcc139-4731-452e-9e2f-def72c478ede" class="">Shard Merging</h2><div id="16c6ea70-4305-417f-969d-ac4c3c67432b" class="column-list"><div id="0829e56b-c6b0-4ad5-9da0-400c37d007e4" style="width:50%" class="column"><ul id="3d5b6f1b-74be-4f1a-8d9a-c7559c3e371e" class="bulleted-list"><li style="list-style-type:disc">Merge two <strong>cold shards</strong> (low traffic) into a single shard</li></ul><ul id="2d74d3de-37e1-420f-9872-08bd06a97ac7" class="bulleted-list"><li style="list-style-type:disc">Decreases the stream capacity by equivalent of removing 1 shard</li></ul><ul id="80a77f9d-c66f-43b9-89cb-94bc8cd032b3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Old shards are closed and will be deleted when the data in them expires</mark></li></ul><ul id="bfc97784-1ab0-4402-be8f-8c5945f9e55e" class="bulleted-list"><li style="list-style-type:disc">Can’t merge more than 2 shards in a single operation</li></ul></div><div id="3987fe0d-b743-4720-a45b-592d00321640" style="width:50%" class="column"><figure id="7ddfda68-379a-4096-98ad-2f43e6d5cf31" class="image"><a href="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%206.png"><img style="width:776px" src="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%206.png"/></a></figure></div></div><h1 id="1c7faad2-d9b8-49c3-86f3-3867127ebac2" class="">Kinesis Data Firehose (KDF)</h1><figure id="65b94087-8189-4624-bc55-2ca13b7b1462" class="image"><a href="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%207.png"><img style="width:1638px" src="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%207.png"/></a></figure><ul id="cd9feb7c-69cd-43eb-9f71-0ea3870be4aa" class="bulleted-list"><li style="list-style-type:disc">Used to load streaming data into a target location</li></ul><ul id="eb30498a-4441-4db4-b744-0bd0f2d07498" class="bulleted-list"><li style="list-style-type:disc"><strong>Serverless</strong></li></ul><ul id="d880ffbf-0f0a-4666-b6c0-b91a03af2403" class="bulleted-list"><li style="list-style-type:disc"><strong>Writes data in batches efficiently (near real time)</strong><ul id="1fa6c720-9985-42bb-9ee4-266a450d8024" class="bulleted-list"><li style="list-style-type:circle"><strong>Buffer size</strong> (size of the batch) - <strong>1 MB to 128MB (default 5MB)</strong></li></ul><ul id="f3dba30b-f204-4793-8747-c7c7daadd450" class="bulleted-list"><li style="list-style-type:circle"><strong>Buffer interval</strong> (how long to wait for buffer to fill up) - <strong>60s to 900s (default 300s)</strong></li></ul><ul id="7de6af30-e344-4b10-a3bc-88a3eded9ba4" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Greater the buffer size, higher the write efficiency</mark>, longer it will take to fill the buffer</li></ul></li></ul><ul id="78af41fc-d81b-463b-894d-8cc418516f8c" class="bulleted-list"><li style="list-style-type:disc"><strong>Can ingest data in real time directly from source</strong></li></ul><ul id="e283cb10-b39a-4af0-b71a-aaf35ad9c46f" class="bulleted-list"><li style="list-style-type:disc"><strong>Auto-scaling</strong></li></ul><ul id="81ff6abf-cd5d-4770-a95b-90a587a11840" class="bulleted-list"><li style="list-style-type:disc">Destinations:<ul id="d30b49c7-edcd-425c-aad8-188df86311c1" class="bulleted-list"><li style="list-style-type:circle">AWS: Redshift, S3, <strong>OpenSearch</strong></li></ul><ul id="ea890834-0882-4ab1-9500-f53ad60a00ef" class="bulleted-list"><li style="list-style-type:circle">3rd party: Splunk, MongoDB, DataDog, NewRelic, etc.</li></ul><ul id="b1873243-1aaf-4fd6-9d1b-f345d45e1159" class="bulleted-list"><li style="list-style-type:circle">Custom HTTP endpoint</li></ul></li></ul><ul id="e2249cb9-12e0-4174-9a7c-e7e96ea859bd" class="bulleted-list"><li style="list-style-type:disc">Pay for data going through Firehose (no provisioning)</li></ul><ul id="477e6314-87c9-402b-b351-8070bbc38565" class="bulleted-list"><li style="list-style-type:disc"><strong>Custom data transformation using Lambda functions</strong> (not supported in KDS)</li></ul><ul id="97364200-d22b-4fc5-a5e1-af9735229a20" class="bulleted-list"><li style="list-style-type:disc"><strong>No replay capability</strong> (does not store data like KDS)</li></ul><h1 id="4703b21b-185d-4f1f-b404-edd447f4b494" class="">Kinesis Data Analytics (KDA)</h1><h2 id="722376ce-de0d-4717-8cf1-d1f572dd9ac6" class="">KDA for SQL</h2><figure id="1ee45051-6250-4b10-8d0a-b8136758f0d8" class="image"><a href="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%208.png"><img style="width:1586px" src="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%208.png"/></a></figure><ul id="2dfbac1a-70de-4461-b3b1-9297930bcf1b" class="bulleted-list"><li style="list-style-type:disc">Perform <strong>real-time analytics on Kinesis streams</strong> using<strong> SQL</strong></li></ul><ul id="eb8c297e-be9f-40c1-bd31-e2743894b539" class="bulleted-list"><li style="list-style-type:disc">Creates streams from SQL query response</li></ul><ul id="27d24e9e-085b-41cc-8604-b48058004a1e" class="bulleted-list"><li style="list-style-type:disc"><strong>Cannot ingest data directly from source</strong> (ingests data from <strong>KDS</strong> or <strong>KDF</strong>)</li></ul><ul id="69252010-569c-489b-a798-8cee2ba3a3c9" class="bulleted-list"><li style="list-style-type:disc"><strong>Auto-scaling</strong></li></ul><ul id="9a6b9fd9-ddd1-4816-a55e-9af9296c03da" class="bulleted-list"><li style="list-style-type:disc"><strong>Serverless</strong></li></ul><ul id="493d0079-f86b-4675-9193-95d965061bbb" class="bulleted-list"><li style="list-style-type:disc">Pay for the data processed (no provisioning)</li></ul><ul id="68f37d38-ce1f-49d7-826d-6757ac7bc793" class="bulleted-list"><li style="list-style-type:disc">Use cases:<ul id="8cf70e30-810b-4173-86a7-9b0b09d6ddc4" class="bulleted-list"><li style="list-style-type:circle">Time-series analytics</li></ul><ul id="8bfaf81f-311a-4ffd-942f-1fce18385631" class="bulleted-list"><li style="list-style-type:circle">Real-time dashboards</li></ul><ul id="85d64198-7e06-41bf-955d-12b723912bc0" class="bulleted-list"><li style="list-style-type:circle">Real-time metrics</li></ul></li></ul><h2 id="f5325895-1797-487f-8344-638c1791f3b5" class="">KDA for Apache Flink</h2><figure id="c6286715-cf47-41b4-a1a5-bb605ce201d5" class="image"><a href="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%209.png"><img style="width:528px" src="Kinesis%20cfeb858a30e54ca5bc7b2e5be0728714/Untitled%209.png"/></a></figure><ul id="65866b5d-4dbc-47ae-90bc-3f7f7e3fcb3b" class="bulleted-list"><li style="list-style-type:disc">Use Flink (Java, Scala or SQL) to process and analyze streaming data (<mark class="highlight-yellow_background">advanced querying capability</mark>)</li></ul><ul id="1b8d80ba-b66b-4881-92bc-4eeeabdb410f" class="bulleted-list"><li style="list-style-type:disc">Can ingest data from <strong>KDS</strong> or <strong>MSK</strong> (to ingest data from KDF, use KDA for SQL)</li></ul><ul id="9696184e-698a-445c-a8de-df9c24035ae0" class="bulleted-list"><li style="list-style-type:disc">Used to run Apache Flink application on a managed cluster on AWS<ul id="ee3e9915-9d78-4f82-9ff9-6039d1d1e3ed" class="bulleted-list"><li style="list-style-type:circle">provisioning compute resources, parallel computation, automatic scaling</li></ul><ul id="52f66495-ed10-4e42-bc1a-708764efb01e" class="bulleted-list"><li style="list-style-type:circle">application backups (implemented as checkpoints and snapshots)</li></ul></li></ul><h1 id="23cd7f01-3fa0-470c-b108-acdde6ce415a" class="">Kinesis Video Streams</h1><ul id="83c5b75a-59c7-46f7-b973-71d614d493bc" class="bulleted-list"><li style="list-style-type:disc">Capture, process and store video streams</li></ul><p id="a8710b59-2b08-4396-a1e5-e8e55d2337ed" class="">
+</p></div></article></body></html>

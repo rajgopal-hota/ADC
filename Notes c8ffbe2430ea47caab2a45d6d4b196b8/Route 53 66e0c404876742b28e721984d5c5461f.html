@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Route 53</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="66e0c404-8767-42b2-8e72-1984d5c5461f" class="page sans"><header><h1 class="page-title">Route 53</h1><p class="page-description"></p></header><div class="page-body"><nav id="29ae6659-cb6b-47df-9167-6f6312744d5e" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#06230a8d-d5e2-4e1e-9316-0b1f9e5a849f">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#62c9ac4c-9fd2-4ff4-97b3-e016700ca1fc">Hosted Zone</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#08c81556-05c8-48c4-9017-cf95e4794c62">Record Types</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#25b20680-71e0-472a-a8c3-d81f97a50881">Routing Policies</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#022c1e6f-d103-4b33-a127-92828aea9a54">Simple</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#751a044f-68c4-4354-8b32-e9baecafe762">Weighted</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#025ce416-86c2-4134-bef2-d6a6ca276550">Latency-based</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#616fe466-54a8-43b6-8c22-c861a15c4070">Failover</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4b9af811-d888-4e69-afab-b7733471c462">Geolocation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#fdc6cccb-cbb1-4a20-a169-777b7b4c9f2b">Geoproximity</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#dd830c98-7bbd-4e09-a0e8-e736ab45f210">Multi-value</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9ba31484-d682-47e6-bfb7-4fcba38a1880">Health Checks</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9f94b939-3827-45d2-b973-1b3a896d9fb5">GoDaddy with Route 53</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b716fbf7-8657-4ec6-9624-48b283717a1d">DNS Resolution in Hybrid Cloud</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4dffb56f-2e70-435e-b2a6-4d97f5739e2c">Misc</a></div></nav><hr id="a6fcca0a-9224-4e8f-ab9b-40aab1d25d42"/><h2 id="06230a8d-d5e2-4e1e-9316-0b1f9e5a849f" class="">Intro</h2><ul id="1e6c113b-a9a3-4705-a72f-8a38a1265d52" class="bulleted-list"><li style="list-style-type:disc">Global Service</li></ul><ul id="b1810544-d43e-42bd-b9c6-bcb17147f0bb" class="bulleted-list"><li style="list-style-type:disc">AWS managed <strong>Authoritative DNS</strong> (customer can update the DNS records and have full control over the DNS)</li></ul><ul id="9c0a6383-ec99-4591-b909-0a4c3002898a" class="bulleted-list"><li style="list-style-type:disc">Also a Domain Registrar (for registering domain names)</li></ul><ul id="f0b14fc6-b6b8-44ff-909c-67840b1a8af7" class="bulleted-list"><li style="list-style-type:disc">Only AWS service which provides 100% availability SLA</li></ul><ul id="77d8fd29-1f22-42f9-bb1f-cd5857286eb2" class="bulleted-list"><li style="list-style-type:disc">Affected by client&#x27;s DNS caching (not suitable for Blue-Green Deployment if the client caches DNS queries)</li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="3b5b4e6b-f7a0-4a20-8d17-5dcfce32bc57"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">It is recommended to use DNS names or URLs instead of IPs wherever possible</div></figure><h2 id="62c9ac4c-9fd2-4ff4-97b3-e016700ca1fc" class="">Hosted Zone</h2><ul id="71b017c5-b6e0-4590-9385-48fb3f4ee765" class="bulleted-list"><li style="list-style-type:disc">A container for DNS records that define how to route traffic to a domain and its subdomains.</li></ul><ul id="70614775-6169-4114-875f-5892cd2ac556" class="bulleted-list"><li style="list-style-type:disc">Hosted zone is queried to get the IP address from the hostname</li></ul><ul id="d370ccf8-e668-471f-ad9e-f2b7091cd43c" class="bulleted-list"><li style="list-style-type:disc">Two types:<ul id="cb732136-95d2-4eae-ae4d-8c313f50d02b" class="bulleted-list"><li style="list-style-type:circle"><strong>Public Hosted Zone</strong><ul id="79355b71-5d0e-47fa-9486-167f8757060a" class="bulleted-list"><li style="list-style-type:square">resolves public domain names</li></ul><ul id="bd742b87-4b52-44b7-aaec-4d21231cbd94" class="bulleted-list"><li style="list-style-type:square">can be queried by anyone on the internet</li></ul></li></ul><ul id="8bb1eeb8-08dd-401a-b9c4-df180e8930a0" class="bulleted-list"><li style="list-style-type:circle"><strong>Private Hosted Zone</strong><ul id="9874fdf3-6a65-490b-bdce-6f2382c0c55b" class="bulleted-list"><li style="list-style-type:square">resolves private domain names</li></ul><ul id="d11fca06-6732-4530-af80-c94cc492b95a" class="bulleted-list"><li style="list-style-type:square">can only be queried from within the VPC</li></ul></li></ul></li></ul><h2 id="08c81556-05c8-48c4-9017-cf95e4794c62" class="">Record Types</h2><ul id="27175b37-752a-4efd-a693-45cac18f4992" class="bulleted-list"><li style="list-style-type:disc"><strong>A</strong> - maps a hostname to IPv4</li></ul><ul id="5ccfeb32-c652-42de-a577-be369b9c0bc7" class="bulleted-list"><li style="list-style-type:disc"><strong>AAAA</strong> - maps a hostname to IPv6</li></ul><ul id="6fb3a0ff-a75e-4f47-b46c-06dbf0f64814" class="bulleted-list"><li style="list-style-type:disc"><strong>CNAME</strong> - maps a hostname to another hostname<ul id="eaf4bdec-948a-47fb-b20e-40ba299e314c" class="bulleted-list"><li style="list-style-type:circle">The target is a domain name which must have an A or AAAA record</li></ul><ul id="736ee0d5-cddd-4cea-9126-2ad4d07f02b5" class="bulleted-list"><li style="list-style-type:circle"><strong>Cannot point to root domains (Zone Apex)</strong>
+Ex: you can’t create a CNAME record for <code>example.com</code>, but you can create for <code>something.example.com</code></li></ul></li></ul><ul id="83935804-e324-4232-8fc5-6adbfe959c3a" class="bulleted-list"><li style="list-style-type:disc"><strong>NS</strong> (Name Servers) - controls how traffic is routed for a domain</li></ul><ul id="157843c3-e261-4fde-a9f0-31f1c055abae" class="bulleted-list"><li style="list-style-type:disc"><strong>Alias</strong> - maps a hostname to an AWS resource<ul id="f377a77f-d1a8-4883-acb5-3776c4a0f1f0" class="bulleted-list"><li style="list-style-type:circle"><strong>AWS proprietary</strong></li></ul><ul id="f5477671-519d-4082-867f-c4d321d81a32" class="bulleted-list"><li style="list-style-type:circle">Can point to root (zone apex) and non-root domains</li></ul><ul id="e7e6487d-03e8-4e4a-a26f-443d2bd89bb9" class="bulleted-list"><li style="list-style-type:circle"><strong>Alias Record is of type A or AAAA</strong> (IPv4 / IPv6)</li></ul><ul id="13331e8c-81a1-48d4-947f-1fe7b0dfe7a7" class="bulleted-list"><li style="list-style-type:circle">Targets can be<ul id="1ddc3ca0-3e9e-46f1-b7ca-5515af0967ca" class="bulleted-list"><li style="list-style-type:square">Elastic Load Balancers</li></ul><ul id="0a17f203-cb3c-4bcf-8dea-1ce22352a047" class="bulleted-list"><li style="list-style-type:square">CloudFront Distributions</li></ul><ul id="49db5079-5639-4cb1-bed7-065fb1b0ea5a" class="bulleted-list"><li style="list-style-type:square">API Gateway</li></ul><ul id="eb9e9084-dde4-4d77-8254-b94c5361d367" class="bulleted-list"><li style="list-style-type:square">Elastic Beanstalk environments</li></ul><ul id="cacd3902-a9a0-479f-ba3b-06fa22fe1c4e" class="bulleted-list"><li style="list-style-type:square">S3 Websites</li></ul><ul id="f949ab69-4732-46ee-b9ed-48b9db06482b" class="bulleted-list"><li style="list-style-type:square">VPC Interface Endpoints</li></ul><ul id="8532fbdc-b5b1-4051-8ae0-79af6c82f6c6" class="bulleted-list"><li style="list-style-type:square">Global Accelerator</li></ul><ul id="652da33a-39cf-4d79-9add-8917edf3e843" class="bulleted-list"><li style="list-style-type:square">Route 53 record in the same hosted zone</li></ul></li></ul><ul id="add92752-adbb-4d57-8c0f-1c1690608165" class="bulleted-list"><li style="list-style-type:circle"><strong>Target cannot be EC2</strong></li></ul></li></ul><h2 id="25b20680-71e0-472a-a8c3-d81f97a50881" class="">Routing Policies</h2><h3 id="022c1e6f-d103-4b33-a127-92828aea9a54" class="">Simple</h3><ul id="8f97146b-0bf6-478a-9690-b9c479ad4a2c" class="bulleted-list"><li style="list-style-type:disc">Route to one or more resources</li></ul><ul id="7fbb417c-da40-41c3-b3c9-8c740e69489b" class="toggle"><li><details open=""><summary>If multiple values are returned, client chooses one at random (client-side load balancing)</summary><figure id="0fa55932-e2a7-4187-981f-8382e02b0379" class="image"><a href="Route%2053%2066e0c404876742b28e721984d5c5461f/Untitled.png"><img style="width:288px" src="Route%2053%2066e0c404876742b28e721984d5c5461f/Untitled.png"/></a></figure></details></li></ul><ul id="acbafe04-c64b-410c-a635-dce44ad4a64b" class="bulleted-list"><li style="list-style-type:disc"><strong>No health check</strong> (if returning multiple resources, some of them might be unhealthy)</li></ul><h3 id="751a044f-68c4-4354-8b32-e9baecafe762" class="">Weighted</h3><ul id="7759201e-84c5-452d-a084-cedce5c3bd8c" class="bulleted-list"><li style="list-style-type:disc">Route a fraction of request to multiple resources</li></ul><ul id="500fdbe3-2097-4410-b89c-d08a8cf28e8d" class="bulleted-list"><li style="list-style-type:disc">Health checks</li></ul><ul id="46c0e69a-ddf8-4505-8c78-dccfba94e2c0" class="bulleted-list"><li style="list-style-type:disc">Use case: testing a new application version by sending a small amount of traffic</li></ul><ul id="788b4780-226b-4a86-bc9b-090bada7fbf6" class="bulleted-list"><li style="list-style-type:disc">Can be used for <strong>Active-Active failover</strong> strategy</li></ul><h3 id="025ce416-86c2-4134-bef2-d6a6ca276550" class="">Latency-based</h3><ul id="1e6bbdcc-9df9-472d-ad94-cfa3d27679d8" class="bulleted-list"><li style="list-style-type:disc">Redirect to the resource that has the lowest latency</li></ul><ul id="c1e315e5-2db7-49a3-becf-357d2eacfff2" class="bulleted-list"><li style="list-style-type:disc">Health checks</li></ul><ul id="b9ffceae-875d-4959-8654-efc67c4d808b" class="bulleted-list"><li style="list-style-type:disc">Can be used for <strong>Active-Active failover</strong> strategy</li></ul><h3 id="616fe466-54a8-43b6-8c22-c861a15c4070" class="">Failover</h3><ul id="743c7c87-509b-4643-a515-ef710d21f01a" class="bulleted-list"><li style="list-style-type:disc">Primary &amp; Secondary Records (if the primary application is down, route to secondary application)</li></ul><ul id="ef07f952-aa7f-499a-a7e6-2a907a0103ba" class="bulleted-list"><li style="list-style-type:disc">Health check must be associated with the primary record</li></ul><ul id="694736b4-48c1-479a-9a28-994fe4bd4191" class="bulleted-list"><li style="list-style-type:disc">Used for <strong>Active-Passive failover</strong> strategy</li></ul><h3 id="4b9af811-d888-4e69-afab-b7733471c462" class="">Geolocation</h3><ul id="cfc2017c-751f-45f9-9351-df694b63daeb" class="bulleted-list"><li style="list-style-type:disc">Routing based on the client&#x27;s location</li></ul><ul id="28c13727-716b-45a3-807f-be8106e6dad0" class="bulleted-list"><li style="list-style-type:disc">Should create a “Default” record (in case there’s no match on location)</li></ul><ul id="5bb04dcb-6993-4950-b424-31e017a7ed6a" class="bulleted-list"><li style="list-style-type:disc">Use cases: restrict content distribution &amp; language preference</li></ul><h3 id="fdc6cccb-cbb1-4a20-a169-777b7b4c9f2b" class="">Geoproximity</h3><ul id="3d2f4459-bdfe-4178-8eae-a79cfe3987d4" class="bulleted-list"><li style="list-style-type:disc">Route traffic to your resources based on the proximity of clients to the resources</li></ul><ul id="c84b879e-8ec6-400f-a238-9f163fe2e8fc" class="bulleted-list"><li style="list-style-type:disc">Ability to shift more traffic to resources based on the defined bias.<ul id="6e33d9b2-46fd-4186-a629-bfd636324622" class="bulleted-list"><li style="list-style-type:circle">To expand (bias: 1 to 99) → more traffic to the resource</li></ul><ul id="8e7d692c-f2de-41bd-a910-707b04535651" class="bulleted-list"><li style="list-style-type:circle">To shrink (bias: -1 to-99) → less traffic to the resource</li></ul></li></ul><ul id="e338fb3e-7160-4159-957e-a5847e523770" class="bulleted-list"><li style="list-style-type:disc">Resources can be:<ul id="edefc8b1-06da-4280-bce3-f2d45474b040" class="bulleted-list"><li style="list-style-type:circle">AWS resources (specify AWS region)</li></ul><ul id="bf8bcf02-86f3-4638-9668-4adcb88bdf1a" class="bulleted-list"><li style="list-style-type:circle">Non-AWS resources (specify Latitude and Longitude)</li></ul></li></ul><ul id="8c7ce7f8-35a3-43bc-9a1b-50fb767ce897" class="bulleted-list"><li style="list-style-type:disc">Uses <strong>Route 53 Traffic Flow</strong></li></ul><h3 id="dd830c98-7bbd-4e09-a0e8-e736ab45f210" class="">Multi-value</h3><ul id="cf85fcbe-5ac2-4b8c-abaf-4575f42ad935" class="bulleted-list"><li style="list-style-type:disc">Route traffic to multiple resources (max 8)</li></ul><ul id="597e7d18-2cda-47ea-9758-079dbba3dd95" class="bulleted-list"><li style="list-style-type:disc">Health Checks (only healthy resources will be returned)</li></ul><h2 id="9ba31484-d682-47e6-bfb7-4fcba38a1880" class="">Health Checks</h2><ul id="ab26f1a5-82a3-4056-aeb0-66def264aab0" class="bulleted-list"><li style="list-style-type:disc">HTTP Health Checks are only for public resources</li></ul><ul id="4a05414a-2c63-44af-97e6-200c7889c32f" class="bulleted-list"><li style="list-style-type:disc">Allows for Automated DNS Failover</li></ul><ul id="ad1ef948-b920-41d5-bc44-ec2fdf68d2e8" class="bulleted-list"><li style="list-style-type:disc">Three types:<ul id="9f8d1391-febb-4d30-8aed-bb6d6f5943c0" class="bulleted-list"><li style="list-style-type:circle"><strong>Monitor an endpoint</strong> (application or other AWS resource)<ul id="a303b9d2-08fb-49f0-906c-afd400d090af" class="bulleted-list"><li style="list-style-type:square">Multiple <strong>global health checkers</strong> check the endpoint health</li></ul><ul id="976e6bce-d22b-4fd9-9fe8-a525e4a4ce2a" class="bulleted-list"><li style="list-style-type:square">Must configure the application firewall to allow incoming requests from the IPs of Route 53 Health Checkers</li></ul><ul id="87f0693a-3dfe-4003-8ffa-c8bc2c3e1486" class="bulleted-list"><li style="list-style-type:square">Supported protocols: HTTP, HTTPS and TCP</li></ul></li></ul><ul id="0b7ecd4b-0f25-4cc2-8257-a3e6f96bcc3e" class="bulleted-list"><li style="list-style-type:circle"><strong>Monitor other health checks</strong> (<mark class="highlight-yellow_background">Calculated Health Checks</mark>)<ul id="8d00e861-cf4f-40ca-9171-d6926ec4ca87" class="bulleted-list"><li style="list-style-type:square">Combine the results of multiple Health Checks into one (AND, OR, NOT)</li></ul><ul id="5e985f59-9ed2-45c1-8214-8297c01232b7" class="bulleted-list"><li style="list-style-type:square">Specify how many of the health checks need to pass to make the parent pass</li></ul><ul id="73ee1021-a911-4f5c-83e5-445b03467030" class="bulleted-list"><li style="list-style-type:square">Usage: perform maintenance to your website without causing all health checks to fail</li></ul></li></ul><ul id="12cf8d36-c3ec-439a-a807-ecf4223d0ecd" class="bulleted-list"><li style="list-style-type:circle"><strong>Monitor CloudWatch Alarms</strong> (<mark class="highlight-yellow_background">to perform health check on private resources</mark>)<ul id="08c15bc9-5322-4e66-82bc-a356af37ac4e" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Route 53 health checkers are outside the VPC</mark>. They can’t access private endpoints  in VPC or on-premises resources.</li></ul><ul id="1ef9e0b9-90f6-43f9-90d3-00146e80962f" class="bulleted-list"><li style="list-style-type:square">Create a CloudWatch Metric and associate a CloudWatch Alarm to it, then create a Health Check that checks the CW alarm.</li></ul></li></ul></li></ul><h2 id="9f94b939-3827-45d2-b973-1b3a896d9fb5" class="">GoDaddy with Route 53</h2><p id="b5b54570-f9a3-4946-bfd9-0ae6f58222bb" class=""><strong>Use GoDaddy as registrar and Route 53 as DNS</strong>: Once we register a hostname at GoDaddy, we need to update the name servers (NS) of GoDaddy to match the name servers of a public hosted zone created in Route 53. This way, GoDaddy will use Route 53’s DNS.</p><h2 id="b716fbf7-8657-4ec6-9624-48b283717a1d" class="">DNS Resolution in Hybrid Cloud</h2><ul id="f3ca89ff-a3ae-4544-ada6-1414a6036a84" class="bulleted-list"><li style="list-style-type:disc">To resolve DNS queries for resources in the VPC from the on-premises network, create an inbound endpoint on Route 53 Resolver and then DNS resolvers on the on-premises network can forward DNS queries to Route 53 Resolver via this endpoint.</li></ul><ul id="407bf888-17cf-4b88-bfea-c35176bf37f2" class="bulleted-list"><li style="list-style-type:disc">To resolve DNS queries for resources in the on-premises network from the VPC, create an outbound endpoint on Route 53 Resolver and then Route 53 Resolver can conditionally forward queries to resolvers on the on-premises network via this endpoint. To conditionally forward queries, create Resolver rules that specify the domain names for the DNS queries that you want to forward (such as <a href="http://example.com/">example.com</a>) and the IP addresses of the DNS resolvers on the on-premises network that you want to forward the queries to.</li></ul><h2 id="4dffb56f-2e70-435e-b2a6-4d97f5739e2c" class="">Misc</h2><ul id="50026436-7cb1-4347-a6c4-9469da090d42" class="bulleted-list"><li style="list-style-type:disc"><strong>Failure Threshold</strong> is the parameter used by Route 53 health checks to determine if an endpoint is healthy. A failure occurs if an endpoint does not respond to a request.</li></ul><ul id="0443d38e-3019-452f-bf64-bddf69a12258" class="bulleted-list"><li style="list-style-type:disc">Route 53 can be used as a DNS to register a domain name, route the internet traffic, and perform health checks on resources. If being used for all three tasks, the order of setup must be sequential as above.</li></ul></div></article></body></html>

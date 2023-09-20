@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Serverless Application Model (SAM)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d23e6c3b-3855-4741-9d6a-5191f950c266" class="page sans"><header><h1 class="page-title">Serverless Application Model (SAM)</h1><p class="page-description"></p></header><div class="page-body"><nav id="cc6e6ed3-53f8-45b4-ac40-910e5d429ef1" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4081b1c4-695d-4f22-9b14-915dd6502e8c">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d17ef7e7-458e-4491-b565-fbd4046f3bf5">Workflow &amp; Commands</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4caa6292-e84b-4cef-b0fa-f59c4ea1e88d">Template</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4def6510-305c-40d6-88ae-d9c191dd8ab4">Policy Templates</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5fb1dbd5-7a1b-4f05-a404-fc8c30ddd43f">SAM + <a href="CodeDeploy%209bfb77d334bc4e2690f4c8e6faeaeb49.html">CodeDeploy</a> </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7bb744f7-b546-4e93-a0ad-cb15fbee479d">Local Deployment</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#915da21e-aab3-4b0e-b296-543ffb99adb3">Serverless Application Repository (SAR)</a></div></nav><hr id="cb5408a6-0226-49dc-89e5-dd5c44fed26f"/><h2 id="4081b1c4-695d-4f22-9b14-915dd6502e8c" class="">Intro</h2><ul id="52360861-0776-4e42-aeb5-73b5234d4816" class="bulleted-list"><li style="list-style-type:disc">IaC (YAML) for deploying serverless applications easily</li></ul><ul id="cd4663e3-93f1-49e9-acbc-8df748b54790" class="bulleted-list"><li style="list-style-type:disc">Abstraction over <a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6.html">CloudFormation</a> to allow developers to easily deploy their code</li></ul><ul id="89bc97e7-e1e8-4ee4-8f4c-024ab181e2d4" class="bulleted-list"><li style="list-style-type:disc">Can deploy Lambda, API Gateway and DynamoDB locally for development using <strong>SAM CLI</strong> and <strong>AWS Toolkits</strong></li></ul><ul id="0849710e-cebe-4943-b85b-69557f925b0d" class="bulleted-list"><li style="list-style-type:disc">Uses <strong>CodeDeploy</strong> under the hood to update Lambda functions</li></ul><h2 id="d17ef7e7-458e-4491-b565-fbd4046f3bf5" class="">Workflow &amp; Commands</h2><figure id="0d792194-fff4-4c50-9987-c82fec74b744" class="image"><a href="Serverless%20Application%20Model%20(SAM)%20d23e6c3b385547419d6a5191f950c266/Untitled.png"><img style="width:1810px" src="Serverless%20Application%20Model%20(SAM)%20d23e6c3b385547419d6a5191f950c266/Untitled.png"/></a></figure><ul id="931637ef-104a-443a-a180-ff74bea2360c" class="bulleted-list"><li style="list-style-type:disc"><code>sam build</code> - <mark class="highlight-yellow_background">Fetch dependencies &amp; build the application.</mark> If the application code does not require building, skip this command and run <code>sam package</code> directly.</li></ul><ul id="a1d46b9e-92aa-4e22-9046-f598b8f2d178" class="bulleted-list"><li style="list-style-type:disc"><code>aws cloudformation package</code> or <code>sam package</code> - Convert the SAM template to CloudFormation template, package the application code and the CloudFormation template and upload to an S3 bucket (must be created beforehand).</li></ul><ul id="42da44a5-1b75-4048-bf31-de348cdd2b5f" class="bulleted-list"><li style="list-style-type:disc"><code>aws cloudformation deploy</code> or <code>sam deploy</code> - Deploy the application package from S3 (creates and executes <mark class="highlight-yellow_background">Change Set</mark> in CloudFormation)</li></ul><ul id="bd01524f-3490-400a-8b08-307ac94a863f" class="bulleted-list"><li style="list-style-type:disc"><code>sam publish</code> - publish serverless app to SAR (only needs the CF template, the code is referenced from S3)</li></ul><h2 id="4caa6292-e84b-4cef-b0fa-f59c4ea1e88d" class="">Template</h2><ul id="c55bb62f-3c33-4bd1-b387-e0faf386e6a3" class="bulleted-list"><li style="list-style-type:disc"><code>Transform: &quot;AWS::Serverless-2016-10-31&#x27;</code> - indicates that the YAML file is a SAM template (required)</li></ul><ul id="670fd0b6-3ad1-43b1-b1a9-059649c8d9f4" class="bulleted-list"><li style="list-style-type:disc"><code>Resources</code> - resources to be created (required)<ul id="6918c5e6-992f-4d4a-a9f0-1b595fc5dbef" class="bulleted-list"><li style="list-style-type:circle"><code>AWS::Serverless::Function</code> - define a Lambda function</li></ul><ul id="55ee4afa-1111-42a0-a111-1272e2033449" class="bulleted-list"><li style="list-style-type:circle"><code>AWS::Serverless::Api</code> - define an API gateway</li></ul><ul id="4f62239a-4739-4833-8770-7a5c33a6c278" class="bulleted-list"><li style="list-style-type:circle"><code>AWS::Serverless::SimpleTable</code> - define a DynamoDB table</li></ul><ul id="c3d5fe93-c286-422d-84d9-89520be52c5f" class="bulleted-list"><li style="list-style-type:circle"><code>AWS::Serverless::Application</code> - use an application from SAR</li></ul></li></ul><h3 id="4def6510-305c-40d6-88ae-d9c191dd8ab4" class="">Policy Templates</h3><div id="c419b0ff-96e0-48d8-bf3b-4ed67caff125" class="column-list"><div id="7910766d-6da5-4a4f-864c-760b964b119e" style="width:50%" class="column"><ul id="79fbd672-8d7e-4068-8024-8b369c3c128f" class="bulleted-list"><li style="list-style-type:disc">List of templates to grant permissions to Lambda functions easily</li></ul><ul id="ad58c2db-61b9-4399-bfb9-91d2109abf1a" class="bulleted-list"><li style="list-style-type:disc">Important policy templates:<ul id="3154e4f6-b417-4fc2-a745-13b5fd0715cc" class="bulleted-list"><li style="list-style-type:circle"><code>S3ReadPolicy</code> - read-only permission to objects in an S3 bucket</li></ul><ul id="c79699ec-a41e-43ee-b15b-f6efc00ecc33" class="bulleted-list"><li style="list-style-type:circle"><code>SQSPollerPolicy</code> - allow the function to poll an SQS queue</li></ul><ul id="0ab625e6-301c-45db-9c75-d09d4a4995f7" class="bulleted-list"><li style="list-style-type:circle"><code>DynamoDBCrudPolicy</code> - allow CRUD operations on a DynamoDB table</li></ul><ul id="0cc7ddf2-bd9a-4350-a8c1-2de2caf2f9d8" class="bulleted-list"><li style="list-style-type:circle"><code>DynamoDBReadPolicy</code> - allow read operations on a DynamoDB table</li></ul></li></ul></div><div id="48103146-31ad-435e-8370-5a2a183b5a0b" style="width:50%" class="column"><figure id="384a8956-17ef-4a6a-a6ea-a63ff025c20c" class="image"><a href="Serverless%20Application%20Model%20(SAM)%20d23e6c3b385547419d6a5191f950c266/Untitled%201.png"><img style="width:712px" src="Serverless%20Application%20Model%20(SAM)%20d23e6c3b385547419d6a5191f950c266/Untitled%201.png"/></a></figure><p id="db54719a-0ee3-48ab-8dc5-39dc9521239f" class="">
+</p></div></div><h2 id="5fb1dbd5-7a1b-4f05-a404-fc8c30ddd43f" class="">SAM + <a href="CodeDeploy%209bfb77d334bc4e2690f4c8e6faeaeb49.html">CodeDeploy</a> </h2><div id="be00b7fe-4bf6-44ec-84d7-165044d31433" class="column-list"><div id="de43abb0-3ad8-48d0-9219-4de1b49444b3" style="width:50%" class="column"><ul id="6d8c4108-f371-4115-8ed1-71c64c453e6a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">SAM uses CodeDeploy under the hood to update Lambda functions every time we update the code and deploy.</mark></li></ul><ul id="8eff6e72-b164-4713-9453-571c445dc8da" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Gradually shifts traffic to the new Lambda version using </mark><strong><mark class="highlight-yellow_background">Aliases</mark></strong></li></ul><ul id="600411d5-00c0-4453-8e16-906f7d9c2b50" class="bulleted-list"><li style="list-style-type:disc">Optional <strong>Pre &amp; Post Traffic Hooks</strong> (run on separate Lambda functions) to validate the deployment before the traffic shift starts and after it ends</li></ul><ul id="fe85088d-9433-4d82-8784-c5f86d031d8a" class="bulleted-list"><li style="list-style-type:disc">Optional <strong>Automated Rollback</strong> using CloudWatch Alarms</li></ul><ul id="255aeb72-e71d-4963-b5c1-5984b84ce849" class="bulleted-list"><li style="list-style-type:disc">Configure the deployment strategy in the <code>Properties</code> section of the Lambda function.<figure id="8e0a134e-e880-477f-843b-790b88e16330" class="image"><a href="Serverless%20Application%20Model%20(SAM)%20d23e6c3b385547419d6a5191f950c266/Untitled%202.png"><img style="width:240px" src="Serverless%20Application%20Model%20(SAM)%20d23e6c3b385547419d6a5191f950c266/Untitled%202.png"/></a></figure></li></ul></div><div id="53620dd2-f3be-41ad-a718-57231a3ea0f2" style="width:50%" class="column"><figure id="6d890adb-40dd-4396-9d6d-e08650f49829" class="image"><a href="Serverless%20Application%20Model%20(SAM)%20d23e6c3b385547419d6a5191f950c266/Untitled%203.png"><img style="width:872px" src="Serverless%20Application%20Model%20(SAM)%20d23e6c3b385547419d6a5191f950c266/Untitled%203.png"/></a></figure></div></div><h2 id="7bb744f7-b546-4e93-a0ad-cb15fbee479d" class="">Local Deployment</h2><ul id="4e6cffdf-60c2-4783-86a2-26a590c71fb1" class="bulleted-list"><li style="list-style-type:disc">Can deploy Lambda, API Gateway and DynamoDB locally for development using <strong>SAM CLI</strong> and <strong>AWS Toolkits</strong></li></ul><ul id="e4e4090b-4c4f-47d9-a4ed-19796182f55d" class="bulleted-list"><li style="list-style-type:disc"><code>sam local start-lambda</code> - start a lambda function locally (local endpoint)</li></ul><ul id="7fa8cf7e-6156-4432-9c9d-b4bf3c4ddd9b" class="bulleted-list"><li style="list-style-type:disc"><code>sam local invoke</code> - invoke the local lambda endpoint with a payload<ul id="d8740d92-e073-4c99-aa1c-25400fb01ec7" class="bulleted-list"><li style="list-style-type:circle">If the function makes API calls to AWS, make sure to specify <code>--profile</code> option</li></ul></li></ul><ul id="d9a9a70a-e503-4b47-9e3b-0c98949f1d5a" class="bulleted-list"><li style="list-style-type:disc"><code>sam local start-api</code> - starts a local HTTP server along with the lambda code as backend<ul id="8bfd0dd3-bcfe-4c87-833f-eaf55748469a" class="bulleted-list"><li style="list-style-type:circle">Changes made to the function code are automatically reloaded</li></ul></li></ul><ul id="84c665bb-d209-4333-bd59-5ad6ccefb1c8" class="bulleted-list"><li style="list-style-type:disc"><code>sam local generate-event</code> - generate local mock events for lambda functions<ul id="ca0d3894-fb1f-4e02-88c7-83d8234089bd" class="bulleted-list"><li style="list-style-type:circle">Example: generate an S3 PutObject event and use it to invoke the lambda function<p id="ea7c0503-3c72-410f-998c-b0f38f28a6a2" class=""><code>sam local generate-event s3 put --bucket &lt;bucket&gt; --key &lt;key&gt; |
+sam local invoke -e - &lt;function_id&gt;</code></p></li></ul></li></ul><h2 id="915da21e-aab3-4b0e-b296-543ffb99adb3" class="">Serverless Application Repository (SAR)</h2><ul id="29919ea5-130a-487a-8132-e41d11253695" class="bulleted-list"><li style="list-style-type:disc">Repository for serverless applications packaged using SAM</li></ul><ul id="7571a7bf-9314-4c7a-8b8e-ed660ff63405" class="bulleted-list"><li style="list-style-type:disc">Packaged applications can be shared<ul id="09d3f964-b38a-4f3b-a905-8696cd6d2109" class="bulleted-list"><li style="list-style-type:circle">Publicly</li></ul><ul id="30fdd94f-f0a2-4352-82ea-fcc6a5ae4bc1" class="bulleted-list"><li style="list-style-type:circle">With specific AWS accounts</li></ul></li></ul><ul id="7ad64272-ac6c-4e26-b978-975d1ab837d4" class="bulleted-list"><li style="list-style-type:disc">The packaged applications can be directly deployed (no duplicate work)</li></ul><ul id="d2a2c12f-b292-42bc-a5ac-a10e0d8489f2" class="bulleted-list"><li style="list-style-type:disc">Application can be customized using <strong>environment variables</strong></li></ul></div></article></body></html>

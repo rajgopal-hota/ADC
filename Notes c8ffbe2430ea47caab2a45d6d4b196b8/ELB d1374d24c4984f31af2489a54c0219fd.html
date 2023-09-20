@@ -1,0 +1,676 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ELB</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d1374d24-c498-4f31-af24-89a54c0219fd" class="page sans"><header><h1 class="page-title">ELB</h1><p class="page-description"></p></header><div class="page-body"><nav id="5652735c-b2c0-420c-b0cc-202e018f537b" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#94ec7d66-dd33-4a29-8b95-208a85d44ff9">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fe8336bc-4455-402c-bc26-93e86e57e8d0">Types</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ded76d08-a43c-44ff-90fc-1b4e14b0a023">Classic Load Balancer (CLB) - deprecated</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1a6709f3-8cfa-4694-a54f-41c293c91653">Application Load Balancer (ALB)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ffb7e2b3-2e31-47ae-91f7-b1b8d2e4fa99">Network Load Balancer (NLB)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#662102b3-dffd-4924-bee3-7a60e864348b">Gateway Load Balancer (GWLB)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#61ca0ca6-ce48-492b-8117-2e1cf206f4a5">Sticky Sessions (Session Affinity)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c47bc2ee-4ed3-430f-bcd5-dc45e8ca3bf9">Cross-zone Load Balancing</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#effa7cbf-4983-484a-894b-7df9e0197c2a">In-flight Encryption (SSL Certificates)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7102658b-7e22-4e85-96b4-a3dc2c6c2b2a">Connection Draining (De-registration Delay)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5d0cd1a7-e865-45f0-85bf-7942ca48f27a">Access Logs</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4801e645-1f0f-4d1a-b8d3-9dd2679af177">Security Groups for a public facing ELB</a></div></nav><hr id="b5ec0008-09d9-4464-a7e6-5cbf245c2d7d"/><h2 id="94ec7d66-dd33-4a29-8b95-208a85d44ff9" class="">Intro</h2><ul id="dac573d2-fb91-4159-a809-9e3c888e4c5d" class="bulleted-list"><li style="list-style-type:disc">Regional Service</li></ul><ul id="5c5f7021-11de-489b-9530-9a2f3a8fddf6" class="bulleted-list"><li style="list-style-type:disc">Supports Multi AZ</li></ul><ul id="7d60b3a0-f786-446e-aef4-2ba4e48c4582" class="bulleted-list"><li style="list-style-type:disc">Spread load across multiple EC2 instances</li></ul><ul id="68036be8-d260-4050-b5f3-25474a82a838" class="bulleted-list"><li style="list-style-type:disc">Separate public traffic from private traffic</li></ul><ul id="78978cfd-77b4-4769-90c8-c8673d08936b" class="bulleted-list"><li style="list-style-type:disc">Health checks allow ELB to know which instances are working properly (done on a port and a route, <code>/health</code> is common)</li></ul><ul id="fd696459-2bc0-4bf4-8667-c011f8e2d78b" class="bulleted-list"><li style="list-style-type:disc"><strong>Does not support weighted routing</strong></li></ul><ul id="ad342890-e0b2-42dd-bd39-567863fa63e0" class="block-color-yellow_background bulleted-list"><li style="list-style-type:disc">If no targets are associated with the target groups ⇒ <strong>503 Service Unavailable</strong></li></ul><ul id="543b11dc-f5ae-4b01-9be4-50f220823315" class="block-color-yellow_background bulleted-list"><li style="list-style-type:disc">Targets are unreachable (possibly due to NACL or SG rules) ⇒ <strong>504 Timeout Error</strong></li></ul><ul id="c6449be8-ee78-4ba4-9951-84ae63bf5048" class="block-color-yellow_background bulleted-list"><li style="list-style-type:disc">Using ALB &amp; NLB, instances in peered VPCs can be used as targets using IP addresses.</li></ul><h2 id="fe8336bc-4455-402c-bc26-93e86e57e8d0" class="">Types</h2><h3 id="ded76d08-a43c-44ff-90fc-1b4e14b0a023" class="">Classic Load Balancer (CLB) - deprecated</h3><ul id="a3d6ea89-e1fc-4a13-a3af-9f89861fedbf" class="bulleted-list"><li style="list-style-type:disc"><strong>Load Balancing to a single application</strong></li></ul><ul id="1f6e8f54-b801-4dd8-b6ef-8afb3d4161f1" class="bulleted-list"><li style="list-style-type:disc">Supports HTTP, HTTPS (layer 7) &amp; TCP (layer 4)</li></ul><ul id="30e4de27-3292-49a7-821d-a057fabe9672" class="bulleted-list"><li style="list-style-type:disc">Health checks are HTTP or TCP based</li></ul><ul id="b4f9fdc0-f428-4a83-bc50-b94d0b9ee45e" class="bulleted-list"><li style="list-style-type:disc">Provides a fixed hostname (xxx.region.elb.amazonaws.com)</li></ul><h3 id="1a6709f3-8cfa-4694-a54f-41c293c91653" class="">Application Load Balancer (ALB)</h3><ul id="628119af-81c2-4a48-8c21-2dc18209843f" class="bulleted-list"><li style="list-style-type:disc"><strong>Load balancing to multiple applications</strong> (target groups) based on the request parameters</li></ul><ul id="80cf7824-66e4-4247-becb-91a7633e7a30" class="bulleted-list"><li style="list-style-type:disc">Operates at Layer 7 (HTTP, HTTPS and WebSocket)</li></ul><ul id="fbc7105a-962f-43bc-8a35-373a222dc49f" class="bulleted-list"><li style="list-style-type:disc">Provides a fixed hostname (xxx.region.elb.amazonaws.com)</li></ul><ul id="1861e025-0de0-4e66-96f4-7fb590effb4c" class="bulleted-list"><li style="list-style-type:disc">ALB terminates the upstream connection and creates a new downstream connection to the targets</li></ul><ul id="0b75076c-60af-4290-8517-42b8f87e6368" class="bulleted-list"><li style="list-style-type:disc"><strong>Security Groups can be attached to ALBs</strong> to filters requests</li></ul><ul id="b3ff2d22-1af8-49f9-8b7a-c13ee31539e6" class="bulleted-list"><li style="list-style-type:disc">Great for micro services &amp; container-based applications (Docker &amp; ECS)</li></ul><ul id="7eafc61d-d43a-48af-b7eb-8ecd3252238f" class="bulleted-list"><li style="list-style-type:disc">Client info is passed in the request headers<ul id="5ee478b0-bab5-4684-af4f-500736d2f755" class="bulleted-list"><li style="list-style-type:circle">Client IP ⇒ <code>X-Forwarded-For</code></li></ul><ul id="b2b4d7cf-5046-44ca-bc33-4d5d0b1c0e7e" class="bulleted-list"><li style="list-style-type:circle">Client Port ⇒ <code>X-Forwarded-Port</code></li></ul><ul id="bd1ce7c9-d1b6-47e1-8fb7-5a0e384a821a" class="bulleted-list"><li style="list-style-type:circle">Protocol ⇒ <code>X-Forwarded-Proto</code></li></ul></li></ul><ul id="6b0657cb-84d1-49ff-a4b3-ad78a60b4b5d" class="bulleted-list"><li style="list-style-type:disc">Target Groups<ul id="8326a91e-c305-4e44-bd0c-2c7a2aacd719" class="bulleted-list"><li style="list-style-type:circle">Health checks are done at the target group level</li></ul><ul id="1af1d749-bc58-4854-826f-e263e0e09864" class="bulleted-list"><li style="list-style-type:circle">Target Groups could be<ul id="8c777095-c74f-4dc9-b9e5-ae2ba91f2ad7" class="bulleted-list"><li style="list-style-type:square">EC2 instances - HTTP</li></ul><ul id="a51ab6b6-8644-42e4-a93e-e08278d32fac" class="bulleted-list"><li style="list-style-type:square">ECS tasks - HTTP</li></ul><ul id="95c3fe2e-dacd-4e3a-b711-e5f9330a3ec5" class="bulleted-list"><li style="list-style-type:square">Lambda functions - HTTP request is translated into a JSON event</li></ul><ul id="ec11a199-39aa-4c7d-969c-a1f25014dff5" class="bulleted-list"><li style="list-style-type:square">Private IP Addresses</li></ul></li></ul></li></ul><ul id="99ad8ac5-de97-4fd4-b645-35cbdf72830a" class="bulleted-list"><li style="list-style-type:disc"><strong>Listener Rules</strong> can be configured to route traffic to different target groups based on:<ul id="29e85988-1542-41ee-a2fd-b00e5e5900b3" class="bulleted-list"><li style="list-style-type:circle">Path (<a href="http://example.com/users">example.com/users</a> &amp; <a href="http://example.com/posts">example.com/posts</a>)</li></ul><ul id="4aa0fb74-1bb0-448e-b0cf-ec02c5176898" class="bulleted-list"><li style="list-style-type:circle">Hostname (<a href="http://one.example.com/">one.example.com</a> &amp; <a href="http://other.example.com/">other.example.com</a>)</li></ul><ul id="5a98bf45-ec84-496d-9b3e-7ec0501ec8bb" class="bulleted-list"><li style="list-style-type:circle">Query String (<a href="http://example.com/users?id=123&amp;order=false">example.com/users?id=123&amp;order=false</a>)</li></ul><ul id="db6080fb-5ea9-4923-aa74-0a8a3ea07538" class="bulleted-list"><li style="list-style-type:circle">Request Headers</li></ul><ul id="1dd26c5e-b474-40af-a3c1-df47506ccc32" class="bulleted-list"><li style="list-style-type:circle">Source IP address</li></ul></li></ul><ul id="4a149961-1502-4af7-9734-ee7e394da554" class="bulleted-list"><li style="list-style-type:disc">Important Points<ul id="53001908-c767-4465-9bcb-1ca24b837b0d" class="bulleted-list"><li style="list-style-type:circle">When the target type is IP, you can specify private IP addresses only.</li></ul><ul id="7413e108-a1ec-4eaa-9cd4-9003a9ac3efb" class="bulleted-list"><li style="list-style-type:circle">If you specify targets using an instance ID, traffic is routed to instances using the primary private IP address specified in the primary network interface for the instance.</li></ul><ul id="8d592726-0bbb-4751-aba6-77df431f4915" class="bulleted-list"><li style="list-style-type:circle">If you specify targets using IP addresses, you can route traffic to an instance using any private IP address from one or more network interfaces. This enables multiple applications on an instance to use the same port.</li></ul></li></ul><h3 id="ffb7e2b3-2e31-47ae-91f7-b1b8d2e4fa99" class="">Network Load Balancer (NLB)</h3><ul id="e13e8b6e-73ba-45c4-ad7c-3db36845c02e" class="bulleted-list"><li style="list-style-type:disc">Operates at Layer 4 (TCP, UDP)</li></ul><ul id="49e567f7-12f3-4a21-9002-c74c170eece7" class="bulleted-list"><li style="list-style-type:disc">Can handle millions of request per seconds (extreme performance)</li></ul><ul id="cfc12547-fa3d-4c02-942f-d65932a3f8b1" class="bulleted-list"><li style="list-style-type:disc"><strong>Lower latency</strong> ~ 100 ms (vs 400 ms for ALB)</li></ul><ul id="05b340f5-e963-4dc8-9edc-d396e906369b" class="bulleted-list"><li style="list-style-type:disc"><strong>1 static public IP per AZ</strong> (vs a static hostname for CLB &amp; ALB)</li></ul><ul id="9ea78ce6-4806-4eb4-a688-6ae01a7ec6cc" class="bulleted-list"><li style="list-style-type:disc"><strong>Elastic IP can be assigned to NLB</strong> (helpful for whitelisting specific IP)</li></ul><ul id="b2bc19e4-8c83-48d0-a818-72f3b6ac7f07" class="bulleted-list"><li style="list-style-type:disc">Maintains the same connection (TCP or UDP) from client all the way to the target application</li></ul><ul id="baebdf5c-d5d0-400f-9005-402a9b45e94d" class="bulleted-list"><li style="list-style-type:disc"><strong>No security groups can be attached to NLBs.</strong> Since they operate on layer 4, they cannot see the data available at layer 7. They just forward the incoming traffic to the right target group as if those requests were directly coming from client. So, the <strong>target instances must allow TCP traffic on port 80 from anywhere</strong>.</li></ul><ul id="58110216-ca20-4e50-b357-ca53bb63ff89" class="bulleted-list"><li style="list-style-type:disc">Within a target group, NLB can send traffic to<ul id="92180e76-c3d4-480f-9ceb-2b53431ae5e9" class="bulleted-list"><li style="list-style-type:circle"><strong>EC2 instances</strong><ul id="a8308101-059c-4582-bf2b-2a29fb8f81ec" class="bulleted-list"><li style="list-style-type:square">If you specify targets using an instance ID, traffic is routed to instances using the <strong>primary private IP address</strong></li></ul></li></ul><ul id="7fe283bd-6cd9-4982-b860-80ad621575a6" class="bulleted-list"><li style="list-style-type:circle"><strong>IP addresses</strong><ul id="4575f5a0-ead9-4ce7-b712-f86de09421f9" class="bulleted-list"><li style="list-style-type:square">Used when you want to balance load for a physical server having a static IP.</li></ul></li></ul><ul id="daeecf04-1962-4ef9-b073-4e81f7c4622e" class="bulleted-list"><li style="list-style-type:circle"><strong>Application Load Balancer (ALB)</strong><ul id="a67451be-bd22-4112-b09f-fb00898d55fb" class="bulleted-list"><li style="list-style-type:square">Used when you want a static IP provided by an NLB but also want to use the features provided by ALB at the application layer.</li></ul></li></ul></li></ul><h3 id="662102b3-dffd-4924-bee3-7a60e864348b" class="">Gateway Load Balancer (GWLB)</h3><ul id="0b04a7f0-8c25-4463-a11c-9e48efa26046" class="bulleted-list"><li style="list-style-type:disc">Operates at layer 3 (Network layer) - IP Protocol</li></ul><ul id="941d73f1-8809-4aa6-869d-04a9162e1cf0" class="bulleted-list"><li style="list-style-type:disc">Used to route requests to a fleet of 3rd party virtual appliances like Firewalls, Intrusion Detection and Prevention Systems (IDPS), etc.</li></ul><ul id="3f1d18a0-7cc0-40e4-99e9-21847c7bb99d" class="bulleted-list"><li style="list-style-type:disc">Performs two functions:<ul id="e60c5351-b753-464f-9cd1-64a839a41e1c" class="bulleted-list"><li style="list-style-type:circle"><strong>Transparent Network Gateway</strong> (single entry/exit for all traffic)</li></ul><ul id="beafd2e6-42ab-4a93-9545-8b1b74495ab6" class="bulleted-list"><li style="list-style-type:circle">Load Balancer (distributes traffic to virtual appliances)</li></ul></li></ul><ul id="0ec161ed-5035-4ad1-8260-884694bdeb47" class="bulleted-list"><li style="list-style-type:disc">Uses GENEVE protocol</li></ul><ul id="2eaf9641-2f69-4e77-8f31-ed5f8f88b92c" class="bulleted-list"><li style="list-style-type:disc">Target groups for GWLB could be<ul id="fd3bb8fb-3fee-4c14-b36a-1348bc279875" class="bulleted-list"><li style="list-style-type:circle">EC2 instances</li></ul><ul id="625dee45-2be8-46ec-9338-5353f8f8919c" class="bulleted-list"><li style="list-style-type:circle">IP addresses</li></ul></li></ul><h2 id="61ca0ca6-ce48-492b-8117-2e1cf206f4a5" class="">Sticky Sessions (Session Affinity)</h2><ul id="021b91bf-f149-4c2c-b5a8-e25a25d4e861" class="bulleted-list"><li style="list-style-type:disc">Requests coming from a client is always redirected to the same instance based on a cookie. After the cookie expires, the requests coming from the same user might be redirected to another instance.</li></ul><ul id="f3c33098-b0ad-428d-afcc-9bace7e52eab" class="bulleted-list"><li style="list-style-type:disc"><strong>Only supported by CLB &amp; ALB</strong> because the cookie can be seen at layer 7</li></ul><ul id="e3809be2-7d56-4901-b767-b9d956623dee" class="bulleted-list"><li style="list-style-type:disc">Used to ensure the user doesn’t lose his session data, like login or cart info, while navigating between web pages.</li></ul><ul id="e6ef6939-935e-44a6-804d-9f67b944beb4" class="bulleted-list"><li style="list-style-type:disc"><strong>Stickiness may cause load imbalance</strong></li></ul><ul id="d3b6402f-c33b-4ebb-9f18-de1aaf628598" class="bulleted-list"><li style="list-style-type:disc">Cookies could be<ul id="ffa90554-b575-42ac-8c21-a2edcacf5cd1" class="bulleted-list"><li style="list-style-type:circle"><strong>Application-based</strong> (TTL defined by the application)</li></ul><ul id="17b60747-6940-47dd-952e-11dc6d4a6083" class="bulleted-list"><li style="list-style-type:circle"><strong>Load Balancer generated</strong> (TTL defined by the load balancer)</li></ul></li></ul><ul id="61c1e25a-92da-4d58-ab79-dc77b662df04" class="bulleted-list"><li style="list-style-type:disc">ELB reserved cookie names (should not be used)<ul id="44737833-a4f0-4bc3-b0e1-5cbc43f99ba9" class="bulleted-list"><li style="list-style-type:circle"><code>AWSALB</code></li></ul><ul id="f6330f48-2db2-45b4-bf96-e95d08f9b9a6" class="bulleted-list"><li style="list-style-type:circle"><code>AWSALBAPP</code></li></ul><ul id="b319a93b-2533-4a78-adfa-ad3bb5319c66" class="bulleted-list"><li style="list-style-type:circle"><code>AWSALBTG</code></li></ul></li></ul><h2 id="c47bc2ee-4ed3-430f-bcd5-dc45e8ca3bf9" class="">Cross-zone Load Balancing</h2><figure id="6ec16bf9-b957-47ae-9f11-e9ef4841ea7a" class="image"><a href="ELB%20d1374d24c4984f31af2489a54c0219fd/Untitled.png"><img style="width:672px" src="ELB%20d1374d24c4984f31af2489a54c0219fd/Untitled.png"/></a></figure><ul id="87f62d22-5a6a-4719-85ae-23bf76fd2838" class="bulleted-list"><li style="list-style-type:disc">Allows ELBs in different AZ containing unbalanced number of instances to distribute the traffic evenly across all instances in all the AZ registered under a load balancer.</li></ul><ul id="09d092a2-e7ba-4533-aa8c-45d58f9878a6" class="bulleted-list"><li style="list-style-type:disc">Supported Load Balancers<ul id="9f23dd58-54dd-4421-b695-eed112b48e69" class="bulleted-list"><li style="list-style-type:circle">Classic Load Balancer<ul id="3c05d366-cd69-4701-8e2e-67c3e09aad52" class="bulleted-list"><li style="list-style-type:square">Disabled by default</li></ul><ul id="9a8b5ec7-c873-48f6-8795-24881ec7ac15" class="bulleted-list"><li style="list-style-type:square">No charges for inter AZ data</li></ul></li></ul><ul id="d896d35a-c35d-485b-af35-ecb52989e47d" class="bulleted-list"><li style="list-style-type:circle">Application Load Balancer<ul id="9698e5a3-c648-4173-8fde-1277c41b95af" class="bulleted-list"><li style="list-style-type:square">Always on (can’t be disabled)</li></ul><ul id="07f39c7e-2c48-43e2-916f-fa06d6f20a66" class="bulleted-list"><li style="list-style-type:square">No charges for inter AZ data</li></ul></li></ul><ul id="69ef1c9f-d621-429c-9eee-40e86a05dad2" class="bulleted-list"><li style="list-style-type:circle">Network Load Balancer<ul id="3ca82bc4-ba7f-41cb-96cd-8989e2139634" class="bulleted-list"><li style="list-style-type:square">Disabled by default</li></ul><ul id="796ff1cf-9077-4076-a4c3-214fce6ba2f3" class="bulleted-list"><li style="list-style-type:square">Charges for inter AZ data</li></ul></li></ul></li></ul><h2 id="effa7cbf-4983-484a-894b-7df9e0197c2a" class="">In-flight Encryption (SSL Certificates)</h2><figure id="ab57b1ec-6b43-479e-b193-a7ed4766fac4" class="image"><a href="ELB%20d1374d24c4984f31af2489a54c0219fd/Untitled%201.png"><img style="width:576px" src="ELB%20d1374d24c4984f31af2489a54c0219fd/Untitled%201.png"/></a></figure><ul id="77d8719d-c225-427f-92e4-fe3fd4ad905e" class="bulleted-list"><li style="list-style-type:disc">Use an <strong>NLB with a TCP listener</strong> &amp; terminate SSL on EC2 instances</li></ul><ul id="636f5fdc-1c9d-489d-84b8-8e38896e8199" class="bulleted-list"><li style="list-style-type:disc">Use an <strong>ALB with an HTTPS listener</strong>, install SSL certificates on the ALB &amp; terminate SSL on the ALB</li></ul><ul id="8a3a4d70-3fa1-49c4-9fca-fd317ea721b0" class="bulleted-list"><li style="list-style-type:disc">Communication between ALB &amp; EC2 instances can happen over HTTP inside the VPC</li></ul><div id="b3ae3f96-feba-4e4b-89c7-a5b168a14563" class="column-list"><div id="48ee0ff9-0786-478e-89ac-082f71e621a3" style="width:50%" class="column"><ul id="b539a36a-1170-4242-a3a9-429e36d3c304" class="bulleted-list"><li style="list-style-type:disc"><strong>Server Name Indication (SNI)</strong><ul id="f1f47047-c10e-4c02-a667-822d10f92f90" class="bulleted-list"><li style="list-style-type:circle">SNI allows us to load multiple SSL certificates on one Load Balancer to serve multiple websites securely</li></ul><ul id="5ab96254-bf79-4181-8335-80049ad788cb" class="bulleted-list"><li style="list-style-type:circle"><strong>Only works for ALB &amp; NLB</strong> (CLB only supports one SSL certificate)</li></ul><ul id="0b616ee5-b803-46fe-8ee6-7470abd18cd6" class="bulleted-list"><li style="list-style-type:circle">Newer protocol, not every client supports it yet</li></ul><ul id="e557c364-c530-4d3d-b22d-1add11aa0bad" class="bulleted-list"><li style="list-style-type:circle"><strong>Supported in CloudFront</strong> also</li></ul></li></ul></div><div id="26b6622d-5092-4615-99a3-5179b0038318" style="width:50%" class="column"><figure id="02c067e3-b01d-48bc-b7a8-7c7c49f8239b" class="image"><a href="ELB%20d1374d24c4984f31af2489a54c0219fd/Untitled%202.png"><img style="width:828px" src="ELB%20d1374d24c4984f31af2489a54c0219fd/Untitled%202.png"/></a></figure></div></div><h2 id="7102658b-7e22-4e85-96b4-a3dc2c6c2b2a" class="">Connection Draining (De-registration Delay)</h2><ul id="83f1cbd9-3db2-413b-87a5-607f951d7ffe" class="bulleted-list"><li style="list-style-type:disc">When an instance is to be de-registered from the ELB, the in-flight requests being served by that instance are given some pre-defined time to complete before the ELB de-registers it.</li></ul><ul id="fb4858e7-6570-4785-b133-ac86c850c6c5" class="bulleted-list"><li style="list-style-type:disc">ELB stops sending new requests to the EC2 instance which is de-registering</li></ul><ul id="6276e415-57af-4dbb-8407-24ca96f09f12" class="bulleted-list"><li style="list-style-type:disc">Set manually (0 to 3600 seconds) (<strong>default: 300 seconds</strong>)</li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="fbf23a31-cbec-445b-996d-9bfe27b8cef3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">For instances behind an ELB and using ASG, increase the de-registration delay to ensure that the in-flight requests are completed before the ELB deregisters an instance which is to be terminated by the ASG.</div></figure><h2 id="5d0cd1a7-e865-45f0-85bf-7942ca48f27a" class="">Access Logs</h2><ul id="c513f5b9-1993-4552-b878-90dbbe4eabd2" class="bulleted-list"><li style="list-style-type:disc">Captures detailed information about requests sent to the load balancer</li></ul><ul id="2a890b84-1730-4109-91a9-f12946978a7c" class="bulleted-list"><li style="list-style-type:disc">Used to analyze traffic patterns and troubleshoot issues</li></ul><ul id="6afff855-1cb2-417d-b119-281f934091d4" class="bulleted-list"><li style="list-style-type:disc">Disabled by default</li></ul><h2 id="4801e645-1f0f-4d1a-b8d3-9dd2679af177" class="">Security Groups for a public facing ELB</h2><figure id="b426c88e-4e23-411f-a75a-0dc5e194e2c6" class="image"><a href="ELB%20d1374d24c4984f31af2489a54c0219fd/Untitled%203.png"><img style="width:1802px" src="ELB%20d1374d24c4984f31af2489a54c0219fd/Untitled%203.png"/></a></figure><p id="6548aa4f-901f-408c-acfb-cb1bb31e0755" class="">ELB will be publicly available on the internet, so it’s security group should allow HTTP and HTTPS traffic from anywhere. EC2 should only allow traffic from the ELB, so the its security group should allow HTTP requests from ELB’s security group.</p></div></article></body></html>

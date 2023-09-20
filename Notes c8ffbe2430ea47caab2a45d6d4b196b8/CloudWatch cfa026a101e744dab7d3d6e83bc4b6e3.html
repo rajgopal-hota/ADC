@@ -1,0 +1,680 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CloudWatch</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="cfa026a1-01e7-44da-b7d3-d6e83bc4b6e3" class="page sans"><header><h1 class="page-title">CloudWatch</h1><p class="page-description"></p></header><div class="page-body"><nav id="815ab007-0af2-4c3c-9c4d-6f3d2a942f43" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b51a39e5-a585-410d-8f2c-27a3711bcff3">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#602b2fdf-6f07-4a34-bbb9-2623aca5ae4b">Metrics</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8d0ef099-8da9-4d47-ac58-e10a039d9a39">Custom Metrics</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f79dcc7f-2845-40d7-ad24-5a1f60633f34">EC2 Monitoring</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a26144a6-8ff5-4237-9832-de96087bf62c">Dashboards</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1dc4e9a2-fdfe-4a8e-8d20-a55a35969bb8">Logs</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3707d5ed-e55b-41a0-a621-71ca828ed78a">Alarms</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f23f0a7c-04bd-4ed5-b2d2-9749a043b7c4">EC2 Instance Recovery on Alarm</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6aa68273-2873-4805-ae3c-605f777d9916">Events</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#27aeb5df-5790-4c59-8874-09fd903b7618">Logs Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#621e8643-183d-4d48-8b48-eda853de7f9e">Synthetics Canary</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a1e5407c-b0f9-49d7-beee-e56876400d66">Blueprints</a></div></nav><hr id="81ab763a-0b1f-43dd-8596-dfbce67911d3"/><h2 id="b51a39e5-a585-410d-8f2c-27a3711bcff3" class="">Intro</h2><ul id="5756e2d9-1aa2-4a49-b52a-d91fbdc98617" class="bulleted-list"><li style="list-style-type:disc"><strong>Serverless</strong> logging and monitoring for AWS services and application</li></ul><h2 id="602b2fdf-6f07-4a34-bbb9-2623aca5ae4b" class="">Metrics</h2><ul id="956b3032-970c-4efa-bf83-034a17373d7b" class="bulleted-list"><li style="list-style-type:disc">Variables to monitor in CloudWatch</li></ul><ul id="e38e4e30-e087-4066-b418-a33008fa5825" class="bulleted-list"><li style="list-style-type:disc">Dimension is an attribute of a metric (instance id, environment, etc.)</li></ul><ul id="a171e44a-97dd-4577-ae05-6753e88c1ae1" class="bulleted-list"><li style="list-style-type:disc">Up to <strong>30 dimensions per metric</strong></li></ul><ul id="fbf9ac00-c92f-4bde-bda7-8f70591e8651" class="bulleted-list"><li style="list-style-type:disc">Segregated by namespaces (which AWS service they monitor)</li></ul><h3 id="8d0ef099-8da9-4d47-ac58-e10a039d9a39" class="">Custom Metrics</h3><ul id="6f4a7b1e-9044-47f4-8074-adbdbb0fc4cb" class="bulleted-list"><li style="list-style-type:disc">Define and send your own custom metrics to CloudWatch using <code>PutMetricData</code><strong> </strong>API</li></ul><ul id="e9b58361-812f-467a-9601-d593a876ef2b" class="bulleted-list"><li style="list-style-type:disc">Metric resolution (<code>StorageResolution</code> API) - frequency of sending metric data</li></ul><ul id="06df9f05-4450-4788-bdd6-5a3883cad478" class="bulleted-list"><li style="list-style-type:disc"><strong>Standard: 1 min</strong></li></ul><ul id="5d7fd8a2-42df-4c2d-955d-b8504408cfd3" class="bulleted-list"><li style="list-style-type:disc"><strong>High Resolution: 1 sec </strong>(higher cost)</li></ul><ul id="899b829a-b7a4-433a-9163-2c47951bf3e6" class="bulleted-list"><li style="list-style-type:disc">Accepts metric data points <strong>two weeks in the past and two hours in the future</strong></li></ul><h3 id="f79dcc7f-2845-40d7-ad24-5a1f60633f34" class="">EC2 Monitoring</h3><ul id="34f8bb88-019f-4ec2-a519-ee761a476786" class="bulleted-list"><li style="list-style-type:disc">Must run a <strong>CloudWatch agent</strong> on instance to push system <strong>metrics and logs</strong> to CloudWatch. Instance role (IAM) must allow the instance to push logs to CloudWatch.</li></ul><ul id="8b3bc6e6-b648-484e-be3f-dca2da587f4e" class="bulleted-list"><li style="list-style-type:disc">EC2 instances have metrics <strong>every 5 minutes</strong></li></ul><ul id="460f605c-a463-4fc0-b2c1-e7326ac9ee5f" class="bulleted-list"><li style="list-style-type:disc">With <strong>detailed monitoring</strong> (for a cost), you get metrics <strong>every 1 minute</strong> (can be enabled using <code>aws ec2 monitor-instances</code> command)</li></ul><ul id="7b342a03-33cf-43ac-b158-505aa6d5bc85" class="bulleted-list"><li style="list-style-type:disc">Use detailed monitoring if you want to react faster to changes (eg. scale faster for your ASG)</li></ul><ul id="19c24c95-1e1b-4b16-be34-6980d5837910" class="bulleted-list"><li style="list-style-type:disc"><strong>Available metrics in CloudWatch</strong>:<ul id="87548c5a-ec16-47ed-97fd-629ded022289" class="bulleted-list"><li style="list-style-type:circle">CPU Utilization</li></ul><ul id="7d7c3c42-0a84-44b7-b4b0-2bfe97156ab0" class="bulleted-list"><li style="list-style-type:circle">Network Utilization</li></ul><ul id="1ea06be6-1f43-4ae9-b66c-03255f82cbe1" class="bulleted-list"><li style="list-style-type:circle">Disk Performance</li></ul><ul id="d0165f41-9d43-46dd-92ba-63d5e681e44c" class="bulleted-list"><li style="list-style-type:circle">Disk Reads/Writes</li></ul></li></ul><ul id="3480a1f2-03b4-4c6f-a6a7-948e75f06925" class="bulleted-list"><li style="list-style-type:disc"><strong>Custom metrics</strong>:<ul id="8c7f5e7e-9169-4cda-ab10-009ddd139ab5" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Memory utilization</mark> (memory usage)</li></ul><ul id="6f35a858-c6f1-4b01-9ab4-06b0ca0ac67b" class="bulleted-list"><li style="list-style-type:circle">Disk swap utilization</li></ul><ul id="c0dfcb5c-28c0-4407-b6e0-4333113d1e9e" class="bulleted-list"><li style="list-style-type:circle">Disk space utilization</li></ul><ul id="476b35f5-c7e1-40ca-999b-0b98c5e40d11" class="bulleted-list"><li style="list-style-type:circle">Page file utilization</li></ul></li></ul><ul id="93156add-7d5d-4781-87a7-4a5847e3db23" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">CloudWatch agent can be used for logging on premises servers too</mark></li></ul><h2 id="a26144a6-8ff5-4237-9832-de96087bf62c" class="">Dashboards</h2><ul id="bc279cfb-46cc-4bf4-a951-92d48104ea83" class="bulleted-list"><li style="list-style-type:disc">Setup custom dashboards for quick access to key metrics and alarms</li></ul><ul id="099d5aaa-7c0f-42b4-8a6e-9afd4349e7e7" class="bulleted-list"><li style="list-style-type:disc"><strong>Dashboards are global</strong> (allows to <strong>monitor services across accounts &amp; regions</strong>)</li></ul><ul id="8e5283ba-7294-4abf-ad1a-ab447321962a" class="bulleted-list"><li style="list-style-type:disc">Dashboards can be shared with people who don’t have an AWS account (public, email address, 3rd party SSO provider through Cognito)</li></ul><h2 id="1dc4e9a2-fdfe-4a8e-8d20-a55a35969bb8" class="">Logs</h2><ul id="6d8aeee2-101c-4d8f-b52d-61b24582b15d" class="bulleted-list"><li style="list-style-type:disc">Used to store application logs</li></ul><ul id="b0b962bf-3a8e-4391-8c9e-33f015182578" class="bulleted-list"><li style="list-style-type:disc">Log Groups represent an application sending logs to CW</li></ul><ul id="80729d88-e450-47f7-a721-a671b387932c" class="bulleted-list"><li style="list-style-type:disc">Log Streams represent instances within applications or log files or containers</li></ul><ul id="70b06f4a-581a-4591-844f-b6e2c7f8e075" class="bulleted-list"><li style="list-style-type:disc">Logs Expiration: never expire (default), 30 days, etc.</li></ul><ul id="ca7795ce-5d2c-4d30-85f7-8a6f883a084f" class="bulleted-list"><li style="list-style-type:disc">Logs can be sent to:<ul id="09a73b29-951a-4a41-aebc-a107b00bfd3f" class="bulleted-list"><li style="list-style-type:circle">S3 buckets (exports)</li></ul><ul id="9508340e-3c19-4dcf-b13e-a14afd5b03c6" class="bulleted-list"><li style="list-style-type:circle">Kinesis Data Streams</li></ul><ul id="95a879d8-11de-40f3-8db9-e41fd84d8555" class="bulleted-list"><li style="list-style-type:circle">Kinesis Data Firehose</li></ul><ul id="b43cd7a0-44a2-4ee1-9d1f-2d9a3bb0bfb4" class="bulleted-list"><li style="list-style-type:circle">Lambda functions</li></ul><ul id="9076b8d4-08a8-41cf-a383-65a25c2a36f4" class="bulleted-list"><li style="list-style-type:circle">ElasticSearch</li></ul></li></ul><ul id="cd29dae2-8c5c-4efd-a74f-32e7be0bc79c" class="bulleted-list"><li style="list-style-type:disc"><strong>Metric Filters</strong> can be used to filter expressions and use the count to trigger CloudWatch alarms. They are not retro-active:<ul id="35061925-543d-4cf8-88ab-ad338c31ec59" class="bulleted-list"><li style="list-style-type:circle">find a specific IP in the logs</li></ul><ul id="e2809c2f-58be-4794-bb6c-ffa469b86a4c" class="bulleted-list"><li style="list-style-type:circle">count occurrences of “ERROR” in the logs</li></ul></li></ul><ul id="2931b9b9-6c33-477c-ba8d-a7fba07ad12d" class="bulleted-list"><li style="list-style-type:disc"><strong>Cloud Watch Logs Insights</strong> can be used to query logs and add queries to CloudWatch Dashboards</li></ul><ul id="aefb0b47-5fb3-4cdf-9d04-1d262a17ba3a" class="bulleted-list"><li style="list-style-type:disc">To stream logs in real-time, apply a <strong>Subscription Filter</strong> on logs</li></ul><ul id="6d8f0017-de9e-4b8d-9935-10601e5625f7" class="bulleted-list"><li style="list-style-type:disc">Logs can take up to <strong>12 hours to become available for exporting to S3</strong> (not real-time). To store logs in real time in S3, use a subscription filter to stream logs to KDS and then to KDF which will then write the logs to S3.</li></ul><ul id="2dc3c21b-e00d-4924-aace-38c2cda978e3" class="bulleted-list"><li style="list-style-type:disc">Logs from multiple accounts and regions can be aggregated using subscription filters<figure id="a393e858-6f53-4327-afdb-90e96e171b6c" class="image"><a href="CloudWatch%20cfa026a101e744dab7d3d6e83bc4b6e3/Untitled.png"><img style="width:624px" src="CloudWatch%20cfa026a101e744dab7d3d6e83bc4b6e3/Untitled.png"/></a></figure></li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="b3092d12-9b31-4cc5-9d0c-28a4223e916d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Metric Filters are a part of CloudWatch Logs (not CloudWatch Metrics)</div></figure><h2 id="3707d5ed-e55b-41a0-a621-71ca828ed78a" class="">Alarms</h2><ul id="e16aa25a-5ebb-471f-aefd-604a3f94cb18" class="bulleted-list"><li style="list-style-type:disc">Alarms are used to trigger notifications for CW metrics based on <strong>Metric Filters</strong></li></ul><ul id="fd08653f-fa57-4e89-9dc7-dc68b5949194" class="bulleted-list"><li style="list-style-type:disc">Various options to trigger alarm (sampling, %, max, min, etc.)</li></ul><ul id="7ff36d8d-95fa-4f31-9a4f-ac086be93b50" class="bulleted-list"><li style="list-style-type:disc"><strong>An alarm monitors a single CW metric</strong></li></ul><ul id="c833665c-7cdc-4287-bb15-4efcee3341d7" class="bulleted-list"><li style="list-style-type:disc">Alarm States:<ul id="d3282a22-ae05-42b1-a7b9-0d1d3a8dc646" class="bulleted-list"><li style="list-style-type:circle">OK</li></ul><ul id="d02c69e0-c151-4fb0-9633-67a17c3ebc72" class="bulleted-list"><li style="list-style-type:circle">INSUFFICIENT_DATA</li></ul><ul id="725eef51-851c-43ce-802d-79ae0e3b195c" class="bulleted-list"><li style="list-style-type:circle">ALARM</li></ul></li></ul><ul id="e0312218-6beb-4f4a-ac6d-312b68b328bd" class="bulleted-list"><li style="list-style-type:disc">Configuration:<ul id="56bae8d3-f467-42ca-9d66-bf8828783d2f" class="bulleted-list"><li style="list-style-type:circle"><strong>Period</strong>: length of time (seconds) to evaluate the metric to create a data point for the alarm (<strong><mark class="highlight-yellow_background">min 10 sec</mark></strong><mark class="highlight-yellow_background"> for high resolution custom metric</mark>)</li></ul><ul id="1bcc60ce-6be7-4149-b77c-3371c207266c" class="bulleted-list"><li style="list-style-type:circle"><strong>Evaluation Period</strong>: number of the most recent periods (data points) to consider when determining the alarm state</li></ul><ul id="71e30954-1118-4f51-89ab-05737d2b74d8" class="bulleted-list"><li style="list-style-type:circle"><strong>Datapoints to Alarm</strong>: number of data points within the evaluation period that must be breached to cause the alarm to go into <code>ALARM</code> state</li></ul></li></ul><ul id="08c63a31-7b75-4fb5-aca4-ad1b21423e83" class="bulleted-list"><li style="list-style-type:disc"><strong>Targets</strong>:<ul id="58636da0-aeeb-41f8-9c85-475e944ee778" class="bulleted-list"><li style="list-style-type:circle">Stop, Terminate, Reboot, or Recover an EC2 Instance</li></ul><ul id="78841f1b-03d2-4b82-9ede-8607b4027b88" class="bulleted-list"><li style="list-style-type:circle">Trigger Auto Scaling Action (ASG)</li></ul><ul id="fd608bac-422c-4d5f-818c-40d5744a9c26" class="bulleted-list"><li style="list-style-type:circle">Send notification to SNS</li></ul></li></ul><ul id="ea9977be-91dc-4330-b1c6-e8f9512513c4" class="bulleted-list"><li style="list-style-type:disc"><strong>Composite Alarms</strong> monitor multiple other alarms with AND/OR conditions to generate a new alarm. This is helpful to reduce alarm noise by creating complex composite alarms. Example: send an SNS notification when both CPU and IOPS are above 90% utilization.<figure id="1f440d0d-7d6c-4345-9908-2ca8b419b50c" class="image"><a href="CloudWatch%20cfa026a101e744dab7d3d6e83bc4b6e3/Untitled%201.png"><img style="width:576px" src="CloudWatch%20cfa026a101e744dab7d3d6e83bc4b6e3/Untitled%201.png"/></a></figure></li></ul><h3 id="f23f0a7c-04bd-4ed5-b2d2-9749a043b7c4" class="">EC2 Instance Recovery on Alarm</h3><ul id="6049fd87-f86b-4152-abff-45696981aba5" class="bulleted-list"><li style="list-style-type:disc">CloudWatch <strong>alarm</strong> to automatically recover an EC2 instance if it becomes <strong>impaired</strong></li></ul><ul id="9062f1ed-36cb-4a52-8a3c-8fc87b675ec1" class="bulleted-list"><li style="list-style-type:disc"><strong>Terminated instances cannot be recovered</strong></li></ul><ul id="7e88bd89-cad0-4220-829b-01577fc84312" class="bulleted-list"><li style="list-style-type:disc">After the recovery, the following are retained<ul id="d166e2d9-87a3-4191-96e1-b43b2923e45d" class="bulleted-list"><li style="list-style-type:circle">Placement Group</li></ul><ul id="1b14867d-57c3-4eac-9d60-fd34b9e71dd4" class="bulleted-list"><li style="list-style-type:circle">Public IP</li></ul><ul id="bd810688-f337-4e8c-bcc7-ca0067e0bc75" class="bulleted-list"><li style="list-style-type:circle">Private IP</li></ul><ul id="f4ad1966-2e9c-4f7a-9063-ba78e378741f" class="bulleted-list"><li style="list-style-type:circle">Elastic IP</li></ul><ul id="66fd0f18-92ae-4f53-b23a-0744d5f2b952" class="bulleted-list"><li style="list-style-type:circle">Instance ID</li></ul><ul id="86de7322-fcd1-4d93-8954-441705fd61fd" class="bulleted-list"><li style="list-style-type:circle">Instance metadata</li></ul></li></ul><ul id="fdda03bf-c8d1-40f8-8a01-429689476e52" class="bulleted-list"><li style="list-style-type:disc">After the recovery, <strong>RAM contents are lost</strong></li></ul><h2 id="6aa68273-2873-4805-ae3c-605f777d9916" class="">Events</h2><ul id="986e2504-c1f0-4a1a-8c7b-ca6d938be772" class="bulleted-list"><li style="list-style-type:disc">Cron to create events on a schedule</li></ul><ul id="00d75e46-f6fa-4c9d-98e9-fabdb2f92d16" class="bulleted-list"><li style="list-style-type:disc"><strong>Uses default event bus (custom &amp; partner event buses are not supported)</strong></li></ul><h2 id="27aeb5df-5790-4c59-8874-09fd903b7618" class="">Logs Encryption</h2><ul id="69ccf64a-8708-4d71-b796-f5cad7ae2ce9" class="bulleted-list"><li style="list-style-type:disc">CloudWatch logs can be encrypted at the <strong>log group level</strong> by associating a KMS key with it.</li></ul><ul id="a40a9b2f-21dd-43db-9c14-6773903a1c28" class="bulleted-list"><li style="list-style-type:disc">Must be done using CloudWatch Logs API (cannot be done through the console)</li></ul><ul id="fac266a9-5a84-4626-95f1-c81e482f39be" class="bulleted-list"><li style="list-style-type:disc">APIs<ul id="43f4e8ec-2d3c-4ec6-897e-84ee3c332f64" class="bulleted-list"><li style="list-style-type:circle"><code>associate-kms-key</code> - associate a KMS key with an existing log group</li></ul><ul id="41617c41-a352-4cb2-aa5d-46e14c0fadb1" class="bulleted-list"><li style="list-style-type:circle"><code>create-log-group</code> - create a log group and associate a KMS key with it</li></ul></li></ul><h2 id="621e8643-183d-4d48-8b48-eda853de7f9e" class="">Synthetics Canary</h2><div id="5f4de2a7-0d88-4a62-925f-dbcf833cdf13" class="column-list"><div id="29e86ba3-696f-4859-982a-ba9142c71eb0" style="width:50%" class="column"><ul id="f3cdf46c-a93b-401f-a1b7-71f699451b8f" class="bulleted-list"><li style="list-style-type:disc">Monitoring tool that runs configurable scripts on production to reproduce what your customers do to <mark class="highlight-yellow_background">find issues before them</mark>. </li></ul><ul id="1bd14b16-53b2-41c1-a7ac-e8759a692f5e" class="bulleted-list"><li style="list-style-type:disc">Can invoke APIs and store the latency data</li></ul><ul id="2a5a6569-11d4-427d-bb1a-08c7c48cbe6c" class="bulleted-list"><li style="list-style-type:disc">Can check UI functionalities with screenshots (has a <mark class="highlight-yellow_background">headless Google Chrome browser</mark>)</li></ul><ul id="e84ca4f3-0f6b-4427-802e-60a24d23ba3a" class="bulleted-list"><li style="list-style-type:disc">Script must be written in <strong>NodeJS</strong> or <strong>Python</strong></li></ul><ul id="4f2781dc-6d67-4e9a-9788-f06ecf036ff6" class="bulleted-list"><li style="list-style-type:disc"><strong>Integrates with CloudWatch alarm</strong> (which can trigger a Lambda function to redirect users to another instance of the application running the previous version)</li></ul></div><div id="19d8b2ea-1a5b-4194-be73-b8f6fd956ad3" style="width:50%" class="column"><figure id="62b40835-17cd-4b77-a431-f842f64a39b7" class="image"><a href="CloudWatch%20cfa026a101e744dab7d3d6e83bc4b6e3/Untitled%202.png"><img style="width:694px" src="CloudWatch%20cfa026a101e744dab7d3d6e83bc4b6e3/Untitled%202.png"/></a></figure></div></div><ul id="c7c9b129-9e05-41f8-81c2-86a5208c8416" class="bulleted-list"><li style="list-style-type:disc">Can run once or on a schedule</li></ul><h3 id="a1e5407c-b0f9-49d7-beee-e56876400d66" class="">Blueprints</h3><ul id="d262ce60-d60e-4f48-a5d0-1d59485a9dd6" class="bulleted-list"><li style="list-style-type:disc"><strong>Heartbeat Monitor</strong> - load URL, store screenshot and an HTTP archive file</li></ul><ul id="ec4cf5b7-702b-45a2-8927-2c8a55525495" class="bulleted-list"><li style="list-style-type:disc"><strong>API Canary</strong> - test basic read and write functions of REST APls</li></ul><ul id="7a977d3e-51e1-4f70-abb5-6dc5b5aebc4a" class="bulleted-list"><li style="list-style-type:disc"><strong>Broken Link Checker</strong> - check all links inside the URL that you are testing</li></ul><ul id="bc6dbfb0-5dbc-4f4e-86ee-0c7174252e1a" class="bulleted-list"><li style="list-style-type:disc"><strong>Visual Monitoring</strong> - compare a screenshot taken during a canary run with a baseline
+screenshot</li></ul><ul id="42cb7d31-5395-46f4-9150-bba7862d05a0" class="bulleted-list"><li style="list-style-type:disc"><strong>Canary Recorder</strong> - used with <strong>CloudWatch Synthetics Recorder</strong> (<mark class="highlight-yellow_background">record your
+actions on a website and automatically generates a script for that</mark>)</li></ul><ul id="ac35141b-445e-4f7d-9945-eae55d374749" class="bulleted-list"><li style="list-style-type:disc"><strong>GUI Workflow Builder</strong> - verifies that actions can be taken on your webpage (e.g.
+test a webpage with a login form)</li></ul><p id="abb9416c-0b9d-4566-b0dc-3d44f052e8c2" class="">
+</p></div></article></body></html>

@@ -1,0 +1,676 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>RDS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1b0fd140-cfa2-48db-9bdc-56c4c0607583" class="page sans"><header><h1 class="page-title">RDS</h1><p class="page-description"></p></header><div class="page-body"><nav id="34d1eb60-6a1d-4303-998a-5f13e669724b" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#29499cbf-c679-4ee3-95fa-4ca9699167c7">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#85d1bbac-4223-41bb-836a-1c6ab44f5cbc">Backups</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5ae873e7-fafd-4782-93dd-2a9ccc92ce1b">Auto Scaling</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e5da0d14-9642-41f2-b0aa-1fb0fd57bcff">Read Replicas</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#be64495f-7260-4094-a98e-772b7b49bd4d">Multi AZ</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#65d21b27-03d1-4951-a612-5d44304a9fa2">RDS Proxy</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c07a9d2c-c09d-40ae-b561-01b5a9837c63">Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#18e80203-e64e-45db-83d3-fd8a821f9143">Access Management</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6bb43dfb-866a-4281-9756-895ab9c8c39b">RDS Events</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#98ed6f50-0f17-4946-babb-e27a7aa7d7b4">Monitoring</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#33fa7656-c17d-4fbf-93de-a58589d16857">Logging</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e2a07150-f86a-4576-86ff-73293f271041">Maintenance &amp; Upgrade</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5d7d6e0f-3b16-4fba-bd95-d1113bd82220">Misc</a></div></nav><hr id="0572e18d-f7a6-4e27-9ea4-9c1dbfe0f0ac"/><h2 id="29499cbf-c679-4ee3-95fa-4ca9699167c7" class="">Intro</h2><ul id="4d966baf-eedc-4c07-9081-c4a4243a5d81" class="bulleted-list"><li style="list-style-type:disc">Regional Service</li></ul><ul id="e1028297-efc4-426c-b04b-cb0ef5ed795e" class="bulleted-list"><li style="list-style-type:disc">Supports Multi AZ</li></ul><ul id="ecf1b30d-4f6a-4bbd-b0d0-3fee0de9106a" class="bulleted-list"><li style="list-style-type:disc">AWS Managed SQL Database</li></ul><ul id="2f51972e-5043-4d43-9777-df8ca6f9e0b1" class="bulleted-list"><li style="list-style-type:disc">Supported Engines<ul id="d5c329ba-118d-492d-a6b0-cd27c1fbf85e" class="bulleted-list"><li style="list-style-type:circle">Postgres</li></ul><ul id="d7b4594d-7341-4dfa-b63e-564b0c8e6d94" class="bulleted-list"><li style="list-style-type:circle">MySQL</li></ul><ul id="02e3bfe6-7662-43bd-bb22-e8767aeb2d7f" class="bulleted-list"><li style="list-style-type:circle">MariaDB</li></ul><ul id="f254d0d0-3433-4e2d-bf69-e867eb8691b3" class="bulleted-list"><li style="list-style-type:circle">Oracle</li></ul><ul id="11c9d72c-ec82-40c9-b970-e4528d8440f7" class="bulleted-list"><li style="list-style-type:circle">Microsoft SQL Server</li></ul><ul id="8f8a3b71-6df0-4d52-9ba6-ed3ecc18512f" class="bulleted-list"><li style="list-style-type:circle">Aurora (AWS Proprietary database)</li></ul></li></ul><ul id="28ca9747-a529-4053-868b-9873ed60d099" class="bulleted-list"><li style="list-style-type:disc"><strong>Backed by EC2 instances with EBS storage</strong></li></ul><ul id="3c86a7ca-55db-4d07-943a-f355cefd96e7" class="bulleted-list"><li style="list-style-type:disc">We don&#x27;t have access to the underlying instance (cannot SSH into it)</li></ul><ul id="f1dc3091-295e-4830-836e-5a0baa649354" class="bulleted-list"><li style="list-style-type:disc"><strong>DB connection is made on port 3306</strong></li></ul><ul id="8103229a-ccd7-44ba-94ff-004a4de65436" class="bulleted-list"><li style="list-style-type:disc">SG is used for network security (must allow incoming TCP traffic on port 3306 from specific IPs)</li></ul><h2 id="85d1bbac-4223-41bb-836a-1c6ab44f5cbc" class="">Backups</h2><ul id="c9fef15e-db19-473e-b70b-3b00f5cbd011" class="bulleted-list"><li style="list-style-type:disc"><strong>Automated Backups</strong> (enabled by default)<ul id="114a070c-b79c-493d-93a0-13f743d47173" class="bulleted-list"><li style="list-style-type:circle">Daily full backup of the database (during the defined maintenance window)</li></ul><ul id="7b39aaec-7121-459f-b1f9-aec519c264ba" class="bulleted-list"><li style="list-style-type:circle">Backup retention: 7 days (max 35 days)</li></ul><ul id="023a446c-3550-4bcb-bdf2-56172dd77178" class="bulleted-list"><li style="list-style-type:circle"><strong>Transaction logs</strong> are backed-up every <strong>5 minutes</strong> for <strong>Point In Time Recovery (PITR)</strong></li></ul><ul id="ad921b80-823c-48f7-a94a-ec5a45556449" class="bulleted-list"><li style="list-style-type:circle"><strong>Automated backups happen in the same region</strong> (can happen in multiple AZs in a multi-AZ deployment)</li></ul></li></ul><ul id="6eacf156-3569-422b-afab-84e0c55f5036" class="bulleted-list"><li style="list-style-type:disc"><strong>DB Snapshots</strong>:<ul id="3b6edb01-3708-4681-9d95-9f35e9d992ba" class="bulleted-list"><li style="list-style-type:circle">Manually triggered</li></ul><ul id="b71b829f-6259-4b82-840a-6f7cb34d44ec" class="bulleted-list"><li style="list-style-type:circle">Backup retention: unlimited</li></ul><ul id="7edb83f9-e1af-431c-9676-37291cd9576b" class="bulleted-list"><li style="list-style-type:circle"><strong>Snapshots can be saved across regions</strong></li></ul></li></ul><h2 id="5ae873e7-fafd-4782-93dd-2a9ccc92ce1b" class="">Auto Scaling</h2><ul id="053c2b09-bbde-44f4-b734-378aeae16049" class="bulleted-list"><li style="list-style-type:disc">Automatically scales the RDS storage within the max limit</li></ul><ul id="de72b63e-f5b6-4c2f-bb5f-ed50dcb62f6c" class="bulleted-list"><li style="list-style-type:disc">Condition for automatic storage scaling:<ul id="91967553-19c4-4482-b49c-93041d2dc772" class="bulleted-list"><li style="list-style-type:circle">Free storage is less than 10% of allocated storage</li></ul><ul id="9f707a42-b250-4248-8511-53d9e3dfeb5d" class="bulleted-list"><li style="list-style-type:circle">Low-storage lasts at least 5 minutes</li></ul><ul id="4ea745be-0459-4ffa-92e4-23e3ad8368ce" class="bulleted-list"><li style="list-style-type:circle">6 hours have passed since last modification</li></ul></li></ul><h2 id="e5da0d14-9642-41f2-b0aa-1fb0fd57bcff" class="">Read Replicas</h2><div id="79bf8624-0eda-44c9-9244-4b090187fbda" class="column-list"><div id="42854bde-bca3-411b-820a-65d8301379e1" style="width:37.5%" class="column"><ul id="a6ab41b3-b959-4dd5-9c02-cae61d92cfb8" class="bulleted-list"><li style="list-style-type:disc">Allows us to scale the read operation (SELECT) on RDS</li></ul><ul id="24bdf057-be73-48ce-9bcf-a788b5aa0f88" class="bulleted-list"><li style="list-style-type:disc"><strong>Up to 5 read replicas</strong> (within AZ, cross AZ or cross region)</li></ul><ul id="9f9e78ad-c209-4596-be00-a3b16afd91e7" class="bulleted-list"><li style="list-style-type:disc"><strong>Asynchronous Replication</strong> (seconds)</li></ul><ul id="05e809fc-7aa2-448a-a552-95bb55a9e4c7" class="bulleted-list"><li style="list-style-type:disc"><strong>Replicas can be promoted to their own DB</strong></li></ul><ul id="2299e2b5-e2d6-4d56-80ff-28b445972af5" class="bulleted-list"><li style="list-style-type:disc"><strong>Applications must update the connection string to leverage read replicas</strong></li></ul></div><div id="dc3a8d03-c5df-4980-a4d4-1fedadf74261" style="width:62.5%" class="column"><figure id="cb7dadfc-2cbe-4e83-b2ed-e598c4beaa33" class="image"><a href="RDS%201b0fd140cfa248db9bdc56c4c0607583/Untitled.png"><img style="width:1160px" src="RDS%201b0fd140cfa248db9bdc56c4c0607583/Untitled.png"/></a></figure></div></div><ul id="fe3ee6a6-8fd6-479c-ac41-856164a63a97" class="bulleted-list"><li style="list-style-type:disc">Network fee for replication<ul id="3a62be63-a186-4f4e-ab27-b91328d825ba" class="bulleted-list"><li style="list-style-type:circle">Same region: free</li></ul><ul id="6445d302-5f83-4cb7-bef5-ad61a9c55e40" class="bulleted-list"><li style="list-style-type:circle">Cross region: paid</li></ul></li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="577ac99f-5e31-4cf4-9f58-e2543fa4f254"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">You can create a read replica as a Multi-AZ DB instance. A standby of the replica will be created in another AZ for failover support for the replica.</div></figure><h2 id="be64495f-7260-4094-a98e-772b7b49bd4d" class="">Multi AZ</h2><div id="26d987e6-2456-4c33-945d-e1ae60200ae6" class="column-list"><div id="31afd53f-7f65-457f-b4cf-16c2d344990e" style="width:56.25%" class="column"><ul id="39a49017-0524-45f2-a76c-8d34243d12a7" class="bulleted-list"><li style="list-style-type:disc">Increase availability of the RDS database by replicating it to another AZ</li></ul><ul id="cd9dce1c-00d1-4c2f-b365-b7fc1a51f474" class="bulleted-list"><li style="list-style-type:disc"><strong>Synchronous Replication</strong></li></ul><ul id="6001d614-d435-4b3c-b31e-29fb7652cadf" class="bulleted-list"><li style="list-style-type:disc"><strong>Connection string does not require to be updated</strong> (both the databases can be accessed by one DNS name, which allows for automatic DNS failover to standby database)</li></ul><ul id="7cbd22ff-e9f2-4c96-b879-ebb2959eed67" class="bulleted-list"><li style="list-style-type:disc">When failing over, <strong>RDS flips the CNAME</strong> record for the DB instance to point at the standby, which is in turn promoted to become the new primary.</li></ul></div><div id="d8e9489d-f82f-459a-9a49-1778c3bbcf66" style="width:43.74999999999999%" class="column"><figure id="e3f0c73d-351f-4f86-8453-c771e7dcc930" class="image"><a href="RDS%201b0fd140cfa248db9bdc56c4c0607583/Untitled%201.png"><img style="width:820px" src="RDS%201b0fd140cfa248db9bdc56c4c0607583/Untitled%201.png"/></a></figure></div></div><ul id="3ade1740-926f-4705-971a-0c8d847c0bd4" class="bulleted-list"><li style="list-style-type:disc"><strong>Cannot be used for scaling as the standby database cannot take read/write operation while the master database is still active.</strong></li></ul><h2 id="65d21b27-03d1-4951-a612-5d44304a9fa2" class="">RDS Proxy</h2><div id="e8de3c50-e066-430d-b9ef-045e90a5f5b8" class="column-list"><div id="d971c4aa-0b5b-4738-9a82-f3cae3ae45eb" style="width:62.5%" class="column"><ul id="5511188d-71ec-4ad7-a416-05c8c3ea175c" class="bulleted-list"><li style="list-style-type:disc"><strong>Serverless</strong>, auto-scaling, <strong>multi-AZ</strong> proxy for RDS</li></ul><ul id="028cf117-ba76-44e6-9994-260337b842e7" class="bulleted-list"><li style="list-style-type:disc">The applications connect to the RDS proxy instead of connecting directly to the RDS. The <strong>RDS proxy pools and shares DB connections among the applications</strong>.</li></ul><ul id="f14fb4ed-a9bc-4b5d-b019-d37edbd76f47" class="bulleted-list"><li style="list-style-type:disc">Reduces CPU and RAM requirements of the DB when a large number of applications need to connect to the DB</li></ul><ul id="9f3d936c-7ced-4821-b125-95ca02acfab1" class="bulleted-list"><li style="list-style-type:disc"><strong>Minimizes open connections and timeouts</strong></li></ul><ul id="704d7387-8f21-4782-ae5d-556ebfaa4a7d" class="bulleted-list"><li style="list-style-type:disc"><strong>DB failover is handled by RDS proxy</strong> (reduces failover time by up to 66%)</li></ul><ul id="2c5c4616-cb76-4970-b085-19246f8ae875" class="bulleted-list"><li style="list-style-type:disc">Supports <strong>RDS (MySQL, PostgreSQL, MariaDB)</strong> and <strong>Aurora (MySQL, PostgreSQL)</strong></li></ul></div><div id="f75ba77d-5875-4b2e-9b54-427b650630e9" style="width:37.49999999999999%" class="column"><figure id="1c4945f1-7a68-4619-b8e3-454efa5b9f72" class="image"><a href="RDS%201b0fd140cfa248db9bdc56c4c0607583/Untitled%202.png"><img style="width:586px" src="RDS%201b0fd140cfa248db9bdc56c4c0607583/Untitled%202.png"/></a></figure></div></div><ul id="d27a6e39-9074-4fe0-a039-d64e6e089341" class="bulleted-list"><li style="list-style-type:disc"><strong>No code changes required</strong> (just update the connection URL)</li></ul><ul id="48e3c418-8e2b-4791-8b3a-026d710264bf" class="bulleted-list"><li style="list-style-type:disc"><strong>Allows to enforce IAM DB Auth</strong> (credentials can be stored in Secrets Manager)</li></ul><ul id="44e12707-0f8d-46af-b8fa-f0517053eed2" class="bulleted-list"><li style="list-style-type:disc"><strong>RDS Proxy can only be accessed from within the VPC</strong></li></ul><h2 id="c07a9d2c-c09d-40ae-b561-01b5a9837c63" class="">Encryption</h2><ul id="dcc6c143-51cd-439c-9e7d-f308184bfa61" class="bulleted-list"><li style="list-style-type:disc"><strong>At rest encryption</strong><ul id="b133bad8-fdc0-40a6-a882-02c214edc42c" class="bulleted-list"><li style="list-style-type:circle">KMS AES-256 encryption</li></ul><ul id="6b028ad9-ead1-42ff-b48c-7871572764c5" class="bulleted-list"><li style="list-style-type:circle">Encrypted DB ⇒ Encrypted Snapshots, Encrypted Replicas and vice versa</li></ul></li></ul><ul id="0ee31010-5326-462c-89ff-407e797c58c4" class="bulleted-list"><li style="list-style-type:disc"><strong>In flight encryption</strong><ul id="14d5d518-94be-4aac-82c1-24a29312813b" class="bulleted-list"><li style="list-style-type:circle"><strong>SSL certificates</strong></li></ul><ul id="99d055ce-2fef-4373-bfcd-de4f68715280" class="bulleted-list"><li style="list-style-type:circle">Force all connections to your DB instance to use SSL by setting the <code>rds.force_ssl</code> parameter to <code>true</code></li></ul><ul id="c3c49827-f026-4606-bcdc-fb071ca14ea2" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">To enable encryption in transit, download the </mark><mark class="highlight-yellow_background"><strong>AWS-provided root certificates</strong></mark><mark class="highlight-yellow_background"> and use them when connecting to DB</mark></li></ul></li></ul><ul id="1a051980-46f5-45b3-b0ce-bdbc3d561a28" class="bulleted-list"><li style="list-style-type:disc">To encrypt an un-encrypted RDS database:<ul id="4aa06972-f669-45fc-ac81-0fc80e1c0874" class="bulleted-list"><li style="list-style-type:circle">Create a snapshot of the un-encrypted database</li></ul><ul id="c5fa1015-f29e-45f8-ab67-b918ad06e96c" class="bulleted-list"><li style="list-style-type:circle">Copy the snapshot and enable encryption for the snapshot</li></ul><ul id="6ba0426c-aba5-4ba0-879c-b8652c70d93e" class="bulleted-list"><li style="list-style-type:circle">Restore the database from the encrypted snapshot</li></ul><ul id="e18d2a1e-5430-45e1-ac46-1103922b2839" class="bulleted-list"><li style="list-style-type:circle">Migrate applications to the new database, and delete the old database</li></ul></li></ul><ul id="3691005e-e379-471f-b821-cdcbad3d5379" class="bulleted-list"><li style="list-style-type:disc">To create an encrypted cross-region read replica from a non-encrypted master:<ul id="7fa3fe93-d7e3-4361-9f2b-e173c49988c5" class="bulleted-list"><li style="list-style-type:circle">Encrypt a snapshot from the unencrypted master DB instance</li></ul><ul id="c5cf644b-e56f-408a-a6f8-3ca6996029bb" class="bulleted-list"><li style="list-style-type:circle">Create a new encrypted master DB instance</li></ul><ul id="d31df592-bb60-44d7-b52a-6c85c89c93e4" class="bulleted-list"><li style="list-style-type:circle">Create an encrypted cross-region Read Replica from the new encrypted master</li></ul></li></ul><h2 id="18e80203-e64e-45db-83d3-fd8a821f9143" class="">Access Management</h2><ul id="e7f6bfd9-15af-4f3a-8999-290712894372" class="bulleted-list"><li style="list-style-type:disc">Username and Password can be used to login into the database</li></ul><div id="121d3641-8d13-4ed3-b61e-8b83443eea65" class="column-list"><div id="334cfdd2-ba3d-441f-af49-45db5fef9908" style="width:50%" class="column"><ul id="21808f2f-e050-4ebc-9ef5-efdcb1ad4b5d" class="bulleted-list"><li style="list-style-type:disc">EC2 instances &amp; Lambda functions should access the DB using <strong>IAM DB Authentication</strong> (<strong>AWSAuthenticationPlugin</strong> with <strong>IAM</strong>) - <strong>token based access</strong><ul id="b9f303f2-d798-4919-86b8-1d1ddc6551ec" class="bulleted-list"><li style="list-style-type:circle">EC2 instance or Lambda function has an IAM role which allows is to make an API call to the RDS service to get the <strong>auth token</strong> which it uses to access the MySQL database.</li></ul><ul id="2d56c197-369f-458b-b5d6-9ece284b3043" class="bulleted-list"><li style="list-style-type:circle">Only works with <strong>MySQL</strong> and <strong>PostgreSQL</strong></li></ul><ul id="1f58bbb7-c09a-4572-bf9d-a91db3a316b3" class="bulleted-list"><li style="list-style-type:circle">Auth token is valid for <strong>15 mins</strong></li></ul><ul id="a9593768-0869-4ba3-89ed-b730adb1134e" class="bulleted-list"><li style="list-style-type:circle">Network traffic is encrypted in-flight using SSL</li></ul><ul id="5b0af3d7-acd0-4c1f-862d-f27b747e869b" class="bulleted-list"><li style="list-style-type:circle"><strong>Central access management using IAM</strong> (instead of doing it for each DB individually)</li></ul></li></ul></div><div id="ae0aff44-743b-46dc-8809-f975472f633c" style="width:50%" class="column"><figure id="3b6692e3-0f2a-4dbb-a275-23c8eca81055" class="image"><a href="RDS%201b0fd140cfa248db9bdc56c4c0607583/Untitled%203.png"><img style="width:706px" src="RDS%201b0fd140cfa248db9bdc56c4c0607583/Untitled%203.png"/></a></figure></div></div><ul id="98306f43-4ad1-4334-8091-4955caa91867" class="bulleted-list"><li style="list-style-type:disc">EC2 &amp; Lambda can also get DB credentials from Parameter Store to authenticate to the DB - <strong>credentials based access</strong></li></ul><h2 id="6bb43dfb-866a-4281-9756-895ab9c8c39b" class="">RDS Events</h2><ul id="7b86d65d-9c1c-4d1a-9ad0-67d8275377ef" class="bulleted-list"><li style="list-style-type:disc">RDS events only provide operational events on the DB instance (not the data)</li></ul><ul id="56acc2b9-9110-45d7-86e9-50e5df8f4aa3" class="bulleted-list"><li style="list-style-type:disc">To capture data modification events, use <strong>native functions</strong> or <strong>stored procedures</strong> to invoke a <strong>Lambda</strong> function.</li></ul><h2 id="98ed6f50-0f17-4946-babb-e27a7aa7d7b4" class="">Monitoring</h2><ul id="d651a474-4e4d-4db5-a9f6-32ddf4c9b1d9" class="bulleted-list"><li style="list-style-type:disc"><strong>CloudWatch Metrics for RDS</strong><ul id="b08cb09b-314e-4eb7-b806-65b0922ef757" class="bulleted-list"><li style="list-style-type:circle">Gathers metrics from the <strong>hypervisor</strong> of the DB instance<ul id="5ed1c6b0-f52b-420e-8b6d-d7189578baa0" class="bulleted-list"><li style="list-style-type:square">CPU Utilization</li></ul><ul id="f0c8627a-c336-450c-92fd-26e9f9dfacff" class="bulleted-list"><li style="list-style-type:square">Database Connections</li></ul><ul id="93becdc7-5890-4167-87d2-bd95df4e5fc1" class="bulleted-list"><li style="list-style-type:square">Freeable Memory</li></ul></li></ul></li></ul><ul id="9b072da6-7796-4361-bef7-61a4472e58f3" class="bulleted-list"><li style="list-style-type:disc"><strong>Enhanced Monitoring</strong><ul id="f586ac6c-1f60-47ad-801f-68625ec81d52" class="bulleted-list"><li style="list-style-type:circle">Gathers metrics from an agent running on the RDS instance<ul id="41a80d9b-870f-4780-8d72-8a7cd561898d" class="bulleted-list"><li style="list-style-type:square">OS processes</li></ul><ul id="02ce3fce-cb9b-4cda-9d40-c75a3b6009ae" class="bulleted-list"><li style="list-style-type:square">RDS child processes</li></ul></li></ul><ul id="da1ae50b-849d-4309-b976-752b86bd0f53" class="bulleted-list"><li style="list-style-type:circle">Used to monitor different <strong>processes or threads on a DB instance</strong> (ex. percentage of the CPU bandwidth and total memory consumed by each database process in your RDS instance</li></ul></li></ul><h2 id="33fa7656-c17d-4fbf-93de-a58589d16857" class="">Logging</h2><ul id="5f929306-38c4-490e-9fa7-4f7e102c7acc" class="bulleted-list"><li style="list-style-type:disc"><strong>Error Logs</strong> - enabled by default</li></ul><ul id="feda7cf6-3192-4fd4-9f4b-42d0aff34323" class="bulleted-list"><li style="list-style-type:disc"><strong>Slow Query Logs</strong> - logs queries that took longer to execute (can be enabled)</li></ul><ul id="45fcda53-8c7c-4873-b04b-75ef6fe8ff41" class="bulleted-list"><li style="list-style-type:disc"><strong>General Logs</strong> - can be enabled</li></ul><ul id="1a8a5fe3-7af0-4b40-babb-5046fc53ac80" class="bulleted-list"><li style="list-style-type:disc"><strong>Audit Logs</strong> - can be enabled</li></ul><h2 id="e2a07150-f86a-4576-86ff-73293f271041" class="">Maintenance &amp; Upgrade</h2><p id="5ee5e073-6df3-40bf-94e3-cf7ba717ff88" class="">Any database engine level upgrade for an RDS DB instance, with Multi-AZ deployment, triggers both the primary and standby DB instances to be upgraded at the same time. This causes <strong>downtime</strong> until the upgrade is complete. This is why it should be done during the maintenance window.</p><h2 id="5d7d6e0f-3b16-4fba-bd95-d1113bd82220" class="">Misc</h2><ul id="ba75a93f-db2a-4dfb-a1ed-e11bab973232" class="bulleted-list"><li style="list-style-type:disc">RDS supports using <strong>Transparent Data Encryption (TDE)</strong> to encrypt stored data on your DB instances running Microsoft SQL Server. TDE automatically encrypts data before it is written to storage, and automatically decrypts data when the data is read from storage.</li></ul></div></article></body></html>

@@ -1,0 +1,676 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>KMS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="57747982-4845-4e1c-b6e5-7275ad7f4171" class="page sans"><header><h1 class="page-title">KMS</h1><p class="page-description"></p></header><div class="page-body"><nav id="0c109c79-82de-4160-a72e-da9a864fb52f" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e1f1c1ba-4754-4d95-9fe8-620d6d6959e7">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#957a914a-a396-41b7-9d16-0dd4a1b4e083">KMS Keys (formerly Customer Master Key)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#618ff043-9092-409d-bf54-a705f13ff796">Symmetric keys</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7c081794-f0a4-47c2-8fa2-5e815b6e9bd3">Asymmetric Keys</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5e712890-10cf-4624-81a3-9db0b8d1cfdf">Key Policies</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#830f09b5-ee90-4add-93e6-1843c1cbaa1f"><strong>Default Key Policy</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6f949bae-7642-4ef4-a5e4-47d5ef1bfe6d"><strong>Custom Key Policy</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0bdbfe20-fc00-497e-aa9d-8286b6185596">Cross-region Encrypted Snapshot Migration</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#499bee9b-7e2e-4abb-abfb-5ada8160625a">Cross-account Encrypted Snapshot Migration</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#77c1eb2b-d28f-40d8-9429-927e72e9a238">Envelope Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b61ad5e1-89e8-4704-9c23-fb8012c94f7e">Encryption Phase</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cdaa52be-5758-4e01-a1a0-b9aad40cfd33">Decryption Phase</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#21ddc5cd-bbb6-4545-9653-74355f154325">APIs</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d7bf90c8-f324-46c3-aab1-3ca4e599945f">AWS Encryption SDK</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e1a7c4f9-6062-4667-92b3-15a6fce377a0">Limits</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3d7a65b7-712f-4237-a0de-1849c892d4a4">Supported Key Operations</a></div></nav><hr id="f80bbc97-6961-41e3-a1a2-dc4a91305964"/><h2 id="e1f1c1ba-4754-4d95-9fe8-620d6d6959e7" class="">Intro</h2><ul id="40bda83e-ef22-4347-9d77-9313279e7e2a" class="bulleted-list"><li style="list-style-type:disc"><strong>Regional service (keys are bound to a region)</strong></li></ul><ul id="a6941c70-0735-49e4-b098-298d9ac13628" class="bulleted-list"><li style="list-style-type:disc">Provides encryption and decryption of data and manages keys required for it</li></ul><ul id="ba16b941-2a78-4d71-aa89-c079bb6ec223" class="bulleted-list"><li style="list-style-type:disc">Encrypted secrets can be stored in the code or environment variables</li></ul><ul id="37ce90b0-13a5-4627-b522-292cc50b3648" class="bulleted-list"><li style="list-style-type:disc"><strong>Encrypt up to 4KB of data per API call (if data &gt; 4 KB, use envelope encryption)</strong></li></ul><ul id="e2e88c75-29e8-4659-9a95-c4ceee1bead1" class="bulleted-list"><li style="list-style-type:disc">Integrated with lAM for authorization</li></ul><ul id="e35ae3a4-efac-4dcb-8974-84e93d3947bb" class="bulleted-list"><li style="list-style-type:disc">Audit key usage with CloudTrail</li></ul><ul id="335bf134-b01a-4255-97c9-3aaea457e87f" class="toggle"><li><details open=""><summary>Need to set <strong>IAM Policy &amp; Key Policy</strong> to allow a user or role to access a KMS key (encrypt or decrypt data using the key)</summary><figure id="a4ae890b-6aa0-43d6-8bfd-d568e90a17e1" class="image"><a href="KMS%205774798248454e1cb6e57275ad7f4171/Untitled.png"><img style="width:1666px" src="KMS%205774798248454e1cb6e57275ad7f4171/Untitled.png"/></a></figure></details></li></ul><ul id="09fae8bf-0d47-4f78-b4ec-37b0dfaa2d86" class="bulleted-list"><li style="list-style-type:disc">Pay for the number of API calls made to KMS</li></ul><ul id="b5592efe-9d58-4108-9c2e-c99c05f5a74f" class="bulleted-list"><li style="list-style-type:disc"><strong>Does not support versioning of keys</strong> (cannot get back the old key)</li></ul><h2 id="957a914a-a396-41b7-9d16-0dd4a1b4e083" class="">KMS Keys (formerly Customer Master Key)</h2><h3 id="618ff043-9092-409d-bf54-a705f13ff796" class="">Symmetric keys</h3><ul id="183cca4b-af52-4a84-986c-9410a2184ff7" class="bulleted-list"><li style="list-style-type:disc">AES-256 encryption</li></ul><ul id="5a6a1da1-1d5a-4073-97fc-dd4ce0305a88" class="bulleted-list"><li style="list-style-type:disc"><strong>Must call KMS API to encrypt data</strong></li></ul><ul id="895b4212-0d31-4f15-94de-612af3d49df7" class="bulleted-list"><li style="list-style-type:disc">Necessary for Envelope Encryption</li></ul><ul id="9edc250f-ad32-447d-9fac-95da1c12e3f8" class="bulleted-list"><li style="list-style-type:disc">Two types:<ul id="1da838ca-d169-47ea-aab8-e1bc5c680026" class="bulleted-list"><li style="list-style-type:circle"><strong>AWS Managed Keys</strong> (free)<ul id="a7704735-22c9-4f57-9e98-d674a54158a6" class="bulleted-list"><li style="list-style-type:square">Default KMS key for each supported service</li></ul><ul id="158dac6c-cdc9-4ef8-b6c0-cc1dba244858" class="bulleted-list"><li style="list-style-type:square">Fully managed by AWS (cannot view, rotate or delete them)</li></ul><ul id="05e9fc8b-bbbe-45cc-a172-b53e34ef127f" class="bulleted-list"><li style="list-style-type:square">Automatic yearly rotation</li></ul></li></ul><ul id="dcc297fe-61fc-416b-a6bf-3e5e1b93bd9a" class="bulleted-list"><li style="list-style-type:circle"><strong>Customer Managed Keys</strong> (1$ per month)<ul id="ea462b82-5a98-4f8f-ab1b-3e47df73815a" class="bulleted-list"><li style="list-style-type:square">Generated in KMS<ul id="c2ce692b-404e-43b2-b8a3-3e6408b77f72" class="bulleted-list"><li style="list-style-type:disc">Optional automatic yearly rotation</li></ul></li></ul><ul id="61acb06a-af24-4af1-b0c3-4875fe2d8f86" class="bulleted-list"><li style="list-style-type:square">Generated and imported from outside<ul id="7b86f110-c9fe-4b02-a5b5-7c51f022bd4c" class="bulleted-list"><li style="list-style-type:disc">Must be 256-bit symmetric key</li></ul><ul id="ee2046dd-c03b-465d-bf9c-a28373c71657" class="bulleted-list"><li style="list-style-type:disc">Not recommended</li></ul><ul id="0b7cf783-6615-4a3d-9f84-93ca8060c25f" class="bulleted-list"><li style="list-style-type:disc">Manual rotation only</li></ul></li></ul><ul id="234a3932-1e02-472e-ab7f-373fafa0e885" class="bulleted-list"><li style="list-style-type:square">Deletion has a waiting period (<strong>pending deletion state</strong>) between <strong>7 - 30 days</strong> (default 30 days). The key can be recovered during the pending deletion state.</li></ul></li></ul></li></ul><h3 id="7c081794-f0a4-47c2-8fa2-5e815b6e9bd3" class="">Asymmetric Keys</h3><ul id="4306de1d-76a7-49cd-90aa-f0a06cbcdae3" class="bulleted-list"><li style="list-style-type:disc">Public (Encrypt) and Private Key (Decrypt) pair</li></ul><ul id="8586fcd6-a83f-48e1-baca-ae240e1d28cb" class="bulleted-list"><li style="list-style-type:disc">Used for Encrypt/Decrypt, or Sign/Verify operations</li></ul><ul id="71fa76a1-e65f-44b4-9654-b4669e2a265b" class="bulleted-list"><li style="list-style-type:disc">The public key is downloadable, but you can’t access the Private Key unencrypted</li></ul><ul id="a3c621c8-f542-4c65-a830-b7c53f4454d9" class="bulleted-list"><li style="list-style-type:disc"><strong>No need to call the KMS API to encrypt data</strong> (data can be encrypted by the client)</li></ul><ul id="8ee4096c-bac8-4741-9ba6-2d09e2cefc98" class="bulleted-list"><li style="list-style-type:disc"><strong>Not eligible for automatic rotation</strong> (use manual rotation)</li></ul><ul id="2cf896e0-a709-4e84-aff9-13b25a20cd58" class="bulleted-list"><li style="list-style-type:disc">Use case: encryption outside of AWS by users who can’t call the KMS API</li></ul><h2 id="5e712890-10cf-4624-81a3-9db0b8d1cfdf" class="">Key Policies</h2><ul id="82aca4cf-a376-42df-9a75-b8433dd8a39f" class="bulleted-list"><li style="list-style-type:disc"><strong>Cannot access KMS keys without a key policy attached to them</strong></li></ul><h3 id="830f09b5-ee90-4add-93e6-1843c1cbaa1f" class=""><strong>Default Key Policy</strong></h3><ul id="5da71e9e-c429-401f-bc45-fcaba18c26b7" class="bulleted-list"><li style="list-style-type:disc">Created by default if you don’t provide a custom key policy</li></ul><ul id="27cf54c8-f13b-4330-bbc7-4d385cfa5a57" class="bulleted-list"><li style="list-style-type:disc">Full access to the key for any user or role in the account (most permissible)<figure id="f6ca9391-2c4a-4f01-ad2d-947b40d0b6ee" class="image"><a href="KMS%205774798248454e1cb6e57275ad7f4171/Untitled%201.png"><img style="width:336px" src="KMS%205774798248454e1cb6e57275ad7f4171/Untitled%201.png"/></a></figure></li></ul><h3 id="6f949bae-7642-4ef4-a5e4-47d5ef1bfe6d" class=""><strong>Custom Key Policy</strong></h3><ul id="e06d6ebe-21d0-48a9-a5a5-80205b428d21" class="bulleted-list"><li style="list-style-type:disc"><strong>Can only be applied to customer owned keys</strong></li></ul><ul id="bb268a6f-8e1f-4cd4-a6f1-5aa517a5e102" class="bulleted-list"><li style="list-style-type:disc">Define users, roles that can access the KMS key</li></ul><ul id="4bfbae9b-cbe2-4473-8c85-8a48544b0722" class="bulleted-list"><li style="list-style-type:disc">Define who can administer the key</li></ul><ul id="26aed30b-f50c-480c-b518-f2fd5e79f7c5" class="bulleted-list"><li style="list-style-type:disc">Useful for <strong>cross-account access</strong> of your KMS key</li></ul><h2 id="0bdbfe20-fc00-497e-aa9d-8286b6185596" class="">Cross-region Encrypted Snapshot Migration</h2><figure id="525259ba-3b45-41ff-a0e2-b672d34b7324" class="image"><a href="KMS%205774798248454e1cb6e57275ad7f4171/Untitled%202.png"><img style="width:672px" src="KMS%205774798248454e1cb6e57275ad7f4171/Untitled%202.png"/></a></figure><ul id="4afe458c-a087-4529-8388-d16e41ec785f" class="bulleted-list"><li style="list-style-type:disc">Create an encrypted snapshot of the EBS volume (can be decrypted by the same key)</li></ul><ul id="996daf2d-ff8e-49c4-b9c3-63b08b7cc841" class="bulleted-list"><li style="list-style-type:disc">Copy the encrypted snapshot to another region with <strong>re-encryption option</strong> using a new key in the new region (keys are bound to a region)</li></ul><ul id="46fa1bdb-9a27-41fe-a64e-966c161f690a" class="bulleted-list"><li style="list-style-type:disc">Restore the EBS volume in the new region.</li></ul><h2 id="499bee9b-7e2e-4abb-abfb-5ada8160625a" class="">Cross-account Encrypted Snapshot Migration</h2><ul id="793cc44d-dbd3-4eab-ae6e-95b636306f72" class="toggle"><li><details open=""><summary>Attach a Key Policy to the main key to authorize access to an IAM role in the target account (cross-account access)</summary><figure id="a406a38d-63bc-4272-a851-43ec3af7fc28" class="image"><a href="KMS%205774798248454e1cb6e57275ad7f4171/Untitled%203.png"><img style="width:384px" src="KMS%205774798248454e1cb6e57275ad7f4171/Untitled%203.png"/></a></figure></details></li></ul><ul id="645f9405-8b16-479b-9df5-8cc2a739db0b" class="bulleted-list"><li style="list-style-type:disc">Share the encrypted snapshot with the new account</li></ul><ul id="6c0d6905-b59d-4b9b-b058-c3fcb3f8e6f7" class="bulleted-list"><li style="list-style-type:disc">In the target account, create a copy of the snapshot (decryption will use the main key)</li></ul><ul id="503c8c29-08e9-4caf-87e3-b72028d450cb" class="bulleted-list"><li style="list-style-type:disc">Encrypt it with a new KMS Key in the target account</li></ul><h2 id="77c1eb2b-d28f-40d8-9429-927e72e9a238" class="">Envelope Encryption</h2><h3 id="b61ad5e1-89e8-4704-9c23-fb8012c94f7e" class="">Encryption Phase</h3><figure id="ff3b7102-f46a-4caa-b1f5-a064d65614b5" class="image"><a href="KMS%205774798248454e1cb6e57275ad7f4171/Untitled%204.png"><img style="width:1800px" src="KMS%205774798248454e1cb6e57275ad7f4171/Untitled%204.png"/></a></figure><p id="d4875c12-d7f9-4144-9ad3-4c1646d09b2b" class="">To encrypt a file larger than 4 KB, we call the <code>GenerateDataKey</code> API which returns a <strong>Data Encryption Key (DEK)</strong> in both plaintext and encrypted form (using the <mark class="highlight-yellow_background">KMS key specified in the command</mark>, <mark class="highlight-yellow_background">requires the user to have IAM permissions to encrypt using the KMS key</mark>). The DEK (symmetric) is used to <strong>encrypt the large file client-side</strong>. Then, an envelope is created which contains the encrypted file as well as the encrypted DEK. The data is now encrypted and the the plaintext DEK can be discarded. </p><h3 id="cdaa52be-5758-4e01-a1a0-b9aad40cfd33" class="">Decryption Phase</h3><figure id="cdb43c11-6684-46ba-8399-9af93c11a2bf" class="image"><a href="KMS%205774798248454e1cb6e57275ad7f4171/Untitled%205.png"><img style="width:1784px" src="KMS%205774798248454e1cb6e57275ad7f4171/Untitled%205.png"/></a></figure><p id="478dd8aa-abfd-4631-9478-c531a2f8a44a" class="">The encrypted DEK (&lt; 4 KB) is extracted from the envelope and passed to the <code>Decrypt</code> API which returns the decrypted DEK (only if the user has permissions to use the KMS key to decrypt data). The plaintext DEK is then used to <strong>decrypt the large file client-side</strong>.</p><h2 id="21ddc5cd-bbb6-4545-9653-74355f154325" class="">APIs</h2><ul id="5bb6bf47-581b-4976-897c-17bb36b814f4" class="bulleted-list"><li style="list-style-type:disc"><code>Encrypt</code> - encrypt up to 4 KB of data</li></ul><ul id="27e79ee3-7b3e-4674-baf1-2beb3136a6d2" class="bulleted-list"><li style="list-style-type:disc"><code>GenerateDataKey</code> - generate a unique <strong>symmetric </strong>DEK for <strong>Envelope Encryption</strong> (returns both plaintext and encrypted data key using the KMS key specified in the command)</li></ul><ul id="9786c9c4-36ae-48e4-b9c0-51cb9d1c5508" class="bulleted-list"><li style="list-style-type:disc"><code>GenerateDataKeyWithoutPlaintext</code> - generate a DEK to use in the <strong>future</strong> (returns the encrypted DEK only)</li></ul><ul id="d6a4bfd6-ae52-42e9-aeaf-159594703a80" class="bulleted-list"><li style="list-style-type:disc"><code>Decrypt</code> - decrypt up to 4 KB of data (could be DEK)</li></ul><ul id="7b580eb2-ed40-4a07-a500-349ed8a07851" class="bulleted-list"><li style="list-style-type:disc"><code>GenerateRandom</code> - generate a random byte string.</li></ul><h2 id="d7bf90c8-f324-46c3-aab1-3ca4e599945f" class="">AWS Encryption SDK</h2><ul id="b86710fb-13d7-45d1-a7fc-c6723d00367a" class="bulleted-list"><li style="list-style-type:disc"><strong>Implements Envelope Encryption</strong> (difficult to implement manually)</li></ul><ul id="dc89050c-d995-4738-ac66-a8d6b1cab374" class="bulleted-list"><li style="list-style-type:disc">Available in Java, Python, C, JS and also as a CLI tool</li></ul><ul id="4b91361f-cb26-41bc-9869-3318113b5595" class="bulleted-list"><li style="list-style-type:disc"><strong>Data Key Caching</strong><ul id="d590953c-8e03-4679-b214-6a5995b64541" class="bulleted-list"><li style="list-style-type:circle">Re-use data keys (DEK) (instead of generating them for each encryption)</li></ul><ul id="87858111-b7e5-477c-a288-fd8a688bc101" class="bulleted-list"><li style="list-style-type:circle"><strong>Reduces the number of API calls to KMS</strong> (cheaper) but <mark class="highlight-yellow_background">not as secure as generating distinct data keys for each encryption.</mark></li></ul><ul id="aee2f80d-a1fa-44b1-bab5-66b575641c7b" class="bulleted-list"><li style="list-style-type:circle">Leverages <code>LocalCryptoMaterialsCache</code> feature</li></ul></li></ul><h2 id="e1a7c4f9-6062-4667-92b3-15a6fce377a0" class="">Limits</h2><ul id="9faec0ab-d687-4a13-a735-3c8f1e37b22e" class="bulleted-list"><li style="list-style-type:disc">All cryptographic operations within the AWS account that leverage keys managed by KMS (eg. SSE-KMS) share the same request quota (on a per second basis)</li></ul><ul id="c2c932dc-d44a-4551-832a-731e5823d39d" class="bulleted-list"><li style="list-style-type:disc">Exceeding the request quota gives <code>ThrottlingException</code> (status code: 400). Possible solutions:<ul id="c3f18a18-4db1-4588-b71c-8ff0e1b25894" class="bulleted-list"><li style="list-style-type:circle">Exponential backoff</li></ul><ul id="4f232ccc-cb08-4887-8b31-64076caf9742" class="bulleted-list"><li style="list-style-type:circle">For <code>GenerateDataKey</code>, <strong>enable DEK Caching</strong> in Encryption SDK</li></ul><ul id="80ae94ec-43ec-4673-8744-68b364551493" class="bulleted-list"><li style="list-style-type:circle">Request quota increase</li></ul></li></ul><ul id="e0a6c437-c66c-435b-aa64-b8421bbd72b7" class="bulleted-list"><li style="list-style-type:disc">Example: if a lot of objects are being uploaded to an S3 bucket with SSE-KMS, there can be performance degradation due to KMS API throttling.</li></ul><h2 id="3d7a65b7-712f-4237-a0de-1849c892d4a4" class="">Supported Key Operations</h2><ul id="d8891d3d-46ab-4156-864b-533a0eba9294" class="bulleted-list"><li style="list-style-type:disc">Create symmetric and asymmetric keys</li></ul><ul id="7404c198-a64b-4c5d-a4a5-c8cefffce50d" class="bulleted-list"><li style="list-style-type:disc">Import your own symmetric key</li></ul><ul id="43ed2533-c6ce-4157-b3cf-8dd0b184b307" class="bulleted-list"><li style="list-style-type:disc">Create both symmetric and asymmetric data key pairs</li></ul><ul id="82ace677-cdc4-4dbf-958d-27ef2eadb658" class="bulleted-list"><li style="list-style-type:disc">Define which IAM users and roles can manage keys</li></ul><ul id="ee72fa12-4d71-4837-9aba-59633b977f3a" class="bulleted-list"><li style="list-style-type:disc">Define which IAM users and roles can use keys to encrypt and decrypt data</li></ul><ul id="220ec4f5-20a0-40d4-b1a0-c471b156613c" class="bulleted-list"><li style="list-style-type:disc">Choose to have keys that were generated by the service to be automatically rotated on an annual basis.</li></ul><ul id="d7f958ac-acbd-465a-a8f0-af6a823b2a49" class="bulleted-list"><li style="list-style-type:disc"><strong>Temporarily disable keys</strong> so they cannot be used by anyone</li></ul><ul id="4aa7c719-8ac0-4ab3-b2be-5cf3c45b6d1a" class="bulleted-list"><li style="list-style-type:disc"><strong>Re-enable disabled keys</strong></li></ul><ul id="09b1a69a-639e-4128-8900-f9dac180bc00" class="bulleted-list"><li style="list-style-type:disc"><strong>Schedule deletion of keys</strong></li></ul><ul id="143123f2-55a4-4bc1-bbb1-9baf5be06363" class="bulleted-list"><li style="list-style-type:disc"><strong>Audit key usage</strong> using CloudTrail</li></ul></div></article></body></html>

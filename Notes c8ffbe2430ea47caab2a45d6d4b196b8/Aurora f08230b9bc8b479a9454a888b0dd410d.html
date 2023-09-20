@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Aurora</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f08230b9-bc8b-479a-9454-a888b0dd410d" class="page sans"><header><h1 class="page-title">Aurora</h1><p class="page-description"></p></header><div class="page-body"><nav id="459c6280-2834-4b8e-a1ec-554c0e2fb64b" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8df65d24-4e65-455b-9b96-64296853813e">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#df70de22-39fd-453e-9f3d-f4383ab51710">Endpoints</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a0c67e9e-0078-48e5-9f63-ca5d8a5e07ae">High Availability &amp; Read Scaling</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#84614804-1f7a-45e9-97ae-d2dd4cc9c732">Encryption &amp; Network Security</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#56af7141-4bd0-4ec7-8b12-6eba3ac7e0db">Aurora Serverless</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7ce17529-9aec-41c3-922f-baeefdb6389b">Aurora Multi-Master</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e8b26576-19c2-4c7d-ac78-46078b1f0ab7">Aurora Global Database</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e59cae3f-38b1-402b-92f7-b1647eaa933c">Aurora Events</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d40cb2a3-0889-4c92-8093-2eb1c8ee9528">Security</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5f66a687-b3d3-4a87-a0e9-8e36109777c5">At-rest Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e1530f8e-43dc-49dd-9095-ad15a411b20d">In-flight Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#fdda634f-a09f-4882-8f52-8623d0d327d2">DB Authentication</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#86f92a02-8514-4b6e-a640-c653a4e350dd">Network Security</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#07a8f96b-e1b9-474b-90ec-6e2aa0510b63">Audit Logs</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#81d200ac-4039-460b-9b87-71707601fb17">Misc</a></div></nav><hr id="355c570f-02d5-4677-9653-69deea70a1dc"/><h2 id="8df65d24-4e65-455b-9b96-64296853813e" class="">Intro</h2><ul id="f81b0baa-2100-4fce-8c40-eaeff30dcc5a" class="bulleted-list"><li style="list-style-type:disc">Regional Service (supports global databases)</li></ul><ul id="1b320606-3389-4fc7-b31e-b0d243f793bf" class="bulleted-list"><li style="list-style-type:disc">Supports Multi AZ</li></ul><ul id="b15fbf7f-c84d-45cd-adae-c3dca0acc884" class="bulleted-list"><li style="list-style-type:disc">AWS managed Relational DB cluster</li></ul><ul id="8aa26980-49cd-4add-ad21-679dac55c2d5" class="bulleted-list"><li style="list-style-type:disc">Preferred over <a href="RDS%201b0fd140cfa248db9bdc56c4c0607583.html">RDS</a> </li></ul><ul id="3b46c2b8-260a-4167-834d-d8dd78d2ec29" class="bulleted-list"><li style="list-style-type:disc">Auto-scaling (max 128TB)</li></ul><ul id="38c483ac-a71a-401d-b7eb-3bc14c706bc3" class="bulleted-list"><li style="list-style-type:disc">Up to 15 read replicas</li></ul><ul id="7f94e16e-cb55-48a8-bb39-266d9da64363" class="bulleted-list"><li style="list-style-type:disc"><strong>Asynchronous Replication</strong> (milliseconds)</li></ul><ul id="687aa751-3df6-4684-9652-3752cb601cff" class="bulleted-list"><li style="list-style-type:disc"><strong>Supports only MySQL &amp; PostgreSQL</strong></li></ul><ul id="43738b3a-6995-4e2e-9fce-67db3058bd7d" class="bulleted-list"><li style="list-style-type:disc">Cloud-optimized (5x performance improvement over MySQL on RDS, over 3x the performance of PostgreSQL on RDS)</li></ul><ul id="41199f7c-b314-45e4-9b68-94cbbc62e9cb" class="bulleted-list"><li style="list-style-type:disc"><strong>Backtrack</strong>: restore data at any point of time without taking backups</li></ul><h2 id="df70de22-39fd-453e-9f3d-f4383ab51710" class="">Endpoints</h2><ul id="019f54bb-f6d2-4c6d-bd96-a32af2936199" class="bulleted-list"><li style="list-style-type:disc"><strong>Writer Endpoint</strong> (Cluster Endpoint)<ul id="93484a73-e8d8-44f0-9839-b69de7d26c88" class="bulleted-list"><li style="list-style-type:circle">Always points to the master (can be used for read/write)</li></ul><ul id="801863b6-84b9-4209-9c69-bc475e0fce82" class="bulleted-list"><li style="list-style-type:circle">Each Aurora DB cluster has one cluster endpoint</li></ul></li></ul><ul id="9c3555fe-ca81-406c-b7ed-fd7d209bc7de" class="bulleted-list"><li style="list-style-type:disc"><strong>Reader Endpoint</strong><ul id="e41edaa1-11af-4fcc-9eb6-33e3a4bbe1f4" class="bulleted-list"><li style="list-style-type:circle">Provides load-balancing for read replicas only (used to read only)</li></ul><ul id="942832f8-9475-45ec-83be-07f55e947c43" class="bulleted-list"><li style="list-style-type:circle">If the cluster has no read replica, it points to master (can be used to read/write)</li></ul><ul id="058aa092-a01e-4a6c-a2e7-21ac9e1ebe25" class="bulleted-list"><li style="list-style-type:circle">Each Aurora DB cluster has one reader endpoint</li></ul></li></ul><ul id="c680a97e-7e9a-4347-88f5-8171793edcce" class="bulleted-list"><li style="list-style-type:disc"><strong>Custom Endpoint</strong>:<ul id="85161ed1-5d9e-4f3b-9739-b8108d4aa5c6" class="bulleted-list"><li style="list-style-type:circle">Load balance to a subset of replicas</li></ul><ul id="62a9bc6f-9533-47c3-b7b9-086f504cf165" class="bulleted-list"><li style="list-style-type:circle">Provides load-balanced based on criteria other than the read-only or read-write capability of the DB instances like instance class (ex, direct internal users to low-capacity instances and direct production traffic to high-capacity instances)</li></ul></li></ul><h2 id="a0c67e9e-0078-48e5-9f63-ca5d8a5e07ae" class="">High Availability &amp; Read Scaling</h2><ul id="148ec76e-8124-4dc6-a205-6a200d31b5d6" class="bulleted-list"><li style="list-style-type:disc">Self healing (if some data is corrupted, it will be automatically healed)</li></ul><ul id="301d93bf-40ec-419b-94ba-868fc1aa23c8" class="bulleted-list"><li style="list-style-type:disc">Storage is striped across 100s of volumes (more resilient)</li></ul><ul id="7d14022a-72a8-48fe-a407-9fd16a46d3f6" class="bulleted-list"><li style="list-style-type:disc"><strong>Automated failover</strong><ul id="fdd4b4d2-c709-4147-b03a-4c2660f2aef4" class="bulleted-list"><li style="list-style-type:circle">A read replica is promoted as the new master in less than 30 seconds</li></ul><ul id="ce860ed0-475c-4c2c-9f9d-4006627342c2" class="bulleted-list"><li style="list-style-type:circle">Aurora flips the <strong>CNAME</strong> record for your DB Instance to point at the healthy replica</li></ul><ul id="7aa1e0f1-9e1f-40e4-a58c-fa59f854e9c6" class="bulleted-list"><li style="list-style-type:circle">In case <strong>no replica</strong> is available, Aurora will attempt to <strong>create a new DB Instance</strong> in the <strong>same AZ</strong> as the original instance. This replacement of the original instance is done on a <strong>best-effort basis</strong> and may not succeed.</li></ul></li></ul><ul id="6c68ddfb-5a17-4818-9d80-5b2193489be7" class="bulleted-list"><li style="list-style-type:disc">Support for <strong>Cross Region Replication</strong></li></ul><ul id="d134374e-7ef9-4728-a999-aa4bd7c4f611" class="bulleted-list"><li style="list-style-type:disc">Aurora maintains 6 copies of your data across 3 AZ:<ul id="af2135e8-0f42-468c-8c3e-68a259a965d6" class="bulleted-list"><li style="list-style-type:circle">4 copies out of 6 needed for writes (can still write if 1 AZ completely fails)</li></ul><ul id="5cf4289f-c68e-4a2b-b26b-7180bd6b859d" class="bulleted-list"><li style="list-style-type:circle">3 copies out of 6 needed for reads</li></ul></li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="08799e62-b524-44ee-93fa-b8f791ca85db"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Each Read Replica is associated with a priority tier (0-15). In the event of a failover, Amazon Aurora will promote the Read Replica that has the highest priority (lowest tier). If two or more Aurora Replicas share the same tier, then Aurora promotes the replica that is largest in size. If two or more Aurora Replicas share the same priority and size, then Aurora promotes an arbitrary replica in the same promotion tier.</div></figure><h2 id="84614804-1f7a-45e9-97ae-d2dd4cc9c732" class="">Encryption &amp; Network Security</h2><ul id="42218937-17cd-47ec-9026-39f51125469f" class="bulleted-list"><li style="list-style-type:disc">Encryption at rest using KMS (same as RDS)</li></ul><ul id="12aaace4-1bcd-4410-b738-e0bf7d40dfbe" class="bulleted-list"><li style="list-style-type:disc">Encryption in flight using SSL (same as RDS)</li></ul><ul id="7c1838be-ffb4-45fa-b9fa-d3ff2ac6d22e" class="bulleted-list"><li style="list-style-type:disc">You can’t SSH into Aurora instances (same as RDS)</li></ul><ul id="b3971a0e-3193-4de0-883b-3ec03002b77c" class="bulleted-list"><li style="list-style-type:disc">Network Security is managed using Security Groups (same as RDS)</li></ul><ul id="1be9b19e-89e3-444b-ab8f-2cf4c9a9ce58" class="bulleted-list"><li style="list-style-type:disc">EC2 instances should access the DB using <strong>IAM DB Auth</strong> but they can also do it using credentials fetched from the parameter store (same as RDS)</li></ul><h2 id="56af7141-4bd0-4ec7-8b12-6eba3ac7e0db" class="">Aurora Serverless</h2><ul id="a71446e4-0e39-40cc-87a2-192283553076" class="bulleted-list"><li style="list-style-type:disc">Optional</li></ul><ul id="b9bacc1e-9fce-48bc-b8fa-ec390b51cc0e" class="bulleted-list"><li style="list-style-type:disc">Automated database instantiation and auto scaling based on usage</li></ul><ul id="5e16c78e-d352-4174-a4c9-c451af0ec5b8" class="bulleted-list"><li style="list-style-type:disc">Good for unpredictable workloads</li></ul><ul id="ebdf6f1b-5b8d-467e-8f26-70fa2aa4548c" class="bulleted-list"><li style="list-style-type:disc">No capacity planning needed</li></ul><ul id="80418c20-0ab0-4c75-8f71-128dfdbb5d50" class="bulleted-list"><li style="list-style-type:disc">Pay per second</li></ul><h2 id="7ce17529-9aec-41c3-922f-baeefdb6389b" class="">Aurora Multi-Master</h2><ul id="df4cf09a-0d13-4f9a-a787-11aa9c0403b4" class="bulleted-list"><li style="list-style-type:disc">Optional</li></ul><ul id="e0dcc86d-ff15-4368-892d-b0fe1f2fca24" class="bulleted-list"><li style="list-style-type:disc">Every node (replica) in the cluster can read and write</li></ul><ul id="d81a5452-c4ec-48f1-9bab-80618e02ca52" class="bulleted-list"><li style="list-style-type:disc"><strong>Immediate failover for writes</strong> (high availability in terms of write). If disabled and the master node fails, need to promote a Read Replica as the new master (will take some time).</li></ul><ul id="8013bd92-76a3-4ee9-a69b-73bed66760ef" class="bulleted-list"><li style="list-style-type:disc"><strong>Client needs to have multiple DB connections for failover</strong></li></ul><h2 id="e8b26576-19c2-4c7d-ac78-46078b1f0ab7" class="">Aurora Global Database</h2><ul id="dbac0395-d92d-4916-9ba5-80bb45a6165c" class="bulleted-list"><li style="list-style-type:disc">Entire database is replicated across regions to recover from region failure</li></ul><ul id="1e0557b8-a7f3-4b95-8a87-550d6081e35b" class="bulleted-list"><li style="list-style-type:disc">Designed for <strong>globally distributed applications</strong> with <strong>low latency local reads</strong> in each region</li></ul><ul id="02e6a600-34fe-4ac0-83ab-09c52d8ee4a2" class="bulleted-list"><li style="list-style-type:disc"><strong>1 Primary Region</strong> (read / write)</li></ul><ul id="ae6687ac-7431-40b8-ae00-436a8b2b27c2" class="bulleted-list"><li style="list-style-type:disc"><strong>Up to 5 secondary (read-only) regions</strong> (replication lag &lt; 1 second)</li></ul><ul id="c761cf6b-8fa7-4db4-b379-4f82ef44ea77" class="bulleted-list"><li style="list-style-type:disc">Up to 16 Read Replicas per secondary region</li></ul><ul id="584a0da0-2f0e-412a-accf-0f9904494631" class="bulleted-list"><li style="list-style-type:disc">Helps for decreasing latency for clients in other geographical locations</li></ul><ul id="f951510d-7a55-4bd9-848f-2cbd1ec5c2d3" class="bulleted-list"><li style="list-style-type:disc"><strong>RTO of less than 1 minute</strong> (to promote another region as primary)</li></ul><h2 id="e59cae3f-38b1-402b-92f7-b1647eaa933c" class="">Aurora Events</h2><ul id="10afe323-fe83-4aab-95ca-171c52038d34" class="bulleted-list"><li style="list-style-type:disc">Invoke a <strong>Lambda</strong> function from an <strong>Aurora MySQL-compatible DB cluster</strong> with a <strong>native function</strong> or a <strong>stored procedure</strong> (same as RDS events)</li></ul><ul id="da01792b-752a-4664-8f40-db2dfc6834b8" class="bulleted-list"><li style="list-style-type:disc">Used to capture data changes whenever a row is modified</li></ul><h2 id="d40cb2a3-0889-4c92-8093-2eb1c8ee9528" class="">Security</h2><h3 id="5f66a687-b3d3-4a87-a0e9-8e36109777c5" class="">At-rest Encryption</h3><ul id="65975616-a73c-482e-8ebd-66e82184dea3" class="bulleted-list"><li style="list-style-type:disc">The master and replicas can be encrypted as rest using KMS, but encryption must be enabled at launch time. </li></ul><ul id="158bfdd7-e5ea-44bd-9ee3-cd3ed235828f" class="bulleted-list"><li style="list-style-type:disc">If master is not encrypted, read replicas cannot be encrypted.</li></ul><ul id="4e9e88aa-465c-4426-8523-a96f4d5031dd" class="bulleted-list"><li style="list-style-type:disc">To encrypt an unencrypted database, create a snapshot and restore the database as encrypted using a key from KMS.</li></ul><h3 id="e1530f8e-43dc-49dd-9095-ad15a411b20d" class="">In-flight Encryption</h3><p id="e01af904-618e-428f-b363-0cebdeb79d26" class="">Client needs to use TLS root certificates provided by AWS to establish TLS (in-flight encryption) with RDS or Aurora.</p><h3 id="fdda634f-a09f-4882-8f52-8623d0d327d2" class="">DB Authentication</h3><ul id="698b9512-7e65-4e2e-ab3e-8cdaa9a17739" class="bulleted-list"><li style="list-style-type:disc">Username:Password based authentication (available on both RDS and Aurora)</li></ul><ul id="14160b6e-6aa6-4536-a2ed-591f8e69e498" class="bulleted-list"><li style="list-style-type:disc"><strong>IAM DB Auth</strong> - use IAM roles to authenticate to DB instead of configuring users on DB (recommended as it allows us to manage all the authentication in IAM)</li></ul><h3 id="86f92a02-8514-4b6e-a640-c653a4e350dd" class="">Network Security</h3><ul id="9d5a294f-ee12-47a0-975b-0d70a8b907e6" class="bulleted-list"><li style="list-style-type:disc">Security Groups control network access to the underlying EC2 instances</li></ul><ul id="4ca31752-9205-4ead-8c3a-fb7ab97da3e8" class="bulleted-list"><li style="list-style-type:disc">No SSH access available as the underlying instances are AWS managed (except on RDS custom)</li></ul><h3 id="07a8f96b-e1b9-474b-90ec-6e2aa0510b63" class="">Audit Logs</h3><ul id="7a88f53f-e825-47cb-9dfc-b7f4460e38ac" class="bulleted-list"><li style="list-style-type:disc">Audit logs can be enabled - store logs locally for a short period of time</li></ul><ul id="d6cb3b26-3902-40fa-a7da-9665427d94ba" class="bulleted-list"><li style="list-style-type:disc">Send audit logs to CloudWatch for log retention</li></ul><h2 id="81d200ac-4039-460b-9b87-71707601fb17" class="">Misc</h2><ul id="74dd0dd6-6c2a-4706-afbb-e603b86deaa9" class="bulleted-list"><li style="list-style-type:disc">Aurora Replicas are created in the same DB cluster within a Region. With <strong>Aurora MySQL</strong> you can also enable <strong>binlog replication</strong> to another Aurora DB cluster which can be in the <strong>same or different region</strong>.</li></ul><ul id="d5614826-5286-46d7-9e2e-c0eb5c10c4f0" class="bulleted-list"><li style="list-style-type:disc">Important parameters:<ul id="74d6e424-87f0-458b-bdad-47d4b924d49b" class="bulleted-list"><li style="list-style-type:circle"><code>max_connections</code> - max number of simultaneous connections Aurora allows</li></ul><ul id="64a0e121-552f-4837-856c-4c6f0d79f434" class="bulleted-list"><li style="list-style-type:circle"><code>max_user_connections</code> - max number of simultaneous connections Aurora allows for a single user</li></ul><p id="0261011f-d2cc-4c34-be91-fc45311eb9f5" class="">
+</p></li></ul></div></article></body></html>

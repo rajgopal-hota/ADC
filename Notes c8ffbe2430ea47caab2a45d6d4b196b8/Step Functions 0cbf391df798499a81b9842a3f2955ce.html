@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Step Functions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0cbf391d-f798-499a-81b9-842a3f2955ce" class="page sans"><header><h1 class="page-title">Step Functions</h1><p class="page-description"></p></header><div class="page-body"><nav id="a2d26a50-3121-4038-b512-20f2f1eeb9e5" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#06f29355-80f9-49ff-9028-cd99fb95d352">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9a2dbabe-24f5-4f55-9ce3-7aadad8a4d43">Task</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#057639ab-71ff-41a8-a74f-7dd9f569fba8">States</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3c84ae3c-4353-4c7d-b7eb-d63f0ab8b6dd">Error Handling</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b68a69a8-880b-4ef1-8332-0b7a0a4cdb82">Retry</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#89baf2d0-2641-4610-ba5c-1984c55cd853"><strong>Catch</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#23631804-d785-424f-b18a-76ad90816a35">Wait for Task Token</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#39ad99d1-62ed-493b-abb8-a61327c735f4">Activity Tasks</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9b7627cc-5981-4c8d-b813-76919ebafc61">Workflow Types</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#560f6e5f-170c-4d7f-ad1a-c3bf7874e34e">Standard Workflows (default)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e1092b82-3b1b-4307-b7b5-042bdba8cea2">Express Workflows</a></div></nav><hr id="a22a6491-41c2-4597-869d-655d116a3407"/><figure id="a8cc739b-923d-424d-be55-5fd75fc553cc" class="image"><a href="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled.png"><img style="width:1800px" src="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled.png"/></a></figure><h2 id="06f29355-80f9-49ff-9028-cd99fb95d352" class="">Intro</h2><ul id="f462b7da-72bb-43d6-abe5-8329ecf591c6" class="bulleted-list"><li style="list-style-type:disc"><strong>Serverless</strong> workflow orchestration</li></ul><ul id="55aa91cf-4dad-4593-889a-e437ca181262" class="bulleted-list"><li style="list-style-type:disc">Model workflows as state machines (1 state machine per workflow)</li></ul><ul id="b6fbd259-39da-4bd5-b65a-b34a7e8fcda1" class="bulleted-list"><li style="list-style-type:disc">Written in JSON</li></ul><ul id="338fb0ff-1d5c-43bf-8849-ee69e54b91ca" class="bulleted-list"><li style="list-style-type:disc"><strong>Visual workflow execution</strong></li></ul><ul id="c7f33135-28ab-443c-9b44-cf03178ed6a3" class="bulleted-list"><li style="list-style-type:disc">Execution event history shows the input and output of each step</li></ul><ul id="93043cd0-6747-4f53-95f4-b1ba98229b78" class="bulleted-list"><li style="list-style-type:disc">Step function has <strong>amazing error handling capabilities</strong> (can be offloaded from the application)</li></ul><h2 id="9a2dbabe-24f5-4f55-9ce3-7aadad8a4d43" class="">Task</h2><figure id="8f0a0dcb-974b-4b36-b931-c88fcd076523" class="image"><a href="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%201.png"><img style="width:288px" src="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%201.png"/></a></figure><ul id="d3932205-37bf-47ab-839b-f6a5ba78ef93" class="bulleted-list"><li style="list-style-type:disc">Each task in the workflow could perform an action on an AWS service or launch another step function workflow.</li></ul><ul id="e4e37514-9b22-4d7b-8391-6f49ab113243" class="bulleted-list"><li style="list-style-type:disc">Task definition to invoke a Lambda function<figure id="847b052f-cb55-4829-8303-1d0ca37d326e" class="image"><a href="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%202.png"><img style="width:384px" src="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%202.png"/></a></figure></li></ul><h2 id="057639ab-71ff-41a8-a74f-7dd9f569fba8" class="">States</h2><ul id="55adef85-0477-40c1-9a06-961b0483d549" class="bulleted-list"><li style="list-style-type:disc"><strong>Choice State</strong> - Test for a condition to send to a branch (or default branch)</li></ul><ul id="59903c21-1e12-4ead-9337-dfa5964f0486" class="bulleted-list"><li style="list-style-type:disc"><strong>Fail or Succeed State</strong> - Stop execution with failure or success</li></ul><ul id="e016c7e9-f8ae-4f20-aea6-2869a5cd5949" class="bulleted-list"><li style="list-style-type:disc"><strong>Pass State</strong> - Simply pass its input to its output or inject some fixed data</li></ul><ul id="63943fb1-68f1-4451-a6d4-c7622847e341" class="bulleted-list"><li style="list-style-type:disc"><strong>Wait State</strong> - Provide a delay for a certain amount of time or until a specified time or date</li></ul><ul id="6fd87575-eb72-4040-a9eb-154ff41665b2" class="bulleted-list"><li style="list-style-type:disc"><strong>Map State</strong> - Dynamically iterate steps</li></ul><ul id="9beaaf6a-c0d0-4581-9121-f76dd6f85499" class="bulleted-list"><li style="list-style-type:disc"><strong>Parallel State</strong> - Begin parallel branches of execution (<strong>asynchronous</strong> execution)</li></ul><ul id="36df6ec9-2af7-4903-a568-bd1f42fbe490" class="bulleted-list"><li style="list-style-type:disc"><strong>Task State</strong> - Run some code <strong>synchronously</strong></li></ul><h2 id="3c84ae3c-4353-4c7d-b7eb-d63f0ab8b6dd" class="">Error Handling</h2><ul id="98910844-0a52-480e-b789-85cb94dd1c62" class="bulleted-list"><li style="list-style-type:disc">Handle errors in the state machine instead of the application code. This makes the application logic simpler. Also, step functions provide execution history.</li></ul><ul id="f6703638-f7f1-4a6d-853a-b420f08eb76c" class="bulleted-list"><li style="list-style-type:disc">Predefined error codes:<ul id="038d79b8-c16b-4bf1-be60-e34f7b0e2c1f" class="bulleted-list"><li style="list-style-type:circle"><code>States.ALL</code> - any error</li></ul><ul id="ec7d0126-028c-4c21-a210-6dcb7bd7ac7e" class="bulleted-list"><li style="list-style-type:circle"><code>States.Timeout</code> -  task ran longer than <code>TimeoutSeconds</code> or no heartbeat received</li></ul><ul id="eab78045-9c65-479f-a776-6a195f91a2a7" class="bulleted-list"><li style="list-style-type:circle"><code>States.TaskFailed</code> - task execution failure</li></ul><ul id="ad2b87a1-a4b2-41f5-b326-53e8b37341f4" class="bulleted-list"><li style="list-style-type:circle"><code>States.Permissions</code> - insufficient privileges to execute code</li></ul></li></ul><ul id="c7509bd1-2fdc-4be8-af44-60b0eec0b85f" class="bulleted-list"><li style="list-style-type:disc">The state can also throw custom errors that can be caught in the step function (eg. a Lambda function throwing a custom error)</li></ul><h3 id="b68a69a8-880b-4ef1-8332-0b7a0a4cdb82" class="">Retry</h3><figure id="2e6adaea-6d92-4dc4-899c-1b4d1758fe01" class="image"><a href="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%203.png"><img style="width:384px" src="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%203.png"/></a></figure><ul id="45441cf2-bd13-4474-84af-45878b9b43d9" class="bulleted-list"><li style="list-style-type:disc">Retry failed state</li></ul><ul id="6da4c648-875f-4b7a-9930-d72135f4b13b" class="bulleted-list"><li style="list-style-type:disc"><code>Retry</code> block is evaluated top to bottom</li></ul><ul id="16cdab3a-036f-4a16-ab6a-e4f7c052f558" class="bulleted-list"><li style="list-style-type:disc"><code>BackoffRate</code> - what factor the <code>IntervalSeconds</code> should be multiplied with at each retry</li></ul><ul id="52136aa6-47f3-4651-9977-ea0dc9b840bd" class="bulleted-list"><li style="list-style-type:disc">When <code>MaxAttempts</code> are reached, the <code>Catch</code> block kicks in</li></ul><h3 id="89baf2d0-2641-4610-ba5c-1984c55cd853" class=""><strong>Catch</strong></h3><figure id="1b5994a1-4ce3-4b92-aea0-da32855aedf2" class="image"><a href="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%204.png"><img style="width:480px" src="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%204.png"/></a></figure><ul id="7e7f0a17-48da-4210-b8e1-964a1a36ce07" class="bulleted-list"><li style="list-style-type:disc">Transition to failed path</li></ul><ul id="6a73977f-2e19-4502-9d80-11275750af46" class="bulleted-list"><li style="list-style-type:disc"><code>Catch</code> block is evaluated top to bottom</li></ul><ul id="77bb7a05-00d4-4886-815b-2a29a69ee3f1" class="bulleted-list"><li style="list-style-type:disc">After all the retries have been exhausted, the state function goes into <code>Catch</code></li></ul><ul id="1ad5e60a-45cd-457a-bc8f-656d235aeba1" class="bulleted-list"><li style="list-style-type:disc">If the error is of X type, go to the next state Y.</li></ul><ul id="3fd839b4-ba48-40a1-ab5a-592579d61289" class="bulleted-list"><li style="list-style-type:disc"><code>ResultPath</code> - a path that determines what input is sent to the state specified in the <code>Next</code> field. Example: it can be used to send the error to the <code>Next</code> state.<figure id="482d41da-f682-4dc0-8785-8d428bf3b20d" class="image"><a href="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%205.png"><img style="width:1746px" src="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%205.png"/></a></figure></li></ul><h2 id="23631804-d785-424f-b18a-76ad90816a35" class="">Wait for Task Token</h2><ul id="9a8aa5e9-8cec-4bb7-a7b9-d514496dfc77" class="bulleted-list"><li style="list-style-type:disc">Used to integrate the workflow with an external task where the external task must finish the job before the workflow proceeds further.</li></ul><ul id="8cae4a34-552e-44af-be4f-fbc0de0c92e7" class="bulleted-list"><li style="list-style-type:disc"><strong>Push-based</strong> (the task pushes the work to the external application or worker which after completion invokes a callback API)</li></ul><ul id="7082ef6d-93ae-4853-9ba9-ccc3206fe2af" class="bulleted-list"><li style="list-style-type:disc">The task is paused until it receives the callback (API call) with the <code>TaskToken</code></li></ul><ul id="8ec14975-7f76-4977-9c95-c54153f890e8" class="bulleted-list"><li style="list-style-type:disc">Append <code>.waitForTaskToken</code> to the <code>Resource</code> field to tell Step Functions to wait for the Task Token to be returned.
+Example: <code>&quot;Resource&quot;: &quot;arn:aws:states:::sqs:sendMessage.waitForTaskToken&quot;</code></li></ul><ul id="326cac74-bcd4-4ee8-a9da-8ac7bb16f3a2" class="bulleted-list"><li style="list-style-type:disc"><strong>Working</strong>: The step function is paused during the <code>Check Credit</code> task execution, where we pass the <code>TaskToken</code> to the external application (push to SQS). After the external application is done processing, it makes a <code>SendTaskSuccess</code> API call with the result of processing and the passed <code>TaskToken</code>. This means the external task was executed successfully and the step function can continue execution. If the external application fails to process, it makes a <code>SendTaskFailure</code> API call which is treated as task failed.<figure id="d2235326-5c2c-44b9-8916-1377ac549a9b" class="image"><a href="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%206.png"><img style="width:672px" src="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%206.png"/></a></figure></li></ul><h2 id="39ad99d1-62ed-493b-abb8-a61327c735f4" class="">Activity Tasks</h2><div id="1c90818e-2941-49c2-83e1-4efc41f8a5e0" class="column-list"><div id="4bc930d0-1b2b-4d71-a63e-23dcf60ca0cc" style="width:56.25%" class="column"><ul id="c50ccabb-89d6-49b2-823c-bffee9323ce1" class="bulleted-list"><li style="list-style-type:disc"><strong>Activity Workers</strong> (<mark class="highlight-yellow_background">running on any compute resource</mark>) poll the workflow for tasks using <code>GetActivityTask</code> API. </li></ul><ul id="f8b37aae-c0af-4ec5-816e-9ede0aff920e" class="bulleted-list"><li style="list-style-type:disc">If an activity worker gets a task, it will complete it and send the response of success or failure as <code>SendTaskSuccess</code> or <code>SendTaskFailure</code> API call. </li></ul><ul id="a5c872b3-bb19-471d-9a65-64fcb173d315" class="bulleted-list"><li style="list-style-type:disc"><strong>Pull-based</strong> (tasks are pulled by the Activity Workers)</li></ul><ul id="08728aca-75cc-4c05-8cb4-7b10ed2f860d" class="bulleted-list"><li style="list-style-type:disc"><code>TaskToken</code> is used to identify which task got completed (same way as in Wait for Task Token)</li></ul><ul id="a03a74a8-e18f-4f14-a530-bb64c12ed611" class="bulleted-list"><li style="list-style-type:disc">To keep the Task active:<ul id="69f67b50-2572-47e4-b845-591566e9e949" class="bulleted-list"><li style="list-style-type:circle">Configure <code>TimeoutSeconds</code> on the step function - how long the task will wait for the activity worker to complete (max 1 year)</li></ul><ul id="b4a32671-dda7-4a8b-b1c9-1c1e297fe548" class="bulleted-list"><li style="list-style-type:circle">Send heartbeats periodically from the activity worker to the task using <code>SendTaskHeartBeat</code> at an interval less than <code>HeartBeatSeconds</code> parameter (set in the step function).</li></ul></li></ul></div><div id="1e08a50a-ba0a-45b6-8016-61bee8125f24" style="width:43.75%" class="column"><figure id="33a5fdd4-1e12-4946-89e5-3c427429f7d1" class="image"><a href="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%207.png"><img style="width:514px" src="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%207.png"/></a></figure></div></div><h2 id="9b7627cc-5981-4c8d-b813-76919ebafc61" class="">Workflow Types</h2><figure id="deaad41b-2343-4189-8a53-c56293b53102" class="image"><a href="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%208.png"><img style="width:336px" src="Step%20Functions%200cbf391df798499a81b9842a3f2955ce/Untitled%208.png"/></a></figure><h3 id="560f6e5f-170c-4d7f-ad1a-c3bf7874e34e" class="">Standard Workflows (default)</h3><ul id="2781b11c-40fc-4e93-becf-80017208b235" class="bulleted-list"><li style="list-style-type:disc">Max duration: 1 year</li></ul><ul id="86c8ef00-60ba-4d6a-bad0-8dec428caf09" class="bulleted-list"><li style="list-style-type:disc">Execution model: <strong>Exactly-once Execution</strong></li></ul><ul id="3a513a0f-b734-4474-b5ee-46ab6eea8b7f" class="bulleted-list"><li style="list-style-type:disc">Execution rate: Over 2,000 workflow executions per sec</li></ul><ul id="b355d77b-16c8-4fec-bc54-b8530369c0b6" class="bulleted-list"><li style="list-style-type:disc">Execution history: <strong>90 days in the console</strong> (send to CloudWatch to retain for longer)</li></ul><ul id="474aff75-c28a-42f7-96d2-3ae6227c7951" class="bulleted-list"><li style="list-style-type:disc">Pricing: based on the number of state transitions</li></ul><ul id="604183dd-472c-4a2a-a6af-eaea8d6371ca" class="bulleted-list"><li style="list-style-type:disc">Use cases: <strong>Non-idempotent actions</strong> (eg. payment processing)</li></ul><h3 id="e1092b82-3b1b-4307-b7b5-042bdba8cea2" class="">Express Workflows</h3><ul id="e7391278-abc0-48ec-a283-2d9ec27a8a56" class="bulleted-list"><li style="list-style-type:disc">Max duration: 5 min</li></ul><ul id="905b5626-d634-4a30-bdd3-a8d8e1785ac2" class="bulleted-list"><li style="list-style-type:disc">Execution rate: Over 100,000 workflow executions per sec</li></ul><ul id="b8ed3bd5-f706-411a-8336-f0a26ad8d5ad" class="bulleted-list"><li style="list-style-type:disc">Execution history: Not available in the console (must use CloudWatch)</li></ul><ul id="5cb3929e-d06a-4f38-9a9a-a0cb52fa7f31" class="bulleted-list"><li style="list-style-type:disc">Use cases: IoT data ingestion, streaming data, backend for apps, etc.</li></ul><ul id="2a99c8bf-ad17-4ef5-a4cd-2c37d9cf7f76" class="bulleted-list"><li style="list-style-type:disc">Types:<ul id="3d6b7f95-db2b-4f34-91ed-85eb68b7bf6c" class="bulleted-list"><li style="list-style-type:circle"><strong>Asynchronous </strong>Express Workflows<ul id="59e6da23-dd7a-413c-8604-b7db88839aab" class="bulleted-list"><li style="list-style-type:square">Execution model: <strong>At-least Once Execution</strong> (the operation must be idempotent because there could be retries)</li></ul><ul id="eb3580e8-cda1-4531-bb41-c37d9225f73f" class="bulleted-list"><li style="list-style-type:square">When the workflow is invoked, it just starts and doesn’t return the result of computation.</li></ul><ul id="99208d7f-27a9-4094-8ff6-57ca19fc93a4" class="bulleted-list"><li style="list-style-type:square">Use cases: where we don’t need immediate response (eg. messaging services)</li></ul></li></ul><ul id="28cf7ebd-f112-4398-a778-c97675903357" class="bulleted-list"><li style="list-style-type:circle"><strong>Synchronous </strong>Express Workflows<ul id="c2fc2131-dfc6-438f-b146-0b1622416670" class="bulleted-list"><li style="list-style-type:square">Execution model: <strong>At-most Once Execution</strong></li></ul><ul id="bc269948-6c80-46ec-9bff-dde122a8bb76" class="bulleted-list"><li style="list-style-type:square">When the workflow is invoked, it completes it and returns the response.</li></ul><ul id="e02a5a98-3cc2-40d9-bf6f-95c447dccf2a" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Can be invoked from </mark><mark class="highlight-yellow_background"><strong>API Gateway</strong></mark><mark class="highlight-yellow_background"> or </mark><mark class="highlight-yellow_background"><strong>Lambda function</strong></mark></li></ul></li></ul></li></ul></div></article></body></html>

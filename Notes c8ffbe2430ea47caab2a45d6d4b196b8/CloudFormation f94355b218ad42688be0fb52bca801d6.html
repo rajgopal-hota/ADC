@@ -1,0 +1,695 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CloudFormation</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f94355b2-18ad-4268-8be0-fb52bca801d6" class="page sans"><header><h1 class="page-title">CloudFormation</h1><p class="page-description"></p></header><div class="page-body"><nav id="11bbb646-3f8b-40d6-9d7c-fbb49ab6369c" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e94148c2-6326-4e6c-add5-e80494c75d56">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#df5d6820-4c0b-4c49-a6bd-80dbc81a0e99">Templates</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3732c28c-e822-4fed-a8c5-e751701c9ba8">Resources</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d8599aee-c619-4b12-bc00-2ae7085b4b76">Parameters</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bd72ed43-77ed-4d4f-891f-a5970b9f9790">Mappings</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b2c4ac8e-9125-4a6a-9789-fd325ea6bf4e">Outputs</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f59c792e-3560-42c1-94e1-1e663fb3652a">Conditions</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e76b24a5-e67a-45cc-ae09-f7995841a358">Intrinsic Functions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#06360eba-1752-47ea-b4b2-57544533ef19">Rollbacks</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7ccd7d03-6ee6-4995-b1bc-afe36f4aec89">ChangeSets</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#68448e69-bdb7-43a1-b152-9d1b91efa8a0">Nested Stack</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#187114e9-fc02-450e-9d8c-8890a7bc7985">StackSets</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e3ea423b-3f7f-4822-96ca-3000746ed354">Drift</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#740b2041-b0de-45ba-83ca-7e7cf71600b9">Stack Notifications</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#28481bbb-87a7-4c15-9e4c-02ab3c6fe4b1">Stack Policies</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b7ff0596-9e92-48ae-919f-242a7a781dfa">Misc</a></div></nav><hr id="8ea23b92-8087-44ae-9848-b75972cf524f"/><h2 id="e94148c2-6326-4e6c-add5-e80494c75d56" class="">Intro</h2><ul id="a5af4661-2f98-4d58-80c2-2f7c91572f8a" class="bulleted-list"><li style="list-style-type:disc">Infrastructure as Code (IaC) - version control, easy replication</li></ul><ul id="53ffe8d7-f1ad-482a-ab64-1ae521740bf6" class="bulleted-list"><li style="list-style-type:disc">Supports most AWS services</li></ul><ul id="a2042654-06d7-4344-81ae-5afcb85a9aed" class="bulleted-list"><li style="list-style-type:disc">Declarative programming</li></ul><ul id="70057912-8a4d-466c-872a-121b2bbc84e7" class="bulleted-list"><li style="list-style-type:disc">Free, pay for the underlying resources</li></ul><ul id="4fee17d9-6a54-47ac-8131-32d3f664be66" class="bulleted-list"><li style="list-style-type:disc">CloudFormation stacks are isolated from each other</li></ul><ul id="21505c25-8e64-4396-87b6-dec11cff4172" class="bulleted-list"><li style="list-style-type:disc">Deleting a stack deletes every single resource or artifact created by that stack.</li></ul><h2 id="df5d6820-4c0b-4c49-a6bd-80dbc81a0e99" class="">Templates</h2><ul id="f1ecbfc3-0e89-4a9e-a5f8-a91c63c68c33" class="bulleted-list"><li style="list-style-type:disc"><strong>Templates are uploaded and referenced from S3</strong>. To update a template, we cannot edit the previous version. We need re-upload a new version of the template and CloudFormation will find out what needs to be modified to reach the desired state.</li></ul><ul id="011720f8-bc41-4961-b720-52b81d68d804" class="bulleted-list"><li style="list-style-type:disc">Deploying Templates<ul id="0d4db435-b41a-45c3-a40e-97b6f775e03c" class="bulleted-list"><li style="list-style-type:circle">Manual - editing templates in the <strong>CloudFormation Designer (GUI)</strong></li></ul><ul id="af8584f6-7eff-4cab-a45f-2fe6a7826cb5" class="bulleted-list"><li style="list-style-type:circle">Automated - editing templates in a YAML file and using CLI to deploy the templates (recommended for automation)</li></ul></li></ul><h3 id="3732c28c-e822-4fed-a8c5-e751701c9ba8" class="">Resources</h3><ul id="5d2ae1d8-2b08-452a-ae1f-a297f9aac20f" class="bulleted-list"><li style="list-style-type:disc"><strong>Mandatory field</strong></li></ul><ul id="d128a719-1839-4bca-bba0-56d9c3aeff7c" class="bulleted-list"><li style="list-style-type:disc">Resource types are of the form <code>AWS::aws-product-name::data-type-name</code></li></ul><ul id="f9aee4de-c229-4577-a02d-aa00ca367ac6" class="bulleted-list"><li style="list-style-type:disc">Template contents are static (no dynamic code generation allowed)</li></ul><h3 id="d8599aee-c619-4b12-bc00-2ae7085b4b76" class="">Parameters</h3><div id="0df9c457-8629-48a3-88f8-6ebae612dee5" class="column-list"><div id="ab101b86-6156-4f90-b17b-1f7e41ed3482" style="width:56.25%" class="column"><figure id="601d501c-1895-4c9f-98cf-2a0c15dc37fe" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled.png"><img style="width:384px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled.png"/></a></figure></div><div id="c12932cf-abb5-45a1-9a1a-d816d2c2eb5f" style="width:43.75000000000001%" class="column"><figure id="13679172-00c7-4aff-82cf-42ad4779e3b8" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%201.png"><img style="width:384px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%201.png"/></a></figure></div></div><ul id="5af5e0e6-a899-42e5-b3e8-e5dab30e07b7" class="bulleted-list"><li style="list-style-type:disc">Dynamic input variables in CloudFormation templates. <mark class="highlight-yellow_background">When deploying the template, the user will be asked to enter values for the defined parameters.</mark></li></ul><ul id="8bbe1953-3832-455f-8e0c-7f8871f39fb4" class="bulleted-list"><li style="list-style-type:disc">Parameters can be referenced using <code>!Ref</code></li></ul><ul id="ec18207d-d775-459c-9b62-acc44bc8a7bb" class="bulleted-list"><li style="list-style-type:disc">Parameters can be modified without having to re-upload the template</li></ul><ul id="5bc2e4fd-9f8b-46f4-95da-c3385b6a5f1d" class="bulleted-list"><li style="list-style-type:disc">AWS creates some default parameters (<strong>Pseudo Parameters</strong>) that can be used in the template.<figure id="73f83284-d9f3-4c28-ac11-1881910abdc0" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%202.png"><img style="width:1228px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%202.png"/></a></figure></li></ul><ul id="ae761e1f-bdf6-4ce0-bb7c-82291dd20afa" class="bulleted-list"><li style="list-style-type:disc">Supported parameter types: <pre id="e25d1861-4f3b-455f-81c8-76575c535ce9" class="code code-wrap"><code>String – A literal string
+
+Number – An integer or float
+List&lt;Number&gt; – An array of integers or floats
+
+CommaDelimitedList – An array of literal strings that are separated by commas
+
+AWS::EC2::KeyPair::KeyName – An Amazon EC2 key pair name
+
+AWS::EC2::SecurityGroup::Id – A security group ID
+AWS::EC2::Subnet::Id – A subnet ID
+AWS::EC2::VPC::Id – A VPC ID
+
+List&lt;AWS::EC2::VPC::Id&gt; – An array of VPC IDs
+List&lt;AWS::EC2::SecurityGroup::Id&gt; – An array of security group IDs
+List&lt;AWS::EC2::Subnet::Id&gt; – An array of subnet IDs</code></pre></li></ul><ul id="6e4542fc-8352-45b6-813f-c7d3ccf9d090" class="bulleted-list"><li style="list-style-type:disc">All the parameters are independent of each other.</li></ul><h3 id="bd72ed43-77ed-4d4f-891f-a5970b9f9790" class="">Mappings</h3><ul id="9d404766-daf1-45ef-8502-d7c604c38c36" class="bulleted-list"><li style="list-style-type:disc">Static variables hardcoded in the template</li></ul><ul id="7efe527a-07c3-4bba-b76a-dea9313fa039" class="bulleted-list"><li style="list-style-type:disc">Mappings are great when the value can be deduced from variables such as Region, AZ, AWS Account ID, etc.</li></ul><ul id="1abc5be3-e916-4e51-9cbe-7e8f57ce71a6" class="bulleted-list"><li style="list-style-type:disc"><code>Fn::FindInMap</code> or <code>!FindInMap</code> is used to fetch the value from a map<p id="66655c47-c8fd-4f29-99c2-c7c066e39e75" class=""><code>!FindInMap [MapName, TopLevelKey, SecondLevelKey]</code> (always this syntax)</p></li></ul><ul id="0ab4e5f8-ae2c-41bd-bb82-ca0c2a0d70f3" class="toggle"><li><details open=""><summary>Example: Select the AMI based on the region and architecture</summary><figure id="baa41777-c8aa-4abc-896e-969ab8933a07" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%203.png"><img style="width:600px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%203.png"/></a></figure></details></li></ul><h3 id="b2c4ac8e-9125-4a6a-9789-fd325ea6bf4e" class="">Outputs</h3><ul id="61cce822-0124-4bf5-8bda-5c863779590e" class="bulleted-list"><li style="list-style-type:disc">Export output values after the stack creation (optional)</li></ul><ul id="fc188c4a-74ef-4d32-ba19-6df41737d7bf" class="bulleted-list"><li style="list-style-type:disc">Exported outputs can be imported by other CloudFormation stacks using <code>!ImportValue</code> function along with their export names.</li></ul><ul id="aeb6242b-1c49-4bf2-b342-03772ec9340e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Exported output name must be unique within the region.</mark></li></ul><ul id="c38788e1-db5b-4698-ac29-15faa0a2a7f0" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">We cannot delete a stack if its outputs are being referenced by another stack</mark></li></ul><ul id="caf1dc41-1a5c-478c-8b8f-66013cc63413" class="bulleted-list"><li style="list-style-type:disc">Example: In the network template, export the SSH security group and import them in other stacks to apply to EC2 instances.</li></ul><div id="758766e1-528c-4663-bc77-e41db085d4ce" class="column-list"><div id="13c1f90d-7e98-4b99-a4dc-c3acc2772b20" style="width:56.25%" class="column"><figure id="1a088bd5-4780-4462-bbfd-fa805a3d5421" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%204.png"><img style="width:1500px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%204.png"/></a></figure></div><div id="1bec4d72-41f1-4e1c-9562-3dce20480bfc" style="width:43.75000000000001%" class="column"><figure id="a1b4f70e-aa10-46f6-b50e-981f1c86faf7" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%205.png"><img style="width:646px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%205.png"/></a></figure></div></div><h3 id="f59c792e-3560-42c1-94e1-1e663fb3652a" class="">Conditions</h3><ul id="917cf194-91b4-4e93-af0b-b62445377524" class="bulleted-list"><li style="list-style-type:disc">Control the creation of <strong>resources</strong> or <strong>outputs</strong> based on a condition</li></ul><ul id="8682fb5f-f4ad-4d66-a716-17c3a432e967" class="bulleted-list"><li style="list-style-type:disc"><strong>Conditions cannot be used within the Parameters section</strong></li></ul><ul id="d7a58d4c-6a28-434a-8450-f56102aeff11" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Conditions can reference other conditions for nesting</mark></li></ul><ul id="9626d7c5-21b6-4dc1-8d05-fe1f911a4cba" class="bulleted-list"><li style="list-style-type:disc">Supported functions: And, Or, Not, Equals, If</li></ul><ul id="096934b6-8dcf-4779-bf5d-d99f74d1bce8" class="bulleted-list"><li style="list-style-type:disc">Example: <code>CreateProdResources</code> will be True only if <code>EnvType</code> is <code>prod</code>.<figure id="7fe9b9d3-4db4-4878-bfac-3c16ab4675da" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%206.png"><img style="width:384px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%206.png"/></a></figure><p id="921aae6a-f15b-4f0c-bd57-0eccd6ca6e8c" class="">MountPoint resource will be created only if <code>CreateProdResources</code> is True.</p><figure id="8920e591-d391-4af9-8e7d-62c3f00522af" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%207.png"><img style="width:288px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%207.png"/></a></figure></li></ul><h3 id="e76b24a5-e67a-45cc-ae09-f7995841a358" class="">Intrinsic Functions</h3><ul id="f2d2937f-5d2c-4cd8-a4fd-4d4687dee8f7" class="toggle"><li><details open=""><summary><code>Ref</code> - returns the ID of a resource or value of a parameter</summary><figure id="d659348a-e8ed-4d73-ad76-b2c8718ffd0a" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%208.png"><img style="width:192px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%208.png"/></a></figure></details></li></ul><ul id="a0546937-62de-4a15-8583-de8f506de924" class="toggle"><li><details open=""><summary><code>GetAtt</code> - get an attribute of a resource</summary><figure id="f26df8eb-d21f-4142-b302-9bbe0e0ee22c" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%209.png"><img style="width:1554px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%209.png"/></a></figure></details></li></ul><ul id="f06cdd02-f6cc-4323-af64-bfaec2d8329a" class="toggle"><li><details open=""><summary><code>FindInMap</code> - get a value from a mapping</summary><figure id="156fec73-ed25-4af6-8fc3-a529f1942a9d" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%203.png"><img style="width:600px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%203.png"/></a></figure></details></li></ul><ul id="6fe2dc26-b262-407a-b9d8-0820980c7f59" class="toggle"><li><details open=""><summary><code>ImportValue</code> - import exported outputs from other templates</summary><figure id="f7c7a393-8815-4259-ab04-e22d37c818dc" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%2010.png"><img style="width:288px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%2010.png"/></a></figure><p id="969cff20-e68b-48f6-90ba-095221fba2d4" class="">
+</p></details></li></ul><ul id="6d820cd2-12e2-4e60-a875-9e5cb9958066" class="toggle"><li><details open=""><summary><code>Join</code> - join comma-delimited list of values</summary><p id="13711669-859f-411b-91fa-c320d42561c9" class=""><code>!Join [ &quot;:&quot;, [a, b, c] ]</code> ⇒ <code>&quot;a:b:c&quot;</code></p></details></li></ul><ul id="1c1a4843-3ea4-4530-bb4f-1349302f24e5" class="bulleted-list"><li style="list-style-type:disc"><code>Sub</code> - substitute variables with a string</li></ul><h2 id="06360eba-1752-47ea-b4b2-57544533ef19" class="">Rollbacks</h2><ul id="18edb846-85f6-4e55-90fc-03b35824f1d0" class="bulleted-list"><li style="list-style-type:disc">Two methods:<ul id="cb768179-3a16-4742-9be3-6d7fb3049799" class="bulleted-list"><li style="list-style-type:circle"><strong>Rollback all stack resources (default)</strong> - rollback the entire stack to the last known stable state (deletes everything in the failed stack)</li></ul><ul id="8d79ab96-a49e-4934-94ef-29a3f15cb677" class="bulleted-list"><li style="list-style-type:circle"><strong>Preserve successfully provisioned resources</strong> - resources that were successfully provisioned will be preserved, failed resources will be rolled back to the last known stable state</li></ul></li></ul><ul id="40f63e1f-6865-485b-be40-65ac2450a389" class="bulleted-list"><li style="list-style-type:disc">During stack creation, rolling back to the previous state means deleting the entire stack.</li></ul><ul id="83ca71f8-3117-4d8b-b3c4-5317a6460285" class="bulleted-list"><li style="list-style-type:disc">During stack update, rolling back to the previous state will delete the failed stack and bring up the previous version.</li></ul><h2 id="7ccd7d03-6ee6-4995-b1bc-afe36f4aec89" class="">ChangeSets</h2><p id="1448e463-b542-4ab6-bcd5-71f1e6ce688c" class="">When we upload a new template to update a stack, ChangeSets show what changes are going to happen to the stack, before creating the stack. If we want to modify the template, we can do that at this stage. Once we are happy, we can execute the change set for the stack to update.<div class="indented"><figure id="d2634938-ac7c-4b09-a976-24ab4082f6d4" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%2011.png"><img style="width:1230px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%2011.png"/></a></figure></div></p><h2 id="68448e69-bdb7-43a1-b152-9d1b91efa8a0" class="">Nested Stack</h2><div id="358110b1-7040-4ecf-8855-11b84e21a8fa" class="column-list"><div id="a245b58c-af1a-4c2a-a3a5-4491cfd8f818" style="width:56.25%" class="column"><ul id="72023be7-3815-47b6-8c7c-d4397d18c8a0" class="bulleted-list"><li style="list-style-type:disc">Allow us to <mark class="highlight-yellow_background">reuse repeated patterns or common components across multiple stacks</mark> (<strong>best practice</strong>).</li></ul><ul id="9c7b6782-f3a0-4e56-be59-7ffbaf34be97" class="bulleted-list"><li style="list-style-type:disc">To update a nested stack, always update the parent (root stack) first</li></ul><ul id="f8ba0228-1a20-4028-8478-cb395ec6586c" class="bulleted-list"><li style="list-style-type:disc"><strong>Cross Stacks are used when stacks have different lifecycles</strong> (export a value from a stack and import it in other stacks) whereas <strong>Nested Stacks are used when the components can be reused</strong>. </li></ul><p id="e6cae1ab-a2ff-4bd9-b9a6-2252f1394f30" class="">
+</p></div><div id="62f47218-5826-4b28-a165-4f9d8aa1f21c" style="width:43.75%" class="column"><figure id="3581084c-f239-4ac2-a35d-d48a33d5aa0d" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%2012.png"><img style="width:722px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%2012.png"/></a><figcaption>Above: cross stack
+Below: nested stack</figcaption></figure></div></div><h2 id="187114e9-fc02-450e-9d8c-8890a7bc7985" class="">StackSets</h2><ul id="6393c245-ae57-4753-a926-cbb6cd894d61" class="bulleted-list"><li style="list-style-type:disc">Used to create, update or delete stacks across <strong>multiple accounts or regions</strong> with a single operation.</li></ul><ul id="1676483e-deb3-4e19-a30d-72dc89bf9924" class="bulleted-list"><li style="list-style-type:disc">Admin account creates StackSets. Trusted accounts can create, update or delete stack instances from StackSets.</li></ul><h2 id="e3ea423b-3f7f-4822-96ca-3000746ed354" class="">Drift</h2><ul id="bfcaf819-1198-4ca3-8870-5a4118258bdb" class="bulleted-list"><li style="list-style-type:disc">CloudFormation doesn’t prevent against manual configuration changes to the stack. This causes drift in the stack. </li></ul><ul id="40fdeba8-1fca-4aba-beac-bf96454e2ec8" class="bulleted-list"><li style="list-style-type:disc">Feature to detect drift in the stack (Select a stack → Action → Detect Drift)</li></ul><ul id="151012c0-44ce-45d7-984f-d3174b4640d7" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Shows what is the expected and actual configuration of drifted resources</mark></li></ul><ul id="3468715d-f12d-4d90-a869-a93edb2989ad" class="bulleted-list"><li style="list-style-type:disc">Not all resources are supported yet</li></ul><h2 id="740b2041-b0de-45ba-83ca-7e7cf71600b9" class="">Stack Notifications</h2><ul id="a976a3f4-6c07-45c4-91ad-5aa6a85d297e" class="bulleted-list"><li style="list-style-type:disc">Enable SNS integration when creating a stack to <strong>send stack events to an SNS topic</strong></li></ul><ul id="01f2a4f1-e963-4747-ac61-18f62d1b3583" class="bulleted-list"><li style="list-style-type:disc">A lambda function can be used to filter for specific events and perform some action (eg. send an email whenever the stack rolls back)</li></ul><figure id="94503ca7-614f-4a2d-994f-a6b0c4051467" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%2013.png"><img style="width:624px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%2013.png"/></a></figure><h2 id="28481bbb-87a7-4c15-9e4c-02ab3c6fe4b1" class="">Stack Policies</h2><ul id="e8cb39b3-211d-46e5-8647-74552ae596ff" class="bulleted-list"><li style="list-style-type:disc">By default, all update actions are allowed to all the resources during a stack update</li></ul><ul id="e65e43b5-fc00-4b30-bc59-cfe9998b000f" class="bulleted-list"><li style="list-style-type:disc"><strong>Stack Policy defines the update actions that are allowed or denied on specific resources during stack update</strong></li></ul><ul id="4f598264-1340-4a41-94c7-1706804c68bf" class="bulleted-list"><li style="list-style-type:disc">Helps protect some resources from unintentional updates</li></ul><ul id="9a8d126c-8f91-4157-a1e1-9c9ca2f6dbfb" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">When you create a stack policy, all update operations on all the stack resources are denied. You need to explicitly allow update operations on the resources.</mark></li></ul><ul id="d551e1be-c5c5-4722-a744-15878dc2e58f" class="bulleted-list"><li style="list-style-type:disc">Example: allow updates on all resources except the production database<figure id="8f8aa75d-0cdc-464a-857a-420902b71264" class="image"><a href="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%2014.png"><img style="width:432px" src="CloudFormation%20f94355b218ad42688be0fb52bca801d6/Untitled%2014.png"/></a></figure></li></ul><h2 id="b7ff0596-9e92-48ae-919f-242a7a781dfa" class="">Misc</h2><ul id="bf4cddee-c7c1-4c50-84c3-358aef808df9" class="bulleted-list"><li style="list-style-type:disc">If the stack is stuck in a <code>DELETE_FAILED</code> state because some resource failed to be deleted, modify the template to retain the resource and manually delete it after the deployment.</li></ul><p id="b047a242-a03c-4858-aab7-adf3db0ae2af" class="">
+</p></div></article></body></html>

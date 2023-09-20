@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>DynamoDB</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c1e69321-ae41-46e1-8b9c-f665749be50b" class="page sans"><header><h1 class="page-title">DynamoDB</h1><p class="page-description"></p></header><div class="page-body"><nav id="0492b0d7-4313-4e60-904b-3f31e839e144" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9e43d571-07e4-474f-a1f5-fd291e3d54db">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2828f1a5-8016-4998-8e5c-4266db7649e8">Tables</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4928db44-d77b-4b61-ac10-5697fd5d3af2">Primary Keys</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4348d102-d7da-4bf3-8621-3cd016e84e08">Read Consistency</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b5ba4b50-6a9c-49d3-96a0-2a87e2492550">Throughput</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c056d0a7-f44e-442c-b4e2-bad981d0d2bf">Capacity Planning</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bae4362a-57d2-46ed-b782-1b54829c55cb">Throttling</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#36a53948-886f-4ad5-b181-4a364a5ffd53">Capacity Modes</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#15c094dd-cf42-499b-9a0e-3ede8e667978">Backups</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#46b8e975-4107-4c5b-bde3-c25803762b42">APIs</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#62340449-cf12-420d-907c-256ae98e461c">Conditional Writes</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#514236f4-4a4d-45f2-a221-1aed11e5c68a">Secondary Indexes</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#eade634f-ff2f-4b2d-b5fe-a849b19d90b8">Local Secondary Index (LSI)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#084eaae0-7eb7-4536-b9dc-7f091c144127">Global Secondary Index (GSI)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9509b1b6-2810-44cf-9165-7f1ef3b1748f">PartiQL</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#aaf93230-310b-4b15-b144-e04eed1ab736">DynamoDB Accelerator (DAX)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#42d4abfa-8656-4832-8776-0efb5626f3fb">DynamoDB Streams</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#18d459a2-a491-4918-a085-a9a7389bf861">Time To Live (TTL)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5c499834-8200-470f-b135-6057e3a859c8">CLI Options</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#478e190a-97c4-4722-bd77-48b872b02c5f">Transactions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4989db65-d734-45bf-96e3-360a035714e6">Security</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cd1f3450-9a8d-462a-b318-372a36b8f5a7">Atomic Counters</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#495e726a-2c1a-478c-9761-2f8dafba0bcd">Misc</a></div></nav><hr id="d1ad253e-0576-4117-96b5-136df5d7d00b"/><h2 id="9e43d571-07e4-474f-a1f5-fd291e3d54db" class="">Intro</h2><ul id="dd9bd3ad-6b28-4d24-9a1c-3e0890463ae2" class="bulleted-list"><li style="list-style-type:disc"><strong>SQL databases (RDS &amp; Aurora) are centralized</strong> and <strong>can scale reads by adding read replicas</strong> but they <strong>cannot scale writes (no sharding)</strong>. The only way to scale writes is to <strong>vertically scale the DB</strong>.</li></ul><ul id="18edd8ec-d134-4531-91f8-a4dff5fd699d" class="bulleted-list"><li style="list-style-type:disc">DynamoDB is a <strong>Serverless NoSQL DB </strong>with <strong>replication across multiple AZ</strong>. It is a <strong>distributed NoSQL DB</strong> that <strong>can scale both reads and writes horizontally</strong> to support massive workloads.</li></ul><ul id="55038539-aaa1-4d17-9398-6c6a7ce6b163" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Database is already created and managed by AWS.</mark> We only need to create Tables. </li></ul><ul id="4bf2f4b4-8249-46b9-846f-6815c50876a4" class="bulleted-list"><li style="list-style-type:disc">Table classes<ul id="e8e08456-e590-4a85-aee4-db20f7d03c6b" class="bulleted-list"><li style="list-style-type:circle">Standard</li></ul><ul id="aa2487e7-ab1e-49cb-8b79-6b4f024282f0" class="bulleted-list"><li style="list-style-type:circle">Infrequent Access (IA)</li></ul></li></ul><ul id="b487003c-44e4-4531-874c-b7b5a9f0df80" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Popular option to use as a serverless distributed cache. Latency will be higher than ElastiCache as DynamoDB is not an in-memory store.</mark> It stores data on disk. </li></ul><ul id="43fdcc3d-480d-4bb5-965c-2849e875fbd4" class="bulleted-list"><li style="list-style-type:disc">Copy a table across account or region (3 options):<ul id="d6178db9-2946-44ef-9673-6bfb34bb7f52" class="bulleted-list"><li style="list-style-type:circle">Using AWS Data Pipeline</li></ul><ul id="13590050-0e73-4ce9-a84a-10bf4c223bd8" class="bulleted-list"><li style="list-style-type:circle">Backup and restore into a new table (takes some time but easy)</li></ul><ul id="215e8eab-749b-441e-a490-ee66978b0fb0" class="bulleted-list"><li style="list-style-type:circle">Scan and BatchWriteItem (not recommended)</li></ul></li></ul><ul id="8157048e-c7fb-4ffa-8d67-fd85d8320609" class="bulleted-list"><li style="list-style-type:disc"><strong>Global Tables</strong> - multi-region, multi-active, replicated tables (need to enable DynamoDB streams)</li></ul><ul id="942f2c19-c018-403e-a6d1-9bc1be90a6b7" class="bulleted-list"><li style="list-style-type:disc"><strong>DynamoDB Local</strong> - deploy DynamoDB locally for development or testing</li></ul><h2 id="2828f1a5-8016-4998-8e5c-4266db7649e8" class="">Tables</h2><ul id="03026dde-1244-4dfb-beb2-514696e97447" class="bulleted-list"><li style="list-style-type:disc">Primary key must be decided at creation time</li></ul><ul id="9c3665ae-7b1a-44f6-aa2d-a2e015a8b8d2" class="bulleted-list"><li style="list-style-type:disc">Infinite rows (items)</li></ul><ul id="5f6b3259-5b92-431a-91c5-7ae7130a5d5b" class="bulleted-list"><li style="list-style-type:disc">Attributes (columns) can be added overtime</li></ul><ul id="dceb45e5-13e2-4a5d-8c40-c591314af014" class="bulleted-list"><li style="list-style-type:disc"><strong>Maximum item size: 400 KB</strong></li></ul><ul id="da00b00e-7b7e-486d-aebf-a4ad8f8fe9d2" class="bulleted-list"><li style="list-style-type:disc">Supported data types:<ul id="ff783eac-3f24-4c78-9370-3b66c5f29748" class="bulleted-list"><li style="list-style-type:circle"><strong>Scalar</strong> - String, Number, Binary, Boolean, Null</li></ul><ul id="f728f083-7f8b-4e3e-8662-b66749ad80be" class="bulleted-list"><li style="list-style-type:circle"><strong>Document</strong> - List, Map</li></ul><ul id="24025642-c44c-4c6a-bd28-f92ece932b8c" class="bulleted-list"><li style="list-style-type:circle"><strong>Set</strong> - String Set, Number Set, Binary Set</li></ul></li></ul><h2 id="4928db44-d77b-4b61-ac10-5697fd5d3af2" class="">Primary Keys</h2><ul id="6d6e1146-a852-46eb-b750-a98800c90e66" class="bulleted-list"><li style="list-style-type:disc"><strong>Partition Key (Hash)</strong><ul id="c45f0331-41ae-421c-b43e-a9e113dd1a30" class="bulleted-list"><li style="list-style-type:circle">Partition key is hashed to find the location of data</li></ul><ul id="7fc1a955-e21f-47bd-a566-6be2ba7be54a" class="bulleted-list"><li style="list-style-type:circle">Partition key must be unique for each item</li></ul><figure id="e31297af-81cb-4f57-b440-8917f76e201e" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled.png"><img style="width:480px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled.png"/></a></figure></li></ul><ul id="ae504b15-8b58-4257-a0c0-beb61bf2853a" class="bulleted-list"><li style="list-style-type:disc"><strong>Partition Key (Hash) + Sort Key (Range)</strong><ul id="775a2629-75da-41e6-88bd-9ecbd1fb8afe" class="bulleted-list"><li style="list-style-type:circle">Partition key is hashed to find the partition and sort key is used to search for the data in that partition</li></ul><ul id="9372f61e-60be-4f14-af06-859127df7bc5" class="bulleted-list"><li style="list-style-type:circle">Combination of partition key and sort key must be unique</li></ul><figure id="d8d8ca98-0234-4953-976a-7eb993196ca9" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%201.png"><img style="width:576px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%201.png"/></a></figure></li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="95c631be-3e01-4816-bb53-a20166131352"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Partition key should be a column in the table that has highest cardinality</strong> to maximize the number of partitions (data distribution). Partition key should also be highly diverse to ensure that the data is distributed equally across partitions. </div></figure><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="2116bbae-670b-42ff-9718-bc1251d92baf"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>If the partition (hash) key is not highly diverse </strong>(only few unique values)<strong>, add a suffix to the partition key to make the partition key diverse.</strong> The suffix can be generated either randomly or calculated using a hashing algorithm.</div></figure><h2 id="4348d102-d7da-4bf3-8621-3cd016e84e08" class="">Read Consistency</h2><div id="999bdc87-3fc6-41d2-8e7f-551cf5799e6d" class="column-list"><div id="40cb8171-7616-4443-a802-dc2e8afcffb9" style="width:68.75%" class="column"><ul id="4affd540-ee23-42ae-a112-e88350164e81" class="bulleted-list"><li style="list-style-type:disc"><strong>Eventually Consistent Read</strong> (default)<ul id="ce557e5d-d4b1-4606-b995-e6ae931a4bc1" class="bulleted-list"><li style="list-style-type:circle">Low latency</li></ul><ul id="80812db6-7562-4140-9679-609512f04335" class="bulleted-list"><li style="list-style-type:circle">May get stale data (if the replication hasn’t happened yet)</li></ul></li></ul><ul id="f63796a0-daa4-491e-ab77-726297014c0e" class="bulleted-list"><li style="list-style-type:disc"><strong>Strongly Consistent Read</strong><ul id="7a96cbdb-3d42-4e52-b3ed-1cdfbe80aae3" class="bulleted-list"><li style="list-style-type:circle"><strong>Consumes twice the RCU</strong></li></ul><ul id="c2acfbd2-e3b5-4e88-b16a-8bb6bcc1d9fc" class="bulleted-list"><li style="list-style-type:circle">More latency</li></ul><ul id="cdf0c5ee-03d8-4137-bea7-16ae6e13ca9c" class="bulleted-list"><li style="list-style-type:circle">Set <code>ConsistentRead: True</code> in API calls (<code>GetItem</code>, <code>BatchGetltem</code>, <code>Query</code>, <code>Scan</code>) to perform a strongly consistent read </li></ul><p id="ad81cef9-e2c7-46ad-bd85-2d93658e2692" class="">
+</p></li></ul></div><div id="60a0da72-952f-48f6-92f5-27eda65b3ffd" style="width:31.249999999999993%" class="column"><figure id="184371d8-131c-452b-b869-2308767241d2" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%202.png"><img style="width:584px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%202.png"/></a></figure></div></div><h2 id="b5ba4b50-6a9c-49d3-96a0-2a87e2492550" class="">Throughput</h2><h3 id="c056d0a7-f44e-442c-b4e2-bad981d0d2bf" class="">Capacity Planning</h3><ul id="2fac32ac-1e45-42ac-9c8e-431f07ac8f08" class="bulleted-list"><li style="list-style-type:disc"><strong>Read Capacity Units (RCU)</strong><ul id="b5b58150-344b-4f76-8078-1eeae5133125" class="bulleted-list"><li style="list-style-type:circle">Throughput for reads</li></ul><ul id="ee4fd707-4cdb-4ba5-b486-1bf29c116d7a" class="bulleted-list"><li style="list-style-type:circle"><strong>1 RCU</strong> ⇒ <strong>1 strongly consistent read per sec</strong> or <strong>2 eventually consistent reads per sec</strong> for an item of <strong>max size 4 KB</strong></li></ul><ul id="c75aa114-d650-4c87-a4a4-c3e78b6196c1" class="bulleted-list"><li style="list-style-type:circle">10 eventually consistent reads per sec with item size 6 KB ⇒ [10 / 2 (eventual consistency)] x [8 KB (rounded up) / 4 KB] = 10 RCU</li></ul><ul id="7cec9bc4-b073-445c-9449-d9767313ec35" class="bulleted-list"><li style="list-style-type:circle">10 strongly consistent reads per sec with item size 10 KB ⇒ 10 x [12 KB (rounded up) / 4 KB] = 30 RCU</li></ul></li></ul><ul id="7deca7b7-6c81-4093-b51a-b9dd3f546e1a" class="bulleted-list"><li style="list-style-type:disc"><strong>Write Capacity Units (WCU)</strong><ul id="7708b4cf-81f3-4ae9-859e-5bbd6fc6ff12" class="bulleted-list"><li style="list-style-type:circle">Throughput for writes</li></ul><ul id="2993ebec-f0b5-4170-be96-e09a8f65aaf0" class="bulleted-list"><li style="list-style-type:circle"><strong>1 WCU ⇒ 1 write per sec </strong>for an item of <strong>max size 1 KB</strong></li></ul><ul id="4b2f5d38-633e-428e-9929-1ad6dbc99191" class="bulleted-list"><li style="list-style-type:circle">Write 6 items per sec with item size 4.5 KB ⇒ 6 x [5 KB (rounded up) / 1 KB] = 30 WCU</li></ul></li></ul><ul id="6ab82e88-188e-4caf-8d7f-1fea79efde76" class="bulleted-list"><li style="list-style-type:disc"><strong>WCU &amp; RCU are divided evenly across partitions</strong> (10 partition &amp; 10 RCU ⇒ 1 RCU for each partition).</li></ul><ul id="a56abc59-1477-4191-b61c-f9288bca5018" class="bulleted-list"><li style="list-style-type:disc">To determine how much of the provisioned capacity is being used, you can monitor <code>ConsumedReadCapacityUnits</code> and <code>ConsumedWriteCapacityUnits</code> over a time period.</li></ul><h3 id="bae4362a-57d2-46ed-b782-1b54829c55cb" class="">Throttling</h3><ul id="baf32f17-6146-48c7-bd2d-69188f32cd1b" class="bulleted-list"><li style="list-style-type:disc">If <mark class="highlight-yellow_background">RCU or WCU for any partition is exceeded</mark>, the request will throttle and we’ll get <code>ProvisionedThroughputExceededException</code>. </li></ul><ul id="7ac20ba0-8f8d-4fea-93e5-757193716bfc" class="bulleted-list"><li style="list-style-type:disc">Reasons for throttling:<ul id="43bdbff7-1fc6-484d-83ce-e2453ac8b6ed" class="bulleted-list"><li style="list-style-type:circle"><strong>Hot Partitions</strong> (most of the data is read or written to only a few partitions)</li></ul><ul id="3bb7a587-c5ca-41a5-91a5-403a194629cd" class="bulleted-list"><li style="list-style-type:circle"><strong>Large item size</strong></li></ul></li></ul><ul id="e7c77f85-7a39-4d45-932a-9d8e32befd93" class="bulleted-list"><li style="list-style-type:disc">Solutions to throttling:<ul id="a921b7df-caa3-485d-8d40-67f4c0b86075" class="bulleted-list"><li style="list-style-type:circle"><strong>Exponential backoff (already in SDK)</strong></li></ul><ul id="a1893edf-85f4-4ca1-8812-d11e3f7c4e5a" class="bulleted-list"><li style="list-style-type:circle">Evenly distributed partition keys (to avoid hot partitions)</li></ul><ul id="13421579-7979-42f3-84e3-30bfbbe58277" class="bulleted-list"><li style="list-style-type:circle">DynamoDB Accelerator (DAX)</li></ul></li></ul><h3 id="36a53948-886f-4ad5-b181-4a364a5ffd53" class="">Capacity Modes</h3><ul id="efc84d1e-a890-468f-ba69-776933265aa1" class="bulleted-list"><li style="list-style-type:disc"><strong>Provisioned</strong><ul id="963c0b42-1f5e-491e-890a-d50fc1924775" class="bulleted-list"><li style="list-style-type:circle">Provision RCU and WCU in advance</li></ul><ul id="069178e3-5ad1-4c10-a0bd-5f6656eb4b05" class="bulleted-list"><li style="list-style-type:circle"><strong>Optional throughput auto-scaling</strong> (automatically scales RCU and WCU) based on target utilization<ul id="8a533244-f81f-4ff9-93ad-cde9b8f60d2c" class="bulleted-list"><li style="list-style-type:square">Example: Min RCU: 1, Max RCU: 100, Target utilization: 70% ⇒ <ul id="4ad61414-accc-4705-8777-7df293197583" class="bulleted-list"><li style="list-style-type:disc">7 RCUs are being consumed ⇒ provisioned RCU = 10</li></ul><ul id="04dff4ed-6119-41a6-acfc-543e96274ce7" class="bulleted-list"><li style="list-style-type:disc">35 RCUs are being consumed ⇒ provisioned RCU = 50</li></ul></li></ul></li></ul><ul id="f19a3f87-8dec-42a3-9482-fb55b6ada9af" class="bulleted-list"><li style="list-style-type:circle">Provisioned throughput can be exceeded temporarily using <strong>Burst Capacity</strong>. Once burst capacity is consumed, we’ll get <code>ProvisionedThroughputExceededException</code>. At this stage, we need to retry with exponential backoff.</li></ul></li></ul><ul id="ff4e7f7e-e19f-4c6a-913b-7267b219df98" class="bulleted-list"><li style="list-style-type:disc"><strong>On-demand</strong><ul id="1e0204c9-160e-4c87-869d-8e3740cdefb8" class="bulleted-list"><li style="list-style-type:circle">No capacity planning needed (reads and writes auto-scale)</li></ul><ul id="9133cdab-b4ec-4369-b36d-354a8fac1079" class="bulleted-list"><li style="list-style-type:circle">No throttling</li></ul><ul id="057b6bac-bd7e-4c15-b8e5-de2a22d245c4" class="bulleted-list"><li style="list-style-type:circle">Pay for the <strong>Read Request Unit (RRU)</strong> and <strong>Write Request Unit (WRU)</strong> consumed. They have the same calculation as RCU and WCU. </li></ul><ul id="e4c8feea-70bb-430e-aff3-d91d207f724f" class="bulleted-list"><li style="list-style-type:circle">2.5 times more expensive than provisioned mode (use only for unpredictable traffic)</li></ul></li></ul><h2 id="15c094dd-cf42-499b-9a0e-3ede8e667978" class="">Backups</h2><ul id="bf331a75-3d1b-4610-a0a1-9cab6def313c" class="bulleted-list"><li style="list-style-type:disc">Two types:<ul id="44af5b89-2b9a-4a85-bdd5-e68e2cbe523c" class="bulleted-list"><li style="list-style-type:circle"><strong>On-demand</strong></li></ul><ul id="1a7d0ed5-fd7d-40fc-b4d9-739a1e324cc9" class="bulleted-list"><li style="list-style-type:circle"><strong>Point-in-time recovery (PITR)</strong> - automatic continuous backups</li></ul></li></ul><ul id="beea8286-b2b9-44f5-9a2e-86973427eeaa" class="bulleted-list"><li style="list-style-type:disc">No performance impact during backups</li></ul><ul id="2016d5fb-d43c-4c8e-8ccd-3fafd535ef1d" class="bulleted-list"><li style="list-style-type:disc"><strong>Backups are written to S3</strong> under the hood but <mark class="highlight-yellow_background">we cannot access these backup buckets</mark></li></ul><h2 id="46b8e975-4107-4c5b-bde3-c25803762b42" class="">APIs</h2><ul id="8eff37f1-84c5-4e66-837b-6fc7975ac7a0" class="bulleted-list"><li style="list-style-type:disc"><code>PutItem</code> - <strong>fully update</strong> the item based on the primary key or create a new item if it does not exist</li></ul><ul id="adab5e68-2acd-4fc6-8531-7d961124ad54" class="bulleted-list"><li style="list-style-type:disc"><code>UpdateItem</code> - <strong>partially update</strong> the item based on the primary key or create a new item if it does not exist</li></ul><ul id="f453668b-9cc6-4a23-943e-6d34596f5bf8" class="bulleted-list"><li style="list-style-type:disc"><code>GetItem</code> - <strong>read an item</strong> using the primary key (hash / hash + range)<ul id="c48f4410-d7e0-400a-ba38-b808a469635a" class="bulleted-list"><li style="list-style-type:circle">Eventually consistent read by default, strongly consistent read optional</li></ul><ul id="13e866e9-45ca-494c-86e0-baf8375ca477" class="bulleted-list"><li style="list-style-type:circle"><code>ProjectionExpression</code> can be specified to retrieve a subset of attributes</li></ul></li></ul><ul id="0a39a950-37f1-4f2f-bc5b-25186076d98e" class="bulleted-list"><li style="list-style-type:disc"><code>Query</code> - <strong>read multiple items based on a query</strong> from a <mark class="highlight-yellow_background">table, LSI or GSI</mark><ul id="792e516f-8922-489b-9162-23722248af62" class="bulleted-list"><li style="list-style-type:circle"><code>KeyConditionExpression</code><ul id="01a4ef2e-2e13-4990-97f5-8906dd999c3a" class="bulleted-list"><li style="list-style-type:square">Partition key (=) - required</li></ul><ul id="7f638ecc-46cd-4786-ae1c-62dfb1832dd2" class="bulleted-list"><li style="list-style-type:square">Sort key (=, &lt;, ≤, &gt;, ≥, between, begins with) - optional</li></ul></li></ul><ul id="3a8cea05-0d03-4f7d-98f2-82f88f2ceb8c" class="bulleted-list"><li style="list-style-type:circle"><code>FilterExpression</code><ul id="78fcab71-c7b3-4713-8afd-6e5bfafea25a" class="bulleted-list"><li style="list-style-type:square">Client-side filtering on non-key attributes</li></ul><ul id="7de56b48-2f0d-4454-9257-9e0cb2779a32" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Does not allow partition key or sort key attributes</mark></li></ul></li></ul><ul id="a5bcd64b-8366-400c-89b1-8cc4b82a647a" class="bulleted-list"><li style="list-style-type:circle">Returns a list of items where number of items = <mark class="highlight-yellow_background">limit in the query</mark> or <mark class="highlight-yellow_background">up to 1 MB of data</mark>. To get more data, use <mark class="highlight-yellow_background">pagination</mark>.</li></ul></li></ul><ul id="757039d3-a841-4eac-8058-2f0c6c78dfe5" class="bulleted-list"><li style="list-style-type:disc"><code>Scan</code> - <strong>scan the entire table</strong> (every partition) and return all the data<ul id="dcf80696-0ad1-469c-bc1b-bf44849fd81e" class="bulleted-list"><li style="list-style-type:circle">Consumes a lot of RCU</li></ul><ul id="e23364e7-196f-443f-af22-301a02588df2" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Recommended to use limit in the scan operation</mark></li></ul><ul id="e6345e9b-57e4-4e50-a667-053513f7b912" class="bulleted-list"><li style="list-style-type:circle">Returns up to 1 MB of data (use pagination to get more data)</li></ul><ul id="bd917143-6bef-4704-95d0-1d589ecf77fb" class="bulleted-list"><li style="list-style-type:circle">Use <code>FilterExpression</code> to filter items and <code>ProjectionExpression</code> to retrieve a subset of attributes (client-side)</li></ul><ul id="b519db67-27d4-44af-acd6-6703dd05ca1d" class="bulleted-list"><li style="list-style-type:circle"><strong>Not recommended</strong> unless you need to read the entire table (Eg. Analytics)</li></ul><ul id="836e1c41-ff1a-4bc6-b5aa-086bdea45577" class="bulleted-list"><li style="list-style-type:circle">Use <strong>Parallel Scan</strong> for faster scans<ul id="755ff844-db5a-4594-bb79-3842f0552db9" class="bulleted-list"><li style="list-style-type:square">Multiple workers</li></ul><ul id="44d73155-d38c-48d6-8efa-16122c95bba8" class="bulleted-list"><li style="list-style-type:square">Increases throughput and RCU consumed</li></ul><ul id="bd2253ed-1db7-4bef-9301-b316bdde768c" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Recommended to use limit in the parallel scan operation</mark></li></ul></li></ul></li></ul><ul id="a11cea3e-e0c8-4cb6-9c8f-e41d5a68999f" class="bulleted-list"><li style="list-style-type:disc"><code>DeleteItem</code> - <strong>delete an item</strong><ul id="6121757c-d248-49fc-810b-84a4066b09e2" class="bulleted-list"><li style="list-style-type:circle">Optional conditional delete (Eg. Delete this item only if age &lt; 0)</li></ul></li></ul><ul id="5c163e86-2c86-4eab-b407-50de2ba6d4ec" class="bulleted-list"><li style="list-style-type:disc"><code>DeleteTable</code> - <strong>delete the whole table</strong> and its items<ul id="db733d08-4d9c-489a-8745-32b08c542830" class="bulleted-list"><li style="list-style-type:circle">Much faster than calling <code>DeleteItem</code> on all the items</li></ul></li></ul><ul id="3d0789a5-913a-4a1f-a6ae-7a9c115bacf7" class="bulleted-list"><li style="list-style-type:disc"><code>BatchWriteItem</code> - <strong>write items in a batch of operations</strong> (processed in parallel)<ul id="5097551c-1b1d-4e5e-aec3-7a190df22a7a" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-yellow_background">Max 25 operations</mark></strong><mark class="highlight-yellow_background"> or max 16 MB of data written in a single API call</mark> </li></ul><ul id="5d5eec25-f68d-404e-bf70-6b8e42f20ca0" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Supports </mark><mark class="highlight-yellow_background"><code>PutItem</code></mark><mark class="highlight-yellow_background"> and </mark><mark class="highlight-yellow_background"><code>DeleteItem</code></mark><mark class="highlight-yellow_background"> (does not support </mark><mark class="highlight-yellow_background"><code>UpdateItem</code></mark><mark class="highlight-yellow_background">)</mark></li></ul><ul id="92f514f8-2513-4006-99fe-7e76a9bc8156" class="bulleted-list"><li style="list-style-type:circle">Can write to multiple tables in the same batch API call</li></ul><ul id="25245cda-6969-44a2-81c3-e8feeff5c405" class="bulleted-list"><li style="list-style-type:circle"><code>UnprocessedItems</code> (failed writes) can be retried with exponential backoff</li></ul><ul id="ca5d214d-1cc0-410b-a2ee-4286cabcf590" class="bulleted-list"><li style="list-style-type:circle">If the batch write exceeds WCU limits, add more WCU</li></ul></li></ul><ul id="53bc1db5-a997-4937-bb8a-8fdf73681e47" class="bulleted-list"><li style="list-style-type:disc"><code>BatchGetItem</code> - <strong>read items in a batch of operations </strong>(processed in parallel)<ul id="85e60563-f2fd-4828-9105-149812e6f892" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-yellow_background">Max 100 items</mark></strong><mark class="highlight-yellow_background"> or max 16 MB of data can be read in a single API call</mark></li></ul><ul id="789f997a-8083-41d5-a65f-a07356871e86" class="bulleted-list"><li style="list-style-type:circle">Can read from multiple tables in the same batch API call</li></ul><ul id="d9048701-9996-41c1-b1c6-a60b75894923" class="bulleted-list"><li style="list-style-type:circle"><code>UnprocessedKeys</code> (failed reads) can be retried with exponential backoff</li></ul><ul id="d5d6f2e6-65b5-4e6f-8f86-0af0d6428548" class="bulleted-list"><li style="list-style-type:circle">If the batch read exceeds RCU limits, add more RCU</li></ul></li></ul><h3 id="62340449-cf12-420d-907c-256ae98e461c" class="">Conditional Writes</h3><ul id="e9a6bb80-81eb-4302-a363-c074cc4d397a" class="bulleted-list"><li style="list-style-type:disc">Option to specify a <strong>Conditional Expression</strong> to apply the write operation only to the items that satisfy the condition. </li></ul><ul id="c8747ab1-96f6-418b-83e7-5359ec97ed83" class="bulleted-list"><li style="list-style-type:disc">Supported by <code>PutItem</code>, <code>UpdateItem</code>, <code>DeleteItem</code> and <code>BatchWriteItem</code> APIs</li></ul><ul id="7c2d2279-c354-40a7-a5a9-891618a02752" class="toggle"><li><details open=""><summary>Examples</summary><p id="b81e0660-5da1-47fd-9723-006df9fc2b02" class="">In the examples below, the values for the variables are passed in <code>values.json</code> file.</p><figure id="e591465e-d6a8-43cc-a6e8-753cbd1b38fc" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%203.png"><img style="width:480px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%203.png"/></a></figure><figure id="605d8488-3cca-4926-b9e4-0041527f09c4" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%204.png"><img style="width:480px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%204.png"/></a></figure><figure id="09c2617f-aec7-4f11-a92f-adc11ad68178" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%205.png"><img style="width:672px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%205.png"/></a></figure><figure id="e412dc4c-e035-452b-bf34-47635958ea19" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%206.png"><img style="width:1274px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%206.png"/></a></figure></details></li></ul><ul id="0c6b1428-2166-4ca9-b384-e040f4acf5c7" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Using </mark><mark class="highlight-yellow_background"><code>attribute_not_exists(partition_key)</code></mark><mark class="highlight-yellow_background"> and  </mark><mark class="highlight-yellow_background"><code>attribute_not_exists(sort_key)</code></mark><mark class="highlight-yellow_background"> in our conditional expressions, we can ensure that a data is never overwritten by write commands.</mark></li></ul><ul id="d8eeeda1-4ad5-4988-8ab0-da9e1d589224" class="bulleted-list"><li style="list-style-type:disc"><strong>Optimistic Locking</strong> - strategy to ensure an item hasn’t changed after you read it and before you update it<ul id="f7644a6c-b3a8-4e7a-b13a-c15f530b4e14" class="bulleted-list"><li style="list-style-type:circle">Each item has an attribute <code>Version</code> which is incremented every time the item is updated</li></ul><ul id="abff21ef-17e4-4328-97e5-62d197501ebd" class="bulleted-list"><li style="list-style-type:circle">The idea is to read the item and send a write (update or delete) request to DynamoDB with a conditional expression that the version of the item is what you read. If the version gets incremented before updating, the write operation will fail.</li></ul></li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="d596e92e-d913-452b-a9bc-3a2c3d65894b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Filter Expressions are for read operations, whereas Conditional Expressions are for write operations.</div></figure><h2 id="514236f4-4a4d-45f2-a221-1aed11e5c68a" class="">Secondary Indexes</h2><ul id="723d660e-89d3-427e-a5af-b2071d1f4213" class="bulleted-list"><li style="list-style-type:disc">Allow running queries on non-primary key attributes</li></ul><ul id="7586a029-7778-4972-bef6-bc5d334d84f9" class="bulleted-list"><li style="list-style-type:disc">Attribute projections - what attributes (columns) to fetch when queried on an index<ul id="b10b410a-cea4-4766-808d-a19d89644218" class="bulleted-list"><li style="list-style-type:circle"><code>KEYS_ONLY</code> - only index and primary key attributes</li></ul><ul id="841c8060-1944-4f7c-9ccc-78f62a6e68aa" class="bulleted-list"><li style="list-style-type:circle"><code>INCLUDE</code> - some attributes (including index and primary key attributes)</li></ul><ul id="e60ea3e9-4b66-42fd-827f-dce4d7cb4813" class="bulleted-list"><li style="list-style-type:circle"><code>ALL</code> - all attributes</li></ul></li></ul><h3 id="eade634f-ff2f-4b2d-b5fe-a849b19d90b8" class="">Local Secondary Index (LSI)</h3><ul id="bf3f9312-2505-4a4c-ab34-8d0d431c65f8" class="bulleted-list"><li style="list-style-type:disc"><strong>Alternative Sort Key</strong> for a table (uses the same partition key)</li></ul><ul id="de7f65c8-bd79-4886-8a2c-fba33939d85d" class="bulleted-list"><li style="list-style-type:disc">Queries are made to a single partition</li></ul><ul id="af108819-072a-4f2c-8df0-ec02d1e59e37" class="bulleted-list"><li style="list-style-type:disc">The sort key of the LSI <strong>must be a scalar attribute</strong> (String, Number or Binary)</li></ul><ul id="3dafa22a-ccd0-4d6a-ba91-3f632355cab1" class="bulleted-list"><li style="list-style-type:disc">Max 5 LSI per table</li></ul><ul id="9b898dcb-687b-47c8-bad9-367ca62f934f" class="bulleted-list"><li style="list-style-type:disc"><strong>Must be defined at table creation time</strong></li></ul><ul id="b68f7fa1-88c6-45a3-9b8c-a7ae33d8f327" class="bulleted-list"><li style="list-style-type:disc"><strong>Uses RCU and WCU of the main table</strong> (works on the same table partition)</li></ul><ul id="f4736ad5-bf99-4733-a015-f2ce50dcf78b" class="bulleted-list"><li style="list-style-type:disc"><strong>Queries on LSI support both eventual consistency and strong consistency</strong></li></ul><ul id="17274e86-b8d9-4f42-9fea-72d37a7d5c66" class="toggle"><li><details open=""><summary>Example</summary><p id="44e0449a-fc22-48d9-9de7-b1b518fc0049" class="">Create an LSI to query the table to fetch all entries of a user between two game timestamps.</p><figure id="b5a0be81-4269-438c-80e7-f8f9fadeac7a" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%207.png"><img style="width:576px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%207.png"/></a></figure></details></li></ul><h3 id="084eaae0-7eb7-4536-b9dc-7f091c144127" class="">Global Secondary Index (GSI)</h3><ul id="59f8cf43-3529-4072-a941-2a1da45ea03f" class="bulleted-list"><li style="list-style-type:disc"><strong>Alternative Primary Key</strong> for a table (Hash or Hash + Sort) to speed up queries on non-key attributes.</li></ul><ul id="9de72838-3bbf-4c67-a999-a81c5ea98609" class="bulleted-list"><li style="list-style-type:disc">The hash key and sort key (optional) of the GSI <strong>must be scalar attributes</strong> (String, Number or Binary)</li></ul><ul id="a67e78e1-934f-4ca0-b99e-826cc0908895" class="bulleted-list"><li style="list-style-type:disc">Queries are made to the entire database</li></ul><ul id="962d429d-9897-454e-b670-a7ac9448f67a" class="bulleted-list"><li style="list-style-type:disc"><strong>Must provision RCU and WCU</strong> (supports auto-scaling) for GSI since it partitions the same table differently. <strong>If the writes are throttled on the GSI, the main table will be throttled for writes as well.</strong></li></ul><ul id="eb7efcbd-cca9-4ab7-b103-210342c866b4" class="bulleted-list"><li style="list-style-type:disc"><strong>GSIs can be added or modified after table creation </strong></li></ul><ul id="fbdac69b-e224-46e2-b220-c02882d30a2e" class="bulleted-list"><li style="list-style-type:disc"><strong>Queries on GSI support eventual consistency only</strong></li></ul><ul id="100f6f83-22d2-43f8-8ccd-7746f3158e6c" class="toggle"><li><details open=""><summary>Example</summary><p id="1ec95d48-01ca-4559-8693-c691434a180c" class="">Create a GSI to fetch based on Game ID and timestamp.</p><figure id="237c0357-95e6-42d1-8034-a1d990b71ae0" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%208.png"><img style="width:1682px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%208.png"/></a></figure></details></li></ul><h2 id="9509b1b6-2810-44cf-9165-7f1ef3b1748f" class="">PartiQL</h2><ul id="cfc4e734-a4b5-4c5e-985d-eccb5ab016bf" class="bulleted-list"><li style="list-style-type:disc">SQL-compatible query language for DynamoDB</li></ul><ul id="9e8e25d0-e384-4049-a140-58dbecd9b0b5" class="bulleted-list"><li style="list-style-type:disc">Can run queries across multiple DynamoDB tables </li></ul><ul id="36d23d38-96c5-4ae5-a532-346bed3aa1b0" class="bulleted-list"><li style="list-style-type:disc">Supports some (not all) SQL statements: <code>INSERT</code>, <code>UPDATE</code>, <code>SELECT</code>, <code>DELETE</code> (does not support <code>JOIN</code> operation)</li></ul><ul id="ed16b1ee-1262-4e27-8f11-0b1af7061f01" class="bulleted-list"><li style="list-style-type:disc">Supports batch operations</li></ul><ul id="8a8e135a-b71a-4dae-9ad0-34f53b8f9ca1" class="toggle"><li><details open=""><summary>PartiQL queries can be run from</summary><ul id="0a982c98-5ddd-4275-8545-e9624002d62b" class="bulleted-list"><li style="list-style-type:disc">AWS Management Console</li></ul><ul id="851ec4ee-d377-42b4-8063-99a97d20814d" class="bulleted-list"><li style="list-style-type:disc">NoSQL Workbench for DynamoDB</li></ul><ul id="1d08d10f-7208-4a40-babd-c38f962ee7d0" class="bulleted-list"><li style="list-style-type:disc">DynamoDB APIs</li></ul><ul id="a69aca1d-20bb-4521-87e6-4eb30c0914cb" class="bulleted-list"><li style="list-style-type:disc">AWS CLI</li></ul><ul id="c95e2cfc-f18f-4227-adbb-8255a55e3bdb" class="bulleted-list"><li style="list-style-type:disc">AWS SDK</li></ul><p id="38ddf3f4-c6ba-4932-a1ff-faf68f63bc11" class="">
+</p></details></li></ul><h2 id="aaf93230-310b-4b15-b144-e04eed1ab736" class="">DynamoDB Accelerator (DAX)</h2><div id="06182388-bcf8-4dec-9de9-4f78b84b616b" class="column-list"><div id="b04f69f5-da1f-4451-81ff-c249e0d867e3" style="width:68.75%" class="column"><ul id="e3c59113-1025-4966-8fb4-ed7fd52ca9bd" class="bulleted-list"><li style="list-style-type:disc"><strong>In-memory distributed cache</strong> for DynamoDB</li></ul><ul id="95254b21-209c-4c15-a32f-f02168c05cde" class="bulleted-list"><li style="list-style-type:disc">Caches reads, queries and individual objects automatically</li></ul><ul id="d5d08f0a-e5e7-490c-8217-2ce8c474303e" class="bulleted-list"><li style="list-style-type:disc">Microseconds latency for cached items</li></ul><ul id="97120269-48d6-42b1-adda-75a79e99309e" class="bulleted-list"><li style="list-style-type:disc"><strong>Doesn’t require application code changes</strong> (managed on DB side)</li></ul><ul id="1e9ab71b-4b02-40fc-a007-192a76064fce" class="bulleted-list"><li style="list-style-type:disc"><strong>Solves the Hot Key Problem</strong> (too many reads from a single partition)</li></ul><ul id="41cd790e-e793-4dec-96c5-2f2eb272a59b" class="bulleted-list"><li style="list-style-type:disc">Default 5 min TTL</li></ul><ul id="8275aa8d-94bd-4c58-a773-ce8f91a40320" class="bulleted-list"><li style="list-style-type:disc">Encryption at rest using KMS</li></ul><ul id="d3317961-3c5f-4dde-a528-0cedd6f25912" class="bulleted-list"><li style="list-style-type:disc">DAX is good for automatic caching of reads and queries made to a DynamoDB table. To cache aggregation results, ElastiCache needs to be used. </li></ul></div><div id="72a2fe0c-1d56-4900-8cf2-c81253b19eee" style="width:31.249999999999993%" class="column"><figure id="079b9147-9766-4df8-8dbb-82831165ba47" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%209.png"><img style="width:480px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%209.png"/></a></figure></div></div><ul id="15d3ce29-b0fd-4007-82a3-b635eca90fa4" class="bulleted-list"><li style="list-style-type:disc">Enable DAX and provision nodes for the DAX cluster<ul id="816636b7-f80e-4177-aff7-c8bb4b48c8f7" class="bulleted-list"><li style="list-style-type:circle">Multi-AZ recommended (min 3 nodes) in production</li></ul><ul id="40f5bc19-2347-4370-9988-22d168e2b425" class="bulleted-list"><li style="list-style-type:circle"><strong>Max 10 nodes in a cluster</strong></li></ul><ul id="9173adc1-4c4a-45d8-b807-e716df9a69ed" class="bulleted-list"><li style="list-style-type:circle">Node types:<ul id="a675f713-0c8a-4c1e-92a7-29d940ca36de" class="bulleted-list"><li style="list-style-type:square"><strong>r-type</strong>: fixed resource with always-capacity (recommended for higher throughput)</li></ul><ul id="213afa0c-4066-4c8c-9763-2b9e1581f279" class="bulleted-list"><li style="list-style-type:square"><strong>t-type</strong>: baseline performance with burst capability (recommended for lower throughput)</li></ul></li></ul></li></ul><ul id="984ef6ed-fa27-4b24-9703-527a67412012" class="bulleted-list"><li style="list-style-type:disc">DAX needs IAM permissions to access DynamoDB table (created automatically)</li></ul><ul id="37dd5f5d-fb4e-483f-ba1b-5ca227701a1a" class="bulleted-list"><li style="list-style-type:disc"><strong>DAX is expensive</strong> (should not be used in low cost applications)</li></ul><h2 id="42d4abfa-8656-4832-8776-0efb5626f3fb" class="">DynamoDB Streams</h2><ul id="e71bb342-62e1-4c09-8ef6-cbe6226215fc" class="bulleted-list"><li style="list-style-type:disc">Ordered stream of item-level modifications (create / update / delete)</li></ul><ul id="e3ea0074-b467-4233-99db-d58c902518bc" class="bulleted-list"><li style="list-style-type:disc"><strong>Data retention: 1 day</strong></li></ul><ul id="3756da36-ca81-4e78-8e4c-c59ca5404da6" class="bulleted-list"><li style="list-style-type:disc">Stream records can be:<ul id="991aa477-6a3c-411f-990a-b112ae7deea8" class="toggle"><li><details open=""><summary>Read directly by AWS Lambda (using Event Source Mapping) </summary><figure id="41b5083e-f91e-42a3-914b-f1251eade11d" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%2010.png"><img style="width:288px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%2010.png"/></a></figure></details></li></ul><ul id="f7adfa95-9ef1-46f8-a5ca-47bec0ae6d13" class="toggle"><li><details open=""><summary>Read by KCL as a stream (requires <strong>Kinesis Adapter</strong>)</summary><p id="a9dd25d6-04ea-4f55-88d0-51ede0ffaf24" class="">The <strong>Kinesis Adapter</strong> is the<strong> recommended way to consume streams from DynamoDB</strong> for real-time processing. The KCL simplifies coding by providing useful abstractions above the low-level Kinesis Streams API.</p><figure id="09d28c38-e667-4927-ade8-34eeb3da0826" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%2011.png"><img style="width:336px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%2011.png"/></a></figure></details></li></ul></li></ul><ul id="72d22abd-620e-4b7b-bb55-50319f8031d6" class="bulleted-list"><li style="list-style-type:disc">Stream record contents:<ul id="e13c8b08-f91f-4ab4-a7b6-570df999f046" class="bulleted-list"><li style="list-style-type:circle"><code>KEYS_ONLY</code> - key attributes of the modified item</li></ul><ul id="b53ed1c6-e0e7-443d-9ea6-2c27536874f9" class="bulleted-list"><li style="list-style-type:circle"><code>NEW_IMAGE</code> - modified item</li></ul><ul id="37a069a1-d1b4-4015-a3f7-5f131a553291" class="bulleted-list"><li style="list-style-type:circle"><code>OLD_IMAGE</code> - old item</li></ul><ul id="3ed9a00a-e1eb-4f33-b88c-0e99b4da5f4a" class="bulleted-list"><li style="list-style-type:circle"><code>NEW_AND_OLD_IMAGES</code> - both new and old items</li></ul></li></ul><ul id="b467c859-f26c-41c0-9a5b-407de6e2bc97" class="bulleted-list"><li style="list-style-type:disc"><strong>No need to provision shards</strong> (managed by AWS)</li></ul><ul id="76874108-94d8-4386-b89d-5e1f14f3416a" class="bulleted-list"><li style="list-style-type:disc"><strong>Not retroactive</strong> (stream will not contain records of changes prior to enabling streams)</li></ul><ul id="bce74f7f-198d-4e14-b35d-c2d0064a9f33" class="bulleted-list"><li style="list-style-type:disc">Use cases<ul id="984effee-5644-46a2-8366-75d9cf967739" class="bulleted-list"><li style="list-style-type:circle">React to changes in real-time (Eg. welcome emails to new users)</li></ul><ul id="e9ea51d7-49cc-483c-9593-8d149209afd9" class="bulleted-list"><li style="list-style-type:circle">Send data to OpenSearch for indexing (search capability on top of DynamoDB)</li></ul><ul id="e395bf47-0ddd-433a-953d-449a6cc2ccf8" class="bulleted-list"><li style="list-style-type:circle"><strong>Implement cross-region replication </strong>or<strong> Global Tables</strong> (requires DynamoDB stream to be enabled)</li></ul></li></ul><h2 id="18d459a2-a491-4918-a085-a9a7389bf861" class="">Time To Live (TTL)</h2><ul id="31af7c2a-45b6-4cbe-ac17-c1f197b87031" class="bulleted-list"><li style="list-style-type:disc">Option to delete items after their expiry timestamp</li></ul><ul id="345c9abe-8d7e-455b-be86-aef81bda8cbe" class="bulleted-list"><li style="list-style-type:disc">The TTL attribute must be <code>Number</code> type with Unix Epoch timestamp value</li></ul><ul id="61ee3fd3-911a-4e14-879d-80bdb4cfb250" class="bulleted-list"><li style="list-style-type:disc">Expired items are deleted within 48 hours (might appear in queries after expiry)</li></ul><ul id="50cf19db-53e0-4fa4-965a-787beaacfe30" class="bulleted-list"><li style="list-style-type:disc"><strong>Deletion through TTL does not consume WCU</strong> (no extra cost)</li></ul><ul id="4419b5f1-84bf-4e6f-8a60-1ffcff722aa6" class="bulleted-list"><li style="list-style-type:disc"><strong>Expired items are deleted from secondary indexes</strong></li></ul><ul id="907b3f59-beec-4748-8a5d-a97747e3e29b" class="bulleted-list"><li style="list-style-type:disc">DynamoDB stream can be used to recover deleted items</li></ul><ul id="c153d960-364b-4f79-9d17-bc26db196ace" class="toggle"><li><details open=""><summary>Working</summary><p id="ff1023e6-583c-44b1-b75a-62a93ea47f6c" class="">A process within DynamoDB performs a scan on the table regularly to check the TTL timestamps and mark the items as expired. Another process performs a scan to find the expired items and deletes them.</p><figure id="bb29fe5d-cb43-46dc-819d-8b92cc11d767" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%2012.png"><img style="width:288px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%2012.png"/></a></figure></details></li></ul><h2 id="5c499834-8200-470f-b135-6057e3a859c8" class="">CLI Options</h2><ul id="693743de-09fb-4c0f-bc1e-4e356591863b" class="bulleted-list"><li style="list-style-type:disc"><code>--projection-expression</code> - specify the attributes to be retrieved</li></ul><ul id="e8c9d981-96cc-49cf-9359-697608e85f61" class="bulleted-list"><li style="list-style-type:disc"><code>--filter-expression</code> - filter items client-side before displaying on the CLI</li></ul><ul id="b9ce6edf-df77-41bc-9d20-a058eb5f8310" class="bulleted-list"><li style="list-style-type:disc"><code>--page-size</code> - make <strong>multiple API calls</strong>, each retrieving few items, to get the full list of items to prevent timeout error (default 1000 items)</li></ul><ul id="90829103-652d-41e1-a238-a17286105a67" class="bulleted-list"><li style="list-style-type:disc"><code>--max-items</code> - retrieve only a few items in a <strong>single API call</strong>, returns <code>NextToken</code> if more items exist</li></ul><ul id="bd87a26d-9ae1-4bbc-9f29-071ddb0241c7" class="bulleted-list"><li style="list-style-type:disc"><code>--starting-token</code> - specify the last <code>NextToken</code> to retrieve the next set of items</li></ul><h2 id="478e190a-97c4-4722-bd77-48b872b02c5f" class="">Transactions</h2><ul id="f126cd4d-9e8a-4b7b-8f4d-e936cc2f5dc2" class="bulleted-list"><li style="list-style-type:disc"><strong>All-or-nothing operation</strong> (the change happens to all the items across multiple tables or none of the items). <mark class="highlight-yellow_background">If any operation in the transaction fails, the entire transaction is failed.</mark></li></ul><ul id="f6c78301-dbb1-4b5f-b66d-e3745c219995" class="bulleted-list"><li style="list-style-type:disc">Provides Atomicity, Consistency, Isolation &amp; Durability (ACID)</li></ul><ul id="27737ac3-7ee8-4045-a282-e05c9a808775" class="bulleted-list"><li style="list-style-type:disc"><strong>Available in both Read and Write operations</strong></li></ul><ul id="ee02320b-d7bb-42ae-9ec0-1d2d2431c4ee" class="bulleted-list"><li style="list-style-type:disc">Performs 2 operations for every item<ul id="384fd873-0a85-4a41-90da-c46c559a6253" class="bulleted-list"><li style="list-style-type:circle"><code>TransactGetItems</code> - get the required items</li></ul><ul id="f6199b3e-2c9b-4016-9d60-7f42ffbddd7f" class="bulleted-list"><li style="list-style-type:circle"><code>TransactWriteItems</code> - update the required items</li></ul></li></ul><ul id="6dbd7390-3f53-435a-9f42-375198a842c6" class="bulleted-list"><li style="list-style-type:disc"><strong>Consumes twice the WCU and RCU of strongly consistent reads</strong><ul id="b0985235-dcfa-4f5c-a1c6-c971b5b17487" class="bulleted-list"><li style="list-style-type:circle">3 transactional writes per sec with item size 5 KB ⇒ 3 x [ 5 KB / 1 KB ] x 2 = 30 WCU</li></ul><ul id="9babc289-3712-4df7-aba7-c64ed66aa478" class="bulleted-list"><li style="list-style-type:circle">5 transactional reads per sec with item size 5 KB ⇒ 5 x [ 8 KB (rounded up) / 4 KB ] x 2 = 20 RCU</li></ul></li></ul><ul id="1510f634-8dca-46ae-ad04-fe44533578a6" class="bulleted-list"><li style="list-style-type:disc">Use cases: financial transactions, multi-player games, managing orders, etc.</li></ul><ul id="cc5ae445-a514-401f-bea2-c23fd6708fb9" class="toggle"><li><details open=""><summary>Example</summary><p id="fc5e6b74-6508-495a-ae8d-a41a3c4aaae8" class="">Update both the tables in a single transaction.</p><figure id="f7a0250e-177c-46e4-a2ee-5eaa90c6f52e" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%2013.png"><img style="width:1720px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%2013.png"/></a></figure></details></li></ul><h2 id="4989db65-d734-45bf-96e3-360a035714e6" class="">Security</h2><ul id="e3d52857-07e3-4d30-881d-9e7daeddbbec" class="bulleted-list"><li style="list-style-type:disc">Access Control using IAM</li></ul><ul id="b31f53b0-fc30-4975-8ad8-b9d27ae978c2" class="bulleted-list"><li style="list-style-type:disc">At-rest encryption using KMS</li></ul><ul id="56e0ad2d-2846-463c-8313-d5b7a50db1a5" class="bulleted-list"><li style="list-style-type:disc">In-flight encryption using TLS</li></ul><ul id="3efc6b6e-ff55-4eb8-9f95-2fef911f4a15" class="bulleted-list"><li style="list-style-type:disc">Gateway Endpoints to access DynamoDB from the VPC without traversing the internet</li></ul><ul id="5ee1009e-4098-4717-867c-b7c8e091e3c3" class="bulleted-list"><li style="list-style-type:disc"><strong>Fine-grained (low level) access control</strong> can be controlled using <strong>federated login</strong> and:<ul id="c9a7d13b-46c2-4a3b-9804-964bf4aacda6" class="bulleted-list"><li style="list-style-type:circle"><code>LeadingKeys</code> - limit access to rows</li></ul><ul id="1ab07a20-31c6-487c-848b-6edb229ad39a" class="bulleted-list"><li style="list-style-type:circle"><code>Attributes</code> - limit access to columns</li></ul></li></ul><h2 id="cd1f3450-9a8d-462a-b318-372a36b8f5a7" class="">Atomic Counters</h2><ul id="a7deb98f-39bc-4670-b141-0ea9ad1a04d8" class="bulleted-list"><li style="list-style-type:disc">Use <code>UpdateItem</code> operation to implement an <strong><em>atomic counter, </em></strong>a numeric attribute that is incremented, unconditionally. </li></ul><ul id="da00c03d-7536-4d56-9b77-bfa8261e05b6" class="bulleted-list"><li style="list-style-type:disc">Updates are not idempotent (the counter will increment each time you call <code>UpdateItem</code>)</li></ul><ul id="059ad39d-6d22-4062-b155-13baf2d049b2" class="bulleted-list"><li style="list-style-type:disc">Not suitable where counting must be accurate (use conditional update instead)</li></ul><h2 id="495e726a-2c1a-478c-9761-2f8dafba0bcd" class="">Misc</h2><ul id="f97f5644-11f6-4f01-a6d5-676d39681887" class="bulleted-list"><li style="list-style-type:disc"><strong>AWS Database Migration Service (DMS)</strong> can be used to migrate data to DynamoDB</li></ul><ul id="b29e53ef-79f3-4433-a057-d4ce3fc58af6" class="bulleted-list"><li style="list-style-type:disc"><strong>Partitioning data too finely is bad</strong> (can increase the overhead of retrieving and processing the partition metadata)</li></ul><ul id="8e2a5f1f-33af-411c-8abc-e8bb42c24834" class="bulleted-list"><li style="list-style-type:disc">Reduce page size to reduce consumed RCU</li></ul><ul id="7261f4c5-9a24-4a03-9af9-26d91dee1353" class="bulleted-list"><li style="list-style-type:disc">To perform scan operations for analytics purposes, the best way is to create a shadow table (copy of the original table) and perform scans on it. This way scan operations don’t impact the RCU of the main table.</li></ul><ul id="32c79878-c3ec-4658-b669-efc32ef83a7f" class="bulleted-list"><li style="list-style-type:disc">To return the number of write capacity units consumed by any write operation, set the <code>ReturnConsumedCapacity</code> parameter to one of the following:<ul id="b4373a2e-1fc1-443a-9809-c182a0f6eaf5" class="bulleted-list"><li style="list-style-type:circle"><code>TOTAL</code> - total number of WCU consumed</li></ul><ul id="df6bbbac-f9a8-4507-bd1e-06a6d24bf78e" class="bulleted-list"><li style="list-style-type:circle"><code>INDEXES</code> - total number of WCU consumed, with subtotals for the table and any secondary indexes that were affected by the operation</li></ul><ul id="ca767d99-0a01-4f98-afcf-f011fe95bba2" class="bulleted-list"><li style="list-style-type:circle"><code>NONE</code> - returns nothing (default)</li></ul></li></ul><ul id="044f0e56-95dc-4508-85c9-b67d54f752f5" class="bulleted-list"><li style="list-style-type:disc">To perform an upsert operation, we only need permission for <code>GetItem</code> and <code>UpdateItem</code> (also has the permission to put an item if it doesn’t exist).</li></ul><ul id="763fdb85-b03d-4057-b88d-a074e55b5661" class="bulleted-list"><li style="list-style-type:disc">Write types in DynamoDB<figure id="148c88b0-8cc4-434e-b948-40d55b043b4b" class="image"><a href="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%2014.png"><img style="width:1832px" src="DynamoDB%20c1e69321ae4146e18b9cf665749be50b/Untitled%2014.png"/></a></figure></li></ul></div></article></body></html>

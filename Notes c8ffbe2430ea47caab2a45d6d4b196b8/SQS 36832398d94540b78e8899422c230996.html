@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SQS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="36832398-d945-40b7-8e88-99422c230996" class="page sans"><header><h1 class="page-title">SQS</h1><p class="page-description"></p></header><div class="page-body"><nav id="758d0e41-646e-4582-b488-6fe713748f5d" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c6b13f0e-8b09-4378-8f16-fb898800d5d1">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#05a10d67-2eca-47d8-ae49-52b383f15eca">Queue Types</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#28fc3ce5-8ab4-4843-8877-0fc4d405749a">Standard Queue</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9e2a10b6-1d17-4124-bfce-8d1dc6e5a97e">FIFO Queue</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c68ff7fc-199e-4aa1-87b5-8c643274794b">Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9303195c-9837-477e-b6cc-f76bd5e71016">Access Management</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#758c4e5b-1216-49b1-b6bf-07f93310c838">Configurations</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#35b23b4f-5b82-4c07-94eb-3334a06675f9">Message Visibility Timeout</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#99ed3469-2053-4057-9a5c-4e90ebd2304b">Queue Delay</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#537d86d2-1781-431e-a607-134ca4fca5e5">Long Polling</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#67dcc020-8a9d-4da8-a484-9d0d0d39d15c">Dead Letter Queue (DLQ)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#89a31c53-a281-4839-9830-683dac3adfb1">Handling Priority</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e6567558-7c5b-42c1-9345-0ec74a55bbfc">SQS Extended Client</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9c1af1a5-7085-4ec2-9e4f-739e7cac7363">Consumer Auto Scaling</a></div></nav><hr id="ad12c5a5-a790-4dc1-af3f-1d9c82b09fc6"/><h2 id="c6b13f0e-8b09-4378-8f16-fb898800d5d1" class="">Intro</h2><ul id="ae41b5e2-c151-4782-ae97-ff167781d64a" class="bulleted-list"><li style="list-style-type:disc">Used to asynchronously decouple applications</li></ul><ul id="891447bb-0f9b-4c5f-8fa2-ca7e053cf0b0" class="bulleted-list"><li style="list-style-type:disc">Supports multiple producers &amp; consumers</li></ul><ul id="ffbd8f51-cec5-4ba0-bc51-b653551bf019" class="bulleted-list"><li style="list-style-type:disc">The consumer polls the queue for messages. Once a consumer processes a message, it deletes it from the queue using <code>DeleteMessage</code> API.</li></ul><ul id="df06a369-feec-43a6-91da-f7b20a4f3a35" class="bulleted-list"><li style="list-style-type:disc">Unlimited number of messages in queue</li></ul><ul id="7d8ead85-47a7-4509-ba62-043be3fe54b4" class="bulleted-list"><li style="list-style-type:disc">Max 10 messages received per batch (configured using <code>MaxNumberOfMessages</code> parameter in the <code>ReceiveMessage</code> API)</li></ul><ul id="cefe9dc3-c05f-41ad-bb71-3b68e2eb1107" class="bulleted-list"><li style="list-style-type:disc"><strong>Max message size: 256 KB</strong></li></ul><ul id="2255bee0-3fd4-4192-bb5e-91101764c0bb" class="bulleted-list"><li style="list-style-type:disc"><strong>Default message retention: 4 days (max: 14 days)</strong></li></ul><ul id="bc1841be-c100-44ce-b54d-eabe91ee66b7" class="bulleted-list"><li style="list-style-type:disc"><strong>Consumers could be EC2 instances or Lambda functions</strong></li></ul><ul id="0858daa6-1599-45f7-afae-dfd555e3db4f" class="bulleted-list"><li style="list-style-type:disc">Queue type cannot be changed once created</li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="0c66e203-8cff-45dc-9baa-0a678f26024f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">SQS cannot ingest data, it must be sent to the queue by the producer (use KDS or KDF instead)</div></figure><h2 id="05a10d67-2eca-47d8-ae49-52b383f15eca" class="">Queue Types</h2><h3 id="28fc3ce5-8ab4-4843-8877-0fc4d405749a" class="">Standard Queue</h3><ul id="e183fa92-9e86-4768-9cef-853e9e7ca511" class="bulleted-list"><li style="list-style-type:disc">Unlimited throughput (publish any number of message per second into the queue)</li></ul><ul id="18c79fb8-743a-4566-a77c-be98cb575058" class="bulleted-list"><li style="list-style-type:disc">Low latency (&lt;10 ms on publish and receive)</li></ul><ul id="a43d0682-e14b-4215-87db-46d1e04ac3f8" class="bulleted-list"><li style="list-style-type:disc">Can have duplicate messages (at least once delivery)</li></ul><ul id="153a76a5-1340-45bd-b056-6cf6b89644c2" class="bulleted-list"><li style="list-style-type:disc">Can have out of order messages (best effort ordering)</li></ul><h3 id="9e2a10b6-1d17-4124-bfce-8d1dc6e5a97e" class="">FIFO Queue</h3><ul id="ea5d1f78-125a-4cea-bd9f-8a743db828b0" class="bulleted-list"><li style="list-style-type:disc">Limited throughput<ul id="30c1dfb5-7bc9-4baa-9333-ff2d3f643ae9" class="bulleted-list"><li style="list-style-type:circle">300 msg/s without batching (batch size = 1)</li></ul><ul id="33fa895d-33b7-4716-9a48-5699eb32653a" class="bulleted-list"><li style="list-style-type:circle">3000 msg/s with batching (batch size = 10)</li></ul></li></ul><ul id="5fae2856-bb12-4fcb-936d-610ff15717a2" class="bulleted-list"><li style="list-style-type:disc"><strong>The queue name must end with</strong> <code>.fifo</code> to be considered a FIFO queue</li></ul><ul id="bcf86186-de20-4a52-9da5-afdfbc3ac8d0" class="bulleted-list"><li style="list-style-type:disc"><strong>Message De-duplication</strong><ul id="9d48be94-feee-4372-8a2a-f599c261f479" class="bulleted-list"><li style="list-style-type:circle"><strong>De-duplication interval: 5 min</strong> (duplicate messages will be discarded only if they are sent less than 5 mins apart)</li></ul><ul id="4387030d-0ba3-4845-b8a3-78de19e2c6bd" class="bulleted-list"><li style="list-style-type:circle">De-duplication methods:<ul id="0ef43401-a6c4-4476-9a6f-919694548d7b" class="bulleted-list"><li style="list-style-type:square"><strong>Content-based de-duplication</strong>: computes the hash of the message body and compares</li></ul><ul id="c0a4986d-c4fe-470b-bf2e-804861903bfd" class="bulleted-list"><li style="list-style-type:square"><strong>Using a message de-duplication ID</strong>: messages with the same de-duplication ID are considered duplicates</li></ul></li></ul></li></ul><ul id="3fccc37e-5367-4bca-ade2-ea6899644b65" class="bulleted-list"><li style="list-style-type:disc"><strong>Message Grouping</strong><ul id="704fb264-8add-47c5-8567-5d3590e03012" class="bulleted-list"><li style="list-style-type:circle">Group messages based on <code>MessageGroupID</code> to send them to different consumers</li></ul><ul id="2d554830-80cd-4c44-9e25-01fb1d3689ae" class="bulleted-list"><li style="list-style-type:circle">Same value for <code>MessageGroupID</code><ul id="db52c3a5-3c73-4743-931d-fa32518cf57b" class="bulleted-list"><li style="list-style-type:square">All the messages are in order</li></ul><ul id="2b117bc8-c797-4162-997c-728dcc67cb09" class="bulleted-list"><li style="list-style-type:square">Single consumer</li></ul></li></ul><ul id="827a2214-1a8f-43fc-a2db-7a3f95942282" class="bulleted-list"><li style="list-style-type:circle">Different values for <code>MessageGroupID</code><ul id="dd2858c8-6f89-4f38-9610-152272548948" class="bulleted-list"><li style="list-style-type:square">Messages will be ordered for each group ID</li></ul><ul id="a36991c0-4229-4614-88b6-05d24a1c6af7" class="bulleted-list"><li style="list-style-type:square">Ordering across groups is not guaranteed</li></ul><ul id="477af624-4c2b-4a1c-9755-2ac8d29a0fe1" class="bulleted-list"><li style="list-style-type:square"><strong>Each group ID can have a different consumer</strong> (parallel processing)</li></ul><ul id="2a1f42a3-efb1-4955-99f6-b9540283c2ce" class="bulleted-list"><li style="list-style-type:square">Max number of consumers = number of unique group IDs</li></ul></li></ul></li></ul><h2 id="c68ff7fc-199e-4aa1-87b5-8c643274794b" class="">Encryption</h2><ul id="a52fb680-a64f-4e8d-a6d1-341a73613fae" class="bulleted-list"><li style="list-style-type:disc">In-flight encryption using HTTPS API</li></ul><ul id="1d16774a-8825-4c4d-83bc-935a6e76c62f" class="bulleted-list"><li style="list-style-type:disc">At-rest server-side encryption:<ul id="ffd802d1-1f43-4de2-a8e1-feffc144ab26" class="bulleted-list"><li style="list-style-type:circle">SSE-SQS: keys managed by SQS</li></ul><ul id="484f866d-94b0-404d-95a3-bc3eb22bd237" class="bulleted-list"><li style="list-style-type:circle">SSE-KMS: keys managed by KMS</li></ul></li></ul><ul id="e8b2723f-a430-497d-b69a-0e41090a526b" class="bulleted-list"><li style="list-style-type:disc">Client-side encryption</li></ul><h2 id="9303195c-9837-477e-b6cc-f76bd5e71016" class="">Access Management</h2><ul id="325a3e1e-c7dc-4738-a598-dbc5876cc8f5" class="bulleted-list"><li style="list-style-type:disc"><strong>IAM Policies</strong> to regulate access to the SQS API</li></ul><ul id="65ad5329-340c-4eae-80c1-ee7dd673fb0a" class="bulleted-list"><li style="list-style-type:disc"><strong>SQS Access Policies</strong> (resource based policy)<ul id="16b57639-0bde-4c95-95a8-60f8861eef21" class="toggle"><li><details open=""><summary>Used for cross-account access to SQS queues</summary><p id="6823fde9-a75a-4bf8-acbf-dcac7eeb4aa3" class="">The example policy allows any resource in the account 111122223333 to poll the SQS queue for messages.</p><figure id="8a3ec072-e8b9-435a-bcb4-ca178ec665f1" class="image"><a href="SQS%2036832398d94540b78e8899422c230996/Untitled.png"><img style="width:384px" src="SQS%2036832398d94540b78e8899422c230996/Untitled.png"/></a></figure></details></li></ul><ul id="7c8b4084-679b-4680-a2b3-c2ae75ec8765" class="toggle"><li><details open=""><summary>Used for allowing other AWS services to send messages to an SQS queue</summary><p id="9f056c69-b7b8-4534-bb5a-f7b6f5cd0c79" class="">The example policy allows any AWS account to send messages to the queue as long as it is coming from the desired S3 bucket and the source account is the one owning the bucket.</p><figure id="d65684c9-5dc1-45ee-ab5d-33499211f74a" class="image"><a href="SQS%2036832398d94540b78e8899422c230996/Untitled%201.png"><img style="width:480px" src="SQS%2036832398d94540b78e8899422c230996/Untitled%201.png"/></a></figure></details></li></ul></li></ul><h2 id="758c4e5b-1216-49b1-b6bf-07f93310c838" class="">Configurations</h2><h3 id="35b23b4f-5b82-4c07-94eb-3334a06675f9" class="">Message Visibility Timeout</h3><figure id="d67be6fd-73de-49fd-9970-7e30f205c33c" class="image"><a href="SQS%2036832398d94540b78e8899422c230996/Untitled%202.png"><img style="width:576px" src="SQS%2036832398d94540b78e8899422c230996/Untitled%202.png"/></a></figure><ul id="c2035226-1ee5-44ac-b707-10f0d1634bb0" class="bulleted-list"><li style="list-style-type:disc">Once a message is polled by a consumer, it becomes invisible to other consumers for the duration of message visibility timeout. After the message visibility timeout is over, the message becomes visible in the queue if it is not deleted by the consumer.</li></ul><ul id="ed934e42-14d0-4b01-87f8-aeda9358328d" class="bulleted-list"><li style="list-style-type:disc">If a consumer dies while processing the message, it will be visible in the queue after the visibility timeout.</li></ul><ul id="80e8c523-8549-4fac-9b53-a4a5103e4aed" class="bulleted-list"><li style="list-style-type:disc">If a message is not processed within the visibility timeout, it will be processed again (by another consumer). However, a consumer could call the <code>ChangeMessageVisibility</code> API to change the visibility timeout for that specific message. This will give the consumer more time to process the message.</li></ul><ul id="cb7c7ecd-d9ea-451e-9f94-eb7f363dda6a" class="bulleted-list"><li style="list-style-type:disc"><strong>Default: 30s</strong></li></ul><ul id="db1aae39-9ee1-40fc-9652-f8b45ae303a9" class="bulleted-list"><li style="list-style-type:disc">Can be configured for the entire queue<ul id="2839b7b5-71ac-4a9a-aebd-5c76e4dda020" class="bulleted-list"><li style="list-style-type:circle">High: if the consumer crashes, re-processing will take long</li></ul><ul id="d94b2bb3-1276-4fca-8fa4-3c3f339ea1bb" class="bulleted-list"><li style="list-style-type:circle">Low: may get duplicate processing of messages</li></ul></li></ul><h3 id="99ed3469-2053-4057-9a5c-4e90ebd2304b" class="">Queue Delay</h3><ul id="2e3f2af4-b7c4-4ee0-a200-4b4857698bb0" class="bulleted-list"><li style="list-style-type:disc">Consumers see the message after some delay</li></ul><ul id="51a0a70e-f9e1-440f-af02-73a764f3385c" class="bulleted-list"><li style="list-style-type:disc">Default: 0 (Max: 15 min)</li></ul><ul id="89633836-3457-4df8-b5c4-9069027ac97a" class="bulleted-list"><li style="list-style-type:disc">Can be set at the queue level</li></ul><ul id="1a0b82f4-31b7-4b1e-a159-64458efc464b" class="bulleted-list"><li style="list-style-type:disc">Can override the default queue delay for a specific message using the <code>DelaySeconds</code> parameter in the <code>SendMessage</code> API</li></ul><h3 id="537d86d2-1781-431e-a607-134ca4fca5e5" class="">Long Polling</h3><ul id="067a28e0-bf76-4ed2-9689-00acda44bae3" class="bulleted-list"><li style="list-style-type:disc">Poll the queue for longer</li></ul><ul id="cccc5c84-145b-4464-adc1-d4d16c173205" class="bulleted-list"><li style="list-style-type:disc">Decreases the number of API calls made to SQS (<strong>cheaper</strong>)</li></ul><ul id="8971d74d-6392-441b-ac9a-0023df0ba03f" class="bulleted-list"><li style="list-style-type:disc">Reduces latency (incoming messages during the polling will be read instantaneously)</li></ul><ul id="e70bc4c3-c054-4785-9215-a070fab6b7a7" class="bulleted-list"><li style="list-style-type:disc"><strong>Polling time: 1 sec to 20 sec</strong></li></ul><ul id="ea2c83da-c6e4-461a-8564-ff7adf0ca10a" class="bulleted-list"><li style="list-style-type:disc">Long Polling is preferred over Short Polling</li></ul><ul id="1eb1ad12-85d4-4191-858d-51bb22374ce1" class="bulleted-list"><li style="list-style-type:disc">Can be enabled at the queue level or at the consumer level by using <code>WaitTimeSeconds</code> parameter in <code>ReceiveMessage</code> API.</li></ul><h3 id="67dcc020-8a9d-4da8-a484-9d0d0d39d15c" class="">Dead Letter Queue (DLQ)</h3><ul id="b2200dd3-dd2c-4ecf-9381-47d40e0d90c9" class="bulleted-list"><li style="list-style-type:disc">An SQS queue used to store failing to be processed messages in another queue</li></ul><ul id="7a42fcbf-ef86-4e9f-87d6-a410028e6fed" class="bulleted-list"><li style="list-style-type:disc">After the <code>MaximumReceives</code> threshold is exceeded, the message goes into the DLQ</li></ul><ul id="676d814f-ba20-4a71-a810-bcde5144c5d4" class="bulleted-list"><li style="list-style-type:disc"><strong>Redrive to Source</strong> - once the bug in the consumer has been resolved, messages in the DLQ can be sent back to the queue (original queue or a custom queue) for processing</li></ul><ul id="9226729f-01b5-4c53-be9d-1f967bb92e51" class="bulleted-list"><li style="list-style-type:disc"><strong>DLQ must be of the same type as the original queue</strong></li></ul><ul id="833337f1-9f27-4c99-8076-aa98242917b7" class="bulleted-list"><li style="list-style-type:disc">Recommended to set a high retention period for DLQ (14 days)</li></ul><h2 id="89a31c53-a281-4839-9830-683dac3adfb1" class="">Handling Priority</h2><p id="2b10bffb-59ea-4db4-8f79-8bc33f02f9d8" class="">Use two SQS queues, one for low priority (ex. free) and the other for high priority (ex. paid). Configure your consuming application to only poll the low priority queue if the high priority queue is empty.</p><h2 id="e6567558-7c5b-42c1-9345-0ec74a55bbfc" class="">SQS Extended Client</h2><p id="8209b118-3e94-44ca-b356-d0d9ba536ebd" class="">To send messages larger than 256 KB (limit in SQS) or files to consumers to process, upload it in S3 and send a message in the queue with a pointer to that file in S3. This is implemented under the hood in the SQS extended client Java library.</p><figure id="2503886b-8181-40fa-b9eb-e7c601d20a85" class="image"><a href="SQS%2036832398d94540b78e8899422c230996/Untitled%203.png"><img style="width:672px" src="SQS%2036832398d94540b78e8899422c230996/Untitled%203.png"/></a></figure><h2 id="9c1af1a5-7085-4ec2-9e4f-739e7cac7363" class="">Consumer Auto Scaling</h2><p id="8cf3a2e4-db97-4c13-9c12-f27ba9dc14cb" class="">We can attach an ASG to the consumer instances which will scale based on the <code>CW metric = Queue length / Number of EC2 instances</code>. CW alarms can be triggered to step scale the consumer application.</p><p id="824e6127-ea3c-4db5-bd60-7d868d843669" class="">
+</p></div></article></body></html>

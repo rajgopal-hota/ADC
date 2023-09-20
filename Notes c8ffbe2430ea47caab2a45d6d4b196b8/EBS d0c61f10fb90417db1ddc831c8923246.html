@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>EBS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d0c61f10-fb90-417d-b1dd-c831c8923246" class="page sans"><header><h1 class="page-title">EBS</h1><p class="page-description"></p></header><div class="page-body"><ul id="cc7f2d01-12b7-4321-9e39-21ab5d4b3bd0" class="bulleted-list"><li style="list-style-type:disc">Volume <strong>Network Drive</strong> (provides low latency access to data)</li></ul><ul id="01bcf8c6-d240-4056-956d-7115c27dd3d2" class="bulleted-list"><li style="list-style-type:disc">Can only be mounted to 1 instance at a time (except EBS multi-attach)</li></ul><ul id="dd434ac0-6012-42c7-bc57-5eb4f4122916" class="bulleted-list"><li style="list-style-type:disc"><strong>Bound to an AZ</strong></li></ul><ul id="04e3967d-8c72-44e9-89b8-85a9ddb9b412" class="bulleted-list"><li style="list-style-type:disc">Must provision capacity in advance (size in GB &amp; throughput in IOPS)</li></ul><ul id="fe1986e9-d2a1-408d-ba63-367cf12fe4f8" class="bulleted-list"><li style="list-style-type:disc">By default, upon instance termination, the root EBS volume is deleted and any other attached EBS volume is not deleted (can be over-ridden using <code>DeleteOnTermination</code> attribute)</li></ul><ul id="7d214973-8e6a-4478-a0bf-97e3d791d68e" class="bulleted-list"><li style="list-style-type:disc">To replicate an EBS volume across AZ or region, need to copy its snapshot</li></ul><ul id="cb8550b0-8a20-42ee-a090-b94d4225b339" class="bulleted-list"><li style="list-style-type:disc">EBS Multi-attach allows the same EBS volume to attach to multiple EC2 instances <strong>in the same AZ</strong></li></ul><ul id="9f27dbb6-de87-4db2-a26f-848513fee7f1" class="bulleted-list"><li style="list-style-type:disc"><strong>New EBS volumes are raw block storage and do not contain any partition or file system</strong>. You need to login to the instance and <strong>format the EBS volume with a file system</strong> for it to be usable.</li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="ebfa778b-46f9-402d-8231-3bc91b031f04"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><code>DeleteOnTermination</code> attribute can be updated for the root EBS volume for a running instance only from the CLI. It can be done from the console only if the instance is stopped.</div></figure><h2 id="ace1dc4e-400f-4080-8fc5-9e4160be1260" class="">Volume Types</h2><h3 id="12a46410-32e9-40c0-9e44-b33a4233de96" class="">General Purpose SSD</h3><ul id="becb6ced-8cc5-4749-8946-02f100920f98" class="bulleted-list"><li style="list-style-type:disc">Good for system boot volumes, virtual desktops</li></ul><ul id="18108861-55a4-42f1-8b15-a6d8b7f5e1ee" class="bulleted-list"><li style="list-style-type:disc">Storage: 1 GB - 16 TB</li></ul><ul id="d1326869-8a7a-46ab-929b-2a4dff65a30a" class="bulleted-list"><li style="list-style-type:disc"><strong>Max IOPS: 16,000</strong></li></ul><ul id="a3162ae6-a529-490e-971e-2f34b0a9b829" class="bulleted-list"><li style="list-style-type:disc"><strong>gp3</strong><ul id="e5c066a5-c68c-4b63-b00e-7052fcaa60a6" class="bulleted-list"><li style="list-style-type:circle"><strong>3,000 lOPS baseline</strong> (max 16,000 - independent of size)</li></ul><ul id="5cfaf895-fea3-47e8-a95a-1ee055a65efd" class="bulleted-list"><li style="list-style-type:circle">125 MiB/s throughput (max 1000MiB/s - independent of size)</li></ul></li></ul><ul id="0b7385da-928d-4f2b-afe9-47695120708c" class="bulleted-list"><li style="list-style-type:disc"><strong>gp2</strong><ul id="5fb1a415-ec11-483b-ad2c-d94e42b14132" class="bulleted-list"><li style="list-style-type:circle"><strong>Burst IOPS up to 3,000</strong></li></ul><ul id="39a52dc6-9ef0-4d82-bc1e-b2b95ea492a4" class="bulleted-list"><li style="list-style-type:circle"><strong>3 IOPS per GB</strong></li></ul><ul id="e45785a3-cd4b-41ac-90a1-a6235e521731" class="bulleted-list"><li style="list-style-type:circle"><strong>Max IOPS: 16,000</strong> (at 5,334 GB)</li></ul></li></ul><h3 id="00142eb0-e38e-4629-b08e-2aa128588401" class="">Provisioned IOPS SSD</h3><ul id="8986b0ae-3664-41e5-9641-ded0794b8faa" class="bulleted-list"><li style="list-style-type:disc">Optimized for <strong>Transaction-intensive Applications</strong> with high frequency of <strong>small &amp; random IO operations</strong>. They are sensitive to increased I/O latency.</li></ul><ul id="cb05c1a3-f25c-4cfd-8cef-80ce0da2eedd" class="bulleted-list"><li style="list-style-type:disc">Maintain high IOPS while keeping I/O latency down by maintaining a <strong>low queue length</strong> and a high number of IOPS available to the volume.</li></ul><ul id="a388d501-a372-43d0-9afd-99284e823418" class="bulleted-list"><li style="list-style-type:disc"><strong>Supports EBS Multi-attach</strong> (not supported by other types)</li></ul><ul id="4319d7e0-b54b-4725-8f57-c7fe78383778" class="bulleted-list"><li style="list-style-type:disc"><strong>io1</strong> or <strong>io2</strong><ul id="a12a8a9e-84c4-404b-acd2-ce5acb3181e9" class="bulleted-list"><li style="list-style-type:circle">Storage: <strong>4 GB - 16 TB</strong></li></ul><ul id="dd2c6701-eb7d-4c03-8aa3-fe7a0fd37ba4" class="bulleted-list"><li style="list-style-type:circle">Max IOPS: <strong>64,000 for Nitro EC2 instances</strong> &amp; <strong>32,000 for non-Nitro</strong></li></ul><ul id="1bac25dd-f182-4a8c-b620-50be3c71c526" class="bulleted-list"><li style="list-style-type:circle"><strong>50 lOPS per GB</strong> (64,000 IOPS at 1,280 GB)</li></ul><ul id="014e3d33-5867-4b2b-bbef-6843b67851f4" class="bulleted-list"><li style="list-style-type:circle">io2 have more durability and more IOPS per GB (at the same price as io1)</li></ul></li></ul><ul id="fba8faa9-af2e-4d9a-a064-fb19c6ea8675" class="bulleted-list"><li style="list-style-type:disc"><strong>io2 Block Express</strong><ul id="bacc2170-e920-4d9a-8861-28a4fd2f2511" class="bulleted-list"><li style="list-style-type:circle">Storage: 4 GB - <strong>64 TB</strong></li></ul><ul id="544fd9cb-a5ae-455c-8365-e264a42ef8d6" class="bulleted-list"><li style="list-style-type:circle">Sub-millisecond latency</li></ul><ul id="a3bea4cd-4482-4e20-947a-0f8bec735ae0" class="bulleted-list"><li style="list-style-type:circle"><strong>Max IOPS: 256,000</strong></li></ul><ul id="cc79ca7b-4bba-4d66-8916-04b2160af320" class="bulleted-list"><li style="list-style-type:circle">1000 lOPS per GB</li></ul></li></ul><h3 id="06446d78-3998-4f12-aff2-de598a51b7ea" class="">Hard Disk Drives (HDD)</h3><ul id="1c43bdfb-8899-4872-98e3-931662a4053a" class="bulleted-list"><li style="list-style-type:disc">Optimized for <strong>Throughput-intensive Applications</strong> that require <strong>large &amp; sequential IO operations</strong> and are less sensitive to increased I/O latency (big data, data warehousing, log processing)</li></ul><ul id="7bdf2b3d-fdb7-46f1-8cd6-98fb22eaed02" class="bulleted-list"><li style="list-style-type:disc">Maintain high throughput to HDD-backed volumes by maintaining a <strong>high queue length</strong> when performing large, sequential I/O</li></ul><ul id="fb622150-161f-4846-a876-5bf541217c4a" class="bulleted-list"><li style="list-style-type:disc"><strong>Cannot be used as boot volume</strong> for an EC2 instance</li></ul><ul id="99c3f8b1-fd5d-4731-a297-4d0aed9dddf5" class="bulleted-list"><li style="list-style-type:disc">Storage: 125 MB - 16 TB</li></ul><ul id="27891a4c-e42c-4abf-bf6e-f4be2ffe2671" class="bulleted-list"><li style="list-style-type:disc"><strong>Throughput Optimized HDD (st1)</strong><ul id="860fade0-e30b-4307-9f54-d9c52e743809" class="bulleted-list"><li style="list-style-type:circle">Optimized for large sequential reads and writes (Big Data, Data Warehouses, Log Processing)</li></ul><ul id="703fa3ab-4301-4f5c-bb25-e2cc7b1bdf91" class="bulleted-list"><li style="list-style-type:circle"><strong>Max throughput: 500 MB/s</strong></li></ul><ul id="60f27f0a-716e-4a61-9d24-fa3c45e7f815" class="bulleted-list"><li style="list-style-type:circle"><strong>Max IOPS: 500</strong></li></ul></li></ul><ul id="3ba77680-e731-408c-ac32-d7275bed22b7" class="bulleted-list"><li style="list-style-type:disc"><strong>Cold HDD (sc1)</strong><ul id="b128419e-b014-4eaf-a412-b32b766b5aff" class="bulleted-list"><li style="list-style-type:circle">For infrequently accessed data</li></ul><ul id="8360ec93-311a-40e3-9de1-d5e95e15c202" class="bulleted-list"><li style="list-style-type:circle">Cheapest</li></ul><ul id="8f9c6618-4bfd-4c03-9e26-0545a315be9f" class="bulleted-list"><li style="list-style-type:circle"><strong>Max throughput: 250 MB/s</strong></li></ul><ul id="76f37148-61d0-41e4-ae35-1169b5e58719" class="bulleted-list"><li style="list-style-type:circle"><strong>Max IOPS: 250</strong></li></ul></li></ul><h2 id="c7de77b5-06a3-4888-9159-1e01d4286423" class="">Encryption</h2><ul id="7381c963-2457-4b0c-afb6-6c7dbea11f43" class="bulleted-list"><li style="list-style-type:disc">Optional</li></ul><ul id="8828b730-e5a1-499b-a469-0ee101696399" class="bulleted-list"><li style="list-style-type:disc">For Encrypted EBS volumes<ul id="e2ae83e0-ef39-4673-b549-12f2509fd404" class="bulleted-list"><li style="list-style-type:circle">Data at rest is encrypted</li></ul><ul id="fb8a6166-1abb-412b-b22b-440564dc28d0" class="bulleted-list"><li style="list-style-type:circle"><strong>Data in-flight between the instance and the volume is encrypted</strong></li></ul><ul id="951b0bc5-fb83-4003-8bac-a72a0a451652" class="bulleted-list"><li style="list-style-type:circle">All snapshots are encrypted</li></ul><ul id="a9a83e8f-3b53-4abd-b2c1-fdbe6822db5a" class="bulleted-list"><li style="list-style-type:circle">All volumes created from the snapshot are encrypted</li></ul></li></ul><ul id="3919c572-c2af-44ae-b2b0-2ca4f404bd8a" class="bulleted-list"><li style="list-style-type:disc">Encrypt an un-encrypted EBS volume<ul id="14bf0add-d82b-4d5f-99b3-286cffdfca3f" class="bulleted-list"><li style="list-style-type:circle">Create an EBS snapshot of the volume</li></ul><ul id="577f1e5a-d5c8-47f0-84eb-39bc11412d7a" class="bulleted-list"><li style="list-style-type:circle">Copy the EBS snapshot and encrypt the new copy</li></ul><ul id="4492097b-2d58-4854-9060-afa1cd5d83d0" class="bulleted-list"><li style="list-style-type:circle">Create a new EBS volume from the encrypted snapshot (the volume will be automatically encrypted)</li></ul></li></ul><h2 id="fd45a894-faff-4bf3-bbbf-8148f26488f6" class="">Snapshots</h2><ul id="0ffc548f-f6cc-4292-91c0-2aa7ecdb083b" class="bulleted-list"><li style="list-style-type:disc"><strong>Data Lifecycle Manager (DLM)</strong> can be used to automate the creation, retention, and deletion of snapshots of EBS volumes</li></ul><ul id="590b38af-393b-4b01-80a1-537ca8f092eb" class="bulleted-list"><li style="list-style-type:disc"><strong>Snapshots are incremental</strong></li></ul><ul id="eeeae6ea-8b47-49de-b831-e5aa2e559ddb" class="bulleted-list"><li style="list-style-type:disc">Only the most recent snapshot is required to restore the volume</li></ul><h2 id="6448eb05-b991-4ffe-9119-49c53fe4b2e9" class="">RAID</h2><ul id="da89df40-d5d8-4ded-a955-5d66708d83d0" class="bulleted-list"><li style="list-style-type:disc"><strong>RAID 0</strong><ul id="409432e2-a836-491a-b598-5a5c2b81e279" class="bulleted-list"><li style="list-style-type:circle"><strong>Improve performance</strong> of a storage volume by distributing reads &amp; writes in a stripe across attached volumes</li></ul><ul id="7c657def-a921-4253-938b-4d62a04d8614" class="bulleted-list"><li style="list-style-type:circle">If you add a storage volume, you get the straight addition of throughput and IOPS</li></ul><ul id="0e223eec-0862-4944-aec5-5af04817ebee" class="bulleted-list"><li style="list-style-type:circle">For high performance applications</li></ul></li></ul><ul id="6c20217b-5dc4-45c3-94ea-9b4894f05143" class="bulleted-list"><li style="list-style-type:disc"><strong>RAID 1</strong><ul id="0ad760e7-efbb-489c-b0da-3615028e2b22" class="bulleted-list"><li style="list-style-type:circle"><strong>Improve data availability</strong> by mirroring data in multiple volumes</li></ul><ul id="623e216d-da80-4849-8f2f-f7eec365daa1" class="bulleted-list"><li style="list-style-type:circle">For critical applications</li></ul><p id="d6224395-6445-4f32-abf2-c134019349ee" class="">
+</p></li></ul></div></article></body></html>

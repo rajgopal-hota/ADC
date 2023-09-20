@@ -1,0 +1,679 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CloudFront</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="cefbb7ac-6de0-4f5e-88a2-ce3ea749d8d0" class="page sans"><header><h1 class="page-title">CloudFront</h1><p class="page-description"></p></header><div class="page-body"><nav id="370211ee-b5c9-4ae7-88fd-4aa1c42d2eba" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#13a8b5fa-beb2-42ff-b98d-c30ae8cc3d4d">Intro</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1b8f5687-66ed-43d0-8789-9ff4b689e139">Origin</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c2201b65-1642-4be4-ba72-3a162b22d097">Pricing</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9bc918c0-03f4-4dff-a1d7-57eff2843020">Origin Groups</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#924063a9-fa63-410f-ab0d-794892ba019a">Field-level Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bcafb6e0-076a-4385-b98e-fd3e13955a88">Static and Dynamic Distributions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#04035d00-4e83-4f1e-a66f-e962525bf316">Signed URL / Cookies</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#233f9ccc-23b6-41ed-abde-26a22c3e8418">CloudFront Signed URL</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2c76943f-bfeb-41d7-9bd0-584c95b11933">S3 Pre-signed URL</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1dd6d9c8-0e89-42ac-877e-7aba39d523e5">CloudFront Functions</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a81290b0-6b9b-46d6-98aa-0efc3e44072a">CloudFront Function vs Lambda@Edge</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a533cd72-08c3-44ba-b7c2-d03b91467d1a">Cache Key</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#52a9b761-92e7-454e-8db4-72bd311fc33c">Cache Policy</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1bbe4184-a318-43cc-8911-8a2dad6851d9">Origin Request Policy</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e585c7c0-1d29-4922-a015-ca3806a8895a">Cache Behaviors</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ad4fd3ac-458f-453f-8c54-ad923cb270fd">Cache Invalidation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#67ae01e3-bc1f-44ee-8594-368c7fe771ed">Real-time Logs</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#879f8b5c-84e4-455e-97ca-698ad1793c75">TLS Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f6dedb2e-ab98-41f0-94cd-8806255fbb03">Misc</a></div></nav><hr id="0f7effb8-c690-4c9f-bc6e-a48efa4de72d"/><h2 id="13a8b5fa-beb2-42ff-b98d-c30ae8cc3d4d" class="">Intro</h2><ul id="7b59d174-006d-4109-b8e5-d0f4d2daf2c2" class="bulleted-list"><li style="list-style-type:disc">Global CDN that caches content at edge locations, reducing load at the origin</li></ul><ul id="1582360d-d43e-445e-b368-d3f5a4dce97e" class="bulleted-list"><li style="list-style-type:disc"><strong>TTL (0 sec - 1 year)</strong> can be set by the origin using headers</li></ul><ul id="174b02af-8868-4580-b202-539b9f328b8c" class="bulleted-list"><li style="list-style-type:disc">Supports <strong>Server Name Indication (SNI)</strong> to allow SSL traffic to multiple domains</li></ul><ul id="f692baf9-5d0d-42b3-a63a-2898b8ab5e67" class="bulleted-list"><li style="list-style-type:disc"><strong>CloudFront Geo Restriction</strong> can be used to allow or block countries from accessing a distribution.</li></ul><ul id="3f531b2e-82c8-4acb-ab07-7806a99dba11" class="bulleted-list"><li style="list-style-type:disc"><strong>Edge Locations are present outside the VPC</strong> so the origin&#x27;s SG must be configured to allow inbound requests from the list of public IPs of all the edge locations.</li></ul><ul id="bc99f149-fc44-4e83-91a2-2a2a712a38bf" class="bulleted-list"><li style="list-style-type:disc">Supports HTTP/RTMP protocol (<strong>does not support UDP protocol</strong>)</li></ul><ul id="589caa7a-f642-4e92-84a2-b81135deb1b7" class="bulleted-list"><li style="list-style-type:disc">In-flight encryption using <strong>HTTPS</strong> (<strong>from client all the way to the origin</strong>)</li></ul><ul id="2c16623f-9e30-4609-8b6a-3da9d1cdd0d4" class="bulleted-list"><li style="list-style-type:disc">To block a specific IP at the CloudFront level, deploy a WAF on CloudFront</li></ul><h2 id="1b8f5687-66ed-43d0-8789-9ff4b689e139" class="">Origin</h2><ul id="f8ad2962-4fae-4a01-91c6-0628627a5882" class="bulleted-list"><li style="list-style-type:disc"><strong>S3 Bucket</strong><ul id="f790c963-6e9a-4d85-93e8-8540f47dddad" class="bulleted-list"><li style="list-style-type:circle">For distributing static files</li></ul><ul id="b247c824-2bef-409f-843e-9cf1808bb7e4" class="bulleted-list"><li style="list-style-type:circle"><strong>Origin Access Identity (OAl) or Origin Access Control (OAC)</strong> allows the S3 bucket to only be accessed by CloudFront</li></ul><ul id="e381ed8d-2790-4010-88e9-f8e1b7ca5c71" class="bulleted-list"><li style="list-style-type:circle">Can be used as ingress to upload files to S3 (transfer acceleration)</li></ul></li></ul><ul id="13b99484-6899-4c2e-947b-35ceb830655d" class="bulleted-list"><li style="list-style-type:disc"><strong>Custom Origin</strong> (for HTTP) - need to be publicly accessible on HTTP by public IPs of edge locations<ul id="7a754862-88d4-4991-9033-82b3f458510d" class="bulleted-list"><li style="list-style-type:circle">EC2 Instance</li></ul><ul id="d08dc7b3-05b3-4935-aa13-cec973a4d918" class="bulleted-list"><li style="list-style-type:circle">ELB</li></ul><ul id="82984073-5af6-474f-b969-f06add8a28ef" class="bulleted-list"><li style="list-style-type:circle">S3 Website (may contain client-side script)</li></ul><ul id="81f7e752-97d0-4fc4-9baf-477a3562e3dc" class="bulleted-list"><li style="list-style-type:circle">On-premise backend</li></ul></li></ul><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="2997db43-32b7-4663-91cd-e3447173e992"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">To restrict access to ELB directly when it is being used as the origin in a CloudFront distribution, create a VPC Security Group for the ELB and use AWS Lambda to automatically update the CloudFront internal service IP addresses when they change.</div></figure><h2 id="c2201b65-1642-4be4-ba72-3a162b22d097" class="">Pricing</h2><ul id="524e3d9e-b42d-4e76-ab98-2cd64f2e5185" class="bulleted-list"><li style="list-style-type:disc">Price Class All: all regions (best performance)</li></ul><ul id="d93b966b-0762-42a0-9eb9-1580521f0eef" class="bulleted-list"><li style="list-style-type:disc">Price Class 200: most regions (excludes the most expensive regions)</li></ul><ul id="d46e3aa6-9229-4224-a0b9-00fda5e3bd1e" class="bulleted-list"><li style="list-style-type:disc">Price Class 100: only the least expensive regions</li></ul><h2 id="9bc918c0-03f4-4dff-a1d7-57eff2843020" class="">Origin Groups</h2><figure id="880ea17d-d973-4413-97f4-a192aa3ce2c4" class="image"><a href="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled.png"><img style="width:1818px" src="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled.png"/></a></figure><ul id="6fc11d75-e2af-451d-a3a8-e91b925949a0" class="bulleted-list"><li style="list-style-type:disc">Consists of a <strong>primary</strong> and a <strong>secondary</strong> origin (can be in <strong>different regions</strong>)</li></ul><ul id="8081ee15-8980-4f08-9d14-ba46090992bc" class="bulleted-list"><li style="list-style-type:disc">Automatic failover to secondary</li></ul><ul id="656e2b5f-43cd-4a2c-b7ba-124e84837ab1" class="bulleted-list"><li style="list-style-type:disc">Provides <strong>region-level</strong> high availability</li></ul><ul id="1c27770d-6554-489d-b15a-3dfbc5effcec" class="bulleted-list"><li style="list-style-type:disc">Use when getting 504 (gateway timeout) error</li></ul><ul id="24e11331-d7b1-49a3-9d95-92fd484c57cf" class="bulleted-list"><li style="list-style-type:disc">CloudFront routes all incoming requests to the primary origin, even when a previous request failed over to the secondary origin. It only sends requests to the secondary origin after a request to the primary origin fails.</li></ul><ul id="92f9da0f-429c-4534-9110-7ef936600257" class="bulleted-list"><li style="list-style-type:disc">CloudFront fails over to the secondary origin only when the HTTP method of the viewer request is <code>GET</code>, <code>HEAD</code>, or <code>OPTIONS</code>.</li></ul><h2 id="924063a9-fa63-410f-ab0d-794892ba019a" class="">Field-level Encryption</h2><ul id="1c684970-613e-4bc7-8c1b-ad34b94a389d" class="bulleted-list"><li style="list-style-type:disc">Sensitive information sent by the user is encrypted at the edge close to user which can only be decrypted by the web server (intermediate services can&#x27;t see the encrypted fields)</li></ul><ul id="ebdfe266-648f-441d-a56d-37b688aeb082" class="bulleted-list"><li style="list-style-type:disc"><strong>Asymmetric Encryption</strong> (public &amp; private key)</li></ul><ul id="98aad9c9-f773-4c8f-a1e1-63a670db966f" class="bulleted-list"><li style="list-style-type:disc">Max 10 encrypted field</li></ul><h2 id="bcafb6e0-076a-4385-b98e-fd3e13955a88" class="">Static and Dynamic Distributions</h2><p id="c8f13da8-c005-4a70-b74e-252cbcd26d5a" class=""><strong>By separating the static and dynamic content</strong> (creating different distributions)<strong>, we can maximize the cache hit in CloudFront.</strong> All the static content will be cached as no caching rules are needed to cache static content. Whereas, dynamic content will be cached based on headers and cookies in the request.</p><figure id="8ad4d832-6b14-4353-a6f5-04fa98b76343" class="image"><a href="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%201.png"><img style="width:2084px" src="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%201.png"/></a></figure><h2 id="04035d00-4e83-4f1e-a66f-e962525bf316" class="">Signed URL / Cookies</h2><ul id="3faeed0d-5e69-4985-8beb-66c031f3112b" class="bulleted-list"><li style="list-style-type:disc">Used to <strong>make a CloudFront distribution private</strong> (distribute to a subset of users)</li></ul><ul id="b498e2ef-376b-4ce4-a3cf-d1b471a2b64b" class="bulleted-list"><li style="list-style-type:disc">Signed URL ⇒ access to individual files</li></ul><ul id="0c42a5db-f6a8-46d3-ba11-e6554c7dca1a" class="bulleted-list"><li style="list-style-type:disc">Signed Cookies ⇒ access to multiple files</li></ul><ul id="6ff780ee-b2c4-41b8-9d3b-ae084d0f9c47" class="bulleted-list"><li style="list-style-type:disc">Whenever we create a signed URL / cookie, we attach a policy specifying:<ul id="86143912-2477-458e-9d3f-4cf41863cb62" class="bulleted-list"><li style="list-style-type:circle">URL / Cookie Expiration (TTL)</li></ul><ul id="55a339ae-8e36-4a18-9974-6ad5e5ea7432" class="bulleted-list"><li style="list-style-type:circle"><strong>IP ranges</strong> allowed to access the data</li></ul><ul id="c8b09285-29db-4ab2-8954-eb3e353537c2" class="bulleted-list"><li style="list-style-type:circle">Trusted signers (which AWS accounts can create signed URLs)</li></ul></li></ul><ul id="6cf75831-fff9-4491-8a17-899db717e666" class="toggle"><li><details open=""><summary><strong>How signed URL is generated</strong></summary><figure id="a4d31490-c049-43a1-af25-28f9f501c34e" class="image"><a href="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%202.png"><img style="width:1686px" src="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%202.png"/></a></figure><ol type="1" id="0d773e5d-d86a-41cc-a575-3c4f99dca94a" class="numbered-list" start="1"><li>The client authenticates and authorizes to the application. </li></ol><ol type="1" id="17a1a6ff-125c-4748-b807-7b098b727d5c" class="numbered-list" start="2"><li>The application uses AWS SDK to generate the signed URL</li></ol><ol type="1" id="a4558626-6c23-460f-8763-74b33aec0c1f" class="numbered-list" start="3"><li>The application gives the signed URL to the client to access the private resource</li></ol></details></li></ul><ul id="2503e9b8-5777-4f7b-9c9f-9a02a463ed44" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>Trusted Key Group</strong></mark><mark class="highlight-yellow_background"> signer is the recommended way of configuring CloudFront to use signed URLs or cookies. It is not recommended to create a CloudFront key-pair in an AWS account and access it at the root level.</mark></li></ul><ul id="d3182015-89c9-42b6-81bb-a92b9212a6e8" class="bulleted-list"><li style="list-style-type:disc">The signer uses its private key to sign the URL or cookies, and CloudFront uses the public key to verify the signature.</li></ul><div id="2a3d342f-b96a-422a-84f5-dfea4bc8594f" class="column-list"><div id="39b4322e-c171-4921-923d-ca92269984bd" style="width:50%" class="column"><h3 id="233f9ccc-23b6-41ed-abde-26a22c3e8418" class="">CloudFront Signed URL</h3><ul id="f9f81b11-2418-4e93-8090-0001899a514c" class="bulleted-list"><li style="list-style-type:disc">Allow access to a path in the distribution, no matter what the origin is.</li></ul><ul id="1cc8ad98-960b-4d48-85c0-ad9dacdec11d" class="bulleted-list"><li style="list-style-type:disc">Uses account-wide key-pair (managed by the root user)</li></ul><ul id="f68179bf-68fc-4403-bacc-71ae27f83648" class="bulleted-list"><li style="list-style-type:disc"><strong>Can apply filtering rules</strong> by IP, path, date and expiration</li></ul></div><div id="9788e5d7-7843-4a0e-a499-a4a0fc4e3b0a" style="width:50%" class="column"><h3 id="2c76943f-bfeb-41d7-9bd0-584c95b11933" class="">S3 Pre-signed URL</h3><ul id="8fc2b543-ab06-49ec-87a9-1f950d3be61f" class="bulleted-list"><li style="list-style-type:disc">Uses the IAM key of the person signing the URL. Anyone with the pre-signed URL has the same rights as the person signing it.</li></ul><ul id="5b8db5b3-9102-4cf7-a8e8-270184ce493f" class="bulleted-list"><li style="list-style-type:disc"><strong>No filter rules can be applied</strong></li></ul><p id="f41e0922-799e-4536-8484-93643df38821" class="">
+</p></div></div><h2 id="1dd6d9c8-0e89-42ac-877e-7aba39d523e5" class="">CloudFront Functions</h2><ul id="3394d965-fdb5-4999-9bb2-affdd7833259" class="bulleted-list"><li style="list-style-type:disc">Lightweight functions written in <strong>JS</strong> deployed at edge locations</li></ul><ul id="1a051178-4444-4851-b00a-83b5795d9152" class="bulleted-list"><li style="list-style-type:disc"><strong>Sub-ms startup times</strong></li></ul><ul id="ff36086c-c4c2-4b14-a8b3-792a60849120" class="bulleted-list"><li style="list-style-type:disc">High throughput: <strong>millions or requests/second</strong></li></ul><ul id="d9969750-ad4c-47a6-941e-0a41ad71b431" class="bulleted-list"><li style="list-style-type:disc">For high scale, <strong>latency sensitive CDN customizations</strong></li></ul><ul id="129eb086-9e7f-43b3-b637-2cca69d561d8" class="bulleted-list"><li style="list-style-type:disc">Can modify <strong>Viewer Request</strong> and <strong>Viewer Response </strong>only<figure id="56af11bc-5aad-49dd-a3cc-1c0584badf47" class="image"><a href="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%203.png"><img style="width:432px" src="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%203.png"/></a></figure></li></ul><ul id="5835eec4-027b-49c8-a57a-99a35f2bde90" class="bulleted-list"><li style="list-style-type:disc">Native feature of CloudFront (code managed within CloudFront)</li></ul><ul id="282ad36d-747b-4eba-8efd-fe8d209d02f3" class="bulleted-list"><li style="list-style-type:disc">Use cases (require &lt; 1ms compute time):<ul id="5d31387c-ce14-45be-9573-103b3671251a" class="bulleted-list"><li style="list-style-type:circle">URL rewrites or redirects</li></ul><ul id="9f8d9ef1-5218-4fc8-9cb9-3f82e7e569dd" class="bulleted-list"><li style="list-style-type:circle"><strong>Cache key normalization</strong>: transform request attributes (headers, cookies, query strings, URL) to create an optimal cache key</li></ul><ul id="3aecc18f-5568-4e2f-8e97-7e0bd533ad65" class="bulleted-list"><li style="list-style-type:circle"><strong>Header manipulation</strong>: insert/modify/delete HTTP headers in the request or response</li></ul><ul id="b7048f73-f9d9-4c97-bc76-b02eee72a17b" class="bulleted-list"><li style="list-style-type:circle"><strong>Request authentication &amp; authorization</strong>: create and validate user-generated tokens (e.g. JWT) to allow/deny requests</li></ul></li></ul><h3 id="a81290b0-6b9b-46d6-98aa-0efc3e44072a" class="">CloudFront Function vs Lambda@Edge</h3><figure id="e3733d71-4030-49b6-babc-ed80636c3eb8" class="image"><a href="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%204.png"><img style="width:1638px" src="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%204.png"/></a></figure><h2 id="a533cd72-08c3-44ba-b7c2-d03b91467d1a" class="">Cache Key</h2><div id="3c2f0917-3458-40f4-8cb2-9c18302cd862" class="column-list"><div id="3a2c4ea3-6fd8-45a3-a389-7cda945b41ca" style="width:37.5%" class="column"><ul id="6918223c-c9d1-41a8-97fa-d84bb7bc7617" class="bulleted-list"><li style="list-style-type:disc"><strong>A unique identifier for each object in the cache</strong></li></ul><ul id="9de5683a-37b8-4fb0-8152-d60a8d45d048" class="bulleted-list"><li style="list-style-type:disc">If the same cache key is created from subsequent requests, the cached content will be returned.</li></ul><ul id="766a7718-7fda-4c5a-a139-621580fc86df" class="bulleted-list"><li style="list-style-type:disc"><strong>Default</strong>: <mark class="highlight-yellow_background">hostname + resource portion of the URL</mark></li></ul><ul id="af4e7b40-c219-49fd-8c69-000a47a6f032" class="bulleted-list"><li style="list-style-type:disc">Can enhance the cache key (making it more complex) by adding other elements of the request (HTTP headers, cookies, query strings) using <strong>Cache Policies</strong></li></ul></div><div id="e10a8964-e35a-4e8f-96a0-584e297631d1" style="width:62.5%" class="column"><figure id="6a85b509-4421-403c-b833-49d45d984e05" class="image"><a href="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%205.png"><img style="width:940px" src="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%205.png"/></a></figure></div></div><h2 id="52a9b761-92e7-454e-8db4-72bd311fc33c" class="">Cache Policy</h2><ul id="e9de7a1c-b816-4864-9dc3-cb7b5f50e195" class="bulleted-list"><li style="list-style-type:disc">Controls how the caching mechanism works in CloudFront</li></ul><ul id="526e4559-dbc3-4099-8a4e-a1e91a26a7ca" class="bulleted-list"><li style="list-style-type:disc">Include in cache key:<ul id="726f218b-7282-4571-943f-5965a04a675f" class="bulleted-list"><li style="list-style-type:circle"><strong>HTTP Headers</strong>: <code>None</code> or <code>Whitelist</code></li></ul><ul id="6ef140af-9c05-47ee-9075-c8bedc2ac4b2" class="bulleted-list"><li style="list-style-type:circle"><strong>Cookies</strong>: <code>None</code> or <code>Whitelist</code> or <code>Include All-Except</code> or <code>All</code></li></ul><ul id="2fea17c4-6e21-4f88-a26c-3b7d35cad5db" class="bulleted-list"><li style="list-style-type:circle"><strong>Query Strings</strong>: <code>None</code> or <code>Whitelist</code> or <code>Include All-Except</code> or <code>All</code></li></ul></li></ul><ul id="99187f30-9662-4324-b535-62e7f8a9a5b7" class="bulleted-list"><li style="list-style-type:disc"><strong>The fewer items in the cache key, the better the caching performance.</strong></li></ul><ul id="6f9ad3f1-796a-43e0-a087-25de8c86ef7f" class="bulleted-list"><li style="list-style-type:disc"><strong>Controls the TTL</strong> (can also be controlled by the origin using <code>Cache-Control</code> header or <code>Expires</code> header)</li></ul><ul id="ba3fce4c-1982-4acc-98a5-f8d09c5e1208" class="bulleted-list"><li style="list-style-type:disc">Predefined managed cache policies or create your own</li></ul><ul id="4d47d5b4-e7ba-4080-8023-ac4496e40b46" class="bulleted-list"><li style="list-style-type:disc">All HTTP headers, cookies, and query strings included in the Cache Key are automatically included in origin requests</li></ul><h2 id="1bbe4184-a318-43cc-8911-8a2dad6851d9" class="">Origin Request Policy</h2><ul id="264c46a3-51f9-4cd9-96c4-09b531bc7a33" class="bulleted-list"><li style="list-style-type:disc">Controls what should be included in the origin request without including them in the cache key<ul id="8e6a357b-8aad-4da1-84e2-49a3d916ea45" class="bulleted-list"><li style="list-style-type:circle"><strong>HTTP Headers</strong>: <code>None</code> or <code>Whitelist</code> or <code>All</code></li></ul><ul id="222f542d-3b7d-444b-bfbf-5901bd97244c" class="bulleted-list"><li style="list-style-type:circle"><strong>Cookies</strong>: <code>None</code> or <code>Whitelist</code> or <code>All</code></li></ul><ul id="d22255a7-609d-47ec-ae9e-fedc3fdb472f" class="bulleted-list"><li style="list-style-type:circle"><strong>Query Strings</strong>: <code>None</code> or <code>Whitelist</code> or <code>All</code></li></ul></li></ul><ul id="ff99724f-062f-4bd2-8531-11ad1b13c28e" class="bulleted-list"><li style="list-style-type:disc">Can add CloudFront HTTP headers and custom headers to origin requests that were not present in the viewer request.</li></ul><ul id="09c4a39f-1da3-43c2-a34b-1fe7a7bd214d" class="bulleted-list"><li style="list-style-type:disc">Predefined managed origin request policies or create your own</li></ul><figure id="95e4c340-926b-4841-8312-84f95131ad9d" class="image"><a href="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%206.png"><img style="width:1752px" src="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%206.png"/></a></figure><h2 id="e585c7c0-1d29-4922-a015-ca3806a8895a" class="">Cache Behaviors</h2><div id="005d8fdf-bf26-48cb-8532-19530dcbb469" class="column-list"><div id="3816fd5c-090a-4662-a8b7-35ee4b445024" style="width:56.25%" class="column"><ul id="4f220467-220e-48c8-9399-664f815b0567" class="bulleted-list"><li style="list-style-type:disc"><strong>Configure cache differently based on the path pattern in the request</strong> (eg. route to different origins or origin groups based on the path pattern in the request)</li></ul><ul id="dfd13b29-4bad-4fcb-ab52-25354680b45d" class="bulleted-list"><li style="list-style-type:disc"><code>/*</code> is the default cache behavior (always processed at the end to find more specific pattern matches beforehand)</li></ul><ul id="8bb21550-5ef5-4fa9-9800-a3c22eea8a6e" class="bulleted-list"><li style="list-style-type:disc"><strong>Configure different Cache Policy and Origin Request Policy for different cache behaviors</strong></li></ul><ul id="82090221-0b8a-4d42-aa83-f37bb88d0921" class="bulleted-list"><li style="list-style-type:disc">Validate requests differently for each cache behavior (eg. only allow requests at <code>/api</code> if they have access token in the header)</li></ul><ul id="b7ad3960-67f8-40bf-8a24-7e099bdb086c" class="bulleted-list"><li style="list-style-type:disc">Example: Sign in page<p id="e0f5bba8-2bf5-49a6-a46e-4035f5297088" class="">User logs in at <code>/login</code> and gets back signed cookies. Configure the cache policy for default cache behavior to only accept requests if they have signed cookies.</p><p id="d31442c5-5d26-46ba-bd10-3f6b5f51a996" class="">
+</p></li></ul></div><div id="b1dd355b-349c-4cf5-868e-bb0054414f78" style="width:43.75%" class="column"><figure id="b184df80-799b-49df-a9c0-eb2d6bc43508" class="image"><a href="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%207.png"><img style="width:542px" src="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%207.png"/></a></figure></div></div><figure id="07dad79b-59d6-4969-8ff4-fe9b5b77c6c7" class="image"><a href="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%208.png"><img style="width:720px" src="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%208.png"/></a></figure><h2 id="ad4fd3ac-458f-453f-8c54-ad923cb270fd" class="">Cache Invalidation</h2><div id="7bd1765f-1f50-4944-bbfb-6481c3314525" class="column-list"><div id="b1a73a3c-b66d-4aa8-8986-a104f7945f45" style="width:50%" class="column"><ul id="185d18d8-ba73-4b03-98f5-a18fb5f86fb6" class="bulleted-list"><li style="list-style-type:disc">If the content is updated at the origin, we can invalidate the cache at all the edge locations using <code>CreateInvalidation</code> API. </li></ul><ul id="bc3655f2-35de-4014-84b8-35a863c31593" class="bulleted-list"><li style="list-style-type:disc">Can invalidate the entire cache, a single file or all the files at a given path.</li></ul><ul id="4f2a2de8-8ef0-4b00-94fa-32a47d9b29eb" class="bulleted-list"><li style="list-style-type:disc"><strong>Cache invalidation is not cost-effective</strong> (need to pay extra for invalidation requests)</li></ul><ul id="009c76c0-7f3c-4955-8540-3e10abae520a" class="bulleted-list"><li style="list-style-type:disc">For a cost effective solution, version your objects using the path or filename and update the application to pull the new version.</li></ul></div><div id="5c985489-03ae-4f91-8b80-1f960bd44585" style="width:50%" class="column"><figure id="57815be6-4035-4288-944e-523ef52af10e" class="image"><a href="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%209.png"><img style="width:822px" src="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%209.png"/></a></figure></div></div><h2 id="67ae01e3-bc1f-44ee-8594-368c7fe771ed" class="">Real-time Logs</h2><figure id="87959447-f29d-4698-82f4-45a0a74e9747" class="image"><a href="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%2010.png"><img style="width:672px" src="CloudFront%20cefbb7ac6de04f5e88a2ce3ea749d8d0/Untitled%2010.png"/></a></figure><ul id="80784ee1-866c-4c1d-829c-d586537bd45f" class="bulleted-list"><li style="list-style-type:disc">Send CloudFront logs in real-time to KDS</li></ul><ul id="7f00fd13-02d5-40d0-9eb5-331b2b6478dd" class="bulleted-list"><li style="list-style-type:disc">Used to monitor and analyze CDN performance</li></ul><ul id="7983327f-74fe-4744-a575-68e464e02fe0" class="bulleted-list"><li style="list-style-type:disc"><strong>Sampling rate</strong>: percentage of requests logged</li></ul><ul id="e44a80ae-48fb-4344-aa62-80021505dfb3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Can log specific fields and </mark><strong><mark class="highlight-yellow_background">cache behaviors</mark></strong></li></ul><h2 id="879f8b5c-84e4-455e-97ca-698ad1793c75" class="">TLS Encryption</h2><ul id="37e14545-52d8-4eca-84ba-a72ece055b84" class="bulleted-list"><li style="list-style-type:disc"><strong>Origin Protocol Policy</strong>: used to enable SSL between the distribution and the origin</li></ul><ul id="b3e11b5a-0d11-41ee-a68c-24a0f9f2b8c6" class="bulleted-list"><li style="list-style-type:disc"><strong>Viewer Protocol Policy</strong>: used to enable SSL between the client (user) and the distribution</li></ul><ul id="59d1db83-b85f-4bf8-92cf-ac1c9e50fdba" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">TLS termination takes place at the distribution level.</mark> If the distribution - origin connection needs to be encrypted, another TLS connection is established.</li></ul><h2 id="f6dedb2e-ab98-41f0-94cd-8806255fbb03" class="">Misc</h2><ul id="c2edf9b5-431b-4c30-99da-c83ed20b1ef1" class="bulleted-list"><li style="list-style-type:disc">You cannot directly integrate Cognito User Pools with CloudFront distribution as you have to create a separate Lambda@Edge function to accomplish the authentication via Cognito User Pools.</li></ul><p id="d4a13f04-dbad-4da4-b856-9ed2d54c612b" class="">
+</p></div></article></body></html>
